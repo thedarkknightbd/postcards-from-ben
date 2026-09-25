@@ -1,5 +1,9 @@
 {
-  "photos": [],
+  "photos": [
+    {
+      "file": "/trips/the-long-way-around/images/uploads/chatgpt-image-sep-24-2026-at-09_37_07-pm.webp"
+    }
+  ],
   "previousDay": "",
   "dayNumber": 1,
   "facts": [
@@ -52,7 +56,7 @@
       "longitude": 11.582
     }
   ],
-  "journal": "Testing my first Postcard from Ben update.",
+  "journal": "",
   "title": "The Journey Begins",
   "videos": []
 }
