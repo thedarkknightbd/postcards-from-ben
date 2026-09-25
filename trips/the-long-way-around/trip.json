@@ -15,7 +15,8 @@
     },
     {
       "file": "data/day-04.json",
-      "mode": "drive"
+      "mode": "drive",
+      "featured": true
     },
     {
       "file": "data/day-05.json",
@@ -31,11 +32,13 @@
     },
     {
       "file": "data/day-08.json",
-      "mode": "drive"
+      "mode": "drive",
+      "featured": true
     },
     {
       "file": "data/day-09.json",
-      "mode": "drive"
+      "mode": "drive",
+      "featured": true
     },
     {
       "file": "data/day-10.json",
@@ -47,7 +50,8 @@
     },
     {
       "file": "data/day-12.json",
-      "mode": "train"
+      "mode": "train",
+      "featured": true
     },
     {
       "file": "data/day-13.json",
@@ -63,7 +67,8 @@
     },
     {
       "file": "data/day-16.json",
-      "mode": "cable"
+      "mode": "cable",
+      "featured": true
     },
     {
       "file": "data/day-17.json",

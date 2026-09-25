@@ -1,6 +1,6 @@
 /* =====================================
    POSTCARDS FROM BEN
-   Shared Trip Day Engine
+   Shared Day Page Engine
 ===================================== */
 
 async function loadDayPage() {
@@ -15,7 +15,6 @@ async function loadDayPage() {
     let data;
 
     try {
-
         const response = await fetch(source);
 
         if (!response.ok) {
@@ -27,15 +26,13 @@ async function loadDayPage() {
         data = await response.json();
 
     } catch (error) {
-
         console.error("Unable to load day JSON:", error);
-
         return;
     }
 
 
     /* =====================================
-       HERO
+       PAGE TITLE / HERO
     ===================================== */
 
     document.title =
@@ -60,39 +57,34 @@ async function loadDayPage() {
 
     factsContainer.innerHTML = "";
 
-    if (data.facts && data.facts.length > 0) {
+    (data.facts || []).forEach(fact => {
 
-        data.facts.forEach(fact => {
+        const item = document.createElement("div");
+        item.className = "fact";
 
-            const item = document.createElement("div");
-            item.className = "fact";
+        const icon = document.createElement("span");
+        icon.className = "fact-icon";
+        icon.textContent = fact.icon;
 
-            const icon = document.createElement("span");
-            icon.className = "fact-icon";
-            icon.textContent = fact.icon;
+        const content = document.createElement("div");
 
-            const content = document.createElement("div");
+        const label = document.createElement("span");
+        label.className = "fact-label";
+        label.textContent = fact.label;
 
-            const label = document.createElement("span");
-            label.className = "fact-label";
-            label.textContent = fact.label;
+        const value = document.createElement("span");
+        value.className = "fact-value";
+        value.textContent = fact.value;
 
-            const value = document.createElement("span");
-            value.className = "fact-value";
-            value.textContent = fact.value;
+        content.append(label, value);
+        item.append(icon, content);
 
-            content.append(label, value);
-            item.append(icon, content);
-
-            factsContainer.appendChild(item);
-
-        });
-
-    }
+        factsContainer.appendChild(item);
+    });
 
 
     /* =====================================
-       INTRO
+       INTRODUCTION
     ===================================== */
 
     document.getElementById("intro-title").textContent =
@@ -111,120 +103,93 @@ async function loadDayPage() {
 
     stopList.innerHTML = "";
 
-    if (data.stops && data.stops.length > 0) {
+    const stops = data.stops || [];
 
-        data.stops.forEach((stop, index) => {
+    stops.forEach((stop, index) => {
 
-            const card = document.createElement("article");
-            card.className = "stop-card";
+        const card = document.createElement("article");
+        card.className = "stop-card";
 
-            const number = document.createElement("div");
-            number.className = "stop-number";
-            number.textContent =
-                String(index + 1).padStart(2, "0");
+        const number = document.createElement("div");
+        number.className = "stop-number";
+        number.textContent =
+            String(index + 1).padStart(2, "0");
 
-            const content = document.createElement("div");
-            content.className = "stop-content";
+        const content = document.createElement("div");
+        content.className = "stop-content";
 
-            const type = document.createElement("p");
-            type.className = "stop-type";
-            type.textContent = stop.type;
+        const type = document.createElement("p");
+        type.className = "stop-type";
+        type.textContent = stop.type;
 
-            const name = document.createElement("h3");
-            name.textContent = stop.name;
+        const name = document.createElement("h3");
+        name.textContent = stop.name;
 
-            const description = document.createElement("p");
-            description.textContent = stop.description;
+        const description = document.createElement("p");
+        description.textContent = stop.description;
 
-            content.append(
-                type,
-                name,
-                description
-            );
+        content.append(type, name, description);
+        card.append(number, content);
 
-            card.append(
-                number,
-                content
-            );
-
-            stopList.appendChild(card);
-
-        });
-
-    }
+        stopList.appendChild(card);
+    });
 
 
     /* =====================================
-       MAP
+       INTERACTIVE MAP
     ===================================== */
-
-    const mapElement =
-        document.getElementById("day-map");
 
     document.getElementById("map-title").textContent =
         data.route;
 
-
-    const mappedStops =
-        (data.stops || []).filter(stop =>
-            Number.isFinite(stop.latitude) &&
-            Number.isFinite(stop.longitude)
-        );
-
+    const mappedStops = stops.filter(stop =>
+        Number.isFinite(Number(stop.latitude)) &&
+        Number.isFinite(Number(stop.longitude))
+    );
 
     if (
-        mapElement &&
         typeof L !== "undefined" &&
         mappedStops.length > 0
     ) {
 
-        const map =
-            L.map("day-map");
-
+        const map = L.map("day-map");
 
         L.tileLayer(
             "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
             {
                 maxZoom: 19,
                 attribution:
-                    '&copy; OpenStreetMap contributors'
+                    "&copy; OpenStreetMap contributors"
             }
         ).addTo(map);
 
-
         const coordinates = [];
-
 
         mappedStops.forEach(stop => {
 
             const coordinate = [
-                stop.latitude,
-                stop.longitude
+                Number(stop.latitude),
+                Number(stop.longitude)
             ];
 
             coordinates.push(coordinate);
-
 
             L.marker(coordinate)
                 .addTo(map)
                 .bindPopup(
                     `<strong>${stop.name}</strong><br>${stop.description}`
                 );
-
         });
-
 
         if (coordinates.length > 1) {
 
-            const route =
-                L.polyline(
-                    coordinates,
-                    {
-                        weight: 4,
-                        opacity: 0.8
-                    }
-                ).addTo(map);
-
+            const route = L.polyline(
+                coordinates,
+                {
+                    weight: 4,
+                    opacity: 0.8
+                }
+            ).addTo(map);
 
             map.fitBounds(
                 route.getBounds(),
@@ -239,9 +204,7 @@ async function loadDayPage() {
                 coordinates[0],
                 10
             );
-
         }
-
     }
 
 
@@ -255,6 +218,7 @@ async function loadDayPage() {
     const photoGrid =
         document.getElementById("photo-grid");
 
+    photoGrid.innerHTML = "";
 
     if (
         data.photos &&
@@ -262,8 +226,6 @@ async function loadDayPage() {
     ) {
 
         photosSection.hidden = false;
-        photoGrid.innerHTML = "";
-
 
         data.photos.forEach(photo => {
 
@@ -276,11 +238,9 @@ async function loadDayPage() {
             image.src = photo.file;
             image.alt =
                 photo.caption || "Travel photo";
-
             image.loading = "lazy";
 
             figure.appendChild(image);
-
 
             if (photo.caption) {
 
@@ -291,22 +251,18 @@ async function loadDayPage() {
                     photo.caption;
 
                 figure.appendChild(caption);
-
             }
 
             photoGrid.appendChild(figure);
-
         });
 
     } else {
-
         photosSection.hidden = true;
-
     }
 
 
     /* =====================================
-       POSTCARD / JOURNAL
+       JOURNAL
     ===================================== */
 
     const journalSection =
@@ -315,6 +271,7 @@ async function loadDayPage() {
     const journalCard =
         document.getElementById("journal-card");
 
+    journalCard.innerHTML = "";
 
     if (
         data.journal &&
@@ -322,32 +279,22 @@ async function loadDayPage() {
     ) {
 
         journalSection.hidden = false;
-        journalCard.innerHTML = "";
 
+        data.journal
+            .split("\n")
+            .filter(text => text.trim() !== "")
+            .forEach(text => {
 
-        const paragraphs =
-            data.journal
-                .split("\n")
-                .filter(text =>
-                    text.trim() !== ""
-                );
+                const paragraph =
+                    document.createElement("p");
 
+                paragraph.textContent = text;
 
-        paragraphs.forEach(text => {
-
-            const paragraph =
-                document.createElement("p");
-
-            paragraph.textContent = text;
-
-            journalCard.appendChild(paragraph);
-
-        });
+                journalCard.appendChild(paragraph);
+            });
 
     } else {
-
         journalSection.hidden = true;
-
     }
 
 
@@ -361,6 +308,7 @@ async function loadDayPage() {
     const videoGrid =
         document.getElementById("video-grid");
 
+    videoGrid.innerHTML = "";
 
     if (
         data.videos &&
@@ -368,8 +316,6 @@ async function loadDayPage() {
     ) {
 
         videoSection.hidden = false;
-        videoGrid.innerHTML = "";
-
 
         data.videos.forEach(video => {
 
@@ -378,7 +324,6 @@ async function loadDayPage() {
 
             wrapper.className =
                 "video-wrapper";
-
 
             const iframe =
                 document.createElement("iframe");
@@ -392,16 +337,12 @@ async function loadDayPage() {
             iframe.loading = "lazy";
             iframe.allowFullscreen = true;
 
-
             wrapper.appendChild(iframe);
             videoGrid.appendChild(wrapper);
-
         });
 
     } else {
-
         videoSection.hidden = true;
-
     }
 
 
@@ -413,7 +354,6 @@ async function loadDayPage() {
         document.getElementById("day-navigation");
 
     navigation.innerHTML = "";
-
 
     if (data.previousDay) {
 
@@ -433,9 +373,7 @@ async function loadDayPage() {
         navigation.appendChild(
             document.createElement("span")
         );
-
     }
-
 
     const overview =
         document.createElement("a");
@@ -450,7 +388,6 @@ async function loadDayPage() {
         "Trip Overview";
 
     navigation.appendChild(overview);
-
 
     if (data.nextDay) {
 
@@ -467,9 +404,7 @@ async function loadDayPage() {
             "Next Day →";
 
         navigation.appendChild(next);
-
     }
-
 }
 
 
