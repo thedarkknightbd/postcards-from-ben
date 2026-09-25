@@ -249,3 +249,5 @@ async function loadTripMap() {
     }
 
 }
+
+loadTripMap();
