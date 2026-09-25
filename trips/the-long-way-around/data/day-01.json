@@ -1,0 +1,67 @@
+{
+  "dayNumber": 1,
+  "date": "October 19, 2026",
+  "title": "The Journey Begins",
+  "route": "Fort Worth → Detroit → Munich",
+
+  "facts": [
+    {
+      "icon": "✈️",
+      "label": "Day Type",
+      "value": "Travel Day"
+    },
+    {
+      "icon": "📍",
+      "label": "Starting Point",
+      "value": "Fort Worth, Texas"
+    },
+    {
+      "icon": "🌍",
+      "label": "Destination",
+      "value": "Munich, Germany"
+    },
+    {
+      "icon": "🌙",
+      "label": "Tonight",
+      "value": "Overnight Flight"
+    }
+  ],
+
+  "introTitle": "The Long Way Around begins.",
+
+  "intro": "After months of planning, the journey finally starts in Fort Worth. From Texas, I head to Detroit before boarding the overnight flight across the Atlantic to Munich.",
+
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Fort Worth",
+      "description": "The journey begins at home in Fort Worth, Texas.",
+      "latitude": 32.7555,
+      "longitude": -97.3308
+    },
+    {
+      "type": "Connection",
+      "name": "Detroit",
+      "description": "Connect in Detroit before the overnight transatlantic flight.",
+      "latitude": 42.3314,
+      "longitude": -83.0458
+    },
+    {
+      "type": "Arrival",
+      "name": "Munich",
+      "description": "Arrive in Germany the following morning, where the European road trip begins.",
+      "latitude": 48.1351,
+      "longitude": 11.582
+    }
+  ],
+
+  "photos": [],
+
+  "journal": "",
+
+  "videos": [],
+
+  "previousDay": "",
+
+  "nextDay": "day-02.html"
+}
