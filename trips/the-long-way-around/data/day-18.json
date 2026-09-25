@@ -1,0 +1,65 @@
+{
+  "dayNumber": 18,
+  "date": "November 5, 2026",
+  "title": "Luxembourg & Belgium",
+  "route": "Strasbourg → Luxembourg → Kraainem → Emmen",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "France · Luxembourg · Belgium · Netherlands"
+    },
+    {
+      "icon": "☕",
+      "label": "Quick Stop",
+      "value": "Luxembourg City"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visit",
+      "value": "Belgium Bethel"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Emmen, Netherlands"
+    }
+  ],
+  "introTitle": "Four countries in one day.",
+  "intro": "The journey continues north from Strasbourg with a brief stop in Luxembourg City before crossing into Belgium for a visit to the branch office in Kraainem. From there, the road continues through Belgium and into the Netherlands, finishing the day in Emmen.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Strasbourg",
+      "description": "Leave Strasbourg and begin the drive north toward Luxembourg.",
+      "latitude": 48.5734,
+      "longitude": 7.7521
+    },
+    {
+      "type": "Coffee Stop",
+      "name": "Place d'Armes — Luxembourg City",
+      "description": "Make a short stop in the heart of Luxembourg City for coffee before continuing toward Belgium.",
+      "latitude": 49.611111,
+      "longitude": 6.128889
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Belgium Bethel — Kraainem",
+      "description": "Visit the Belgium Bethel Branch office in Kraainem, just outside Brussels.",
+      "latitude": 50.8616,
+      "longitude": 4.4695
+    },
+    {
+      "type": "Destination",
+      "name": "Emmen",
+      "description": "Cross into the Netherlands and settle in for the night in Emmen.",
+      "latitude": 52.7858,
+      "longitude": 6.8976
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-17.html",
+  "nextDay": "day-19.html"
+}

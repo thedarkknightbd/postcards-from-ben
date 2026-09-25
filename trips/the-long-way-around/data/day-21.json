@@ -1,0 +1,44 @@
+{
+  "dayNumber": 21,
+  "date": "November 8, 2026",
+  "title": "Sunday in Frankfurt",
+  "route": "Frankfurt, Germany",
+  "facts": [
+    {
+      "icon": "🇩🇪",
+      "label": "Country",
+      "value": "Germany"
+    },
+    {
+      "icon": "☀️",
+      "label": "Day Type",
+      "value": "Easy Day"
+    },
+    {
+      "icon": "🏙️",
+      "label": "Location",
+      "value": "Frankfurt"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Frankfurt, Germany"
+    }
+  ],
+  "introTitle": "A quiet day in Frankfurt.",
+  "intro": "The final full day based in Frankfurt keeps the pace light, with time to enjoy the city and recharge before the journey continues south toward Selters and Munich.",
+  "stops": [
+    {
+      "type": "Base",
+      "name": "Frankfurt",
+      "description": "A relaxed day based in Frankfurt before beginning the final stretch of The Long Way Around.",
+      "latitude": 50.1109,
+      "longitude": 8.6821
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-20.html",
+  "nextDay": "day-22.html"
+}

@@ -1,0 +1,65 @@
+{
+  "dayNumber": 11,
+  "date": "October 29, 2026",
+  "title": "San Marino & Bologna",
+  "route": "Brescia → San Marino → Bologna → Brescia",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Italy · San Marino"
+    },
+    {
+      "icon": "🏰",
+      "label": "Country Stop",
+      "value": "San Marino"
+    },
+    {
+      "icon": "🍝",
+      "label": "City Stop",
+      "value": "Bologna"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "A tiny country and one of Italy's great cities.",
+  "intro": "The day begins with a drive across northern Italy to the Republic of San Marino for a short visit high above the surrounding countryside. From there, the route turns toward Bologna for lunch and time in its historic center before returning to Brescia for the evening.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Brescia",
+      "description": "Leave Brescia and begin the drive southeast toward San Marino.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    },
+    {
+      "type": "Country Stop",
+      "name": "Piazza della Libertà — San Marino",
+      "description": "Spend a short time in the historic center of San Marino, including Piazza della Libertà and its sweeping views across the surrounding countryside.",
+      "latitude": 43.93658,
+      "longitude": 12.44673
+    },
+    {
+      "type": "Historic Center",
+      "name": "Piazza Maggiore — Bologna",
+      "description": "Stop in the heart of Bologna for lunch and some time around Piazza Maggiore and the surrounding historic center.",
+      "latitude": 44.4939,
+      "longitude": 11.3428
+    },
+    {
+      "type": "Destination",
+      "name": "Brescia",
+      "description": "Return to Brescia after a day through San Marino and Bologna.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-10.html",
+  "nextDay": "day-12.html"
+}

@@ -1,0 +1,44 @@
+{
+  "dayNumber": 13,
+  "date": "October 31, 2026",
+  "title": "A Slower Day",
+  "route": "Brescia · Flexible Day",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "☕",
+      "label": "Day Type",
+      "value": "Flexible Day"
+    },
+    {
+      "icon": "🧭",
+      "label": "Plan",
+      "value": "Explore · Rest · Wander"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "A day without a long itinerary.",
+  "intro": "After a full day aboard the Bernina Express, this day is intentionally left open. The pace slows in Brescia, with time to explore, revisit a favorite place, take an easy drive nearby or simply enjoy a quieter day before the journey continues.",
+  "stops": [
+    {
+      "type": "Base",
+      "name": "Brescia",
+      "description": "A flexible day based in Brescia with no major road trip or fixed sightseeing route.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-12.html",
+  "nextDay": "day-14.html"
+}

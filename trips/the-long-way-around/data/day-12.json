@@ -1,0 +1,107 @@
+{
+  "dayNumber": 12,
+  "date": "October 30, 2026",
+  "title": "The Bernina Express",
+  "route": "Brescia → Tirano → Bernina Pass → St. Moritz → Tirano → Brescia",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Italy · Switzerland"
+    },
+    {
+      "icon": "🚆",
+      "label": "Featured Journey",
+      "value": "Bernina Express"
+    },
+    {
+      "icon": "🏔️",
+      "label": "High Point",
+      "value": "Ospizio Bernina · 2,253 m"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "Across the Alps by rail.",
+  "intro": "One of the signature experiences of The Long Way Around begins in Tirano, where the Bernina Express climbs from Italy into the Swiss Alps. The railway winds through Valposchiavo, crosses the famous Brusio Circular Viaduct, climbs past Alp Grüm to the Bernina Pass and Lago Bianco, and continues through Pontresina to St. Moritz. After reaching St. Moritz, the journey retraces the spectacular Bernina route back to Tirano before returning to Brescia.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Brescia",
+      "description": "Leave Brescia and drive north toward Tirano for the start of the rail journey.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    },
+    {
+      "type": "Rail Journey Begins",
+      "name": "Tirano",
+      "description": "Board the Bernina Express in Tirano for the journey from Italy into the Swiss Alps.",
+      "latitude": 46.21516,
+      "longitude": 10.16675
+    },
+    {
+      "type": "Railway Landmark",
+      "name": "Brusio Circular Viaduct",
+      "description": "Cross the famous stone spiral viaduct where the Bernina Railway loops around itself to gain elevation.",
+      "latitude": 46.253889,
+      "longitude": 10.127778
+    },
+    {
+      "type": "Alpine Village",
+      "name": "Poschiavo",
+      "description": "Continue through the Italian-speaking Valposchiavo as the railway climbs higher into the Alps.",
+      "latitude": 46.32465,
+      "longitude": 10.0545
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Alp Grüm",
+      "description": "Pass Alp Grüm for sweeping views across the Bernina Range and toward the Palü Glacier.",
+      "latitude": 46.37444,
+      "longitude": 10.03388
+    },
+    {
+      "type": "Highest Point",
+      "name": "Ospizio Bernina & Lago Bianco",
+      "description": "Reach the highest section of the Bernina Railway at 2,253 meters beside Lago Bianco and the Bernina Pass.",
+      "latitude": 46.40876,
+      "longitude": 10.0197
+    },
+    {
+      "type": "Mountain Stop",
+      "name": "Pontresina",
+      "description": "Descend into the Upper Engadin and pass through Pontresina on the approach to St. Moritz.",
+      "latitude": 46.49065,
+      "longitude": 9.89607
+    },
+    {
+      "type": "Destination",
+      "name": "St. Moritz",
+      "description": "Reach St. Moritz at the northern end of the Bernina journey before boarding the return trip.",
+      "latitude": 46.49797,
+      "longitude": 9.84639
+    },
+    {
+      "type": "Return by Rail",
+      "name": "Tirano",
+      "description": "Return across the Bernina route to Tirano after the round-trip journey through the Alps.",
+      "latitude": 46.21516,
+      "longitude": 10.16675
+    },
+    {
+      "type": "Destination",
+      "name": "Brescia",
+      "description": "Drive back to Brescia after a full day aboard the Bernina Express.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-11.html",
+  "nextDay": "day-13.html"
+}

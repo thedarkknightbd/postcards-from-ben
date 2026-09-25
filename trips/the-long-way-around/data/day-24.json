@@ -1,0 +1,58 @@
+{
+  "dayNumber": 24,
+  "date": "November 11, 2026",
+  "title": "The Long Way Home",
+  "route": "Munich → Atlanta → Fort Worth",
+  "facts": [
+    {
+      "icon": "✈️",
+      "label": "Day Type",
+      "value": "Travel Day"
+    },
+    {
+      "icon": "🌍",
+      "label": "Starting Point",
+      "value": "Munich, Germany"
+    },
+    {
+      "icon": "🇺🇸",
+      "label": "Destination",
+      "value": "Fort Worth, Texas"
+    },
+    {
+      "icon": "🏁",
+      "label": "Journey",
+      "value": "The Long Way Around"
+    }
+  ],
+  "introTitle": "The long way home.",
+  "intro": "After 24 days on the road, The Long Way Around comes to an end. The final journey begins in Munich, crosses the Atlantic through Atlanta, and continues home to Fort Worth — completing a loop that stretched across countries, mountain passes, lakes, railways and thousands of miles.",
+  "stops": [
+    {
+      "type": "Departure",
+      "name": "Munich Airport",
+      "description": "Begin the journey home from Munich after the final night in Europe.",
+      "latitude": 48.3538,
+      "longitude": 11.7861
+    },
+    {
+      "type": "Connection",
+      "name": "Atlanta",
+      "description": "Return to the United States and connect in Atlanta for the final leg home.",
+      "latitude": 33.6407,
+      "longitude": -84.4277
+    },
+    {
+      "type": "Arrival",
+      "name": "Fort Worth",
+      "description": "Arrive home in Fort Worth, bringing The Long Way Around to a close.",
+      "latitude": 32.7555,
+      "longitude": -97.3308
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-23.html",
+  "nextDay": ""
+}

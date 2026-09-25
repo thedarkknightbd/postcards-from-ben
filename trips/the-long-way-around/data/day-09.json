@@ -1,0 +1,58 @@
+{
+  "dayNumber": 9,
+  "date": "October 27, 2026",
+  "title": "One More Morning in the Dolomites",
+  "route": "Selva di Val Gardena → Val di Funes → Brescia",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Featured Day",
+      "value": "The Dolomites"
+    },
+    {
+      "icon": "📷",
+      "label": "Scenic Stop",
+      "value": "Val di Funes"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "One last morning in the mountains.",
+  "intro": "After waking up in Selva di Val Gardena, the trip takes a slower pace for one more morning in the Dolomites. The route heads toward Val di Funes and Santa Maddalena for another classic Alpine landscape before leaving the mountains behind and returning to Brescia.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Selva di Val Gardena",
+      "description": "Begin the morning in the heart of Val Gardena before heading toward Val di Funes.",
+      "latitude": 46.553859,
+      "longitude": 11.759955
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Santa Maddalena — Val di Funes",
+      "description": "Spend part of the morning in Val di Funes, surrounded by the dramatic Odle peaks and classic Dolomite scenery.",
+      "latitude": 46.64146,
+      "longitude": 11.71533
+    },
+    {
+      "type": "Destination",
+      "name": "Brescia",
+      "description": "Leave the Dolomites behind and return to Brescia for the next stretch of the journey.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-08.html",
+  "nextDay": "day-10.html"
+}

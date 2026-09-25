@@ -1,0 +1,65 @@
+{
+  "dayNumber": 22,
+  "date": "November 9, 2026",
+  "title": "Selters, Ulm & Munich",
+  "route": "Frankfurt → Central European Branch Office → Ulm → Munich",
+  "facts": [
+    {
+      "icon": "🇩🇪",
+      "label": "Country",
+      "value": "Germany"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visit",
+      "value": "Central European Branch Office"
+    },
+    {
+      "icon": "🏙️",
+      "label": "City Stop",
+      "value": "Ulm"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Munich, Germany"
+    }
+  ],
+  "introTitle": "South through Germany.",
+  "intro": "The final major travel day in Germany begins in Frankfurt and heads first to Selters for a visit to the Central European Branch Office. From there, the journey continues south with a stop in Ulm before finishing the day in Munich for the final nights of The Long Way Around.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Frankfurt",
+      "description": "Leave Frankfurt and begin the journey south through Germany.",
+      "latitude": 50.1109,
+      "longitude": 8.6821
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Central European Branch Office",
+      "description": "Visit the Central European Bethel Branch Office in Selters.",
+      "latitude": 50.335,
+      "longitude": 8.226
+    },
+    {
+      "type": "City Stop",
+      "name": "Ulm",
+      "description": "Stop in Ulm for some time around the historic center and Münsterplatz before continuing toward Munich.",
+      "latitude": 48.3984,
+      "longitude": 9.9916
+    },
+    {
+      "type": "Destination",
+      "name": "Munich",
+      "description": "Arrive in Munich and settle in for the final stretch of the trip.",
+      "latitude": 48.1351,
+      "longitude": 11.582
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-21.html",
+  "nextDay": "day-23.html"
+}

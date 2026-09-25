@@ -1,0 +1,58 @@
+{
+  "dayNumber": 20,
+  "date": "November 7, 2026",
+  "title": "An Afternoon on the Rhine",
+  "route": "Frankfurt → Rhine Valley → Frankfurt",
+  "facts": [
+    {
+      "icon": "🇩🇪",
+      "label": "Country",
+      "value": "Germany"
+    },
+    {
+      "icon": "☕",
+      "label": "Day Type",
+      "value": "Easy Afternoon"
+    },
+    {
+      "icon": "🌊",
+      "label": "Scenic Area",
+      "value": "Rhine Valley"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Frankfurt, Germany"
+    }
+  ],
+  "introTitle": "A slower afternoon along the Rhine.",
+  "intro": "After a relaxed morning in Frankfurt, the day leaves plenty of room for an easy afternoon drive toward the Rhine Valley. The plan is intentionally simple: enjoy some river scenery, spend a little time around the Rüdesheim area, and return to Frankfurt without turning the day into another long road trip.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Frankfurt",
+      "description": "Enjoy a slower morning in Frankfurt before heading west toward the Rhine.",
+      "latitude": 50.1109,
+      "longitude": 8.6821
+    },
+    {
+      "type": "Scenic Area",
+      "name": "Rhine Valley — Rüdesheim Area",
+      "description": "Spend part of the afternoon along the Rhine near Rüdesheim, with time for river views and a relaxed stop before heading back.",
+      "latitude": 49.9786,
+      "longitude": 7.9242
+    },
+    {
+      "type": "Destination",
+      "name": "Frankfurt",
+      "description": "Return to Frankfurt after a relaxed afternoon along the Rhine.",
+      "latitude": 50.1109,
+      "longitude": 8.6821
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-19.html",
+  "nextDay": "day-21.html"
+}

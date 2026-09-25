@@ -1,0 +1,44 @@
+{
+  "dayNumber": 14,
+  "date": "November 1, 2026",
+  "title": "Sunday in Brescia",
+  "route": "Brescia, Italy",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "☀️",
+      "label": "Day Type",
+      "value": "Easy Day"
+    },
+    {
+      "icon": "🏛️",
+      "label": "Location",
+      "value": "Brescia"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "A quiet Sunday in Brescia.",
+  "intro": "The final full day based in Brescia is intentionally easy, with time to enjoy the city at a slower pace before packing up and beginning the next major stretch of The Long Way Around.",
+  "stops": [
+    {
+      "type": "Base",
+      "name": "Brescia",
+      "description": "A relaxed day spent in Brescia before leaving the city the following morning.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-13.html",
+  "nextDay": "day-15.html"
+}

@@ -1,0 +1,65 @@
+{
+  "dayNumber": 10,
+  "date": "October 28, 2026",
+  "title": "Northern Lake Garda",
+  "route": "Brescia → Limone sul Garda → Riva del Garda → Brescia",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "🌊",
+      "label": "Featured Area",
+      "value": "Northern Lake Garda"
+    },
+    {
+      "icon": "🏘️",
+      "label": "Lakeside Stops",
+      "value": "Limone · Riva del Garda"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "North along Lake Garda.",
+  "intro": "The day follows the western shore of Lake Garda toward its more dramatic northern end, where steep mountains rise directly from the water. The first stop is Limone sul Garda for its waterfront, historic lanes and lakeside scenery before continuing north to Riva del Garda at the head of the lake. From there, the route turns back toward Brescia for the evening.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Brescia",
+      "description": "Leave Brescia and head toward the western shore of Lake Garda.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Limone sul Garda",
+      "description": "Explore the waterfront and historic center of Limone sul Garda, tucked between Lake Garda and the surrounding mountains.",
+      "latitude": 45.8141,
+      "longitude": 10.7928
+    },
+    {
+      "type": "Scenic Stop",
+      "name": "Riva del Garda",
+      "description": "Continue to the mountainous northern end of Lake Garda for views where the lake narrows beneath the surrounding peaks.",
+      "latitude": 45.8858,
+      "longitude": 10.8412
+    },
+    {
+      "type": "Destination",
+      "name": "Brescia",
+      "description": "Return to Brescia after a scenic day along northern Lake Garda.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-09.html",
+  "nextDay": "day-11.html"
+}

@@ -1,0 +1,58 @@
+{
+  "dayNumber": 17,
+  "date": "November 4, 2026",
+  "title": "Across France",
+  "route": "Courmayeur → Mont Blanc Tunnel → Strasbourg",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Italy · France"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Travel Day"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Mountain Crossing",
+      "value": "Mont Blanc Tunnel"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Strasbourg, France"
+    }
+  ],
+  "introTitle": "From the Alps to Alsace.",
+  "intro": "The journey leaves Courmayeur and crosses beneath the Mont Blanc massif into France. From the Alps, the route continues north across eastern France toward Strasbourg, trading high mountain scenery for the historic streets and canals of Alsace.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Courmayeur",
+      "description": "Leave Courmayeur after two nights beneath Mont Blanc and begin the journey into France.",
+      "latitude": 45.7914,
+      "longitude": 6.9717
+    },
+    {
+      "type": "Border Crossing",
+      "name": "Mont Blanc Tunnel",
+      "description": "Cross beneath the Mont Blanc massif from Italy into France.",
+      "latitude": 45.866,
+      "longitude": 6.9
+    },
+    {
+      "type": "Destination",
+      "name": "Strasbourg",
+      "description": "Arrive in Strasbourg and settle in for the night in the heart of Alsace.",
+      "latitude": 48.5734,
+      "longitude": 7.7521
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-16.html",
+  "nextDay": "day-18.html"
+}

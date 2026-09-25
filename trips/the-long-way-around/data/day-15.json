@@ -1,0 +1,58 @@
+{
+  "dayNumber": 15,
+  "date": "November 2, 2026",
+  "title": "Monaco & the Alps",
+  "route": "Brescia → Monaco → Courmayeur",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Italy · Monaco"
+    },
+    {
+      "icon": "🏙️",
+      "label": "Country Stop",
+      "value": "Monaco"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Destination",
+      "value": "Courmayeur"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Courmayeur, Italy"
+    }
+  ],
+  "introTitle": "From the Mediterranean to the Alps.",
+  "intro": "The next chapter of The Long Way Around begins with a drive southwest from Brescia to the Mediterranean and the tiny Principality of Monaco. After a brief stop in Monte Carlo, the route turns north through the mountains toward the Aosta Valley, finishing the day beneath Mont Blanc in Courmayeur.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Brescia",
+      "description": "Leave Brescia and begin the long drive toward the Mediterranean coast.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    },
+    {
+      "type": "Country Stop",
+      "name": "Monte Carlo — Monaco",
+      "description": "Make a brief stop in Monaco and take in the heart of Monte Carlo before continuing toward the Alps.",
+      "latitude": 43.7397,
+      "longitude": 7.4272
+    },
+    {
+      "type": "Destination",
+      "name": "Courmayeur",
+      "description": "Leave the Mediterranean behind and settle in beneath Mont Blanc in the Italian Alps.",
+      "latitude": 45.7914,
+      "longitude": 6.9717
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-14.html",
+  "nextDay": "day-16.html"
+}

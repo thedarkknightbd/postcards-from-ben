@@ -1,0 +1,79 @@
+{
+  "dayNumber": 16,
+  "date": "November 3, 2026",
+  "title": "Mont Blanc",
+  "route": "Courmayeur → Pavillon du Mont Fréty → Punta Helbronner → Courmayeur",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Featured Day",
+      "value": "Mont Blanc"
+    },
+    {
+      "icon": "🚠",
+      "label": "Experience",
+      "value": "Skyway Monte Bianco"
+    },
+    {
+      "icon": "⬆️",
+      "label": "High Point",
+      "value": "Punta Helbronner · 3,462 m"
+    }
+  ],
+  "introTitle": "Up into the Mont Blanc massif.",
+  "intro": "One of the signature mountain days of The Long Way Around begins in Courmayeur with the Skyway Monte Bianco. The rotating cable cars climb from the valley to Pavillon du Mont Fréty before continuing high into the Mont Blanc massif to Punta Helbronner, where panoramic views stretch across some of the highest peaks in the Alps.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Courmayeur",
+      "description": "Begin the day beneath Mont Blanc in Courmayeur.",
+      "latitude": 45.7914,
+      "longitude": 6.9717
+    },
+    {
+      "type": "Cable Car",
+      "name": "Skyway Monte Bianco — Courmayeur",
+      "description": "Begin the ascent from the valley station toward the high slopes of Mont Blanc.",
+      "latitude": 45.8159,
+      "longitude": 6.9561
+    },
+    {
+      "type": "Mountain Station",
+      "name": "Pavillon du Mont Fréty",
+      "description": "Reach the intermediate Skyway station at 2,173 meters above the Aosta Valley.",
+      "latitude": 45.82916,
+      "longitude": 6.94983
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Punta Helbronner",
+      "description": "Reach the top of Skyway Monte Bianco at 3,462 meters for panoramic views across the Mont Blanc massif.",
+      "latitude": 45.8459,
+      "longitude": 6.9318
+    },
+    {
+      "type": "Return",
+      "name": "Pavillon du Mont Fréty",
+      "description": "Descend through Pavillon before returning to the valley.",
+      "latitude": 45.82916,
+      "longitude": 6.94983
+    },
+    {
+      "type": "Destination",
+      "name": "Courmayeur",
+      "description": "Return to Courmayeur and settle back into the Italian Alps after a day high above the valley.",
+      "latitude": 45.7914,
+      "longitude": 6.9717
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-15.html",
+  "nextDay": "day-17.html"
+}

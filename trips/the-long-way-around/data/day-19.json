@@ -1,0 +1,58 @@
+{
+  "dayNumber": 19,
+  "date": "November 6, 2026",
+  "title": "Netherlands to Germany",
+  "route": "Emmen → Netherlands Bethel → Frankfurt",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Netherlands · Germany"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visit",
+      "value": "Netherlands Bethel"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Road Trip"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Frankfurt, Germany"
+    }
+  ],
+  "introTitle": "From the Netherlands into Germany.",
+  "intro": "The morning begins in Emmen with a visit to the Netherlands branch office before The Long Way Around continues southeast into Germany. The day finishes in Frankfurt, which becomes the base for the next few days.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Emmen",
+      "description": "Begin the day in Emmen in the northeastern Netherlands.",
+      "latitude": 52.7858,
+      "longitude": 6.8976
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Netherlands Bethel",
+      "description": "Visit the Netherlands Bethel Branch office in Emmen.",
+      "latitude": 52.77357,
+      "longitude": 6.88361
+    },
+    {
+      "type": "Destination",
+      "name": "Frankfurt",
+      "description": "Cross into Germany and settle in for the next part of the journey in Frankfurt.",
+      "latitude": 50.1109,
+      "longitude": 8.6821
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-18.html",
+  "nextDay": "day-20.html"
+}

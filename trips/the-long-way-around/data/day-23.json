@@ -1,0 +1,58 @@
+{
+  "dayNumber": 23,
+  "date": "November 10, 2026",
+  "title": "Liechtenstein",
+  "route": "Munich → Vaduz → Munich",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Germany · Liechtenstein"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Country Stop",
+      "value": "Liechtenstein"
+    },
+    {
+      "icon": "🏙️",
+      "label": "Main Stop",
+      "value": "Vaduz"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Munich, Germany"
+    }
+  ],
+  "introTitle": "One more country before heading home.",
+  "intro": "With the road trip nearly complete, there is time for one final day trip from Munich. The route heads southwest through the Alps to Vaduz for a short visit to Liechtenstein before turning back toward Munich for the final night of The Long Way Around.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Munich",
+      "description": "Leave Munich for the final international road trip of the journey.",
+      "latitude": 48.1351,
+      "longitude": 11.582
+    },
+    {
+      "type": "Country Stop",
+      "name": "Vaduz — Liechtenstein",
+      "description": "Spend some time in Vaduz, surrounded by the Alps, for a brief visit to one of Europe's smallest countries.",
+      "latitude": 47.141,
+      "longitude": 9.5215
+    },
+    {
+      "type": "Destination",
+      "name": "Munich",
+      "description": "Return to Munich and settle in for the final night before the journey home.",
+      "latitude": 48.1351,
+      "longitude": 11.582
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-22.html",
+  "nextDay": "day-24.html"
+}

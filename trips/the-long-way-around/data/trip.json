@@ -27,11 +27,75 @@
     },
     {
       "file": "data/day-07.json",
-      "mode": "drive"
+      "mode": "local"
     },
     {
       "file": "data/day-08.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-09.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-10.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-11.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-12.json",
+      "mode": "train"
+    },
+    {
+      "file": "data/day-13.json",
       "mode": "local"
+    },
+    {
+      "file": "data/day-14.json",
+      "mode": "local"
+    },
+    {
+      "file": "data/day-15.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-16.json",
+      "mode": "cable"
+    },
+    {
+      "file": "data/day-17.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-18.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-19.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-20.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-21.json",
+      "mode": "local"
+    },
+    {
+      "file": "data/day-22.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-23.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-24.json",
+      "mode": "flight"
     }
   ]
 }
