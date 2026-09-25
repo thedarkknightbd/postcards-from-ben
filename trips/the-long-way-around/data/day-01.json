@@ -26,14 +26,14 @@
   ],
   "route": "Fort Worth → Detroit → Munich",
   "nextDay": "day-02.html",
-  "intro": "After months of planning, the journey finally starts in Fort Worth. From Texas, I head to Detroit before boarding the overnight flight across the Atlantic to Munich.",
+  "intro": "After months of planning, the adventure finally starts in Fort Worth. From Texas, I head to Detroit before boarding the overnight flight across the Atlantic to Munich.",
   "introTitle": "The Long Way Around begins.",
   "date": "October 19, 2026",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Fort Worth",
-      "description": "The journey begins at home in Fort Worth, Texas.",
+      "description": "The adventure begins at home in Fort Worth, Texas.",
       "latitude": 32.7555,
       "longitude": -97.3308
     },
@@ -53,7 +53,7 @@
     }
   ],
   "journal": "",
-  "title": "The Journey Begins",
+  "title": "The Adventure Begins",
   "videos": []
   
 }
