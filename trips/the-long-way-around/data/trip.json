@@ -1,0 +1,9 @@
+{
+  "title": "The Long Way Around",
+  "days": [
+    {
+      "file": "data/day-01.json",
+      "mode": "flight"
+    }
+  ]
+}

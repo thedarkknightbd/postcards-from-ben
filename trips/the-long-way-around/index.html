@@ -8,6 +8,11 @@
     <title>The Long Way Around | Postcards from Ben</title>
 
     <link rel="stylesheet" href="../../css/styles.css">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+>
 </head>
 
 
@@ -92,9 +97,15 @@
                 Germany → Liechtenstein
             </p>
 
-            <div class="map-placeholder">
-                Interactive trip map coming soon.
+            <div
+                id="trip-map"
+                class="interactive-map trip-overview-map"
+                data-trip-source="data/trip.json">
             </div>
+            
+            <p class="map-note">
+                Routes show the sequence of stops for each day.
+            </p>
 
         </section>
 
@@ -826,6 +837,13 @@
 
     </footer>
 
+
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin="">
+    </script>
+    
+    <script src="../../js/trip-map.js"></script> 
 
     <script src="../../js/site.js"></script>
 

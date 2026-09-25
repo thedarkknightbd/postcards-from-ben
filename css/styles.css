@@ -1118,6 +1118,26 @@ footer {
 
 }
 
+===================================== */
+
+.trip-overview-map {
+    height: 520px;
+}
+
+.map-note {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+
+    .trip-overview-map {
+        height: 420px;
+    }
+
+}
+
 /* =====================================
    PHOTO GALLERY
 ===================================== */
@@ -1219,6 +1239,30 @@ footer {
 
     .photo-grid img {
         height: auto;
+    }
+
+}
+
+/* =====================================
+   MASTER TRIP MAP
+===================================== */
+
+.trip-overview-map {
+    height: 520px;
+}
+
+.map-note {
+    margin-top: 10px;
+
+    font-size: 0.78rem;
+
+    color: #777;
+}
+
+@media (max-width: 600px) {
+
+    .trip-overview-map {
+        height: 420px;
     }
 
 }
