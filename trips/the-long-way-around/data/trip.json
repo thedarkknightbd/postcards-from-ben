@@ -4,6 +4,34 @@
     {
       "file": "data/day-01.json",
       "mode": "flight"
+    },
+    {
+      "file": "data/day-02.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-03.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-04.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-05.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-06.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-07.json",
+      "mode": "drive"
+    },
+    {
+      "file": "data/day-08.json",
+      "mode": "local"
     }
   ]
 }

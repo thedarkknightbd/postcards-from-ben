@@ -1,0 +1,114 @@
+{
+  "dayNumber": 8,
+  "date": "October 26, 2026",
+  "title": "Seceda & the Dolomites",
+  "route": "Brescia → Ortisei → Seceda → Sella Ronda → Selva",
+  "facts": [
+    {
+      "icon": "🇮🇹",
+      "label": "Country",
+      "value": "Italy"
+    },
+    {
+      "icon": "🏔️",
+      "label": "Featured Day",
+      "value": "The Dolomites"
+    },
+    {
+      "icon": "🚠",
+      "label": "Mountain Stop",
+      "value": "Seceda"
+    },
+    {
+      "icon": "🚙",
+      "label": "Scenic Drive",
+      "value": "Four Dolomite Passes"
+    }
+  ],
+  "introTitle": "Into the heart of the Dolomites.",
+  "intro": "One of the biggest scenic days of The Long Way Around begins with an early drive from Brescia to Ortisei. After riding the cableways to Seceda for panoramic views across the Dolomites, the journey continues around the Sella massif through a series of mountain passes, villages and valleys, finishing with Passo Gardena in the late-afternoon light before spending the night in Selva di Val Gardena.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Brescia",
+      "description": "Leave Brescia early and head north toward the Dolomites.",
+      "latitude": 45.5416,
+      "longitude": 10.2118
+    },
+    {
+      "type": "Cable Car",
+      "name": "Seceda Cableways — Ortisei",
+      "description": "Park in Ortisei and begin the cableway journey up to Seceda.",
+      "latitude": 46.576421,
+      "longitude": 11.675068
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Seceda",
+      "description": "Take in the dramatic ridgeline and panoramic views from high above Val Gardena.",
+      "latitude": 46.600589,
+      "longitude": 11.725794
+    },
+    {
+      "type": "Return to Car",
+      "name": "Seceda Cableways — Ortisei",
+      "description": "Ride back down to Ortisei and begin the scenic driving loop.",
+      "latitude": 46.576421,
+      "longitude": 11.675068
+    },
+    {
+      "type": "Mountain Pass",
+      "name": "Passo Sella",
+      "description": "The first major mountain pass of the Sella loop, beneath the dramatic walls of the Sella massif.",
+      "latitude": 46.5029,
+      "longitude": 11.76401
+    },
+    {
+      "type": "Mountain Pass",
+      "name": "Passo Pordoi",
+      "description": "Continue around the Sella massif over Passo Pordoi.",
+      "latitude": 46.48752,
+      "longitude": 11.81226
+    },
+    {
+      "type": "Mountain Village",
+      "name": "Arabba",
+      "description": "Descend from Passo Pordoi through the mountain village of Arabba.",
+      "latitude": 46.497569,
+      "longitude": 11.87485
+    },
+    {
+      "type": "Mountain Pass",
+      "name": "Passo Campolongo",
+      "description": "Climb from Arabba over Passo Campolongo toward Alta Badia.",
+      "latitude": 46.52,
+      "longitude": 11.87417
+    },
+    {
+      "type": "Mountain Village",
+      "name": "Corvara",
+      "description": "Pass through Corvara in the heart of Alta Badia before the final climb of the loop.",
+      "latitude": 46.54957,
+      "longitude": 11.87403
+    },
+    {
+      "type": "Golden Hour",
+      "name": "Passo Gardena",
+      "description": "Save the final major pass for late-afternoon and golden-hour views across the Dolomites.",
+      "latitude": 46.55,
+      "longitude": 11.80944
+    },
+    {
+      "type": "Destination",
+      "name": "Selva di Val Gardena",
+      "description": "Descend from Passo Gardena into Selva di Val Gardena and settle in for the night in the heart of the Dolomites.",
+      "latitude": 46.553859,
+      "longitude": 11.759955
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-07.html",
+  "nextDay": "day-09.html"
+}

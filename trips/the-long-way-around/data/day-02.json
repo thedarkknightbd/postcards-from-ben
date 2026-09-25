@@ -1,0 +1,57 @@
+"dayNumber": 2,
+  "date": "October 20, 2026",
+  "title": "Germany, Czechia & Austria",
+  "route": "Munich → Lake Lipno → Vienna",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Germany · Czechia · Austria"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Road Trip"
+    },
+    {
+      "icon": "🏞️",
+      "label": "Scenic Stop",
+      "value": "Lake Lipno"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Vienna, Austria"
+    }
+  ],
+  "introTitle": "The European road trip begins.",
+  "intro": "After landing in Munich, I pick up the car and begin the first drive of The Long Way Around. The route crosses into Czechia for a short lakeside stop at Lipno before continuing east to Vienna.",
+  "stops": [
+    {
+      "type": "Arrival",
+      "name": "Munich Airport",
+      "description": "Arrival in Germany and the starting point of the European road trip.",
+      "latitude": 48.3538,
+      "longitude": 11.7861
+    },
+    {
+      "type": "Scenic Stop",
+      "name": "MOLO Lipno",
+      "description": "A short lunch and photo stop beside Lake Lipno, including the long pier extending over the lake.",
+      "latitude": 48.63975,
+      "longitude": 14.22394
+    },
+    {
+      "type": "Destination",
+      "name": "Vienna",
+      "description": "Continue into Austria and finish the first driving day in Vienna.",
+      "latitude": 48.2082,
+      "longitude": 16.3738
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-01.html",
+  "nextDay": "day-03.html"
+}

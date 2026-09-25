@@ -1,0 +1,79 @@
+{
+  "dayNumber": 6,
+  "date": "October 24, 2026",
+  "title": "Venice",
+  "route": "Kamnik → Venice → Brescia",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Slovenia · Italy"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Road Trip · Walking"
+    },
+    {
+      "icon": "🛶",
+      "label": "Featured Stop",
+      "value": "Venice"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Brescia, Italy"
+    }
+  ],
+  "introTitle": "Into Venice.",
+  "intro": "The route leaves Slovenia and crosses into Italy for a compact visit to Venice. After parking at Piazzale Roma, the afternoon is spent walking through the historic center to the Grand Canal, Rialto Bridge and St. Mark's Square before returning to the car and continuing west to Brescia.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Kamnik",
+      "description": "Leave Kamnik and begin the drive west toward Italy.",
+      "latitude": 46.2259,
+      "longitude": 14.6119
+    },
+    {
+      "type": "Parking",
+      "name": "Piazzale Roma",
+      "description": "Park at Venice's road-access point and continue through the historic center on foot.",
+      "latitude": 45.437989,
+      "longitude": 12.318089
+    },
+    {
+      "type": "Scenic Stop",
+      "name": "Rialto Bridge & Grand Canal",
+      "description": "Walk to Rialto Bridge for one of the classic views over Venice's Grand Canal.",
+      "latitude": 45.436015,
+      "longitude": 12.32842
+    },
+    {
+      "type": "Scenic Stop",
+      "name": "St. Mark's Square",
+      "description": "Continue to Piazza San Marco for the heart of historic Venice.",
+      "latitude": 45.433914,
+      "longitude": 12.337604
+    },
+    {
+      "type": "Return to Car",
+      "name": "Piazzale Roma",
+      "description": "Walk back to Piazzale Roma and continue the road trip.",
+      "latitude": 45.437989,
+      "longitude": 12.318089
+    },
+    {
+      "type": "Destination",
+      "name": "Brescia",
+      "description": "Finish the day in Brescia, which becomes the base for the next part of the trip.",
+      "latitude": 45.533,
+      "longitude": 10.233
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-05.html",
+  "nextDay": "day-07.html"
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Day 4 — Lake Bled & Slovenia</title>
+
+    <link rel="stylesheet"
+          href="../../../css/styles.css">
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
+
+</head>
+
+
+<body
+    class="day-page"
+    data-day-source="../data/day-04.json"
+>
+
+
+    <!-- HERO -->
+
+    <header class="day-hero">
+
+        <a class="back-link"
+           href="../index.html">
+
+            ← The Long Way Around
+
+        </a>
+
+
+        <div class="day-hero-content">
+
+            <p id="day-label"
+               class="day-label">
+            </p>
+
+            <h1 id="day-title">
+            </h1>
+
+            <p id="day-route"
+               class="day-route">
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- QUICK FACTS -->
+
+    <section id="day-facts"
+             class="day-facts">
+    </section>
+
+
+
+    <main>
+
+
+        <!-- TODAY -->
+
+        <section id="intro-section"
+                 class="day-intro">
+
+            <p class="section-kicker">
+                Today
+            </p>
+
+            <h2 id="intro-title">
+            </h2>
+
+            <p id="intro-text"
+               class="day-lead">
+            </p>
+
+        </section>
+
+
+
+        <!-- STOPS -->
+
+        <section id="stops-section">
+
+            <p class="section-kicker">
+                Along the Way
+            </p>
+
+            <h2>
+                Today's Stops
+            </h2>
+
+            <div id="stop-list"
+                 class="stop-list">
+            </div>
+
+        </section>
+
+
+
+        <!-- MAP -->
+
+        <section id="map-section">
+
+            <p class="section-kicker">
+                The Route
+            </p>
+
+            <h2 id="map-title">
+            </h2>
+
+            <div id="day-map"
+                 class="interactive-map">
+            </div>
+
+        </section>
+
+
+
+        <!-- PHOTOS -->
+
+        <section id="photos-section"
+                 hidden>
+
+            <p class="section-kicker">
+                From the Camera
+            </p>
+
+            <h2>
+                Photos
+            </h2>
+
+            <div id="photo-grid"
+                 class="photo-grid">
+            </div>
+
+        </section>
+
+
+
+        <!-- JOURNAL -->
+
+        <section id="journal-section"
+                 class="journal-section"
+                 hidden>
+
+            <p class="section-kicker">
+                Postcard from the Road
+            </p>
+
+            <h2>
+                Today's Postcard
+            </h2>
+
+            <div id="journal-card"
+                 class="journal-card">
+            </div>
+
+        </section>
+
+
+
+        <!-- VIDEO -->
+
+        <section id="video-section"
+                 hidden>
+
+            <p class="section-kicker">
+                From the Road
+            </p>
+
+            <h2>
+                Video
+            </h2>
+
+            <div id="video-grid"
+                 class="video-grid">
+            </div>
+
+        </section>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav id="day-navigation"
+             class="day-navigation">
+        </nav>
+
+
+    </main>
+
+
+
+    <footer>
+
+        <p>
+            Postcards from Ben
+        </p>
+
+    </footer>
+
+
+    <!-- MAP ENGINE -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin="">
+    </script>
+
+
+
+    <!-- SHARED DAY PAGE ENGINE -->
+
+    <script src="../../../js/day-page.js"></script>
+
+
+</body>
+
+</html>

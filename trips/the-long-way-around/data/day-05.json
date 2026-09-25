@@ -1,0 +1,58 @@
+{
+  "dayNumber": 5,
+  "date": "October 23, 2026",
+  "title": "Slovenia & Croatia",
+  "route": "Kamnik → Zagreb → Kamnik",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Slovenia · Croatia"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visits",
+      "value": "Slovenia · Croatia"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Road Trip"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Kamnik, Slovenia"
+    }
+  ],
+  "introTitle": "Two branch visits in one day.",
+  "intro": "The day begins in Kamnik with a visit to the Slovenia Bethel Branch office. From there, the route crosses into Croatia for a visit to the Croatia Bethel Branch Office in Zagreb before turning north again and returning to Kamnik for the night.",
+  "stops": [
+    {
+      "type": "Branch Visit",
+      "name": "Slovenia Bethel",
+      "description": "Visit the Slovenia Bethel Branch office in Kamnik.",
+      "latitude": 46.2259,
+      "longitude": 14.6119
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Croatia Bethel",
+      "description": "Visit the Croatia Bethel Branch Office in Zagreb.",
+      "latitude": 45.810044,
+      "longitude": 15.873169
+    },
+    {
+      "type": "Destination",
+      "name": "Kamnik",
+      "description": "Return to Kamnik after the Zagreb visit.",
+      "latitude": 46.2259,
+      "longitude": 14.6119
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-04.html",
+  "nextDay": "day-06.html"
+}

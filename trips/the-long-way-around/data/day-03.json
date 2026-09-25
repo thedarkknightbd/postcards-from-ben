@@ -1,0 +1,58 @@
+{
+  "dayNumber": 3,
+  "date": "October 21, 2026",
+  "title": "Vienna to Budapest",
+  "route": "Vienna → Bratislava → Budapest",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Austria · Slovakia · Hungary"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visit",
+      "value": "Slovakia Bethel"
+    },
+    {
+      "icon": "🚙",
+      "label": "Day Type",
+      "value": "Road Trip"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Budapest, Hungary"
+    }
+  ],
+  "introTitle": "Three countries in one day.",
+  "intro": "The journey continues east from Vienna into Slovakia for a visit to the branch office in Bratislava before crossing another border and continuing to Budapest.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Vienna",
+      "description": "Begin the day in Vienna before heading east toward Slovakia.",
+      "latitude": 48.2082,
+      "longitude": 16.3738
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Slovakia Bethel",
+      "description": "Visit the Slovakia Bethel Branch Office in Bratislava.",
+      "latitude": 48.197827,
+      "longitude": 17.135739
+    },
+    {
+      "type": "Destination",
+      "name": "Budapest",
+      "description": "Cross into Hungary and finish the day in Budapest.",
+      "latitude": 47.4979,
+      "longitude": 19.0402
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-02.html",
+  "nextDay": "day-04.html"
+}

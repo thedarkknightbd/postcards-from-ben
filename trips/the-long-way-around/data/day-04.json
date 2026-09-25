@@ -1,0 +1,65 @@
+{
+  "dayNumber": 4,
+  "date": "October 22, 2026",
+  "title": "Lake Bled & Slovenia",
+  "route": "Budapest → Lake Bled → Kamnik",
+  "facts": [
+    {
+      "icon": "🌍",
+      "label": "Countries",
+      "value": "Hungary · Slovenia"
+    },
+    {
+      "icon": "🏢",
+      "label": "Branch Visit",
+      "value": "Hungary Bethel"
+    },
+    {
+      "icon": "🏞️",
+      "label": "Featured Stop",
+      "value": "Lake Bled"
+    },
+    {
+      "icon": "📍",
+      "label": "Tonight",
+      "value": "Kamnik, Slovenia"
+    }
+  ],
+  "introTitle": "From Budapest to the Slovenian Alps.",
+  "intro": "The day begins in Budapest with a visit to the Hungary branch office before heading west toward Slovenia. Late in the afternoon, the route reaches Lake Bled for one of the first major Alpine views of the trip before continuing to Kamnik for the night.",
+  "stops": [
+    {
+      "type": "Starting Point",
+      "name": "Budapest",
+      "description": "Begin the day in Budapest.",
+      "latitude": 47.4979,
+      "longitude": 19.0402
+    },
+    {
+      "type": "Branch Visit",
+      "name": "Hungary Bethel",
+      "description": "Visit the Hungary Bethel Branch Office in Budapest.",
+      "latitude": 47.50269,
+      "longitude": 19.17266
+    },
+    {
+      "type": "Featured Scenic Stop",
+      "name": "Lake Bled",
+      "description": "A late-afternoon stop at Lake Bled for views of the lake, island and surrounding Julian Alps.",
+      "latitude": 46.368803,
+      "longitude": 14.113975
+    },
+    {
+      "type": "Destination",
+      "name": "Kamnik",
+      "description": "Continue to Kamnik for the overnight stay.",
+      "latitude": 46.2259,
+      "longitude": 14.6119
+    }
+  ],
+  "photos": [],
+  "journal": "",
+  "videos": [],
+  "previousDay": "day-03.html",
+  "nextDay": "day-05.html"
+}
