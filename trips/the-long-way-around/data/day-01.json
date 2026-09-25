@@ -1,9 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "",
   "dayNumber": 1,
-  "date": "October 19, 2026",
-  "title": "The Journey Begins",
-  "route": "Fort Worth → Detroit → Munich",
-
   "facts": [
     {
       "icon": "✈️",
@@ -26,11 +24,11 @@
       "value": "Overnight Flight"
     }
   ],
-
-  "introTitle": "The Long Way Around begins.",
-
+  "route": "Fort Worth → Detroit → Munich",
+  "nextDay": "day-02.html",
   "intro": "After months of planning, the journey finally starts in Fort Worth. From Texas, I head to Detroit before boarding the overnight flight across the Atlantic to Munich.",
-
+  "introTitle": "The Long Way Around begins.",
+  "date": "October 19, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -54,14 +52,7 @@
       "longitude": 11.582
     }
   ],
-
-  "photos": [],
-
-  "journal": "",
-
-  "videos": [],
-
-  "previousDay": "",
-
-  "nextDay": "day-02.html"
+  "journal": "Testing my first Postcard from Ben update.",
+  "title": "The Journey Begins",
+  "videos": []
 }
