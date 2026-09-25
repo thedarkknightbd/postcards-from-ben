@@ -1267,3 +1267,59 @@ footer {
 
 }
 
+/* =====================================
+   TRIP POSTER
+===================================== */
+
+.trip-poster-section {
+    max-width: 1200px;
+    margin: 40px auto 50px;
+    padding: 0 20px;
+}
+
+.trip-poster {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.16);
+}
+
+/* =====================================
+   TRIP COVER / POSTER
+===================================== */
+
+.trip-cover-section {
+    background: #17212b;
+    padding: 0 20px 50px;
+}
+
+.trip-cover-image {
+    display: block;
+
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+
+    margin: 0 auto;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 600px) {
+
+    .trip-cover-section {
+        padding: 0 12px 32px;
+    }
+
+    .trip-cover-image {
+        border-radius: 10px;
+    }
+
+}
