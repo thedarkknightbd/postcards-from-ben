@@ -6,7 +6,7 @@
 const MAPLIBRE_VERSION = "6.11.2";
 
 const MAP_STYLE =
-    "https://tiles.openfreemap.org/styles/dark";
+    "https://tiles.openfreemap.org/styles/positron";
 
 
 async function loadMapLibre() {
@@ -257,37 +257,6 @@ async function loadTripMap() {
         "top-right"
 
     );
-
-
-    if (maplibregl.GlobeControl) {
-
-        map.addControl(
-
-            new maplibregl.GlobeControl(),
-
-            "top-right"
-
-        );
-
-    }
-
-
-
-    /* =====================================
-       GLOBE VIEW
-    ===================================== */
-
-    map.on(
-        "style.load",
-        () => {
-
-            map.setProjection({
-                type: "globe"
-            });
-
-        }
-    );
-
 
 
     /* =====================================
