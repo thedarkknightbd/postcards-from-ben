@@ -132,7 +132,7 @@ async function loadTripProgress() {
         if (today < start) {
 
             label.textContent =
-                "The journey begins October 19";
+                "The adventure begins October 19";
 
             completedDays = 0;
             percentage = 0;
@@ -185,7 +185,7 @@ async function loadTripProgress() {
             percentage = 100;
 
             label.textContent =
-                `Journey Complete · ${trip.dayCount} Days`;
+                `Adventure Complete · ${trip.dayCount} Days`;
 
         }
 

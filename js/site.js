@@ -62,7 +62,7 @@ if (dayMap && typeof L !== "undefined") {
     ).addTo(map);
 
 
-    // Automatically show the entire journey
+    // Automatically show the entire adventure
 
     map.fitBounds(
         route.getBounds(),

@@ -190,28 +190,48 @@ async function loadTripMap() {
 
             const routeOptions = {
                 weight: 4,
-                opacity: 0.8
+                opacity: 0.85,
+                lineCap: "round"
             };
 
 
             /*
-             Flight = dashed
-             Train = shorter dashes
-             Driving = solid
+            Transportation styles
+
+            Drive  = solid
+            Train  = short dashes
+            Flight = long dashes
+            Cable  = dotted
+            Local  = light dotted
             */
 
-            if (dayReference.mode === "flight") {
+            switch (dayReference.mode) {
 
-                routeOptions.dashArray =
-                    "10 12";
+                case "flight":
+                    routeOptions.dashArray = "14 12";
+                    routeOptions.weight = 3;
+                    break;
 
-            }
+                case "train":
+                    routeOptions.dashArray = "6 7";
+                    routeOptions.weight = 4;
+                    break;
 
-            if (dayReference.mode === "train") {
+                case "cable":
+                    routeOptions.dashArray = "2 7";
+                    routeOptions.weight = 4;
+                    break;
 
-                routeOptions.dashArray =
-                    "4 8";
+                case "local":
+                    routeOptions.dashArray = "2 8";
+                    routeOptions.weight = 2;
+                    routeOptions.opacity = 0.55;
+                    break;
 
+                case "drive":
+                default:
+                    routeOptions.weight = 4;
+                    break;
             }
 
 

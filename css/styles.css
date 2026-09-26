@@ -1397,3 +1397,85 @@ footer {
 
     transition: width 0.6s ease;
 }
+
+/* =====================================
+   MAP ROUTE LEGEND
+===================================== */
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+
+    margin-top: 18px;
+}
+
+.map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 0.78rem;
+    color: #68737d;
+}
+
+.map-legend-line {
+    display: inline-block;
+
+    width: 34px;
+    height: 4px;
+
+    border-radius: 999px;
+
+    background: #17212b;
+}
+
+
+/* Driving — solid */
+
+.route-drive {
+    background: #17212b;
+}
+
+
+/* Train — short dashes */
+
+.route-train {
+    height: 0;
+
+    border-top: 4px dashed #17212b;
+
+    background: none;
+}
+
+
+/* Flight — long dashes */
+
+.route-flight {
+    height: 0;
+
+    border-top: 3px dashed #17212b;
+
+    background: none;
+}
+
+
+/* Cable car — dotted */
+
+.route-cable {
+    height: 0;
+
+    border-top: 4px dotted #17212b;
+
+    background: none;
+}
+
+
+@media (max-width: 600px) {
+
+    .map-legend {
+        gap: 10px 16px;
+    }
+
+}
+

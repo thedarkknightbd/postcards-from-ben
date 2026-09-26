@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "Into the heart of the Dolomites.",
-  "intro": "One of the biggest scenic days of The Long Way Around begins with an early drive from Brescia to Ortisei. After riding the cableways to Seceda for panoramic views across the Dolomites, the journey continues around the Sella massif through a series of mountain passes, villages and valleys, finishing with Passo Gardena in the late-afternoon light before spending the night in Selva di Val Gardena.",
+  "intro": "One of the biggest scenic days of The Long Way Around begins with an early drive from Brescia to Ortisei. After riding the cableways to Seceda for panoramic views across the Dolomites, the adventure continues around the Sella massif through a series of mountain passes, villages and valleys, finishing with Passo Gardena in the late-afternoon light before spending the night in Selva di Val Gardena.",
   "stops": [
     {
       "type": "Starting Point",
@@ -38,7 +38,7 @@
     {
       "type": "Cable Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Park in Ortisei and begin the cableway journey up to Seceda.",
+      "description": "Park in Ortisei and begin the cableway adventure up to Seceda.",
       "latitude": 46.576421,
       "longitude": 11.675068
     },
