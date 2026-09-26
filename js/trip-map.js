@@ -6,7 +6,7 @@
 const MAPLIBRE_VERSION = "6.11.2";
 
 const MAP_STYLE =
-    "https://tiles.openfreemap.org/styles/positron";
+    "https://tiles.openfreemap.org/styles/bright";
 
 
 async function loadMapLibre() {
@@ -325,16 +325,9 @@ async function loadTripMap() {
                 },
 
                 paint: {
-
-                    "line-color":
-                        "#f6f4ef",
-
-                    "line-width":
-                        3.5,
-
-                    "line-opacity":
-                        0.9
-
+                    "line-color": "#17324d",
+                    "line-width": 4.5,
+                    "line-opacity": 0.95
                 }
 
             });
@@ -373,19 +366,10 @@ async function loadTripMap() {
                 },
 
                 paint: {
-
-                    "line-color":
-                        "#f6f4ef",
-
-                    "line-width":
-                        4,
-
-                    "line-opacity":
-                        0.95,
-
-                    "line-dasharray":
-                        [2, 2]
-
+                    "line-color": "#9a3f3f",
+                    "line-width": 4.5,
+                    "line-opacity": 0.95,
+                    "line-dasharray": [2, 2]
                 }
 
             });
@@ -424,19 +408,10 @@ async function loadTripMap() {
                 },
 
                 paint: {
-
-                    "line-color":
-                        "#f6f4ef",
-
-                    "line-width":
-                        3,
-
-                    "line-opacity":
-                        0.8,
-
-                    "line-dasharray":
-                        [6, 4]
-
+                    "line-color": "#d39a2c",
+                    "line-width": 4,
+                    "line-opacity": 0.95,
+                    "line-dasharray": [6, 4]
                 }
 
             });
@@ -475,19 +450,10 @@ async function loadTripMap() {
                 },
 
                 paint: {
-
-                    "line-color":
-                        "#f6f4ef",
-
-                    "line-width":
-                        3,
-
-                    "line-opacity":
-                        0.9,
-
-                    "line-dasharray":
-                        [1, 3]
-
+                    "line-color": "#2f7f7a",
+                    "line-width": 4,
+                    "line-opacity": 0.95,
+                    "line-dasharray": [1, 3]
                 }
 
             });

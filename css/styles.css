@@ -1434,7 +1434,7 @@ footer {
 /* Driving — solid */
 
 .route-drive {
-    background: #17212b;
+    border-top: 4px solid #17324d;
 }
 
 
@@ -1443,7 +1443,7 @@ footer {
 .route-train {
     height: 0;
 
-    border-top: 4px dashed #17212b;
+    border-top: 4px dashed #9a3f3f;
 
     background: none;
 }
@@ -1454,7 +1454,7 @@ footer {
 .route-flight {
     height: 0;
 
-    border-top: 3px dashed #17212b;
+    border-top: 3px dashed #d39a2c;
 
     background: none;
 }
@@ -1465,7 +1465,7 @@ footer {
 .route-cable {
     height: 0;
 
-    border-top: 4px dotted #17212b;
+    border-top: 4px dotted #2f7f7a;
 
     background: none;
 }
