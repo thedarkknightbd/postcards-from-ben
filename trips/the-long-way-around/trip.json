@@ -1,5 +1,9 @@
 {
   "title": "The Long Way Around",
+  "startDate": "2026-10-19",
+  "endDate": "2026-11-11",
+  "dayCount": 24,
+  "timeZone": "Europe/Berlin",
   "days": [
     {
       "file": "data/day-01.json",

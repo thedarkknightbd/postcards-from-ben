@@ -45,6 +45,35 @@
         24 Days · 16 Countries · ~4,000 Miles
     </p>
 
+    <div
+    id="trip-progress"
+    class="trip-progress"
+    data-trip-source="trip.json"
+    hidden>
+
+        <p
+            id="trip-progress-label"
+            class="trip-progress-label">
+        </p>
+
+        <div
+            id="trip-progress-track"
+            class="trip-progress-track"
+            role="progressbar"
+            aria-label="Trip progress"
+            aria-valuemin="0"
+            aria-valuemax="24"
+            aria-valuenow="0">
+
+            <div
+                id="trip-progress-bar"
+                class="trip-progress-bar">
+            </div>
+
+        </div>
+
+    </div>
+
 </header>
 
 
@@ -173,6 +202,8 @@
     <script src="../../js/trip-map.js"></script>
 
     <script src="../../js/trip-days.js"></script>
+
+    <script src="../../js/trip-progress.js"></script>
 
     <script src="../../js/site.js"></script>
 
