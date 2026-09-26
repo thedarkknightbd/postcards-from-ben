@@ -1842,3 +1842,42 @@ body.lightbox-open {
         rgba(0, 0, 0, 0.45);
 }
 
+/* =====================================
+   VIEW ON MAP
+===================================== */
+
+.view-on-map {
+    display: inline-block;
+
+    margin-top: 12px;
+    padding: 7px 11px;
+
+    border: 1px solid #2D9CDB;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #17324d;
+
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+.view-on-map:hover,
+.view-on-map:focus-visible {
+    background: rgba(45, 156, 219, 0.12);
+    transform: translateY(-1px);
+}
+
+.stop-card.is-map-active {
+    outline: 2px solid #2D9CDB;
+    outline-offset: 3px;
+}
+
+

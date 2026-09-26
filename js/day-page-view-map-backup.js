@@ -111,7 +111,6 @@ async function loadDayPage() {
 
         const card = document.createElement("article");
         card.className = "stop-card";
-        card.dataset.stopIndex = index;
 
         const number = document.createElement("div");
         number.className = "stop-number";
@@ -132,23 +131,6 @@ async function loadDayPage() {
         description.textContent = stop.description;
 
         content.append(type, name, description);
-
-        const hasCoordinates =
-            Number.isFinite(Number(stop.latitude)) &&
-            Number.isFinite(Number(stop.longitude));
-
-        if (hasCoordinates) {
-
-            const mapButton =
-                document.createElement("button");
-
-            mapButton.type = "button";
-            mapButton.className = "view-on-map";
-            mapButton.dataset.stopIndex = index;
-            mapButton.textContent = "View on map →";
-
-            content.appendChild(mapButton);
-        }
         card.append(number, content);
 
         stopList.appendChild(card);
@@ -201,10 +183,6 @@ async function loadDayPage() {
 
         const coordinates = [];
 
-        const stopMarkers = new Map();
-
-
-
         mappedStops.forEach(({ stop, index }) => {
 
             const coordinate = [
@@ -252,8 +230,7 @@ async function loadDayPage() {
             );
 
 
-            const marker =
-                new maplibregl.Marker({
+            new maplibregl.Marker({
                 element: markerElement,
                 anchor: "center"
             })
@@ -268,95 +245,7 @@ async function loadDayPage() {
                 )
                 .addTo(map);
 
-            stopMarkers.set(index, marker);
-
         });
-
-
-        /* =====================================
-           VIEW ON MAP
-        ===================================== */
-
-        stopList.addEventListener("click", event => {
-
-            const button =
-                event.target.closest(".view-on-map");
-
-            if (!button) {
-                return;
-            }
-
-            const index =
-                Number(button.dataset.stopIndex);
-
-            const stop =
-                stops[index];
-
-            const marker =
-                stopMarkers.get(index);
-
-            if (!stop || !marker) {
-                return;
-            }
-
-
-            document
-                .querySelectorAll(".stop-card.is-map-active")
-                .forEach(card =>
-                    card.classList.remove("is-map-active")
-                );
-
-
-            const card =
-                document.querySelector(
-                    `[data-stop-index="${index}"]`
-                );
-
-            if (card) {
-                card.classList.add("is-map-active");
-            }
-
-
-            document
-                .getElementById("map-section")
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-
-            window.setTimeout(() => {
-
-                map.flyTo({
-                    center: [
-                        Number(stop.longitude),
-                        Number(stop.latitude)
-                    ],
-
-                    zoom: Math.max(
-                        map.getZoom(),
-                        11
-                    ),
-
-                    duration: 900,
-                    essential: true
-                });
-
-
-                const popup =
-                    marker.getPopup();
-
-                if (
-                    popup &&
-                    !popup.isOpen()
-                ) {
-                    marker.togglePopup();
-                }
-
-            }, 450);
-
-        });
-
 
         map.on("load", () => {
 
