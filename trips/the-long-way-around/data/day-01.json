@@ -35,14 +35,16 @@
       "name": "Fort Worth",
       "description": "The adventure begins at home in Fort Worth, Texas.",
       "latitude": 32.7555,
-      "longitude": -97.3308
+      "longitude": -97.3308,
+      "transportToNext": "flight"
     },
     {
       "type": "Connection",
       "name": "Detroit",
       "description": "Connect in Detroit before the overnight transatlantic flight.",
       "latitude": 42.3314,
-      "longitude": -83.0458
+      "longitude": -83.0458,
+      "transportToNext": "flight"
     },
     {
       "type": "Arrival",
@@ -55,5 +57,4 @@
   "journal": "",
   "title": "The Adventure Begins",
   "videos": []
-  
 }

@@ -32,36 +32,41 @@
       "type": "Starting Point",
       "name": "Kamnik",
       "description": "Leave Kamnik and begin the drive west toward Italy.",
-      "latitude": 46.2259,
-      "longitude": 14.6119
+      "latitude": 46.2012,
+      "longitude": 14.5953,
+      "transportToNext": "drive"
     },
     {
       "type": "Parking",
       "name": "Piazzale Roma",
       "description": "Park at Venice's road-access point and continue through the historic center on foot.",
       "latitude": 45.437989,
-      "longitude": 12.318089
+      "longitude": 12.318089,
+      "transportToNext": "walk"
     },
     {
       "type": "Scenic Stop",
       "name": "Rialto Bridge & Grand Canal",
       "description": "Walk to Rialto Bridge for one of the classic views over Venice's Grand Canal.",
       "latitude": 45.436015,
-      "longitude": 12.32842
+      "longitude": 12.32842,
+      "transportToNext": "walk"
     },
     {
       "type": "Scenic Stop",
       "name": "St. Mark's Square",
       "description": "Continue to Piazza San Marco for the heart of historic Venice.",
       "latitude": 45.433914,
-      "longitude": 12.337604
+      "longitude": 12.337604,
+      "transportToNext": "walk"
     },
     {
       "type": "Return to Car",
       "name": "Piazzale Roma",
       "description": "Walk back to Piazzale Roma and continue the road trip.",
       "latitude": 45.437989,
-      "longitude": 12.318089
+      "longitude": 12.318089,
+      "transportToNext": "drive"
     },
     {
       "type": "Destination",

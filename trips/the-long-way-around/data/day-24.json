@@ -33,14 +33,16 @@
       "name": "Munich Airport",
       "description": "Begin the journey home from Munich after the final night in Europe.",
       "latitude": 48.3538,
-      "longitude": 11.7861
+      "longitude": 11.7861,
+      "transportToNext": "flight"
     },
     {
       "type": "Connection",
       "name": "Atlanta",
       "description": "Return to the United States and connect in Atlanta for the final leg home.",
       "latitude": 33.6407,
-      "longitude": -84.4277
+      "longitude": -84.4277,
+      "transportToNext": "flight"
     },
     {
       "type": "Arrival",
