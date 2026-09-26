@@ -69,9 +69,9 @@
       "transportToNext": "cable"
     },
     {
-      "type": "Cable Car",
+      "type": "Cable Car Return",
       "name": "Skyway Monte Bianco — Courmayeur",
-      "description": "Begin the ascent from the valley station toward the high slopes of Mont Blanc.",
+      "description": "Return to the valley station after descending from Pavillon du Mont Fréty.",
       "latitude": 45.8159,
       "longitude": 6.9561,
       "transportToNext": "drive"

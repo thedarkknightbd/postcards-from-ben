@@ -23,7 +23,6 @@ async function loadTripMap() {
     const mapElement =
         document.getElementById("trip-map");
 
-
     if (!mapElement) {
         return;
     }
@@ -31,7 +30,6 @@ async function loadTripMap() {
 
     const tripSource =
         mapElement.dataset.tripSource;
-
 
     if (!tripSource) {
 
@@ -52,10 +50,8 @@ async function loadTripMap() {
         maplibregl =
             await loadMapLibre();
 
-
         const response =
             await fetch(tripSource);
-
 
         if (!response.ok) {
 
@@ -65,10 +61,8 @@ async function loadTripMap() {
 
         }
 
-
         tripData =
             await response.json();
-
 
     } catch (error) {
 
@@ -81,39 +75,32 @@ async function loadTripMap() {
     }
 
 
-
     /* =====================================
        COLLECT ROUTES + STOPS
     ===================================== */
 
     const routeFeatures = [];
-
     const markerStops = [];
 
     const bounds =
         new maplibregl.LngLatBounds();
 
 
-
     for (const dayReference of tripData.days) {
 
         let day;
-
 
         try {
 
             const response =
                 await fetch(dayReference.file);
 
-
             if (!response.ok) {
                 continue;
             }
 
-
             day =
                 await response.json();
-
 
         } catch (error) {
 
@@ -126,16 +113,20 @@ async function loadTripMap() {
         }
 
 
-
         const mappedStops =
-            (day.stops || []).filter(stop =>
-                Number.isFinite(
-                    Number(stop.latitude)
-                ) &&
-                Number.isFinite(
-                    Number(stop.longitude)
-                )
-            );
+            (day.stops || [])
+                .map((stop, index) => ({
+                    stop,
+                    index
+                }))
+                .filter(item =>
+                    Number.isFinite(
+                        Number(item.stop.latitude)
+                    ) &&
+                    Number.isFinite(
+                        Number(item.stop.longitude)
+                    )
+                );
 
 
         if (mappedStops.length === 0) {
@@ -143,20 +134,17 @@ async function loadTripMap() {
         }
 
 
-
-        const coordinates =
-            mappedStops.map(stop => {
+        mappedStops.forEach(
+            ({ stop }) => {
 
                 const coordinate = [
                     Number(stop.longitude),
                     Number(stop.latitude)
                 ];
 
-
                 bounds.extend(
                     coordinate
                 );
-
 
                 markerStops.push({
                     coordinate,
@@ -164,46 +152,67 @@ async function loadTripMap() {
                     day
                 });
 
-
-                return coordinate;
-
-            });
-
+            }
+        );
 
 
         /* =====================================
-           ROUTE SEGMENT
+           INDIVIDUAL TRANSPORT SEGMENTS
         ===================================== */
 
-        if (
-            coordinates.length > 1 &&
-            dayReference.mode !== "local"
+        for (
+            let i = 0;
+            i < mappedStops.length - 1;
+            i++
         ) {
+
+            const fromStop =
+                mappedStops[i].stop;
+
+            const toStop =
+                mappedStops[i + 1].stop;
+
+            const mode =
+                fromStop.transportToNext ||
+                dayReference.mode ||
+                "drive";
+
+
+            /*
+             * Local days can have markers without
+             * needing a route line.
+             */
+
+            if (mode === "local") {
+                continue;
+            }
+
 
             routeFeatures.push({
 
                 type: "Feature",
 
                 properties: {
-
-                    mode:
-                        dayReference.mode ||
-                        "drive",
-
+                    mode,
                     dayNumber:
                         day.dayNumber,
-
                     title:
                         day.title
-
                 },
 
                 geometry: {
-
                     type: "LineString",
 
-                    coordinates
-
+                    coordinates: [
+                        [
+                            Number(fromStop.longitude),
+                            Number(fromStop.latitude)
+                        ],
+                        [
+                            Number(toStop.longitude),
+                            Number(toStop.latitude)
+                        ]
+                    ]
                 }
 
             });
@@ -211,7 +220,6 @@ async function loadTripMap() {
         }
 
     }
-
 
 
     /* =====================================
@@ -243,11 +251,6 @@ async function loadTripMap() {
         });
 
 
-
-    /* =====================================
-       CONTROLS
-    ===================================== */
-
     map.addControl(
 
         new maplibregl.NavigationControl({
@@ -268,10 +271,6 @@ async function loadTripMap() {
         () => {
 
 
-            /* -------------------------
-               ROUTE DATA
-            ------------------------- */
-
             map.addSource(
                 "trip-routes",
                 {
@@ -279,23 +278,57 @@ async function loadTripMap() {
                     type: "geojson",
 
                     data: {
-
                         type:
                             "FeatureCollection",
 
                         features:
                             routeFeatures
-
                     }
 
                 }
             );
 
 
+            /* =====================================
+               WHITE HALO
+            ===================================== */
 
-            /* -------------------------
-               DRIVING
-            ------------------------- */
+            map.addLayer({
+
+                id:
+                    "trip-route-halo",
+
+                type:
+                    "line",
+
+                source:
+                    "trip-routes",
+
+                layout: {
+                    "line-cap":
+                        "round",
+
+                    "line-join":
+                        "round"
+                },
+
+                paint: {
+                    "line-color":
+                        "#ffffff",
+
+                    "line-width":
+                        8,
+
+                    "line-opacity":
+                        0.9
+                }
+
+            });
+
+
+            /* =====================================
+               DRIVE — LIGHT BLUE / SOLID
+            ===================================== */
 
             map.addLayer({
 
@@ -315,28 +348,76 @@ async function loadTripMap() {
                 ],
 
                 layout: {
-
                     "line-cap":
                         "round",
 
                     "line-join":
                         "round"
-
                 },
 
                 paint: {
-                    "line-color": "#17324d",
-                    "line-width": 4.5,
-                    "line-opacity": 0.95
+                    "line-color":
+                        "#2D9CDB",
+
+                    "line-width":
+                        5,
+
+                    "line-opacity":
+                        1
                 }
 
             });
 
 
+            /* =====================================
+               WALK — CHARCOAL / DOTTED
+            ===================================== */
 
-            /* -------------------------
-               TRAIN
-            ------------------------- */
+            map.addLayer({
+
+                id:
+                    "trip-route-walk",
+
+                type:
+                    "line",
+
+                source:
+                    "trip-routes",
+
+                filter: [
+                    "==",
+                    ["get", "mode"],
+                    "walk"
+                ],
+
+                layout: {
+                    "line-cap":
+                        "round",
+
+                    "line-join":
+                        "round"
+                },
+
+                paint: {
+                    "line-color":
+                        "#30343B",
+
+                    "line-width":
+                        4.5,
+
+                    "line-opacity":
+                        1,
+
+                    "line-dasharray":
+                        [0.5, 2.5]
+                }
+
+            });
+
+
+            /* =====================================
+               TRAIN — RED / SHORT DASHES
+            ===================================== */
 
             map.addLayer({
 
@@ -356,29 +437,33 @@ async function loadTripMap() {
                 ],
 
                 layout: {
-
                     "line-cap":
                         "round",
 
                     "line-join":
                         "round"
-
                 },
 
                 paint: {
-                    "line-color": "#9a3f3f",
-                    "line-width": 4.5,
-                    "line-opacity": 0.95,
-                    "line-dasharray": [2, 2]
+                    "line-color":
+                        "#D62828",
+
+                    "line-width":
+                        5,
+
+                    "line-opacity":
+                        1,
+
+                    "line-dasharray":
+                        [2, 2]
                 }
 
             });
 
 
-
-            /* -------------------------
-               FLIGHT
-            ------------------------- */
+            /* =====================================
+               FLIGHT — GOLD / LONG DASHES
+            ===================================== */
 
             map.addLayer({
 
@@ -398,29 +483,33 @@ async function loadTripMap() {
                 ],
 
                 layout: {
-
                     "line-cap":
                         "round",
 
                     "line-join":
                         "round"
-
                 },
 
                 paint: {
-                    "line-color": "#d39a2c",
-                    "line-width": 4,
-                    "line-opacity": 0.95,
-                    "line-dasharray": [6, 4]
+                    "line-color":
+                        "#E9B949",
+
+                    "line-width":
+                        5,
+
+                    "line-opacity":
+                        1,
+
+                    "line-dasharray":
+                        [6, 4]
                 }
 
             });
 
 
-
-            /* -------------------------
-               CABLE CAR
-            ------------------------- */
+            /* =====================================
+               CABLE — GREEN
+            ===================================== */
 
             map.addLayer({
 
@@ -440,24 +529,69 @@ async function loadTripMap() {
                 ],
 
                 layout: {
-
                     "line-cap":
                         "round",
 
                     "line-join":
                         "round"
-
                 },
 
                 paint: {
-                    "line-color": "#2f7f7a",
-                    "line-width": 4,
-                    "line-opacity": 0.95,
-                    "line-dasharray": [1, 3]
+                    "line-color":
+                        "#2A9D6F",
+
+                    "line-width":
+                        7,
+
+                    "line-opacity":
+                        1
                 }
 
             });
 
+
+            /* White dotted cable detail */
+
+            map.addLayer({
+
+                id:
+                    "trip-route-cable-detail",
+
+                type:
+                    "line",
+
+                source:
+                    "trip-routes",
+
+                filter: [
+                    "==",
+                    ["get", "mode"],
+                    "cable"
+                ],
+
+                layout: {
+                    "line-cap":
+                        "round",
+
+                    "line-join":
+                        "round"
+                },
+
+                paint: {
+                    "line-color":
+                        "#ffffff",
+
+                    "line-width":
+                        2,
+
+                    "line-opacity":
+                        0.95,
+
+                    "line-dasharray":
+                        [0.5, 2.2]
+                }
+
+            });
 
 
             /* =====================================
@@ -471,14 +605,11 @@ async function loadTripMap() {
                         "button"
                     );
 
-
                 marker.type =
                     "button";
 
-
                 marker.className =
                     "trip-map-marker";
-
 
                 marker.setAttribute(
                     "aria-label",
@@ -486,16 +617,13 @@ async function loadTripMap() {
                 );
 
 
-
                 const popup =
                     document.createElement(
                         "div"
                     );
 
-
                 popup.className =
                     "trip-map-popup";
-
 
 
                 const heading =
@@ -503,10 +631,8 @@ async function loadTripMap() {
                         "strong"
                     );
 
-
                 heading.textContent =
                     `Day ${item.day.dayNumber} · ${item.day.title}`;
-
 
 
                 const location =
@@ -514,14 +640,11 @@ async function loadTripMap() {
                         "div"
                     );
 
-
                 location.className =
                     "trip-map-popup-location";
 
-
                 location.textContent =
                     item.stop.name;
-
 
 
                 const description =
@@ -529,10 +652,8 @@ async function loadTripMap() {
                         "p"
                     );
 
-
                 description.textContent =
-                    item.stop.description;
-
+                    item.stop.description || "";
 
 
                 popup.append(
@@ -540,7 +661,6 @@ async function loadTripMap() {
                     location,
                     description
                 );
-
 
 
                 new maplibregl.Marker({
@@ -563,7 +683,6 @@ async function loadTripMap() {
                     .addTo(map);
 
             });
-
 
 
             /* =====================================

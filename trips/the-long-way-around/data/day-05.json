@@ -29,18 +29,28 @@
   "intro": "The day begins in Kamnik with a visit to the Slovenia Bethel Branch office. From there, the route crosses into Croatia for a visit to the Croatia Bethel Branch Office in Zagreb before turning north again and returning to Kamnik for the night.",
   "stops": [
     {
+      "type": "Starting Point",
+      "name": "Kamnik",
+      "description": "Start the day in Kamnik before heading to the Slovenia Bethel Branch office.",
+      "latitude": 46.2012,
+      "longitude": 14.5953,
+      "transportToNext": "drive"
+    },
+    {
       "type": "Branch Visit",
       "name": "Slovenia Bethel",
       "description": "Visit the Slovenia Bethel Branch office in Kamnik.",
       "latitude": 46.2259,
-      "longitude": 14.6119
+      "longitude": 14.6119,
+      "transportToNext": "drive"
     },
     {
       "type": "Branch Visit",
       "name": "Croatia Bethel",
       "description": "Visit the Croatia Bethel Branch Office in Zagreb.",
       "latitude": 45.810044,
-      "longitude": 15.873169
+      "longitude": 15.873169,
+      "transportToNext": "drive"
     },
     {
       "type": "Destination",
