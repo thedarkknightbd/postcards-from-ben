@@ -1727,3 +1727,72 @@ body.lightbox-open {
 
 }
 
+/* =====================================
+   MAPLIBRE TRIP MAP
+===================================== */
+
+.trip-overview-map {
+    position: relative;
+}
+
+
+/* Map markers */
+
+.trip-map-marker {
+    width: 15px;
+    height: 15px;
+
+    padding: 0;
+
+    border: 3px solid #17212b;
+    border-radius: 50%;
+
+    background: #f6f4ef;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.45);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease;
+}
+
+
+.trip-map-marker:hover,
+.trip-map-marker:focus-visible {
+
+    transform:
+        scale(1.35);
+
+}
+
+
+/* Popup */
+
+.trip-map-popup {
+    color: #17212b;
+
+    line-height: 1.4;
+}
+
+
+.trip-map-popup strong {
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+.trip-map-popup-location {
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.trip-map-popup p {
+    margin: 0;
+}
+
