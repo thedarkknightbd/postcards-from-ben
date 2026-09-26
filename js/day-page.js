@@ -531,6 +531,29 @@ map.addLayer({
 });
 
 
+                map.fitBounds(
+                    bounds,
+                    {
+                        padding: 55,
+                        maxZoom: 11,
+                        duration: 0
+                    }
+                );
+
+            } else {
+
+                map.jumpTo({
+                    center: coordinates[0],
+                    zoom: 11
+                });
+
+            }
+
+        });
+
+    }
+
+
    /* =====================================
    PHOTOS
 ===================================== */
