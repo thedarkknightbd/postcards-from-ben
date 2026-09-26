@@ -1,3 +1,5 @@
+import * as maplibregl from "https://unpkg.com/maplibre-gl@^6.11.2/dist/maplibre-gl.mjs";
+
 /* =====================================
    POSTCARDS FROM BEN
    Shared Day Page Engine
@@ -136,76 +138,397 @@ async function loadDayPage() {
 
 
     /* =====================================
-       INTERACTIVE MAP
+       INTERACTIVE MAP — MAPLIBRE
     ===================================== */
 
     document.getElementById("map-title").textContent =
         data.route;
 
-    const mappedStops = stops.filter(stop =>
-        Number.isFinite(Number(stop.latitude)) &&
-        Number.isFinite(Number(stop.longitude))
-    );
+    const mappedStops = stops
+        .map((stop, index) => ({
+            stop,
+            index
+        }))
+        .filter(item =>
+            Number.isFinite(Number(item.stop.latitude)) &&
+            Number.isFinite(Number(item.stop.longitude))
+        );
 
     if (
-        typeof L !== "undefined" &&
+        typeof maplibregl !== "undefined" &&
         mappedStops.length > 0
     ) {
 
-        const map = L.map("day-map");
+        const firstStop = mappedStops[0].stop;
 
-        L.tileLayer(
-            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-            {
-                maxZoom: 19,
-                attribution:
-                    "&copy; OpenStreetMap contributors"
-            }
-        ).addTo(map);
+        const map = new maplibregl.Map({
+            container: "day-map",
+            style: "https://tiles.openfreemap.org/styles/bright",
+            center: [
+                Number(firstStop.longitude),
+                Number(firstStop.latitude)
+            ],
+            zoom: 7
+        });
+
+        map.addControl(
+            new maplibregl.NavigationControl({
+                showCompass: false
+            }),
+            "top-right"
+        );
+
+        const bounds =
+            new maplibregl.LngLatBounds();
 
         const coordinates = [];
 
-        mappedStops.forEach(stop => {
+        mappedStops.forEach(({ stop, index }) => {
 
             const coordinate = [
-                Number(stop.latitude),
-                Number(stop.longitude)
+                Number(stop.longitude),
+                Number(stop.latitude)
             ];
 
             coordinates.push(coordinate);
+            bounds.extend(coordinate);
 
-            L.marker(coordinate)
-                .addTo(map)
-                .bindPopup(
-                    `<strong>${stop.name}</strong><br>${stop.description}`
-                );
+            const popupContent =
+                document.createElement("div");
+
+            const title =
+                document.createElement("strong");
+
+            title.textContent = stop.name;
+
+            const description =
+                document.createElement("p");
+
+            description.textContent =
+                stop.description || "";
+
+            popupContent.append(
+                title,
+                description
+            );
+
+            const markerElement =
+                document.createElement("button");
+
+            markerElement.type =
+                "button";
+
+            markerElement.className =
+                "day-map-marker";
+
+            markerElement.textContent =
+                String(index + 1).padStart(2, "0");
+
+            markerElement.setAttribute(
+                "aria-label",
+                `View ${stop.name}`
+            );
+
+
+            new maplibregl.Marker({
+                element: markerElement,
+                anchor: "center"
+            })
+                .setLngLat(coordinate)
+                .setPopup(
+                    new maplibregl.Popup({
+                        offset: 24,
+                        maxWidth: "300px"
+                    }).setDOMContent(
+                        popupContent
+                    )
+                )
+                .addTo(map);
+
         });
 
-        if (coordinates.length > 1) {
+        map.on("load", () => {
 
-            const route = L.polyline(
-                coordinates,
-                {
-                    weight: 4,
-                    opacity: 0.8
+            if (coordinates.length > 1) {
+
+                /* =====================================
+                   BUILD INDIVIDUAL ROUTE SEGMENTS
+                ===================================== */
+
+                const routeFeatures = [];
+
+                for (
+                    let i = 0;
+                    i < mappedStops.length - 1;
+                    i++
+                ) {
+
+                    const fromStop =
+                        mappedStops[i].stop;
+
+                    const toStop =
+                        mappedStops[i + 1].stop;
+
+                    const mode =
+                        fromStop.transportToNext ||
+                        "drive";
+
+                    routeFeatures.push({
+                        type: "Feature",
+
+                        properties: {
+                            mode
+                        },
+
+                        geometry: {
+                            type: "LineString",
+
+                            coordinates: [
+                                [
+                                    Number(fromStop.longitude),
+                                    Number(fromStop.latitude)
+                                ],
+                                [
+                                    Number(toStop.longitude),
+                                    Number(toStop.latitude)
+                                ]
+                            ]
+                        }
+                    });
+
                 }
-            ).addTo(map);
 
-            map.fitBounds(
-                route.getBounds(),
-                {
-                    padding: [35, 35]
-                }
-            );
 
-        } else {
+                map.addSource(
+                    "day-route",
+                    {
+                        type: "geojson",
 
-            map.setView(
-                coordinates[0],
-                10
-            );
-        }
+                        data: {
+                            type: "FeatureCollection",
+                            features: routeFeatures
+                        }
+                    }
+                );
+
+
+                /* =====================================
+                   WHITE ROUTE HALO
+                   Keeps every color visible
+                ===================================== */
+
+                map.addLayer({
+                    id: "day-route-halo",
+
+                    type: "line",
+
+                    source: "day-route",
+
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+
+                    paint: {
+                        "line-color": "#ffffff",
+                        "line-width": 8,
+                        "line-opacity": 0.92
+                    }
+                });
+
+
+                /* =====================================
+                   DRIVING — LIGHT BLUE / SOLID
+                ===================================== */
+
+                map.addLayer({
+                    id: "day-route-drive",
+
+                    type: "line",
+
+                    source: "day-route",
+
+                    filter: [
+                        "==",
+                        ["get", "mode"],
+                        "drive"
+                    ],
+
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+
+                    paint: {
+                        "line-color": "#2D9CDB",
+                        "line-width": 5,
+                        "line-opacity": 1
+                    }
+                });
+
+
+                /* =====================================
+                   WALKING — CHARCOAL / DOTTED
+                ===================================== */
+
+                map.addLayer({
+                    id: "day-route-walk",
+
+                    type: "line",
+
+                    source: "day-route",
+
+                    filter: [
+                        "==",
+                        ["get", "mode"],
+                        "walk"
+                    ],
+
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+
+                    paint: {
+                        "line-color": "#30343B",
+                        "line-width": 4.5,
+                        "line-opacity": 1,
+                        "line-dasharray": [
+                            0.5,
+                            2.5
+                        ]
+                    }
+                });
+
+
+                /* =====================================
+                   TRAIN — RED / SHORT DASHES
+                ===================================== */
+
+                map.addLayer({
+                    id: "day-route-train",
+
+                    type: "line",
+
+                    source: "day-route",
+
+                    filter: [
+                        "==",
+                        ["get", "mode"],
+                        "train"
+                    ],
+
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+
+                    paint: {
+                        "line-color": "#D62828",
+                        "line-width": 5,
+                        "line-opacity": 1,
+                        "line-dasharray": [
+                            2,
+                            2
+                        ]
+                    }
+                });
+
+
+                /* =====================================
+                   FLIGHT — GOLD / LONG DASHES
+                ===================================== */
+
+                map.addLayer({
+                    id: "day-route-flight",
+
+                    type: "line",
+
+                    source: "day-route",
+
+                    filter: [
+                        "==",
+                        ["get", "mode"],
+                        "flight"
+                    ],
+
+                    layout: {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+
+                    paint: {
+                        "line-color": "#E9B949",
+                        "line-width": 5,
+                        "line-opacity": 1,
+                        "line-dasharray": [
+                            6,
+                            4
+                        ]
+                    }
+                });
+
+
+                /* =====================================
+   CABLE CAR — GREEN
+===================================== */
+
+map.addLayer({
+    id: "day-route-cable",
+
+    type: "line",
+
+    source: "day-route",
+
+    filter: [
+        "==",
+        ["get", "mode"],
+        "cable"
+    ],
+
+    layout: {
+        "line-cap": "round",
+        "line-join": "round"
+    },
+
+    paint: {
+        "line-color": "#2A9D6F",
+        "line-width": 7,
+        "line-opacity": 1
     }
+});
+
+
+/* White dotted center */
+
+map.addLayer({
+    id: "day-route-cable-detail",
+
+    type: "line",
+
+    source: "day-route",
+
+    filter: [
+        "==",
+        ["get", "mode"],
+        "cable"
+    ],
+
+    layout: {
+        "line-cap": "round",
+        "line-join": "round"
+    },
+
+    paint: {
+        "line-color": "#FFFFFF",
+        "line-width": 2,
+        "line-opacity": 0.95,
+        "line-dasharray": [
+            0.5,
+            2.2
+        ]
+    }
+});
 
 
    /* =====================================

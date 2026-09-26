@@ -1796,3 +1796,49 @@ body.lightbox-open {
     margin: 0;
 }
 
+
+
+/* =====================================
+   NUMBERED DAY MAP MARKERS
+===================================== */
+
+.day-map-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: 3px solid #f6f4ef;
+    border-radius: 50%;
+
+    background: #17324d;
+    color: #ffffff;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.day-map-marker:hover,
+.day-map-marker:focus-visible {
+    transform: scale(1.15);
+
+    box-shadow:
+        0 4px 14px
+        rgba(0, 0, 0, 0.45);
+}
+
