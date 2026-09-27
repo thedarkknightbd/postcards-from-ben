@@ -134,6 +134,10 @@ async function loadTripMap() {
         }
 
 
+        /* =====================================
+           MARKERS + BOUNDS
+        ===================================== */
+
         mappedStops.forEach(
             ({ stop }) => {
 
@@ -157,7 +161,200 @@ async function loadTripMap() {
 
 
         /* =====================================
-           INDIVIDUAL TRANSPORT SEGMENTS
+           LOAD REAL DRIVE / WALK GEOMETRY
+        ===================================== */
+
+        let detailedRouteData = null;
+        let railRouteData = null;
+
+        try {
+
+            const routeFile =
+                dayReference.file
+                    .replace(
+                        /^data\//,
+                        "routes/"
+                    )
+                    .replace(
+                        /\.json$/,
+                        ".geojson"
+                    );
+
+
+            const routeResponse =
+                await fetch(routeFile);
+
+
+            if (routeResponse.ok) {
+
+                detailedRouteData =
+                    await routeResponse.json();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                `Detailed route unavailable for Day ${day.dayNumber}:`,
+                error
+            );
+
+        }
+
+
+        /* =====================================
+           LOAD REAL RAIL GEOMETRY
+        ===================================== */
+
+        try {
+
+            const railFile =
+                dayReference.file
+                    .replace(
+                        /^data\//,
+                        "routes/"
+                    )
+                    .replace(
+                        /\.json$/,
+                        "-rail.geojson"
+                    );
+
+            const railResponse =
+                await fetch(railFile);
+
+            if (railResponse.ok) {
+
+                railRouteData =
+                    await railResponse.json();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                `Rail route unavailable for Day ${day.dayNumber}:`,
+                error
+            );
+
+        }
+
+
+        const coveredSegments =
+            new Set();
+
+
+        /* =====================================
+           ADD REAL DRIVE / WALK ROUTES
+        ===================================== */
+
+        if (
+            detailedRouteData &&
+            Array.isArray(
+                detailedRouteData.features
+            )
+        ) {
+
+            detailedRouteData.features.forEach(
+                feature => {
+
+                    const properties =
+                        feature.properties || {};
+
+                    const startIndex =
+                        Number(
+                            properties.fromStopIndex
+                        );
+
+                    const endIndex =
+                        Number(
+                            properties.toStopIndex
+                        );
+
+
+                    if (
+                        Number.isFinite(startIndex) &&
+                        Number.isFinite(endIndex)
+                    ) {
+
+                        for (
+                            let index = startIndex;
+                            index < endIndex;
+                            index++
+                        ) {
+
+                            coveredSegments.add(
+                                index
+                            );
+
+                        }
+
+                    }
+
+
+                    routeFeatures.push({
+
+                        ...feature,
+
+                        properties: {
+
+                            ...properties,
+
+                            dayNumber:
+                                day.dayNumber,
+
+                            title:
+                                day.title
+
+                        }
+
+                    });
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           REAL TRAIN ROUTE
+        ===================================== */
+
+        if (
+            railRouteData &&
+            Array.isArray(
+                railRouteData.features
+            )
+        ) {
+
+            railRouteData.features.forEach(
+                feature => {
+
+                    routeFeatures.push({
+
+                        ...feature,
+
+                        properties: {
+
+                            ...(feature.properties || {}),
+
+                            dayNumber:
+                                day.dayNumber,
+
+                            title:
+                                day.title
+
+                        }
+
+                    });
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           FALLBACK TRANSPORT SEGMENTS
         ===================================== */
 
         for (
@@ -166,11 +363,17 @@ async function loadTripMap() {
             i++
         ) {
 
+            const fromItem =
+                mappedStops[i];
+
+            const toItem =
+                mappedStops[i + 1];
+
             const fromStop =
-                mappedStops[i].stop;
+                fromItem.stop;
 
             const toStop =
-                mappedStops[i + 1].stop;
+                toItem.stop;
 
             const mode =
                 fromStop.transportToNext ||
@@ -178,12 +381,33 @@ async function loadTripMap() {
                 "drive";
 
 
+            if (mode === "local") {
+                continue;
+            }
+
+
+            if (
+                mode === "train" &&
+                railRouteData &&
+                Array.isArray(
+                    railRouteData.features
+                ) &&
+                railRouteData.features.length > 0
+            ) {
+                continue;
+            }
+
+
             /*
-             * Local days can have markers without
-             * needing a route line.
+             * Skip segments already represented
+             * by real driving/walking geometry.
              */
 
-            if (mode === "local") {
+            if (
+                coveredSegments.has(
+                    fromItem.index
+                )
+            ) {
                 continue;
             }
 
@@ -193,26 +417,40 @@ async function loadTripMap() {
                 type: "Feature",
 
                 properties: {
+
                     mode,
+
                     dayNumber:
                         day.dayNumber,
+
                     title:
                         day.title
+
                 },
 
                 geometry: {
+
                     type: "LineString",
 
                     coordinates: [
                         [
-                            Number(fromStop.longitude),
-                            Number(fromStop.latitude)
+                            Number(
+                                fromStop.longitude
+                            ),
+                            Number(
+                                fromStop.latitude
+                            )
                         ],
                         [
-                            Number(toStop.longitude),
-                            Number(toStop.latitude)
+                            Number(
+                                toStop.longitude
+                            ),
+                            Number(
+                                toStop.latitude
+                            )
                         ]
                     ]
+
                 }
 
             });

@@ -64,8 +64,8 @@
       "type": "Mountain Pass",
       "name": "Passo Sella",
       "description": "The first major mountain pass of the Sella loop, beneath the dramatic walls of the Sella massif.",
-      "latitude": 46.5029,
-      "longitude": 11.76401,
+      "latitude": 46.508554,
+      "longitude": 11.762924,
       "transportToNext": "drive"
     },
     {

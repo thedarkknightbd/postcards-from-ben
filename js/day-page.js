@@ -34,6 +34,71 @@ async function loadDayPage() {
 
 
     /* =====================================
+       DETAILED ROAD / WALK GEOMETRY
+    ===================================== */
+
+    let detailedRouteData = null;
+    let railRouteData = null;
+
+    try {
+
+        const routeSource =
+            source
+                .replace("../data/", "../routes/")
+                .replace(".json", ".geojson");
+
+        const routeResponse =
+            await fetch(routeSource);
+
+        if (routeResponse.ok) {
+
+            detailedRouteData =
+                await routeResponse.json();
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Detailed route geometry unavailable:",
+            error
+        );
+
+    }
+
+
+    /* =====================================
+       DETAILED RAIL GEOMETRY
+    ===================================== */
+
+    try {
+
+        const railSource =
+            source
+                .replace("../data/", "../routes/")
+                .replace(".json", "-rail.geojson");
+
+        const railResponse =
+            await fetch(railSource);
+
+        if (railResponse.ok) {
+
+            railRouteData =
+                await railResponse.json();
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Detailed rail geometry unavailable:",
+            error
+        );
+
+    }
+
+
+    /* =====================================
        PAGE TITLE / HERO
     ===================================== */
 
@@ -368,23 +433,141 @@ async function loadDayPage() {
 
                 const routeFeatures = [];
 
+                const coveredSegments =
+                    new Set();
+
+
+                /* -------------------------
+                   REAL DRIVE / WALK ROUTES
+                ------------------------- */
+
+                if (
+                    detailedRouteData &&
+                    Array.isArray(
+                        detailedRouteData.features
+                    )
+                ) {
+
+                    detailedRouteData.features.forEach(
+                        feature => {
+
+                            const properties =
+                                feature.properties || {};
+
+                            const startIndex =
+                                Number(
+                                    properties.fromStopIndex
+                                );
+
+                            const endIndex =
+                                Number(
+                                    properties.toStopIndex
+                                );
+
+                            if (
+                                Number.isFinite(startIndex) &&
+                                Number.isFinite(endIndex)
+                            ) {
+
+                                for (
+                                    let i = startIndex;
+                                    i < endIndex;
+                                    i++
+                                ) {
+
+                                    coveredSegments.add(i);
+
+                                }
+
+                            }
+
+                            routeFeatures.push(
+                                feature
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* -------------------------
+                   REAL TRAIN ROUTE
+                ------------------------- */
+
+                if (
+                    railRouteData &&
+                    Array.isArray(
+                        railRouteData.features
+                    )
+                ) {
+
+                    railRouteData.features.forEach(
+                        feature => {
+
+                            routeFeatures.push(
+                                feature
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* -------------------------
+                   FALLBACK STRAIGHT ROUTES
+                ------------------------- */
+
                 for (
                     let i = 0;
                     i < mappedStops.length - 1;
                     i++
                 ) {
 
+                    const fromItem =
+                        mappedStops[i];
+
+                    const toItem =
+                        mappedStops[i + 1];
+
                     const fromStop =
-                        mappedStops[i].stop;
+                        fromItem.stop;
 
                     const toStop =
-                        mappedStops[i + 1].stop;
+                        toItem.stop;
+
+                    const originalIndex =
+                        fromItem.index;
+
+                    if (
+                        coveredSegments.has(
+                            originalIndex
+                        )
+                    ) {
+                        continue;
+                    }
+
 
                     const mode =
                         fromStop.transportToNext ||
                         "drive";
 
+
+                    if (
+                        mode === "train" &&
+                        railRouteData &&
+                        Array.isArray(
+                            railRouteData.features
+                        ) &&
+                        railRouteData.features.length > 0
+                    ) {
+                        continue;
+                    }
+
+
                     routeFeatures.push({
+
                         type: "Feature",
 
                         properties: {
@@ -392,19 +575,30 @@ async function loadDayPage() {
                         },
 
                         geometry: {
+
                             type: "LineString",
 
                             coordinates: [
                                 [
-                                    Number(fromStop.longitude),
-                                    Number(fromStop.latitude)
+                                    Number(
+                                        fromStop.longitude
+                                    ),
+                                    Number(
+                                        fromStop.latitude
+                                    )
                                 ],
                                 [
-                                    Number(toStop.longitude),
-                                    Number(toStop.latitude)
+                                    Number(
+                                        toStop.longitude
+                                    ),
+                                    Number(
+                                        toStop.latitude
+                                    )
                                 ]
                             ]
+
                         }
+
                     });
 
                 }

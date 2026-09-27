@@ -39,7 +39,7 @@
     {
       "type": "Branch Visit",
       "name": "Slovenia Bethel",
-      "description": "Visit the Slovenia Bethel Branch office in Kamnik.",
+      "description": "Visit the Slovenia Branch Office in Kamnik.",
       "latitude": 46.2259,
       "longitude": 14.6119,
       "transportToNext": "drive"
@@ -47,7 +47,7 @@
     {
       "type": "Branch Visit",
       "name": "Croatia Bethel",
-      "description": "Visit the Croatia Bethel Branch Office in Zagreb.",
+      "description": "Visit the Croatia Branch Office in Zagreb.",
       "latitude": 45.810044,
       "longitude": 15.873169,
       "transportToNext": "drive"
