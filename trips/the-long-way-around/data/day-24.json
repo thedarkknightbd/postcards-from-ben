@@ -2,7 +2,7 @@
   "dayNumber": 24,
   "date": "November 11, 2026",
   "title": "The Long Way Home",
-  "route": "Munich → Atlanta → Fort Worth",
+  "route": "Munich → Atlanta → DFW Airport → North Fort Worth",
   "facts": [
     {
       "icon": "✈️",
@@ -17,7 +17,7 @@
     {
       "icon": "🇺🇸",
       "label": "Destination",
-      "value": "Fort Worth, Texas"
+      "value": "North Fort Worth, Texas"
     },
     {
       "icon": "🏁",
@@ -26,12 +26,12 @@
     }
   ],
   "introTitle": "The long way home.",
-  "intro": "After 24 days on the road, The Long Way Around comes to an end. The final journey begins in Munich, crosses the Atlantic through Atlanta, and continues home to Fort Worth — completing a loop that stretched across countries, mountain passes, lakes, railways and thousands of miles.",
+  "intro": "After 24 days on the road, The Long Way Around comes to an end. The final journey begins at Munich Airport, crosses the Atlantic through Atlanta, continues to DFW Airport, and finishes with the drive home to North Fort Worth.",
   "stops": [
     {
       "type": "Departure",
       "name": "Munich Airport",
-      "description": "Begin the journey home from Munich after the final night in Europe.",
+      "description": "Begin the journey home after the final night in Europe.",
       "latitude": 48.3538,
       "longitude": 11.7861,
       "transportToNext": "flight"
@@ -39,17 +39,25 @@
     {
       "type": "Connection",
       "name": "Atlanta",
-      "description": "Return to the United States and connect in Atlanta for the final leg home.",
+      "description": "Return to the United States and connect in Atlanta for the final flight to DFW.",
       "latitude": 33.6407,
       "longitude": -84.4277,
       "transportToNext": "flight"
     },
     {
       "type": "Arrival",
-      "name": "Fort Worth",
-      "description": "Arrive home in Fort Worth, bringing The Long Way Around to a close.",
-      "latitude": 32.7555,
-      "longitude": -97.3308
+      "name": "DFW Airport",
+      "description": "Land back in North Texas before the final drive home.",
+      "latitude": 32.892417,
+      "longitude": -97.037914,
+      "transportToNext": "drive"
+    },
+    {
+      "type": "Journey's End",
+      "name": "North Fort Worth",
+      "description": "Arrive home in North Fort Worth, completing The Long Way Around.",
+      "latitude": 32.8516,
+      "longitude": -97.31655
     }
   ],
   "photos": [],

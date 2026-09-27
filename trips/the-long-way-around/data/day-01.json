@@ -11,7 +11,7 @@
     {
       "icon": "📍",
       "label": "Starting Point",
-      "value": "Fort Worth, Texas"
+      "value": "North Fort Worth, Texas"
     },
     {
       "icon": "🌍",
@@ -24,34 +24,42 @@
       "value": "Overnight Flight"
     }
   ],
-  "route": "Fort Worth → Detroit → Munich",
+  "route": "North Fort Worth → DFW Airport → Detroit → Munich",
   "nextDay": "day-02.html",
-  "intro": "After months of planning, the adventure finally starts in Fort Worth. From Texas, I head to Detroit before boarding the overnight flight across the Atlantic to Munich.",
+  "intro": "After months of planning, The Long Way Around begins in North Fort Worth. I drive to DFW Airport, fly to Detroit, and then board the overnight flight across the Atlantic to Munich.",
   "introTitle": "The Long Way Around begins.",
   "date": "October 19, 2026",
   "stops": [
     {
       "type": "Starting Point",
-      "name": "Fort Worth",
-      "description": "The adventure begins at home in Fort Worth, Texas.",
-      "latitude": 32.7555,
-      "longitude": -97.3308,
+      "name": "North Fort Worth",
+      "description": "The Long Way Around begins in North Fort Worth, Texas.",
+      "latitude": 32.8516,
+      "longitude": -97.31655,
+      "transportToNext": "drive"
+    },
+    {
+      "type": "Airport",
+      "name": "DFW Airport",
+      "description": "Drive to DFW Airport and begin the flight to Detroit.",
+      "latitude": 32.892417,
+      "longitude": -97.037914,
       "transportToNext": "flight"
     },
     {
       "type": "Connection",
-      "name": "Detroit",
+      "name": "Detroit Metropolitan Airport",
       "description": "Connect in Detroit before the overnight transatlantic flight.",
-      "latitude": 42.3314,
-      "longitude": -83.0458,
+      "latitude": 42.212431,
+      "longitude": -83.353393,
       "transportToNext": "flight"
     },
     {
       "type": "Arrival",
-      "name": "Munich",
+      "name": "Munich Airport",
       "description": "Arrive in Germany the following morning, where the European road trip begins.",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "latitude": 48.3538,
+      "longitude": 11.7861
     }
   ],
   "journal": "",
