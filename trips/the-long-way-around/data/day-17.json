@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Courmayeur",
       "description": "Leave Courmayeur after two nights beneath Mont Blanc and begin the journey into France.",
-      "latitude": 45.7914,
-      "longitude": 6.9717
+      "latitude": 45.79256,
+      "longitude": 6.96874
     },
     {
       "type": "Border Crossing",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Strasbourg",
       "description": "Arrive in Strasbourg and settle in for the night in the heart of Alsace.",
-      "latitude": 48.5734,
-      "longitude": 7.7521
+      "latitude": 48.59681,
+      "longitude": 7.75531
     }
   ],
   "photos": [],

@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Munich",
       "description": "Leave Munich for the final international road trip of the journey.",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "latitude": 48.35544,
+      "longitude": 11.78869
     },
     {
       "type": "Country Stop",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Munich",
       "description": "Return to Munich and settle in for the final night before the journey home.",
-      "latitude": 48.1351,
-      "longitude": 11.582
+      "latitude": 48.35544,
+      "longitude": 11.78869
     }
   ],
   "photos": [],

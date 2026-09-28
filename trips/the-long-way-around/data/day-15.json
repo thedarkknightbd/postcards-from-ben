@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Brescia",
       "description": "Leave Brescia and begin the long drive toward the Mediterranean coast.",
-      "latitude": 45.5416,
-      "longitude": 10.2118
+      "latitude": 45.565778,
+      "longitude": 10.23647
     },
     {
       "type": "Country Stop",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Courmayeur",
       "description": "Leave the Mediterranean behind and settle in beneath Mont Blanc in the Italian Alps.",
-      "latitude": 45.7914,
-      "longitude": 6.9717
+      "latitude": 45.79256,
+      "longitude": 6.96874
     }
   ],
   "photos": [],

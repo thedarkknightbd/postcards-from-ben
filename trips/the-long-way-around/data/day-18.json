@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Strasbourg",
       "description": "Leave Strasbourg and begin the drive north toward Luxembourg.",
-      "latitude": 48.5734,
-      "longitude": 7.7521
+      "latitude": 48.59681,
+      "longitude": 7.75531
     },
     {
       "type": "Coffee Stop",
@@ -53,8 +53,8 @@
       "type": "Destination",
       "name": "Emmen",
       "description": "Cross into the Netherlands and settle in for the night in Emmen.",
-      "latitude": 52.7858,
-      "longitude": 6.8976
+      "latitude": 52.77519,
+      "longitude": 6.89194
     }
   ],
   "photos": [],

@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Brescia",
       "description": "Leave Brescia and head toward the western shore of Lake Garda.",
-      "latitude": 45.5416,
-      "longitude": 10.2118
+      "latitude": 45.565778,
+      "longitude": 10.23647
     },
     {
       "type": "Featured Scenic Stop",
@@ -53,8 +53,8 @@
       "type": "Destination",
       "name": "Brescia",
       "description": "Return to Brescia after a scenic day along northern Lake Garda.",
-      "latitude": 45.5416,
-      "longitude": 10.2118
+      "latitude": 45.565778,
+      "longitude": 10.23647
     }
   ],
   "photos": [],

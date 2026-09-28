@@ -1,4 +1,4 @@
-{ 
+{
   "dayNumber": 2,
   "date": "October 20, 2026",
   "title": "Germany, Czechia & Austria",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Vienna",
       "description": "Continue into Austria and finish the first driving day in Vienna.",
-      "latitude": 48.2082,
-      "longitude": 16.3738
+      "latitude": 48.16299,
+      "longitude": 16.34039
     }
   ],
   "photos": [],

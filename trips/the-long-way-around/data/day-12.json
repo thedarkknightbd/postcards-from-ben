@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Brescia",
       "description": "Leave Brescia and drive north toward Tirano for the start of the rail journey.",
-      "latitude": 45.5416,
-      "longitude": 10.2118,
+      "latitude": 45.565778,
+      "longitude": 10.23647,
       "transportToNext": "drive"
     },
     {
@@ -104,8 +104,8 @@
       "type": "Destination",
       "name": "Brescia",
       "description": "Drive back to Brescia after a full day aboard the Bernina Express.",
-      "latitude": 45.5416,
-      "longitude": 10.2118
+      "latitude": 45.565778,
+      "longitude": 10.23647
     }
   ],
   "photos": [],

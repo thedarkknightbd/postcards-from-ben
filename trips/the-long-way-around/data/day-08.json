@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Brescia",
       "description": "Leave Brescia early and head north toward the Dolomites.",
-      "latitude": 45.5416,
-      "longitude": 10.2118,
+      "latitude": 45.565778,
+      "longitude": 10.23647,
       "transportToNext": "drive"
     },
     {

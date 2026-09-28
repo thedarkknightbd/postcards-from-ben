@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Emmen",
       "description": "Begin the day in Emmen in the northeastern Netherlands.",
-      "latitude": 52.7858,
-      "longitude": 6.8976
+      "latitude": 52.77519,
+      "longitude": 6.89194
     },
     {
       "type": "Branch Visit",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Frankfurt",
       "description": "Cross into Germany and settle in for the next part of the journey in Frankfurt.",
-      "latitude": 50.1109,
-      "longitude": 8.6821
+      "latitude": 50.05684,
+      "longitude": 8.34047
     }
   ],
   "photos": [],
