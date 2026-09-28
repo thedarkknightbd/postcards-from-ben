@@ -18,15 +18,15 @@
           "Monte Carlo — Monaco",
           "Courmayeur"
         ],
-        "distanceMeters": 817378.1,
+        "distanceMeters": 817378.3,
         "durationSeconds": 30745.800000000003
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ],
           [
             10.236466,

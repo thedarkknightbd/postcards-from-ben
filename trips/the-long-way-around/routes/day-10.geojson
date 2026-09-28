@@ -19,15 +19,15 @@
           "Riva del Garda",
           "Brescia"
         ],
-        "distanceMeters": 174270.3,
-        "durationSeconds": 12871.3
+        "distanceMeters": 174270.7,
+        "durationSeconds": 12871.400000000001
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ],
           [
             10.236466,
@@ -11758,8 +11758,8 @@
             45.565187
           ],
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ]
         ]
       }

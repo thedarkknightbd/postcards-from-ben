@@ -9189,7 +9189,7 @@
           "Piazzale Roma",
           "Brescia"
         ],
-        "distanceMeters": 189450.3,
+        "distanceMeters": 189450.5,
         "durationSeconds": 7072.9
       },
       "geometry": {
@@ -12844,8 +12844,8 @@
             45.565187
           ],
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ]
         ]
       }

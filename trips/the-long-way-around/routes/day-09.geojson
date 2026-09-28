@@ -18,8 +18,8 @@
           "Santa Maddalena — Val di Funes",
           "Brescia"
         ],
-        "distanceMeters": 277659.9,
-        "durationSeconds": 12500.4
+        "distanceMeters": 277660.1,
+        "durationSeconds": 12500.5
       },
       "geometry": {
         "type": "LineString",
@@ -13253,8 +13253,8 @@
             45.565187
           ],
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ]
         ]
       }

@@ -19,15 +19,15 @@
           "Piazza Maggiore — Bologna",
           "Brescia"
         ],
-        "distanceMeters": 674250.5,
-        "durationSeconds": 26564.699999999997
+        "distanceMeters": 674250.9,
+        "durationSeconds": 26564.8
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ],
           [
             10.236466,
@@ -16102,8 +16102,8 @@
             45.565187
           ],
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ]
         ]
       }

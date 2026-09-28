@@ -32,8 +32,8 @@
       "type": "Departure",
       "name": "Munich Airport",
       "description": "Begin the journey home after the final night in Europe.",
-      "latitude": 48.35544,
-      "longitude": 11.78869,
+      "latitude": 48.3538,
+      "longitude": 11.7861,
       "transportToNext": "flight"
     },
     {

@@ -17,15 +17,15 @@
           "Brescia",
           "Tirano"
         ],
-        "distanceMeters": 131879.6,
-        "durationSeconds": 9086.6
+        "distanceMeters": 131879.8,
+        "durationSeconds": 9086.7
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ],
           [
             10.236466,
@@ -8194,7 +8194,7 @@
           "Tirano",
           "Brescia"
         ],
-        "distanceMeters": 131755.4,
+        "distanceMeters": 131755.7,
         "durationSeconds": 9055.1
       },
       "geometry": {
@@ -16245,8 +16245,8 @@
             45.565187
           ],
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ]
         ]
       }

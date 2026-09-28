@@ -17,15 +17,15 @@
           "Brescia",
           "Seceda Cableways — Ortisei"
         ],
-        "distanceMeters": 231942.1,
+        "distanceMeters": 231942.3,
         "durationSeconds": 9806.3
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            10.236766,
-            45.565692
+            10.236767,
+            45.565693
           ],
           [
             10.236466,
