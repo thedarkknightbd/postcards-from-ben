@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Frankfurt",
       "description": "Leave Frankfurt and begin the journey south through Germany.",
-      "latitude": 50.05684,
-      "longitude": 8.34047
+      "latitude": 50.06299672429767,
+      "longitude": 8.348715139561602
     },
     {
       "type": "Branch Visit",
@@ -53,8 +53,8 @@
       "type": "Destination",
       "name": "Munich",
       "description": "Arrive in Munich and settle in for the final stretch of the trip.",
-      "latitude": 48.35563,
-      "longitude": 11.78872
+      "latitude": 48.35561398823043,
+      "longitude": 11.788780241425268
     }
   ],
   "photos": [],

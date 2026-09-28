@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Courmayeur",
       "description": "Begin the day beneath Mont Blanc in Courmayeur.",
-      "latitude": 45.783708, 
-      "longitude": 6.973207
+      "latitude": 45.78381895553412,
+      "longitude": 6.973237850469659,
       "transportToNext": "drive"
     },
     {
@@ -80,8 +80,8 @@
       "type": "Destination",
       "name": "Courmayeur",
       "description": "Return to Courmayeur and settle back into the Italian Alps after a day high above the valley.",
-      "latitude": 45.783708, 
-      "longitude": 6.973207
+      "latitude": 45.78381895553412,
+      "longitude": 6.973237850469659
     }
   ],
   "photos": [],

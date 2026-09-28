@@ -32,8 +32,8 @@
       "type": "Starting Point",
       "name": "Frankfurt",
       "description": "Enjoy a slower morning in Frankfurt before heading west toward the Rhine.",
-      "latitude": 50.05957,
-      "longitude": 8.34541
+      "latitude": 50.06299672429767,
+      "longitude": 8.348715139561602
     },
     {
       "type": "Scenic Area",
@@ -46,8 +46,8 @@
       "type": "Destination",
       "name": "Frankfurt",
       "description": "Return to Frankfurt after a relaxed afternoon along the Rhine.",
-      "latitude": 50.05957,
-      "longitude": 8.34541
+      "latitude": 50.06299672429767,
+      "longitude": 8.348715139561602
     }
   ],
   "photos": [],
