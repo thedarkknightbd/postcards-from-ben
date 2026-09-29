@@ -1,0 +1,281 @@
+{
+  "places": [
+    {
+      "name": "Antigua",
+      "mapNames": [
+        "Antigua and Barbuda"
+      ],
+      "small": true,
+      "lat": 17.0747,
+      "lng": -61.8175
+    },
+    {
+      "name": "Aruba",
+      "mapNames": [
+        "Aruba"
+      ],
+      "small": true,
+      "lat": 12.5211,
+      "lng": -69.9683
+    },
+    {
+      "name": "Bahamas",
+      "mapNames": [
+        "The Bahamas",
+        "Bahamas"
+      ],
+      "small": true,
+      "lat": 25.0343,
+      "lng": -77.3963
+    },
+    {
+      "name": "Barbados",
+      "mapNames": [
+        "Barbados"
+      ],
+      "small": true,
+      "lat": 13.1939,
+      "lng": -59.5432
+    },
+    {
+      "name": "Bermuda",
+      "mapNames": [
+        "Bermuda"
+      ],
+      "small": true,
+      "lat": 32.3078,
+      "lng": -64.7505
+    },
+    {
+      "name": "Bosnia & Herzegovina",
+      "mapNames": [
+        "Bosnia and Herzegovina"
+      ]
+    },
+    {
+      "name": "Brazil",
+      "mapNames": [
+        "Brazil"
+      ]
+    },
+    {
+      "name": "British Virgin Islands",
+      "mapNames": [
+        "British Virgin Islands"
+      ],
+      "small": true,
+      "lat": 18.4207,
+      "lng": -64.64
+    },
+    {
+      "name": "Canada",
+      "mapNames": [
+        "Canada"
+      ]
+    },
+    {
+      "name": "Caribbean Netherlands",
+      "mapNames": [
+        "Bonaire, Sint Eustatius and Saba"
+      ],
+      "small": true,
+      "lat": 12.2019,
+      "lng": -68.2624
+    },
+    {
+      "name": "Colombia",
+      "mapNames": [
+        "Colombia"
+      ]
+    },
+    {
+      "name": "France",
+      "mapNames": [
+        "France"
+      ]
+    },
+    {
+      "name": "Germany",
+      "mapNames": [
+        "Germany"
+      ]
+    },
+    {
+      "name": "Greece",
+      "mapNames": [
+        "Greece"
+      ],
+      "trips": [
+        "special-convention"
+      ]
+    },
+    {
+      "name": "Hungary",
+      "mapNames": [
+        "Hungary"
+      ],
+      "trips": [
+        "autumn-hungary"
+      ]
+    },
+    {
+      "name": "India",
+      "mapNames": [
+        "India"
+      ]
+    },
+    {
+      "name": "Ireland",
+      "mapNames": [
+        "Ireland"
+      ]
+    },
+    {
+      "name": "Italy",
+      "mapNames": [
+        "Italy"
+      ]
+    },
+    {
+      "name": "Kenya",
+      "mapNames": [
+        "Kenya"
+      ],
+      "trips": [
+        "under-mara-sky",
+        "afternoon-with-giants"
+      ]
+    },
+    {
+      "name": "Mexico",
+      "mapNames": [
+        "Mexico"
+      ]
+    },
+    {
+      "name": "Puerto Rico",
+      "mapNames": [
+        "Puerto Rico"
+      ],
+      "small": true,
+      "lat": 18.2208,
+      "lng": -66.5901
+    },
+    {
+      "name": "Sint Maarten",
+      "mapNames": [
+        "Sint Maarten"
+      ],
+      "small": true,
+      "lat": 18.0425,
+      "lng": -63.0548
+    },
+    {
+      "name": "St Lucia",
+      "mapNames": [
+        "Saint Lucia",
+        "St. Lucia"
+      ],
+      "small": true,
+      "lat": 13.9094,
+      "lng": -60.9789
+    },
+    {
+      "name": "St Martin",
+      "mapNames": [
+        "Saint Martin"
+      ],
+      "small": true,
+      "lat": 18.0826,
+      "lng": -63.0523
+    },
+    {
+      "name": "UAE",
+      "mapNames": [
+        "United Arab Emirates"
+      ]
+    },
+    {
+      "name": "UK",
+      "mapNames": [
+        "United Kingdom"
+      ]
+    },
+    {
+      "name": "Ukraine",
+      "mapNames": [
+        "Ukraine"
+      ],
+      "trips": [
+        "winter-black-sea"
+      ]
+    },
+    {
+      "name": "US Virgin Islands",
+      "mapNames": [
+        "United States Virgin Islands",
+        "U.S. Virgin Islands"
+      ],
+      "small": true,
+      "lat": 18.3358,
+      "lng": -64.8963
+    },
+    {
+      "name": "USA",
+      "mapNames": [
+        "United States of America",
+        "United States"
+      ]
+    },
+    {
+      "name": "Vatican City",
+      "mapNames": [
+        "Vatican"
+      ],
+      "small": true,
+      "lat": 41.9029,
+      "lng": 12.4534
+    },
+    {
+      "name": "Romania",
+      "mapNames": [
+        "Romania"
+      ],
+      "trips": [
+        "special-convention"
+      ]
+    }
+  ],
+  "trips": {
+    "winter-black-sea": {
+      "title": "Winter on the Black Sea",
+      "location": "DFW → London → Istanbul → Odessa",
+      "date": "December 8–13, 2018",
+      "url": "/trips/winter-on-the-black-sea/"
+    },
+    "autumn-hungary": {
+      "title": "Autumn in Hungary",
+      "location": "DFW → Philadelphia → Hungary",
+      "date": "October 23–28, 2018",
+      "url": "/trips/autumn-in-hungary/"
+    },
+    "special-convention": {
+      "title": "A Special Convention",
+      "location": "Bucharest → Cluj → Athens → Mykonos",
+      "date": "August 2017",
+      "url": "/trips/a-special-convention/"
+    },
+    "under-mara-sky": {
+      "title": "Under the Mara Sky",
+      "location": "Nairobi → Maasai Mara, Kenya",
+      "date": "April 2012",
+      "url": "/trips/under-the-mara-sky/"
+    },
+    "afternoon-with-giants": {
+      "title": "An Afternoon with Giants",
+      "location": "Nairobi, Kenya",
+      "date": "July 2011",
+      "url": "/trips/an-afternoon-with-giants/"
+    }
+  }
+}

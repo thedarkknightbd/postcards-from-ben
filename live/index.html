@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Live Location | Postcards from Ben</title>
+
+  <meta
+    name="description"
+    content="Follow Ben's latest location while he's on the road."
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="../icons/favicon-32x32.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="../icons/apple-touch-icon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.css"
+  >
+
+  <style>
+    :root {
+      --navy: #17212b;
+      --paper: #f6f4ef;
+      --text: #202326;
+      --muted: #6d7378;
+      --border: rgba(23, 33, 43, 0.14);
+      --blue: #2D9CDB;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      background: var(--navy);
+      color: white;
+      padding: 20px 24px;
+    }
+
+    .header-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .back-link {
+      color: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+
+    .live-page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 60px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 4.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 18px 0 30px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .status-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .status-dot {
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+      border-radius: 50%;
+      background: #999;
+    }
+
+    .status-dot.live {
+      background: #2A9D6F;
+      box-shadow: 0 0 0 6px rgba(42, 157, 111, 0.12);
+    }
+
+    .status-dot.recent {
+      background: #E9B949;
+    }
+
+    .status-dot.stale {
+      background: #9a9a9a;
+    }
+
+    .status-copy {
+      min-width: 0;
+    }
+
+    .status-title {
+      margin: 0;
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .status-detail {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .map-shell {
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: #ddd;
+      box-shadow:
+        0 18px 50px rgba(23, 33, 43, 0.08);
+    }
+
+    #live-map {
+      width: 100%;
+      height: min(68vh, 720px);
+      min-height: 500px;
+    }
+
+    .live-marker {
+      width: 24px;
+      height: 24px;
+      border: 4px solid white;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.35),
+        0 0 0 8px rgba(45, 156, 219, 0.2);
+    }
+
+    .privacy-note {
+      margin: 18px 4px 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .map-message {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(360px, calc(100% - 40px));
+      padding: 18px;
+      text-align: center;
+      background: rgba(246, 244, 239, 0.94);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .map-message[hidden] {
+      display: none;
+    }
+
+    .map-message strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .map-message span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        padding: 17px 18px;
+      }
+
+      .live-page {
+        width: min(100% - 22px, 1180px);
+        padding-top: 32px;
+      }
+
+      #live-map {
+        min-height: 470px;
+        height: 62vh;
+      }
+
+      .map-shell {
+        border-radius: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        POSTCARDS FROM BEN
+      </a>
+
+      <a class="back-link" href="../">
+        ← Home
+      </a>
+    </div>
+  </header>
+
+  <main class="live-page">
+
+    <p class="eyebrow">
+      On the road
+    </p>
+
+    <h1>
+      Where I Am
+    </h1>
+
+    <p class="intro">
+      A little window into where the journey has taken me.
+      The marker shows the most recent location shared from my phone.
+    </p>
+
+    <div class="status-card">
+      <div
+        id="status-dot"
+        class="status-dot"
+        aria-hidden="true"
+      ></div>
+
+      <div class="status-copy">
+        <p
+          id="status-title"
+          class="status-title"
+        >
+          Checking location…
+        </p>
+
+        <p
+          id="status-detail"
+          class="status-detail"
+        >
+          Connecting to the latest update.
+        </p>
+      </div>
+    </div>
+
+    <div class="map-shell">
+
+      <div id="live-map"></div>
+
+      <div
+        id="map-message"
+        class="map-message"
+        hidden
+      >
+        <strong>Live location unavailable</strong>
+        <span>
+          The latest location could not be loaded right now.
+        </span>
+      </div>
+
+    </div>
+
+    <p class="privacy-note">
+      Location updates are automatic while live tracking is enabled.
+      The marker may represent a recent location rather than my exact
+      position at this moment.
+    </p>
+
+  </main>
+
+
+  <script type="module">
+
+    import * as maplibregl
+      from "https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.mjs";
+
+
+    const LOCATION_ENDPOINT =
+      "https://postcards-live-location.bjdominguez.workers.dev/location";
+
+
+    const map = new maplibregl.Map({
+      container: "live-map",
+      style: "https://tiles.openfreemap.org/styles/bright",
+      center: [-97.31655, 32.85160],
+      zoom: 7,
+      attributionControl: true
+    });
+
+
+    map.addControl(
+      new maplibregl.NavigationControl({
+        showCompass: false
+      }),
+      "top-right"
+    );
+
+
+    let marker = null;
+    let firstLocation = true;
+
+
+    const statusDot =
+      document.getElementById("status-dot");
+
+    const statusTitle =
+      document.getElementById("status-title");
+
+    const statusDetail =
+      document.getElementById("status-detail");
+
+    const mapMessage =
+      document.getElementById("map-message");
+
+
+    function formatAge(date) {
+
+      const seconds =
+        Math.max(
+          0,
+          Math.floor(
+            (Date.now() - date.getTime()) / 1000
+          )
+        );
+
+
+      if (seconds < 60) {
+        return "just now";
+      }
+
+
+      const minutes =
+        Math.floor(seconds / 60);
+
+
+      if (minutes === 1) {
+        return "1 minute ago";
+      }
+
+
+      if (minutes < 60) {
+        return `${minutes} minutes ago`;
+      }
+
+
+      const hours =
+        Math.floor(minutes / 60);
+
+
+      if (hours === 1) {
+        return "1 hour ago";
+      }
+
+
+      if (hours < 24) {
+        return `${hours} hours ago`;
+      }
+
+
+      const days =
+        Math.floor(hours / 24);
+
+
+      if (days === 1) {
+        return "1 day ago";
+      }
+
+
+      return `${days} days ago`;
+    }
+
+
+    function updateStatus(timestamp) {
+
+      const date =
+        new Date(timestamp * 1000);
+
+      const ageMinutes =
+        Math.max(
+          0,
+          (Date.now() - date.getTime()) / 60000
+        );
+
+
+      statusDot.className =
+        "status-dot";
+
+
+      if (ageMinutes < 15) {
+
+        statusDot.classList.add("live");
+
+        statusTitle.textContent =
+          "Live";
+
+        statusDetail.textContent =
+          `Updated ${formatAge(date)}`;
+
+      }
+
+      else if (ageMinutes < 60) {
+
+        statusDot.classList.add("recent");
+
+        statusTitle.textContent =
+          "Recent location";
+
+        statusDetail.textContent =
+          `Updated ${formatAge(date)}`;
+
+      }
+
+      else {
+
+        statusDot.classList.add("stale");
+
+        statusTitle.textContent =
+          "Location may be outdated";
+
+        statusDetail.textContent =
+          `Last updated ${formatAge(date)}`;
+
+      }
+    }
+
+
+    function updateMarker(data) {
+
+      const longitude =
+        Number(data.longitude);
+
+      const latitude =
+        Number(data.latitude);
+
+
+      if (
+        !Number.isFinite(longitude) ||
+        !Number.isFinite(latitude)
+      ) {
+        return;
+      }
+
+
+      if (!marker) {
+
+        const markerElement =
+          document.createElement("div");
+
+        markerElement.className =
+          "live-marker";
+
+
+        marker =
+          new maplibregl.Marker({
+            element: markerElement
+          })
+            .setLngLat([
+              longitude,
+              latitude
+            ])
+            .addTo(map);
+
+      }
+
+      else {
+
+        marker.setLngLat([
+          longitude,
+          latitude
+        ]);
+
+      }
+
+
+      if (firstLocation) {
+
+        map.flyTo({
+          center: [
+            longitude,
+            latitude
+          ],
+
+          zoom: 10.5,
+
+          duration: 1600,
+
+          essential: true
+        });
+
+
+        firstLocation = false;
+      }
+
+    }
+
+
+    async function loadLocation() {
+
+      try {
+
+        const response =
+          await fetch(
+            LOCATION_ENDPOINT,
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (!data.ok) {
+
+          throw new Error(
+            "No location available"
+          );
+
+        }
+
+
+        mapMessage.hidden =
+          true;
+
+
+        updateMarker(data);
+
+        updateStatus(
+          Number(data.timestamp)
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Live location error:",
+          error
+        );
+
+
+        statusDot.className =
+          "status-dot stale";
+
+        statusTitle.textContent =
+          "Location unavailable";
+
+        statusDetail.textContent =
+          "Unable to retrieve the latest update.";
+
+        mapMessage.hidden =
+          false;
+      }
+
+    }
+
+
+    map.on(
+      "load",
+      () => {
+        loadLocation();
+      }
+    );
+
+
+    setInterval(
+      loadLocation,
+      60000
+    );
+
+  </script>
+
+</body>
+</html>

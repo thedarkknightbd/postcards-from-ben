@@ -42,9 +42,24 @@
                     and some unforgettable stops along the way.
                 </p>
 
-                <a href="trips/the-long-way-around/">
-                    Explore the Adventure
-                </a>
+                <div class="adventure-actions">
+
+                    <a href="trips/the-long-way-around/">
+                        Explore the Adventure
+                    </a>
+
+                    <a
+                        class="live-location-button"
+                        href="/live/">
+                        <span
+                            class="live-location-dot"
+                            aria-hidden="true">
+                        </span>
+
+                        Where I Am
+                    </a>
+
+                </div>
             </article>
         </section>
 
@@ -71,21 +86,171 @@
 
         </section>
 
-        <section>
+        <section id="travel-history" class="travel-history">
 
-            <h2>More Adventures</h2>
+            <p class="section-kicker">
+                Past Postcards
+            </p>
 
-            <article>
+            <h2>
+                Where the Postcards Have Come From
+            </h2>
 
-                <h3>
-                    More postcards coming soon
-                </h3>
+            <p class="travel-history-intro">
+                A few corners of the world that have become part of the story.
+                Tap a highlighted place to see the memory connected to it.
+            </p>
 
-                <p>
-                    Future adventures will be added here.
-                </p>
+            <div class="travel-map-shell">
 
-            </article>
+                <div class="travel-map-toolbar">
+                    <span class="travel-map-key">
+                        <span
+                            class="travel-map-key-swatch"
+                            aria-hidden="true">
+                        </span>
+
+                        Places from along the way
+                    </span>
+
+                    <button
+                        id="travel-map-reset"
+                        class="travel-map-reset"
+                        type="button">
+                        Reset map
+                    </button>
+                </div>
+
+                <div
+                    id="travel-map"
+                    class="travel-world-map">
+
+                    <p
+                        id="travel-map-status"
+                        class="travel-map-status">
+                        Loading the map…
+                    </p>
+
+                </div>
+
+                <div
+                    id="travel-map-details"
+                    class="travel-map-details"
+                    hidden>
+                </div>
+
+            </div>
+
+            <div class="past-postcards-grid">
+
+                <article class="past-postcard-card">
+                    <p class="past-postcard-date">
+                        December 2018
+                    </p>
+
+                    <h3>
+                        Winter on the Black Sea
+                    </h3>
+
+                    <p>
+                        DFW → London → Istanbul → Odessa
+                    </p>
+
+                    <a
+                        class="past-postcard-link"
+                        href="trips/winter-on-the-black-sea/">
+                        View Postcard →
+                    </a>
+                </article>
+
+                <article class="past-postcard-card">
+                    <p class="past-postcard-date">
+                        October 2018
+                    </p>
+
+                    <h3>
+                        Autumn in Hungary
+                    </h3>
+
+                    <p>
+                        DFW → Philadelphia → Hungary
+                    </p>
+
+                    <a
+                        class="past-postcard-link"
+                        href="trips/autumn-in-hungary/">
+                        View Postcard →
+                    </a>
+                </article>
+
+                <article class="past-postcard-card">
+                    <p class="past-postcard-date">
+                        August 2017
+                    </p>
+
+                    <h3>
+                        A Special Convention
+                    </h3>
+
+                    <p>
+                        Bucharest → Cluj → Athens → Mykonos
+                    </p>
+
+                    <a
+                        class="past-postcard-link"
+                        href="trips/a-special-convention/">
+                        View Postcard →
+                    </a>
+                </article>
+
+
+                <article class="past-postcard-card">
+
+                    <p class="past-postcard-date">
+                        Kenya
+                    </p>
+
+                    <h3>
+                        Under the Mara Sky
+                    </h3>
+
+                    <p>
+                        Three days on safari in the Maasai Mara.
+                    </p>
+
+                    <a
+                        class="past-postcard-link"
+                        href="trips/under-the-mara-sky/">
+                        View Postcard →
+                    </a>
+
+
+                </article>
+
+
+                <article class="past-postcard-card">
+
+                    <p class="past-postcard-date">
+                        Kenya
+                    </p>
+
+                    <h3>
+                        An Afternoon with Giants
+                    </h3>
+
+                    <p>
+                        Nairobi and an unforgettable visit with the elephants.
+                    </p>
+
+                    <a
+                        class="past-postcard-link"
+                        href="trips/an-afternoon-with-giants/">
+                        View Postcard →
+                    </a>
+
+
+                </article>
+            </div>
 
         </section>
 
@@ -96,6 +261,11 @@
     </footer>
 
     <script src="js/latest-postcard.js"></script>
+
+    <script
+        type="module"
+        src="js/travel-map.js">
+    </script>
 
     <script src="js/site.js"></script>
 
