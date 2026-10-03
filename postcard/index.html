@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Send Me a Postcard | Postcards from Ben</title>
+
+    <meta
+        name="description"
+        content="Send a private postcard to Ben.">
+
+    <meta
+        name="theme-color"
+        content="#17212b">
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/icons/favicon-32x32.png">
+
+    <link
+        rel="apple-touch-icon"
+        href="/icons/apple-touch-icon.png">
+
+    <link
+        rel="stylesheet"
+        href="/css/styles.css">
+
+    <script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer>
+    </script>
+</head>
+
+
+<body class="postcard-page">
+
+    <header class="postcard-page-header">
+
+        <a
+            class="postcard-back-link"
+            href="/">
+            ← Postcards from Ben
+        </a>
+
+    </header>
+
+
+    <main class="postcard-page-main">
+
+        <section class="postcard-heading">
+
+            <p class="section-kicker">
+                Write Back
+            </p>
+
+            <h1>
+                Send Me a Postcard
+            </h1>
+
+            <p>
+                Write back from wherever you are.
+                Your postcard comes directly to me and is never
+                posted publicly.
+            </p>
+
+        </section>
+
+
+        <section class="postcard-paper">
+
+            <div class="postcard-message-side">
+
+                <div class="postcard-stamp-line">
+                    POSTCARDS FROM BEN
+                </div>
+
+                <label for="postcard-message">
+                    Your postcard
+                </label>
+
+                <textarea
+                    id="postcard-message"
+                    name="message"
+                    form="postcard-form"
+                    maxlength="2000"
+                    required
+                    placeholder="Write something..."
+                ></textarea>
+
+                <div class="postcard-character-count">
+                    <span id="postcard-count">0</span> / 2000
+                </div>
+
+            </div>
+
+
+            <div class="postcard-address-side">
+
+                <div
+                    class="postcard-stamp"
+                    aria-hidden="true">
+                    ✈
+                </div>
+
+
+                <form id="postcard-form">
+
+                    <input
+                        type="hidden"
+                        id="postcard-source"
+                        name="source"
+                        value="Postcards from Ben">
+
+
+                    <div
+                        class="postcard-honeypot"
+                        aria-hidden="true">
+
+                        <label for="postcard-website">
+                            Website
+                        </label>
+
+                        <input
+                            id="postcard-website"
+                            name="website"
+                            type="text"
+                            tabindex="-1"
+                            autocomplete="off">
+
+                    </div>
+
+
+                    <div class="postcard-field">
+
+                        <label for="postcard-name">
+                            Your name
+                        </label>
+
+                        <input
+                            id="postcard-name"
+                            name="name"
+                            type="text"
+                            maxlength="80"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+                    <div class="postcard-field">
+
+                        <label for="postcard-email">
+                            Your email
+                        </label>
+
+                        <input
+                            id="postcard-email"
+                            name="email"
+                            type="email"
+                            maxlength="200"
+                            autocomplete="email">
+
+                        <p class="postcard-field-note">
+                            Optional — only if you'd like a reply.
+                        </p>
+
+                    </div>
+
+
+                    <div class="postcard-turnstile-wrap">
+
+                        <div
+                            class="cf-turnstile"
+                            data-sitekey="0x4AAAAAAFMzWR-WSKdEa1l5"
+                            data-theme="light"
+                            data-size="flexible">
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="postcard-submit"
+                        class="postcard-submit"
+                        type="submit">
+                        Send Postcard
+                    </button>
+
+
+                    <div
+                        id="postcard-status"
+                        class="postcard-status"
+                        role="status"
+                        aria-live="polite">
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <p class="postcard-privacy">
+            Your message is private. It isn't published or displayed
+            anywhere on Postcards from Ben.
+        </p>
+
+    </main>
+
+
+    <script
+        src="/js/postcard.js"
+        defer>
+    </script>
+
+</body>
+
+</html>
