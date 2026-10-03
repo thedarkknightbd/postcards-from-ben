@@ -3041,3 +3041,183 @@ body.lightbox-open {
     }
 
 }
+
+/* =====================================
+   HOMEPAGE — SEND ME A POSTCARD
+===================================== */
+
+.send-postcard-home {
+    margin-top: 80px;
+}
+
+
+.send-postcard-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding:
+        48px 52px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #ded9cf;
+
+    border-radius: 20px;
+
+    background: #f6f4ef;
+
+    box-shadow:
+        0 18px 40px rgba(23, 33, 43, 0.08);
+}
+
+
+.send-postcard-copy {
+    max-width: 650px;
+}
+
+
+.send-postcard-card .section-kicker {
+    margin-bottom: 8px;
+
+    color: #71808a;
+}
+
+
+.send-postcard-card h2 {
+    margin:
+        0 0 14px;
+
+    color: #17212b;
+
+    font-size:
+        clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.05;
+}
+
+
+.send-postcard-card p:not(.section-kicker) {
+    max-width: 580px;
+
+    margin:
+        0 0 24px;
+
+    color: #59656d;
+
+    line-height: 1.7;
+}
+
+
+.send-postcard-button {
+    display: inline-block;
+
+    padding:
+        12px 20px;
+
+    border-radius: 999px;
+
+    background: #17212b;
+    color: #ffffff;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+}
+
+
+.send-postcard-button:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.92;
+}
+
+
+.send-postcard-stamp {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 92px;
+    height: 108px;
+
+    border:
+        2px dashed #9aa7ae;
+
+    color: #5e7380;
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+    transform: rotate(3deg);
+}
+
+
+.send-postcard-stamp-icon {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 1.8rem;
+}
+
+
+@media (max-width: 700px) {
+
+    .send-postcard-home {
+        margin-top: 55px;
+    }
+
+
+    .send-postcard-card {
+        align-items: flex-start;
+
+        padding:
+            34px 26px;
+    }
+
+
+    .send-postcard-stamp {
+        width: 70px;
+        height: 84px;
+
+        font-size: 0.52rem;
+    }
+
+
+    .send-postcard-stamp-icon {
+        font-size: 1.35rem;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .send-postcard-card {
+        display: block;
+    }
+
+
+    .send-postcard-stamp {
+        margin-top: 32px;
+        margin-left: auto;
+    }
+
+}
+
