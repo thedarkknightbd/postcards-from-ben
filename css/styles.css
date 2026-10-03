@@ -3115,33 +3115,58 @@ body.lightbox-open {
 
 
 .send-postcard-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 220px;
 
     padding:
-        12px 20px;
+        14px 24px;
+
+    border:
+        2px solid #17212b;
 
     border-radius: 999px;
 
     background: #17212b;
     color: #ffffff;
 
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    letter-spacing: 0.01em;
 
     text-decoration: none;
 
+    box-shadow:
+        0 8px 20px rgba(23, 33, 43, 0.16);
+
     transition:
         transform 0.15s ease,
-        opacity 0.15s ease;
+        box-shadow 0.15s ease,
+        background 0.15s ease;
 }
 
 
 .send-postcard-button:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 
-    opacity: 0.92;
+    box-shadow:
+        0 12px 26px rgba(23, 33, 43, 0.22);
+
+    background: #22313f;
 }
 
+
+.send-postcard-button:focus-visible {
+    outline:
+        3px solid rgba(23, 33, 43, 0.25);
+
+    outline-offset: 3px;
+}
 
 .send-postcard-stamp {
     flex: 0 0 auto;
