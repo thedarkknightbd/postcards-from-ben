@@ -1747,7 +1747,7 @@ body.lightbox-open {
     border: 3px solid #17212b;
     border-radius: 50%;
 
-    background: #f6f4ef;
+    background: #f0eee8;
 
     box-shadow:
         0 2px 8px
@@ -3244,5 +3244,194 @@ body.lightbox-open {
         margin-left: auto;
     }
 
+}
+
+
+
+/* =====================================
+   FINAL HOMEPAGE POSTCARD OVERRIDE
+===================================== */
+
+.send-postcard-home {
+    margin-top: 80px;
+}
+
+.send-postcard-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 48px 52px;
+
+    overflow: hidden;
+
+    border: 1px solid #d6d1c7;
+    border-radius: 20px;
+
+    background: #f6f4ef;
+
+    box-shadow:
+        0 18px 40px rgba(23, 33, 43, 0.08);
+}
+
+.send-postcard-copy {
+    max-width: 650px;
+}
+
+.send-postcard-card .section-kicker {
+    margin-bottom: 8px;
+
+    color: #71808a;
+}
+
+.send-postcard-card h2 {
+    margin: 0 0 14px;
+
+    color: #17212b;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+}
+
+.send-postcard-card p:not(.section-kicker) {
+    max-width: 620px;
+
+    margin: 0 0 28px;
+
+    color: #59656d;
+
+    line-height: 1.7;
+}
+
+/* Main CTA button */
+
+.send-postcard-card .send-postcard-button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 230px;
+
+    padding: 14px 24px !important;
+
+    border: 2px solid #17212b !important;
+    border-radius: 999px !important;
+
+    background: #17212b !important;
+    color: #ffffff !important;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    text-decoration: none !important;
+
+    box-shadow:
+        0 8px 20px rgba(23, 33, 43, 0.18);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.send-postcard-card .send-postcard-button:hover {
+    transform: translateY(-2px);
+
+    background: #22313f !important;
+
+    box-shadow:
+        0 12px 26px rgba(23, 33, 43, 0.23);
+}
+
+/* Postcard stamp */
+
+.send-postcard-stamp {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 92px;
+    height: 108px;
+
+    border: 2px dashed #9aa7ae;
+
+    color: #5e7380;
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+    transform: rotate(3deg);
+}
+
+.send-postcard-stamp-icon {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 1.8rem;
+}
+
+@media (max-width: 700px) {
+
+    .send-postcard-home {
+        margin-top: 55px;
+    }
+
+    .send-postcard-card {
+        align-items: flex-start;
+
+        padding: 34px 26px;
+    }
+
+    .send-postcard-stamp {
+        width: 70px;
+        height: 84px;
+
+        font-size: 0.52rem;
+    }
+
+    .send-postcard-stamp-icon {
+        font-size: 1.35rem;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .send-postcard-card {
+        display: block;
+    }
+
+    .send-postcard-stamp {
+        margin-top: 32px;
+        margin-left: auto;
+    }
+}
+
+
+
+/* Final postcard color contrast */
+
+.send-postcard-card {
+    background: #ebe7de !important;
+    border-color: #d2cbc0 !important;
+}
+
+
+/* Stronger homepage postcard contrast */
+
+.send-postcard-card {
+    background: #e3e8eb !important;
+    border-color: #c7d0d6 !important;
 }
 
