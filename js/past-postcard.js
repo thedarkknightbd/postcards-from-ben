@@ -320,6 +320,15 @@ function createPastLightbox() {
                     id="lightbox-counter"
                     class="lightbox-counter">
                 </p>
+
+                <a
+                    id="lightbox-download"
+                    class="lightbox-download"
+                    href="#"
+                    download
+                >
+                    ↓ Download original
+                </a>
             </div>
 
             <button
@@ -444,6 +453,11 @@ function updatePastLightbox() {
             "lightbox-counter"
         );
 
+    const download =
+        document.getElementById(
+            "lightbox-download"
+        );
+
     applyOptimizedImage(
         image,
         photo.url,
@@ -456,6 +470,18 @@ function updatePastLightbox() {
 
     counter.textContent =
         `${pastLightboxIndex + 1} / ${pastLightboxPhotos.length}`;
+
+    download.href =
+        photo.key
+            ? `/api/download?key=${encodeURIComponent(photo.key)}`
+            : photo.url;
+
+    download.setAttribute(
+        "download",
+        photo.key
+            ? photo.key.split("/").pop()
+            : "photo"
+    );
 
     const previous =
         document.querySelector(
