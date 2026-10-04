@@ -3509,11 +3509,12 @@ body.lightbox-open {
 
 .not-found-route {
     position: relative;
+    z-index: 2;
 
     width: min(760px, 86%);
     height: 210px;
 
-    margin: 0 auto -34px;
+    margin: 0 auto 8px;
 
     opacity: 0.92;
 }
@@ -3562,7 +3563,7 @@ body.lightbox-open {
 
 .not-found-route-label-start {
     left: 1%;
-    bottom: 25px;
+    bottom: 42px;
 }
 
 .not-found-route-label-end {
@@ -3574,6 +3575,7 @@ body.lightbox-open {
 
 .not-found-card {
     position: relative;
+    z-index: 1;
 
     padding:
         clamp(28px, 5vw, 58px);
@@ -3762,7 +3764,7 @@ body.lightbox-open {
         height: 150px;
 
         margin-bottom:
-            -18px;
+            4px;
     }
 
     .not-found-route-label {
