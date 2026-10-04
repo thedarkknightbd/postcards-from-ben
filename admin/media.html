@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Postcards from Ben — Photos</title>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    body { margin:0; background:#0b1420; color:#f5f7fa; }
+    main { max-width:760px; margin:auto; padding:24px 18px 56px; }
+    h1 { margin:0 0 6px; font-size:28px; }
+    p { color:#aeb8c4; line-height:1.45; }
+    .card { background:#111d2b; border:1px solid #263648; border-radius:18px; padding:16px; margin:16px 0; }
+    label { display:block; margin:12px 0 6px; font-weight:700; }
+    select,input,button { box-sizing:border-box; width:100%; border-radius:12px; border:1px solid #34475d; background:#0c1724; color:#fff; padding:12px; font-size:16px; }
+    button { background:#e9b85d; color:#1c1407; font-weight:800; border:0; margin-top:12px; }
+    button.secondary { background:#1b2a3c; color:#e9eef5; }
+    button:disabled { opacity:.55; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .status { white-space:pre-wrap; font-size:13px; color:#c9d3dd; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:12px; }
+    .item { background:#0b1622; border:1px solid #263648; border-radius:14px; overflow:hidden; }
+    .item img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#07101a; }
+    .item div { padding:8px; font-size:11px; color:#aeb8c4; word-break:break-all; }
+    .hidden { display:none; }
+    a { color:#e9b85d; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Photo Manager</h1>
+  <p>Upload directly from your iPhone or iPad into the R2 structure for <strong>The Long Way Around</strong>.</p>
+
+  <section class="card">
+    <label for="token">Upload key</label>
+    <input id="token" type="password" autocomplete="current-password" placeholder="Enter once on this device">
+    <button id="saveToken" class="secondary">Save on this device</button>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <div>
+        <label for="kind">Location</label>
+        <select id="kind">
+          <option value="days">Day photos</option>
+          <option value="hero">Trip hero</option>
+        </select>
+      </div>
+      <div id="dayWrap">
+        <label for="day">Day</label>
+        <select id="day"></select>
+      </div>
+    </div>
+
+    <label for="files">Photos</label>
+    <input id="files" type="file" accept="image/*" multiple>
+    <button id="upload">Upload photos</button>
+    <button id="refresh" class="secondary">Refresh this folder</button>
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="card">
+    <strong id="folderLabel">Current folder</strong>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <p><a href="/admin/">← Back to editor</a></p>
+</main>
+
+<script>
+const TRIP_ROOT = "trips/the-long-way-around";
+const tokenEl = document.getElementById("token");
+const kindEl = document.getElementById("kind");
+const dayEl = document.getElementById("day");
+const dayWrap = document.getElementById("dayWrap");
+const filesEl = document.getElementById("files");
+const statusEl = document.getElementById("status");
+const gridEl = document.getElementById("grid");
+const folderLabel = document.getElementById("folderLabel");
+
+for (let i = 1; i <= 24; i++) {
+  const n = String(i).padStart(2, "0");
+  dayEl.insertAdjacentHTML("beforeend", `<option value="${n}">Day ${i}</option>`);
+}
+
+tokenEl.value = sessionStorage.getItem("postcards-media-token") || "";
+
+document.getElementById("saveToken").addEventListener("click", () => {
+  sessionStorage.setItem("postcards-media-token", tokenEl.value.trim());
+  status("Saved for this browser session.");
+});
+
+kindEl.addEventListener("change", () => {
+  dayWrap.classList.toggle("hidden", kindEl.value === "hero");
+  refresh();
+});
+dayEl.addEventListener("change", refresh);
+document.getElementById("refresh").addEventListener("click", refresh);
+document.getElementById("upload").addEventListener("click", upload);
+
+function prefix() {
+  return kindEl.value === "hero"
+    ? `${TRIP_ROOT}/hero/`
+    : `${TRIP_ROOT}/days/day-${dayEl.value}/`;
+}
+
+function authHeaders() {
+  const token = tokenEl.value.trim() || sessionStorage.getItem("postcards-media-token") || "";
+  return { Authorization: `Bearer ${token}` };
+}
+
+function status(message) {
+  statusEl.textContent = "\n" + message;
+}
+
+async function refresh() {
+  const p = prefix();
+  folderLabel.textContent = p;
+  gridEl.innerHTML = "";
+  status("Loading…");
+
+  try {
+    const res = await fetch(`/api/r2?prefix=${encodeURIComponent(p)}`, { headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not list folder.");
+
+    if (!data.objects.length) {
+      status("No photos in this folder yet.");
+      return;
+    }
+
+    status(`${data.objects.length} photo(s)`);
+    for (const obj of data.objects) {
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `<img loading="lazy" src="${obj.url}" alt=""><div>${obj.key}</div>`;
+      gridEl.appendChild(el);
+    }
+  } catch (err) {
+    status(err.message);
+  }
+}
+
+async function upload() {
+  const files = [...filesEl.files];
+  if (!files.length) return status("Choose one or more photos first.");
+
+  const button = document.getElementById("upload");
+  button.disabled = true;
+
+  try {
+    let completed = 0;
+    for (const file of files) {
+      status(`Uploading ${completed + 1} of ${files.length}: ${file.name}`);
+
+      const form = new FormData();
+      form.append("prefix", prefix());
+      form.append("file", file);
+
+      const res = await fetch("/api/r2", {
+        method: "POST",
+        headers: authHeaders(),
+        body: form
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `Upload failed for ${file.name}`);
+      completed++;
+    }
+
+    filesEl.value = "";
+    status(`Uploaded ${completed} photo(s).`);
+    await refresh();
+  } catch (err) {
+    status(err.message);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+refresh();
+</script>
+</body>
+</html>
