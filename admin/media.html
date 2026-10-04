@@ -31,13 +31,16 @@
     .hint { margin:8px 0 0; font-size:12px; color:#91a0af; }
     .hidden { display:none; }
     a { color:#e9b85d; }
-    @media(max-width:560px) { .grid { grid-template-columns:1fr; } }
+    @media(max-width:560px) {
+      .grid { grid-template-columns:1fr; }
+      .row { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
 <main>
   <h1>Photo Manager</h1>
-  <p>Upload directly from your iPhone or iPad. Day folders publish automatically; the first image in <strong>Trip hero</strong> is used as the trip poster.</p>
+  <p>Choose an adventure, then upload to its hero or gallery. Photos publish automatically to the matching page.</p>
 
   <section class="card">
     <label for="token">Upload key</label>
@@ -46,14 +49,22 @@
   </section>
 
   <section class="card">
+    <label for="trip">Adventure</label>
+    <select id="trip">
+      <option value="the-long-way-around">The Long Way Around</option>
+      <option value="winter-on-the-black-sea">Winter on the Black Sea</option>
+      <option value="autumn-in-hungary">Autumn in Hungary</option>
+      <option value="a-special-convention">A Special Convention</option>
+      <option value="under-the-mara-sky">Under the Mara Sky</option>
+      <option value="an-afternoon-with-giants">An Afternoon with Giants</option>
+    </select>
+
     <div class="row">
       <div>
         <label for="kind">Location</label>
-        <select id="kind">
-          <option value="days">Day photos</option>
-          <option value="hero">Trip hero</option>
-        </select>
+        <select id="kind"></select>
       </div>
+
       <div id="dayWrap">
         <label for="day">Day</label>
         <select id="day"></select>
@@ -82,7 +93,7 @@
 </main>
 
 <script>
-const TRIP_ROOT = "trips/the-long-way-around";
+const tripEl = document.getElementById("trip");
 const tokenEl = document.getElementById("token");
 const kindEl = document.getElementById("kind");
 const dayEl = document.getElementById("day");
@@ -106,8 +117,13 @@ document.getElementById("saveToken").addEventListener("click", () => {
   setStatus("Upload key saved for this browser session.");
 });
 
+tripEl.addEventListener("change", () => {
+  configureLocations();
+  refresh();
+});
+
 kindEl.addEventListener("change", () => {
-  dayWrap.classList.toggle("hidden", kindEl.value === "hero");
+  updateDayVisibility();
   refresh();
 });
 
@@ -115,10 +131,36 @@ dayEl.addEventListener("change", refresh);
 document.getElementById("refresh").addEventListener("click", refresh);
 document.getElementById("upload").addEventListener("click", upload);
 
+function isCurrentTrip() {
+  return tripEl.value === "the-long-way-around";
+}
+
+function configureLocations() {
+  kindEl.innerHTML = "";
+
+  if (isCurrentTrip()) {
+    kindEl.insertAdjacentHTML("beforeend", '<option value="days">Day photos</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Trip hero</option>');
+  } else {
+    kindEl.insertAdjacentHTML("beforeend", '<option value="gallery">Gallery</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Hero</option>');
+  }
+
+  updateDayVisibility();
+}
+
+function updateDayVisibility() {
+  dayWrap.classList.toggle("hidden", !(isCurrentTrip() && kindEl.value === "days"));
+}
+
 function prefix() {
-  return kindEl.value === "hero"
-    ? `${TRIP_ROOT}/hero/`
-    : `${TRIP_ROOT}/days/day-${dayEl.value}/`;
+  const root = `trips/${tripEl.value}`;
+
+  if (isCurrentTrip() && kindEl.value === "days") {
+    return `${root}/days/day-${dayEl.value}/`;
+  }
+
+  return `${root}/${kindEl.value}/`;
 }
 
 function authHeaders(extra = {}) {
@@ -130,12 +172,22 @@ function setStatus(message) {
   statusEl.textContent = message;
 }
 
+function hint() {
+  if (isCurrentTrip() && kindEl.value === "days") {
+    return `Anything here appears automatically on Day ${Number(dayEl.value)}.`;
+  }
+
+  if (kindEl.value === "hero") {
+    return "The first image below is used as this adventure's hero/cover image.";
+  }
+
+  return "Everything here appears automatically in this adventure's photo gallery.";
+}
+
 async function refresh() {
   const p = prefix();
   folderLabel.textContent = p;
-  folderHint.textContent = kindEl.value === "hero"
-    ? "The first image below is the trip poster shown on The Long Way Around page."
-    : `Anything here appears automatically on Day ${Number(dayEl.value)}.`;
+  folderHint.textContent = hint();
   gridEl.innerHTML = "";
   setStatus("Loading…");
 
@@ -238,6 +290,7 @@ async function removePhoto(obj) {
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Could not delete photo.");
+
     await refresh();
     setStatus("Photo deleted.");
   } catch (err) {
@@ -283,6 +336,7 @@ async function upload() {
   }
 }
 
+configureLocations();
 refresh();
 </script>
 </body>
