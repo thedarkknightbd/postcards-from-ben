@@ -860,7 +860,7 @@ map.addLayer({
 
 
    /* =====================================
-   PHOTOS
+   PHOTOS — AUTO-LOAD FROM R2 DAY FOLDER
 ===================================== */
 
 const photosSection =
@@ -871,14 +871,61 @@ const photoGrid =
 
 photoGrid.innerHTML = "";
 
+let pagePhotos = [];
+
+try {
+
+    const photoResponse =
+        await fetch(
+            `/api/photos?day=${encodeURIComponent(data.dayNumber)}`
+        );
+
+    if (photoResponse.ok) {
+
+        const photoData =
+            await photoResponse.json();
+
+        pagePhotos =
+            Array.isArray(photoData.photos)
+                ? photoData.photos
+                : [];
+
+    } else {
+
+        console.warn(
+            "R2 photo listing unavailable:",
+            photoResponse.status
+        );
+
+    }
+
+} catch (error) {
+
+    console.warn(
+        "Unable to load photos from R2:",
+        error
+    );
+
+}
+
+
+/* Fallback for any older JSON-managed photo entries */
+
 if (
-    data.photos &&
-    data.photos.length > 0
+    pagePhotos.length === 0 &&
+    Array.isArray(data.photos)
 ) {
+
+    pagePhotos = data.photos;
+
+}
+
+
+if (pagePhotos.length > 0) {
 
     photosSection.hidden = false;
 
-    data.photos.forEach((photo, index) => {
+    pagePhotos.forEach((photo, index) => {
 
         const figure =
             document.createElement("figure");
@@ -934,7 +981,7 @@ if (
             "click",
             () => {
                 openLightbox(
-                    data.photos,
+                    pagePhotos,
                     index
                 );
             }
