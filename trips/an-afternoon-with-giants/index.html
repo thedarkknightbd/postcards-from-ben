@@ -42,7 +42,7 @@
 </head>
 
 
-<body class="past-postcard-page">
+<body class="past-postcard-page" data-postcard-source="postcard.json">
 
     <header class="past-postcard-hero">
 
@@ -52,15 +52,15 @@
             ← Postcards from Ben
         </a>
 
-        <p class="past-postcard-kicker">
+        <p id="past-postcard-kicker" class="past-postcard-kicker">
             Nairobi, Kenya · July 2011
         </p>
 
-        <h1>
+        <h1 id="past-postcard-title">
             An Afternoon with Giants
         </h1>
 
-        <p class="past-postcard-subtitle">
+        <p id="past-postcard-subtitle" class="past-postcard-subtitle">
             An unforgettable afternoon with the elephants in Nairobi.
         </p>
 
@@ -71,15 +71,15 @@
 
         <section class="past-postcard-intro">
 
-            <p class="section-kicker">
+            <p id="past-postcard-section-label" class="section-kicker">
                 The Memory
             </p>
 
-            <h2>
+            <h2 id="past-postcard-intro-title">
                 An afternoon I still remember
             </h2>
 
-            <p class="past-postcard-lead">
+            <p id="past-postcard-story" class="past-postcard-lead">
                 A memorable afternoon in Nairobi spent visiting the
                 elephant orphanage. I don’t remember every detail from
                 that day, but the photos still bring back how special
@@ -95,7 +95,7 @@
                 Photos
             </p>
 
-            <h2>
+            <h2 id="past-postcard-photo-title">
                 From Nairobi
             </h2>
 
@@ -104,7 +104,7 @@
                 class="past-postcard-gallery">
 
                 <div class="past-postcard-photo-placeholder">
-                    <p>
+                    <p id="past-postcard-photo-placeholder-text">
                         Photos from this afternoon will be added here.
                     </p>
                 </div>
@@ -130,6 +130,8 @@
             Postcards from Ben
         </p>
     </footer>
+
+    <script src="../../js/past-postcard.js"></script>
 
 </body>
 
