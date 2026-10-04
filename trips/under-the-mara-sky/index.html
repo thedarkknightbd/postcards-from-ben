@@ -42,7 +42,7 @@
 </head>
 
 
-<body class="past-postcard-page">
+<body class="past-postcard-page" data-postcard-source="postcard.json">
 
     <header class="past-postcard-hero">
 
@@ -52,15 +52,15 @@
             ← Postcards from Ben
         </a>
 
-        <p class="past-postcard-kicker">
+        <p id="past-postcard-kicker" class="past-postcard-kicker">
             Nairobi → Maasai Mara, Kenya · April 2012
         </p>
 
-        <h1>
+        <h1 id="past-postcard-title">
             Under the Mara Sky
         </h1>
 
-        <p class="past-postcard-subtitle">
+        <p id="past-postcard-subtitle" class="past-postcard-subtitle">
             Three days on safari in the Maasai Mara.
         </p>
 
@@ -71,15 +71,15 @@
 
         <section class="past-postcard-intro">
 
-            <p class="section-kicker">
+            <p id="past-postcard-section-label" class="section-kicker">
                 The Journey
             </p>
 
-            <h2>
+            <h2 id="past-postcard-intro-title">
                 From Nairobi to the Mara
             </h2>
 
-            <p class="past-postcard-lead">
+            <p id="past-postcard-story" class="past-postcard-lead">
                 I left Nairobi and headed out to the Maasai Mara
                 for three days on safari. The drive out was part
                 of the experience, but the real highlight was being
@@ -96,7 +96,7 @@
                 Photos
             </p>
 
-            <h2>
+            <h2 id="past-postcard-photo-title">
                 From the Maasai Mara
             </h2>
 
@@ -105,7 +105,7 @@
                 class="past-postcard-gallery">
 
                 <div class="past-postcard-photo-placeholder">
-                    <p>
+                    <p id="past-postcard-photo-placeholder-text">
                         Safari photos from the Mara will be added here.
                     </p>
                 </div>
@@ -131,6 +131,8 @@
             Postcards from Ben
         </p>
     </footer>
+
+    <script src="../../js/past-postcard.js"></script>
 
 </body>
 
