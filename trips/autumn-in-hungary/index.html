@@ -43,7 +43,7 @@
 </head>
 
 
-<body class="past-postcard-page">
+<body class="past-postcard-page" data-postcard-source="postcard.json">
 
     <header class="past-postcard-hero">
 
@@ -53,15 +53,15 @@
             ← Postcards from Ben
         </a>
 
-        <p class="past-postcard-kicker">
+        <p id="past-postcard-kicker" class="past-postcard-kicker">
             DFW → Philadelphia → Hungary · October 23–28, 2018
         </p>
 
-        <h1>
+        <h1 id="past-postcard-title">
             Autumn in Hungary
         </h1>
 
-        <p class="past-postcard-subtitle">
+        <p id="past-postcard-subtitle" class="past-postcard-subtitle">
             A few autumn days in Hungary, with Philadelphia along the way.
         </p>
 
@@ -72,15 +72,15 @@
 
         <section class="past-postcard-intro">
 
-            <p class="section-kicker">
+            <p id="past-postcard-section-label" class="section-kicker">
                 The Journey
             </p>
 
-            <h2>
+            <h2 id="past-postcard-intro-title">
                 A short autumn trip
             </h2>
 
-            <p class="past-postcard-lead">
+            <p id="past-postcard-story" class="past-postcard-lead">
                 I left Dallas–Fort Worth on October 23, connected
                 through Philadelphia, and continued on to Hungary.
                 It was a short trip, returning the same way on
@@ -97,7 +97,7 @@
                 Photos
             </p>
 
-            <h2>
+            <h2 id="past-postcard-photo-title">
                 From Hungary
             </h2>
 
@@ -107,7 +107,7 @@
 
                 <div class="past-postcard-photo-placeholder">
 
-                    <p>
+                    <p id="past-postcard-photo-placeholder-text">
                         Photos from Hungary will be added here.
                     </p>
 
@@ -134,6 +134,8 @@
             Postcards from Ben
         </p>
     </footer>
+
+    <script src="../../js/past-postcard.js"></script>
 
 </body>
 
