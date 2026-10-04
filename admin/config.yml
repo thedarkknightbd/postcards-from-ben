@@ -133,3 +133,202 @@ collections:
         name: "nextDay"
         widget: "string"
         required: false
+
+  - name: "past_postcards"
+    label: "Past Postcards"
+
+    editor:
+      preview: false
+
+    files:
+
+      - label: "Winter on the Black Sea"
+        name: "winter_on_the_black_sea"
+        file: "trips/winter-on-the-black-sea/postcard.json"
+
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Route & Date"
+            name: "kicker"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+
+          - label: "Section Label"
+            name: "sectionLabel"
+            widget: "string"
+
+          - label: "Story Heading"
+            name: "introTitle"
+            widget: "string"
+
+          - label: "Story"
+            name: "story"
+            widget: "text"
+
+          - label: "Photo Section Heading"
+            name: "photoTitle"
+            widget: "string"
+
+          - label: "Photo Placeholder"
+            name: "photoPlaceholder"
+            widget: "string"
+            required: false
+
+      - label: "Autumn in Hungary"
+        name: "autumn_in_hungary"
+        file: "trips/autumn-in-hungary/postcard.json"
+
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Route & Date"
+            name: "kicker"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+
+          - label: "Section Label"
+            name: "sectionLabel"
+            widget: "string"
+
+          - label: "Story Heading"
+            name: "introTitle"
+            widget: "string"
+
+          - label: "Story"
+            name: "story"
+            widget: "text"
+
+          - label: "Photo Section Heading"
+            name: "photoTitle"
+            widget: "string"
+
+          - label: "Photo Placeholder"
+            name: "photoPlaceholder"
+            widget: "string"
+            required: false
+
+      - label: "A Special Convention"
+        name: "a_special_convention"
+        file: "trips/a-special-convention/postcard.json"
+
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Route & Date"
+            name: "kicker"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+
+          - label: "Section Label"
+            name: "sectionLabel"
+            widget: "string"
+
+          - label: "Story Heading"
+            name: "introTitle"
+            widget: "string"
+
+          - label: "Story"
+            name: "story"
+            widget: "text"
+
+          - label: "Photo Section Heading"
+            name: "photoTitle"
+            widget: "string"
+
+          - label: "Photo Placeholder"
+            name: "photoPlaceholder"
+            widget: "string"
+            required: false
+
+      - label: "Under the Mara Sky"
+        name: "under_the_mara_sky"
+        file: "trips/under-the-mara-sky/postcard.json"
+
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Route & Date"
+            name: "kicker"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+
+          - label: "Section Label"
+            name: "sectionLabel"
+            widget: "string"
+
+          - label: "Story Heading"
+            name: "introTitle"
+            widget: "string"
+
+          - label: "Story"
+            name: "story"
+            widget: "text"
+
+          - label: "Photo Section Heading"
+            name: "photoTitle"
+            widget: "string"
+
+          - label: "Photo Placeholder"
+            name: "photoPlaceholder"
+            widget: "string"
+            required: false
+
+      - label: "An Afternoon with Giants"
+        name: "an_afternoon_with_giants"
+        file: "trips/an-afternoon-with-giants/postcard.json"
+
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Route & Date"
+            name: "kicker"
+            widget: "string"
+
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+
+          - label: "Section Label"
+            name: "sectionLabel"
+            widget: "string"
+
+          - label: "Story Heading"
+            name: "introTitle"
+            widget: "string"
+
+          - label: "Story"
+            name: "story"
+            widget: "text"
+
+          - label: "Photo Section Heading"
+            name: "photoTitle"
+            widget: "string"
+
+          - label: "Photo Placeholder"
+            name: "photoPlaceholder"
+            widget: "string"
+            required: false
+
