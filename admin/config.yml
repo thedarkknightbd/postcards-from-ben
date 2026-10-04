@@ -119,9 +119,10 @@ collections:
 
         fields:
 
-          - label: "Photo"
+          - label: "Photo URL"
             name: "file"
-            widget: "image"
+            widget: "string"
+            hint: "Paste the R2 image URL, e.g. https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-08/photo.webp"
 
           - label: "Caption"
             name: "caption"
