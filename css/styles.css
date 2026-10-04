@@ -2426,6 +2426,12 @@ body.lightbox-open {
 }
 
 
+.past-postcard-hero.has-photo {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .past-postcard-hero h1 {
     max-width: 950px;
 
@@ -2515,6 +2521,15 @@ body.lightbox-open {
 .past-postcard-gallery figure {
     margin: 0;
 }
+
+.past-postcard-gallery a {
+    display: block;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
 
 
 .past-postcard-gallery img {
