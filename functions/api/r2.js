@@ -7,29 +7,39 @@ export async function onRequest(context) {
 
   const auth = request.headers.get("Authorization") || "";
   const expected = env.MEDIA_UPLOAD_TOKEN ? `Bearer ${env.MEDIA_UPLOAD_TOKEN}` : "";
-
-  if (!expected || auth !== expected) {
-    return json({ error: "Unauthorized" }, 401);
-  }
+  const isAuthorized = Boolean(expected && auth === expected);
 
   const url = new URL(request.url);
 
   if (request.method === "GET") {
-    const prefix = sanitizePrefix(url.searchParams.get("prefix") || "trips/the-long-way-around/");
+    const prefix = sanitizePrefix(url.searchParams.get("prefix") || "");
+
+    const isPublicDayFolder =
+      /^trips\/the-long-way-around\/days\/day-(0[1-9]|1[0-9]|2[0-4])\/$/.test(prefix);
+
+    if (!isAuthorized && !isPublicDayFolder) {
+      return json({ error: "Unauthorized" }, 401);
+    }
+
     const listed = await env.POSTCARDS_MEDIA.list({ prefix, limit: 1000 });
 
     return json({
       prefix,
-      objects: listed.objects.map((obj) => ({
-        key: obj.key,
-        size: obj.size,
-        uploaded: obj.uploaded,
-        url: publicUrl(env, obj.key)
-      }))
+      objects: listed.objects
+        .filter((obj) => /\.(avif|gif|heic|heif|jpe?g|png|webp)$/i.test(obj.key))
+        .map((obj) => ({
+          key: obj.key,
+          size: obj.size,
+          uploaded: obj.uploaded,
+          url: publicUrl(env, obj.key)
+        }))
     });
   }
 
   if (request.method === "POST") {
+    if (!isAuthorized) {
+      return json({ error: "Unauthorized" }, 401);
+    }
     const form = await request.formData();
     const file = form.get("file");
     const prefix = sanitizePrefix(String(form.get("prefix") || ""));
