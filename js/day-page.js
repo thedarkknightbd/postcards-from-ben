@@ -1253,7 +1253,7 @@ function createLightbox() {
                     href="#"
                     download
                 >
-                    ↓ Download original
+                    Open original to save
                 </a>
 
             </div>
