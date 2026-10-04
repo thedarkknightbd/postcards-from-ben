@@ -43,7 +43,7 @@
 </head>
 
 
-<body class="past-postcard-page">
+<body class="past-postcard-page" data-postcard-source="postcard.json">
 
     <header class="past-postcard-hero">
 
@@ -53,15 +53,15 @@
             ← Postcards from Ben
         </a>
 
-        <p class="past-postcard-kicker">
+        <p id="past-postcard-kicker" class="past-postcard-kicker">
             Bucharest → Cluj → Athens → Mykonos · August 2017
         </p>
 
-        <h1>
+        <h1 id="past-postcard-title">
             A Special Convention
         </h1>
 
-        <p class="past-postcard-subtitle">
+        <p id="past-postcard-subtitle" class="past-postcard-subtitle">
             A journey through Romania and Greece centered around
             a very special gathering.
         </p>
@@ -73,15 +73,15 @@
 
         <section class="past-postcard-intro">
 
-            <p class="section-kicker">
+            <p id="past-postcard-section-label" class="section-kicker">
                 The Journey
             </p>
 
-            <h2>
+            <h2 id="past-postcard-intro-title">
                 From Bucharest to Mykonos
             </h2>
 
-            <p class="past-postcard-lead">
+            <p id="past-postcard-story" class="past-postcard-lead">
                 This journey began in Bucharest before continuing
                 to Cluj for the special convention. I stayed in Cluj
                 through August 23, then flew to Athens and finished
@@ -99,7 +99,7 @@
                 Photos
             </p>
 
-            <h2>
+            <h2 id="past-postcard-photo-title">
                 From Romania &amp; Greece
             </h2>
 
@@ -109,9 +109,8 @@
 
                 <div class="past-postcard-photo-placeholder">
 
-                    <p>
-                        Photos from Bucharest, Cluj, Athens and
-                        Mykonos will be added here.
+                    <p id="past-postcard-photo-placeholder-text">
+                        Photos from Bucharest, Cluj, Athens and Mykonos will be added here.
                     </p>
 
                 </div>
@@ -137,6 +136,8 @@
             Postcards from Ben
         </p>
     </footer>
+
+    <script src="../../js/past-postcard.js"></script>
 
 </body>
 
