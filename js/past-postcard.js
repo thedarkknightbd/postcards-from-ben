@@ -472,9 +472,7 @@ function updatePastLightbox() {
         `${pastLightboxIndex + 1} / ${pastLightboxPhotos.length}`;
 
     download.href =
-        photo.key
-            ? `/api/download?key=${encodeURIComponent(photo.key)}`
-            : photo.url;
+        photo.url;
 
     download.setAttribute(
         "download",
@@ -482,6 +480,12 @@ function updatePastLightbox() {
             ? photo.key.split("/").pop()
             : "photo"
     );
+
+    download.target =
+        "_blank";
+
+    download.rel =
+        "noopener";
 
     const previous =
         document.querySelector(
