@@ -5,6 +5,19 @@ import * as maplibregl from "https://unpkg.com/maplibre-gl@^6.11.2/dist/maplibre
    Shared Day Page Engine
 ===================================== */
 
+function optimizedPhotoUrl(source, width, quality = 82) {
+    return `/cdn-cgi/image/format=auto,width=${width},quality=${quality}/${source}`;
+}
+
+function applyOptimizedImage(image, source, width, quality = 82) {
+    image.onerror = () => {
+        image.onerror = null;
+        image.src = source;
+    };
+
+    image.src = optimizedPhotoUrl(source, width, quality);
+}
+
 async function loadDayPage() {
 
     const source = document.body.dataset.daySource;
@@ -961,7 +974,12 @@ if (pagePhotos.length > 0) {
         const image =
             document.createElement("img");
 
-        image.src = photo.file;
+        applyOptimizedImage(
+            image,
+            photo.file,
+            1200,
+            82
+        );
 
         image.alt =
             photo.caption || "Travel photo";
@@ -1369,8 +1387,12 @@ function updateLightbox() {
         );
 
 
-    image.src =
-        photo.file;
+    applyOptimizedImage(
+        image,
+        photo.file,
+        2400,
+        88
+    );
 
     image.alt =
         photo.caption ||
