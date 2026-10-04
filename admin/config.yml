@@ -1,9 +1,7 @@
 backend:
-  name: github
-  repo: thedarkknightbd/postcards-from-ben
+  name: turbo-github
+  turbo_site_id: c7ee06d5-6037-495c-887d-bcbf8f6c9ccc
   branch: main
-  base_url: https://postcards-cms-auth.bjdominguez.workers.dev
-  auth_endpoint: auth
 
 site_url: https://postcardsfromben.com
 display_url: https://postcardsfromben.com
