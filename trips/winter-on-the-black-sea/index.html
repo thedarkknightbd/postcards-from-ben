@@ -43,7 +43,7 @@
 </head>
 
 
-<body class="past-postcard-page">
+<body class="past-postcard-page" data-postcard-source="postcard.json">
 
     <header class="past-postcard-hero">
 
@@ -53,15 +53,15 @@
             ← Postcards from Ben
         </a>
 
-        <p class="past-postcard-kicker">
+        <p id="past-postcard-kicker" class="past-postcard-kicker">
             DFW → London → Istanbul → Odessa · December 8–13, 2018
         </p>
 
-        <h1>
+        <h1 id="past-postcard-title">
             Winter on the Black Sea
         </h1>
 
-        <p class="past-postcard-subtitle">
+        <p id="past-postcard-subtitle" class="past-postcard-subtitle">
             A few winter days in Odessa on the edge of the Black Sea.
         </p>
 
@@ -72,15 +72,15 @@
 
         <section class="past-postcard-intro">
 
-            <p class="section-kicker">
+            <p id="past-postcard-section-label" class="section-kicker">
                 The Journey
             </p>
 
-            <h2>
+            <h2 id="past-postcard-intro-title">
                 Through London and Istanbul to Odessa
             </h2>
 
-            <p class="past-postcard-lead">
+            <p id="past-postcard-story" class="past-postcard-lead">
                 I left Dallas–Fort Worth on December 8, traveling
                 through London and Istanbul before reaching Odessa
                 on the Black Sea. A few winter days there made for
@@ -97,7 +97,7 @@
                 Photos
             </p>
 
-            <h2>
+            <h2 id="past-postcard-photo-title">
                 From Odessa
             </h2>
 
@@ -107,7 +107,7 @@
 
                 <div class="past-postcard-photo-placeholder">
 
-                    <p>
+                    <p id="past-postcard-photo-placeholder-text">
                         Photos from Odessa will be added here.
                     </p>
 
@@ -134,6 +134,8 @@
             Postcards from Ben
         </p>
     </footer>
+
+    <script src="../../js/past-postcard.js"></script>
 
 </body>
 
