@@ -6,6 +6,9 @@ backend:
 site_url: https://postcardsfromben.com
 display_url: https://postcardsfromben.com
 
+media_folder: "trips/the-long-way-around/images/uploads"
+public_folder: "/trips/the-long-way-around/images/uploads"
+
 collections:
 
   - name: "long_way_around"
