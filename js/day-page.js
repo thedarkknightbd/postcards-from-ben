@@ -1247,6 +1247,15 @@ function createLightbox() {
                     class="lightbox-counter">
                 </p>
 
+                <a
+                    id="lightbox-download"
+                    class="lightbox-download"
+                    href="#"
+                    download
+                >
+                    ↓ Download original
+                </a>
+
             </div>
 
             <button
@@ -1386,6 +1395,11 @@ function updateLightbox() {
             "lightbox-counter"
         );
 
+    const download =
+        document.getElementById(
+            "lightbox-download"
+        );
+
 
     applyOptimizedImage(
         image,
@@ -1405,6 +1419,21 @@ function updateLightbox() {
 
     counter.textContent =
         `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+
+    const originalSource =
+        photo.file || "";
+
+    download.href =
+        photo.key
+            ? `/api/download?key=${encodeURIComponent(photo.key)}`
+            : originalSource;
+
+    download.setAttribute(
+        "download",
+        photo.key
+            ? photo.key.split("/").pop()
+            : "photo"
+    );
 
 
     const previous =
