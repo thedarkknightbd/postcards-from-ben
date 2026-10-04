@@ -192,23 +192,20 @@ async function loadPastPostcard() {
                         "figure"
                     );
 
-                const link =
+                const button =
                     document.createElement(
-                        "a"
+                        "button"
                     );
 
-                link.href =
-                    photo.url;
+                button.type =
+                    "button";
 
-                link.target =
-                    "_blank";
+                button.className =
+                    "photo-lightbox-button";
 
-                link.rel =
-                    "noopener";
-
-                link.setAttribute(
+                button.setAttribute(
                     "aria-label",
-                    `Open photo ${index + 1}`
+                    `View photo ${index + 1}`
                 );
 
                 const image =
@@ -229,12 +226,22 @@ async function loadPastPostcard() {
                     82
                 );
 
-                link.appendChild(
+                button.appendChild(
                     image
                 );
 
+                button.addEventListener(
+                    "click",
+                    () => {
+                        openPastLightbox(
+                            photos,
+                            index
+                        );
+                    }
+                );
+
                 figure.appendChild(
-                    link
+                    button
                 );
 
                 gallery.appendChild(
@@ -250,5 +257,277 @@ async function loadPastPostcard() {
         );
     }
 }
+
+let pastLightboxPhotos = [];
+let pastLightboxIndex = 0;
+
+function createPastLightbox() {
+    if (
+        document.getElementById(
+            "photo-lightbox"
+        )
+    ) {
+        return;
+    }
+
+    const lightbox =
+        document.createElement(
+            "div"
+        );
+
+    lightbox.id =
+        "photo-lightbox";
+
+    lightbox.className =
+        "photo-lightbox";
+
+    lightbox.hidden =
+        true;
+
+    lightbox.innerHTML = `
+        <div class="lightbox-backdrop"></div>
+
+        <div
+            class="lightbox-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo viewer"
+        >
+            <button
+                type="button"
+                class="lightbox-close"
+                aria-label="Close photo viewer"
+            >
+                ×
+            </button>
+
+            <button
+                type="button"
+                class="lightbox-nav lightbox-previous"
+                aria-label="Previous photo"
+            >
+                ‹
+            </button>
+
+            <div class="lightbox-image-area">
+                <img
+                    id="lightbox-image"
+                    src=""
+                    alt=""
+                >
+
+                <p
+                    id="lightbox-counter"
+                    class="lightbox-counter">
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="lightbox-nav lightbox-next"
+                aria-label="Next photo"
+            >
+                ›
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(
+        lightbox
+    );
+
+    lightbox
+        .querySelector(
+            ".lightbox-close"
+        )
+        .addEventListener(
+            "click",
+            closePastLightbox
+        );
+
+    lightbox
+        .querySelector(
+            ".lightbox-backdrop"
+        )
+        .addEventListener(
+            "click",
+            closePastLightbox
+        );
+
+    lightbox
+        .querySelector(
+            ".lightbox-previous"
+        )
+        .addEventListener(
+            "click",
+            previousPastLightboxPhoto
+        );
+
+    lightbox
+        .querySelector(
+            ".lightbox-next"
+        )
+        .addEventListener(
+            "click",
+            nextPastLightboxPhoto
+        );
+}
+
+function openPastLightbox(
+    photos,
+    index
+) {
+    createPastLightbox();
+
+    pastLightboxPhotos =
+        photos;
+
+    pastLightboxIndex =
+        index;
+
+    updatePastLightbox();
+
+    const lightbox =
+        document.getElementById(
+            "photo-lightbox"
+        );
+
+    lightbox.hidden =
+        false;
+
+    document.body.classList.add(
+        "lightbox-open"
+    );
+
+    lightbox
+        .querySelector(
+            ".lightbox-close"
+        )
+        .focus();
+}
+
+function closePastLightbox() {
+    const lightbox =
+        document.getElementById(
+            "photo-lightbox"
+        );
+
+    if (!lightbox) {
+        return;
+    }
+
+    lightbox.hidden =
+        true;
+
+    document.body.classList.remove(
+        "lightbox-open"
+    );
+}
+
+function updatePastLightbox() {
+    const photo =
+        pastLightboxPhotos[
+            pastLightboxIndex
+        ];
+
+    if (!photo) {
+        return;
+    }
+
+    const image =
+        document.getElementById(
+            "lightbox-image"
+        );
+
+    const counter =
+        document.getElementById(
+            "lightbox-counter"
+        );
+
+    applyOptimizedImage(
+        image,
+        photo.url,
+        2600,
+        90
+    );
+
+    image.alt =
+        `${document.title.split(" | ")[0]} photo ${pastLightboxIndex + 1}`;
+
+    counter.textContent =
+        `${pastLightboxIndex + 1} / ${pastLightboxPhotos.length}`;
+
+    const previous =
+        document.querySelector(
+            ".lightbox-previous"
+        );
+
+    const next =
+        document.querySelector(
+            ".lightbox-next"
+        );
+
+    const multiple =
+        pastLightboxPhotos.length > 1;
+
+    previous.hidden =
+        !multiple;
+
+    next.hidden =
+        !multiple;
+}
+
+function previousPastLightboxPhoto() {
+    pastLightboxIndex--;
+
+    if (pastLightboxIndex < 0) {
+        pastLightboxIndex =
+            pastLightboxPhotos.length - 1;
+    }
+
+    updatePastLightbox();
+}
+
+function nextPastLightboxPhoto() {
+    pastLightboxIndex++;
+
+    if (
+        pastLightboxIndex >=
+        pastLightboxPhotos.length
+    ) {
+        pastLightboxIndex = 0;
+    }
+
+    updatePastLightbox();
+}
+
+document.addEventListener(
+    "keydown",
+    event => {
+        const lightbox =
+            document.getElementById(
+                "photo-lightbox"
+            );
+
+        if (
+            !lightbox ||
+            lightbox.hidden
+        ) {
+            return;
+        }
+
+        if (event.key === "Escape") {
+            closePastLightbox();
+        }
+
+        if (event.key === "ArrowLeft") {
+            previousPastLightboxPhoto();
+        }
+
+        if (event.key === "ArrowRight") {
+            nextPastLightboxPhoto();
+        }
+    }
+);
 
 loadPastPostcard();
