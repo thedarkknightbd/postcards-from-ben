@@ -1424,9 +1424,7 @@ function updateLightbox() {
         photo.file || "";
 
     download.href =
-        photo.key
-            ? `/api/download?key=${encodeURIComponent(photo.key)}`
-            : originalSource;
+        originalSource;
 
     download.setAttribute(
         "download",
@@ -1434,6 +1432,12 @@ function updateLightbox() {
             ? photo.key.split("/").pop()
             : "photo"
     );
+
+    download.target =
+        "_blank";
+
+    download.rel =
+        "noopener";
 
 
     const previous =
