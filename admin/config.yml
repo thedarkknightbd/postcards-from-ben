@@ -6,19 +6,6 @@ backend:
 site_url: https://postcardsfromben.com
 display_url: https://postcardsfromben.com
 
-media_folder: "trips/the-long-way-around/images/uploads"
-public_folder: "/trips/the-long-way-around/images/uploads"
-
-media_processing:
-  enabled: true
-  format:
-    enabled: true
-    default: webp
-  quality: 82
-  strip_metadata: true
-  width: 2000
-  height: null
-
 collections:
 
   - name: "long_way_around"
@@ -110,24 +97,6 @@ collections:
             name: "longitude"
             widget: "number"
             value_type: "float"
-
-
-      - label: "Photos"
-        name: "photos"
-        widget: "list"
-        required: false
-
-        fields:
-
-          - label: "Photo URL"
-            name: "file"
-            widget: "string"
-            hint: "Paste the R2 image URL, e.g. https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-08/photo.webp"
-
-          - label: "Caption"
-            name: "caption"
-            widget: "string"
-            required: false
 
 
       - label: "Postcard from the Road"
