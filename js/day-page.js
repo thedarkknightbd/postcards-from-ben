@@ -223,7 +223,7 @@ async function loadDayPage() {
             mapButton.type = "button";
             mapButton.className = "view-on-map";
             mapButton.dataset.stopIndex = index;
-            mapButton.textContent = "View on map →";
+            mapButton.textContent = "📍 View on map";
 
             content.appendChild(mapButton);
         }
