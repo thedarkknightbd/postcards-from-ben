@@ -327,7 +327,7 @@ function createPastLightbox() {
                     href="#"
                     download
                 >
-                    ↓ Download original
+                    Open original to save
                 </a>
             </div>
 
