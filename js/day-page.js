@@ -875,9 +875,15 @@ let pagePhotos = [];
 
 try {
 
+    const dayFolder =
+        String(data.dayNumber).padStart(2, "0");
+
+    const photoPrefix =
+        `trips/the-long-way-around/days/day-${dayFolder}/`;
+
     const photoResponse =
         await fetch(
-            `/api/photos?day=${encodeURIComponent(data.dayNumber)}`
+            `/api/r2?prefix=${encodeURIComponent(photoPrefix)}`
         );
 
     if (photoResponse.ok) {
@@ -886,8 +892,11 @@ try {
             await photoResponse.json();
 
         pagePhotos =
-            Array.isArray(photoData.photos)
-                ? photoData.photos
+            Array.isArray(photoData.objects)
+                ? photoData.objects.map(photo => ({
+                    file: photo.url,
+                    key: photo.key
+                  }))
                 : [];
 
     } else {
