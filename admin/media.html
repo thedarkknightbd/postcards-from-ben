@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex">
-  <title>Postcards from Ben — Photos</title>
+  <title>Postcards from Ben — Media</title>
   <style>
     :root { color-scheme: dark; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
     * { box-sizing:border-box; }
@@ -21,31 +21,41 @@
     button:disabled { opacity:.45; cursor:default; }
     .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .token-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
     .status { min-height:24px; margin-top:10px; white-space:pre-wrap; font-size:13px; color:#c9d3dd; }
     .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px; }
     .item { background:#0b1622; border:1px solid #263648; border-radius:14px; overflow:hidden; }
-    .item img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#07101a; }
+    .item img,.item video { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#07101a; }
+    .item video { aspect-ratio:16/9; }
     .item-meta { padding:9px; font-size:11px; color:#aeb8c4; word-break:break-all; }
     .item-actions { display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:6px; padding:0 9px 9px; }
     .item-actions button { padding:9px 6px; font-size:13px; }
     .hint { margin:8px 0 0; font-size:12px; color:#91a0af; }
     .hidden { display:none; }
+    .progress { width:100%; height:8px; margin-top:10px; overflow:hidden; border-radius:999px; background:#263648; }
+    .progress[hidden] { display:none; }
+    .progress > span { display:block; width:0; height:100%; background:#e9b85d; transition:width .15s linear; }
     a { color:#e9b85d; }
     @media(max-width:560px) {
       .grid { grid-template-columns:1fr; }
-      .row { grid-template-columns:1fr; }
+      .row,.token-actions { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
 <main>
-  <h1>Photo Manager</h1>
-  <p>Choose an adventure, then upload to its hero or gallery. Photos publish automatically to the matching page.</p>
+  <h1>Media Manager</h1>
+  <p>Upload photos, hero images, and short MP4 videos. Media publishes automatically to the matching adventure or day.</p>
 
   <section class="card">
     <label for="token">Upload key</label>
     <input id="token" type="password" autocomplete="current-password" placeholder="Enter your media upload key">
-    <button id="saveToken" class="secondary" style="margin-top:10px">Use for this browser session</button>
+    <div class="token-actions">
+      <button id="saveSession" class="secondary">Use this session</button>
+      <button id="saveDevice" class="secondary">Remember on this device</button>
+    </div>
+    <button id="forgetToken" class="secondary" style="margin-top:10px">Forget saved key</button>
+    <p class="hint">Only use “Remember on this device” on a device you trust.</p>
   </section>
 
   <section class="card">
@@ -71,7 +81,7 @@
       </div>
     </div>
 
-    <label for="files">Photos</label>
+    <label id="filesLabel" for="files">Photos</label>
     <input id="files" type="file" accept="image/*" multiple>
 
     <div class="actions">
@@ -79,6 +89,7 @@
       <button id="refresh" class="secondary">Refresh</button>
     </div>
 
+    <div id="progress" class="progress" hidden><span></span></div>
     <div id="status" class="status"></div>
     <p id="folderHint" class="hint"></p>
   </section>
@@ -93,16 +104,23 @@
 </main>
 
 <script>
+const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
+const VIDEO_PART_BYTES = 25 * 1024 * 1024;
+
 const tripEl = document.getElementById("trip");
 const tokenEl = document.getElementById("token");
 const kindEl = document.getElementById("kind");
 const dayEl = document.getElementById("day");
 const dayWrap = document.getElementById("dayWrap");
 const filesEl = document.getElementById("files");
+const filesLabel = document.getElementById("filesLabel");
 const statusEl = document.getElementById("status");
 const gridEl = document.getElementById("grid");
 const folderLabel = document.getElementById("folderLabel");
 const folderHint = document.getElementById("folderHint");
+const uploadButton = document.getElementById("upload");
+const progressEl = document.getElementById("progress");
+const progressBar = progressEl.querySelector("span");
 let currentObjects = [];
 
 for (let i = 1; i <= 24; i++) {
@@ -110,11 +128,29 @@ for (let i = 1; i <= 24; i++) {
   dayEl.insertAdjacentHTML("beforeend", `<option value="${n}">Day ${i}</option>`);
 }
 
-tokenEl.value = sessionStorage.getItem("postcards-media-token") || "";
+tokenEl.value =
+  localStorage.getItem("postcards-media-token") ||
+  sessionStorage.getItem("postcards-media-token") ||
+  "";
 
-document.getElementById("saveToken").addEventListener("click", () => {
-  sessionStorage.setItem("postcards-media-token", tokenEl.value.trim());
+document.getElementById("saveSession").addEventListener("click", () => {
+  const token = tokenEl.value.trim();
+  sessionStorage.setItem("postcards-media-token", token);
   setStatus("Upload key saved for this browser session.");
+});
+
+document.getElementById("saveDevice").addEventListener("click", () => {
+  const token = tokenEl.value.trim();
+  localStorage.setItem("postcards-media-token", token);
+  sessionStorage.removeItem("postcards-media-token");
+  setStatus("Upload key remembered on this device.");
+});
+
+document.getElementById("forgetToken").addEventListener("click", () => {
+  localStorage.removeItem("postcards-media-token");
+  sessionStorage.removeItem("postcards-media-token");
+  tokenEl.value = "";
+  setStatus("Saved upload key removed from this device.");
 });
 
 tripEl.addEventListener("change", () => {
@@ -123,16 +159,20 @@ tripEl.addEventListener("change", () => {
 });
 
 kindEl.addEventListener("change", () => {
-  updateDayVisibility();
+  updateKindUi();
   refresh();
 });
 
 dayEl.addEventListener("change", refresh);
 document.getElementById("refresh").addEventListener("click", refresh);
-document.getElementById("upload").addEventListener("click", upload);
+uploadButton.addEventListener("click", upload);
 
 function isCurrentTrip() {
   return tripEl.value === "the-long-way-around";
+}
+
+function isVideoKind() {
+  return kindEl.value === "videos";
 }
 
 function configureLocations() {
@@ -140,17 +180,34 @@ function configureLocations() {
 
   if (isCurrentTrip()) {
     kindEl.insertAdjacentHTML("beforeend", '<option value="days">Day photos</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="videos">Day videos</option>');
     kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Trip hero</option>');
   } else {
     kindEl.insertAdjacentHTML("beforeend", '<option value="gallery">Gallery</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="videos">Videos</option>');
     kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Hero</option>');
   }
 
-  updateDayVisibility();
+  updateKindUi();
 }
 
-function updateDayVisibility() {
-  dayWrap.classList.toggle("hidden", !(isCurrentTrip() && kindEl.value === "days"));
+function updateKindUi() {
+  dayWrap.classList.toggle(
+    "hidden",
+    !(isCurrentTrip() && (kindEl.value === "days" || kindEl.value === "videos"))
+  );
+
+  if (isVideoKind()) {
+    filesLabel.textContent = "MP4 videos";
+    filesEl.accept = "video/mp4,.mp4";
+    uploadButton.textContent = "Upload videos";
+  } else {
+    filesLabel.textContent = "Photos";
+    filesEl.accept = "image/*";
+    uploadButton.textContent = "Upload photos";
+  }
+
+  filesEl.value = "";
 }
 
 function prefix() {
@@ -160,16 +217,39 @@ function prefix() {
     return `${root}/days/day-${dayEl.value}/`;
   }
 
+  if (isCurrentTrip() && kindEl.value === "videos") {
+    return `${root}/days/day-${dayEl.value}/videos/`;
+  }
+
   return `${root}/${kindEl.value}/`;
 }
 
+function token() {
+  return (
+    tokenEl.value.trim() ||
+    localStorage.getItem("postcards-media-token") ||
+    sessionStorage.getItem("postcards-media-token") ||
+    ""
+  );
+}
+
 function authHeaders(extra = {}) {
-  const token = tokenEl.value.trim() || sessionStorage.getItem("postcards-media-token") || "";
-  return { ...extra, Authorization: `Bearer ${token}` };
+  return { ...extra, Authorization: `Bearer ${token()}` };
 }
 
 function setStatus(message) {
   statusEl.textContent = message;
+}
+
+function setProgress(value) {
+  if (value === null) {
+    progressEl.hidden = true;
+    progressBar.style.width = "0%";
+    return;
+  }
+
+  progressEl.hidden = false;
+  progressBar.style.width = `${Math.max(0, Math.min(100, value))}%`;
 }
 
 function hint() {
@@ -177,11 +257,33 @@ function hint() {
     return `Anything here appears automatically on Day ${Number(dayEl.value)}.`;
   }
 
+  if (isCurrentTrip() && kindEl.value === "videos") {
+    return `MP4 videos here appear automatically on Day ${Number(dayEl.value)}. Maximum 500 MB per video.`;
+  }
+
   if (kindEl.value === "hero") {
     return "The first image below is used as this adventure's hero/cover image.";
   }
 
+  if (kindEl.value === "videos") {
+    return "MP4 videos here appear automatically on this adventure page. Maximum 500 MB per video.";
+  }
+
   return "Everything here appears automatically in this adventure's photo gallery.";
+}
+
+function formatBytes(bytes) {
+  if (!Number.isFinite(bytes)) return "";
+  const units = ["B", "KB", "MB", "GB"];
+  let value = bytes;
+  let unit = 0;
+
+  while (value >= 1024 && unit < units.length - 1) {
+    value /= 1024;
+    unit++;
+  }
+
+  return `${value >= 10 || unit === 0 ? value.toFixed(0) : value.toFixed(1)} ${units[unit]}`;
 }
 
 async function refresh() {
@@ -192,13 +294,20 @@ async function refresh() {
   setStatus("Loading…");
 
   try {
-    const res = await fetch(`/api/r2?prefix=${encodeURIComponent(p)}`, { headers: authHeaders() });
+    const res = await fetch(`/api/r2?prefix=${encodeURIComponent(p)}`, {
+      headers: authHeaders()
+    });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Could not list folder.");
 
     currentObjects = data.objects || [];
     render();
-    setStatus(currentObjects.length ? `${currentObjects.length} photo(s)` : "No photos in this folder yet.");
+    const noun = isVideoKind() ? "video" : "photo";
+    setStatus(
+      currentObjects.length
+        ? `${currentObjects.length} ${noun}(s)`
+        : `No ${noun}s in this folder yet.`
+    );
   } catch (err) {
     setStatus(err.message);
   }
@@ -211,14 +320,24 @@ function render() {
     const item = document.createElement("article");
     item.className = "item";
 
-    const img = document.createElement("img");
-    img.loading = "lazy";
-    img.src = obj.url;
-    img.alt = "";
+    if (isVideoKind()) {
+      const video = document.createElement("video");
+      video.src = obj.url;
+      video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      item.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.src = obj.url;
+      img.alt = "";
+      item.appendChild(img);
+    }
 
     const meta = document.createElement("div");
     meta.className = "item-meta";
-    meta.textContent = obj.key.split("/").pop();
+    meta.textContent = `${obj.key.split("/").pop()} · ${formatBytes(Number(obj.size))}`;
 
     const actions = document.createElement("div");
     actions.className = "item-actions";
@@ -240,10 +359,10 @@ function render() {
     const del = document.createElement("button");
     del.className = "danger";
     del.textContent = "Delete";
-    del.addEventListener("click", () => removePhoto(obj));
+    del.addEventListener("click", () => removeMedia(obj));
 
     actions.append(up, down, del);
-    item.append(img, meta, actions);
+    item.append(meta, actions);
     gridEl.appendChild(item);
   });
 }
@@ -277,8 +396,9 @@ async function move(index, delta) {
   }
 }
 
-async function removePhoto(obj) {
-  if (!confirm("Delete this photo from R2? This cannot be undone.")) return;
+async function removeMedia(obj) {
+  const noun = isVideoKind() ? "video" : "photo";
+  if (!confirm(`Delete this ${noun} from R2? This cannot be undone.`)) return;
 
   setStatus("Deleting…");
 
@@ -289,10 +409,10 @@ async function removePhoto(obj) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Could not delete photo.");
+    if (!res.ok) throw new Error(data.error || `Could not delete ${noun}.`);
 
     await refresh();
-    setStatus("Photo deleted.");
+    setStatus(`${noun[0].toUpperCase() + noun.slice(1)} deleted.`);
   } catch (err) {
     setStatus(err.message);
   }
@@ -300,39 +420,167 @@ async function removePhoto(obj) {
 
 async function upload() {
   const files = [...filesEl.files];
-  if (!files.length) return setStatus("Choose one or more photos first.");
 
-  const button = document.getElementById("upload");
-  button.disabled = true;
+  if (!files.length) {
+    return setStatus(
+      isVideoKind()
+        ? "Choose one or more MP4 videos first."
+        : "Choose one or more photos first."
+    );
+  }
+
+  if (isVideoKind()) {
+    const invalid = files.find(
+      file =>
+        !file.name.toLowerCase().endsWith(".mp4") ||
+        file.size > MAX_VIDEO_BYTES
+    );
+
+    if (invalid) {
+      return setStatus(
+        invalid.size > MAX_VIDEO_BYTES
+          ? `${invalid.name} is larger than 500 MB.`
+          : `${invalid.name} is not an MP4 video.`
+      );
+    }
+  }
+
+  uploadButton.disabled = true;
+  setProgress(0);
 
   try {
     let completed = 0;
 
     for (const file of files) {
-      setStatus(`Uploading ${completed + 1} of ${files.length}: ${file.name}`);
+      if (isVideoKind()) {
+        await uploadVideo(file, completed, files.length);
+      } else {
+        await uploadPhoto(file, completed, files.length);
+      }
 
-      const form = new FormData();
-      form.append("prefix", prefix());
-      form.append("file", file);
-
-      const res = await fetch("/api/r2", {
-        method: "POST",
-        headers: authHeaders(),
-        body: form
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || `Upload failed for ${file.name}`);
       completed++;
     }
 
     filesEl.value = "";
     await refresh();
-    setStatus(`Uploaded ${completed} photo(s).`);
+    setProgress(null);
+    setStatus(
+      `Uploaded ${completed} ${isVideoKind() ? "video" : "photo"}(s).`
+    );
   } catch (err) {
+    setProgress(null);
     setStatus(err.message);
   } finally {
-    button.disabled = false;
+    uploadButton.disabled = false;
+  }
+}
+
+async function uploadPhoto(file, completed, total) {
+  setStatus(`Uploading ${completed + 1} of ${total}: ${file.name}`);
+
+  const form = new FormData();
+  form.append("prefix", prefix());
+  form.append("file", file);
+
+  const res = await fetch("/api/r2", {
+    method: "POST",
+    headers: authHeaders(),
+    body: form
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Upload failed for ${file.name}`);
+
+  setProgress(((completed + 1) / total) * 100);
+}
+
+async function uploadVideo(file, completedFiles, totalFiles) {
+  setStatus(
+    `Preparing video ${completedFiles + 1} of ${totalFiles}: ${file.name} (${formatBytes(file.size)})`
+  );
+
+  const startRes = await fetch("/api/r2?action=video-start", {
+    method: "POST",
+    headers: authHeaders({ "content-type": "application/json" }),
+    body: JSON.stringify({
+      prefix: prefix(),
+      name: file.name,
+      size: file.size,
+      type: file.type || "video/mp4"
+    })
+  });
+
+  const start = await startRes.json();
+  if (!startRes.ok) {
+    throw new Error(start.error || `Could not start upload for ${file.name}`);
+  }
+
+  const parts = [];
+  const partCount = Math.ceil(file.size / VIDEO_PART_BYTES);
+
+  try {
+    for (let index = 0; index < partCount; index++) {
+      const partNumber = index + 1;
+      const begin = index * VIDEO_PART_BYTES;
+      const end = Math.min(file.size, begin + VIDEO_PART_BYTES);
+      const blob = file.slice(begin, end);
+
+      setStatus(
+        `Uploading ${file.name}: part ${partNumber} of ${partCount} · ${Math.round((begin / file.size) * 100)}%`
+      );
+
+      const partRes = await fetch(
+        `/api/r2?action=video-part&key=${encodeURIComponent(start.key)}&uploadId=${encodeURIComponent(start.uploadId)}&partNumber=${partNumber}`,
+        {
+          method: "PUT",
+          headers: authHeaders({ "content-type": "application/octet-stream" }),
+          body: blob
+        }
+      );
+
+      const part = await partRes.json();
+      if (!partRes.ok) {
+        throw new Error(part.error || `Video part ${partNumber} failed.`);
+      }
+
+      parts.push({
+        partNumber: Number(part.partNumber),
+        etag: part.etag
+      });
+
+      const fileFraction = end / file.size;
+      const overall = ((completedFiles + fileFraction) / totalFiles) * 100;
+      setProgress(overall);
+    }
+
+    setStatus(`Finalizing ${file.name}…`);
+
+    const completeRes = await fetch("/api/r2?action=video-complete", {
+      method: "POST",
+      headers: authHeaders({ "content-type": "application/json" }),
+      body: JSON.stringify({
+        key: start.key,
+        uploadId: start.uploadId,
+        parts
+      })
+    });
+
+    const complete = await completeRes.json();
+    if (!completeRes.ok) {
+      throw new Error(complete.error || `Could not finish ${file.name}`);
+    }
+  } catch (error) {
+    try {
+      await fetch(
+        `/api/r2?action=video-abort&key=${encodeURIComponent(start.key)}&uploadId=${encodeURIComponent(start.uploadId)}`,
+        {
+          method: "DELETE",
+          headers: authHeaders()
+        }
+      );
+    } catch {}
+
+    throw error;
   }
 }
 
