@@ -1202,7 +1202,8 @@ footer {
     background: #17212b;
 }
 
-.video-wrapper iframe {
+.video-wrapper iframe,
+.video-wrapper video {
     position: absolute;
 
     width: 100%;
@@ -1211,6 +1212,11 @@ footer {
     border: 0;
 
     inset: 0;
+}
+
+.video-wrapper video {
+    object-fit: contain;
+    background: #000;
 }
 
 
@@ -2519,7 +2525,8 @@ body.lightbox-open {
 
 
 .past-postcard-intro h2,
-.past-postcard-photos h2 {
+.past-postcard-photos h2,
+.past-postcard-videos h2 {
     margin-top: 5px;
 
     font-size:
