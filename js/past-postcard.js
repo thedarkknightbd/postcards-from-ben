@@ -161,6 +161,101 @@ async function loadPastPostcard() {
         );
     }
 
+    /* VIDEOS */
+
+    try {
+        const videos =
+            await loadR2Folder(
+                `trips/${slug}/videos/`
+            );
+
+        if (videos.length) {
+            const main =
+                document.querySelector(
+                    ".past-postcard-main"
+                );
+
+            const navigation =
+                document.querySelector(
+                    ".past-postcard-navigation"
+                );
+
+            if (main && navigation) {
+                const section =
+                    document.createElement(
+                        "section"
+                    );
+
+                section.className =
+                    "past-postcard-videos";
+
+                section.innerHTML = `
+                    <p class="section-kicker">Videos</p>
+                    <h2>Watch the journey</h2>
+                    <div class="video-grid past-postcard-video-grid"></div>
+                `;
+
+                const grid =
+                    section.querySelector(
+                        ".past-postcard-video-grid"
+                    );
+
+                videos.forEach(
+                    (video, index) => {
+                        const wrapper =
+                            document.createElement(
+                                "div"
+                            );
+
+                        wrapper.className =
+                            "video-wrapper";
+
+                        const player =
+                            document.createElement(
+                                "video"
+                            );
+
+                        player.src =
+                            video.url;
+
+                        player.controls =
+                            true;
+
+                        player.preload =
+                            "metadata";
+
+                        player.playsInline =
+                            true;
+
+                        player.setAttribute(
+                            "aria-label",
+                            `Travel video ${index + 1}`
+                        );
+
+                        wrapper.appendChild(
+                            player
+                        );
+
+                        grid.appendChild(
+                            wrapper
+                        );
+                    }
+                );
+
+                main.insertBefore(
+                    section,
+                    navigation
+                );
+            }
+        }
+
+    } catch (error) {
+        console.warn(
+            "Past postcard videos unavailable:",
+            error
+        );
+    }
+
     /* GALLERY */
 
     const gallery =
@@ -380,6 +475,62 @@ function createPastLightbox() {
             "click",
             nextPastLightboxPhoto
         );
+
+
+    let touchStartX = null;
+    let touchStartY = null;
+
+    lightbox.addEventListener(
+        "touchstart",
+        event => {
+            if (event.touches.length !== 1) {
+                return;
+            }
+
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        },
+        { passive: true }
+    );
+
+    lightbox.addEventListener(
+        "touchend",
+        event => {
+            if (
+                touchStartX === null ||
+                touchStartY === null ||
+                event.changedTouches.length !== 1 ||
+                pastLightboxPhotos.length < 2
+            ) {
+                touchStartX = null;
+                touchStartY = null;
+                return;
+            }
+
+            const deltaX =
+                event.changedTouches[0].clientX - touchStartX;
+
+            const deltaY =
+                event.changedTouches[0].clientY - touchStartY;
+
+            touchStartX = null;
+            touchStartY = null;
+
+            if (
+                Math.abs(deltaX) < 50 ||
+                Math.abs(deltaX) <= Math.abs(deltaY)
+            ) {
+                return;
+            }
+
+            if (deltaX > 0) {
+                previousPastLightboxPhoto();
+            } else {
+                nextPastLightboxPhoto();
+            }
+        },
+        { passive: true }
+    );
 }
 
 function openPastLightbox(
