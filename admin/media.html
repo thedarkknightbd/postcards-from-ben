@@ -45,7 +45,7 @@
 <body>
 <main>
   <h1>Media Manager</h1>
-  <p>Upload photos, hero images, and short MP4 videos. Media publishes automatically to the matching adventure or day.</p>
+  <p>Upload photos, hero images, and short MP4 or iPhone MOV videos. Media publishes automatically to the matching adventure or day.</p>
 
   <section class="card">
     <label for="token">Upload key</label>
@@ -198,8 +198,8 @@ function updateKindUi() {
   );
 
   if (isVideoKind()) {
-    filesLabel.textContent = "MP4 videos";
-    filesEl.accept = "video/mp4,.mp4";
+    filesLabel.textContent = "MP4 or MOV videos";
+    filesEl.accept = "video/mp4,video/quicktime,.mp4,.mov";
     uploadButton.textContent = "Upload videos";
   } else {
     filesLabel.textContent = "Photos";
@@ -258,7 +258,7 @@ function hint() {
   }
 
   if (isCurrentTrip() && kindEl.value === "videos") {
-    return `MP4 videos here appear automatically on Day ${Number(dayEl.value)}. Maximum 500 MB per video.`;
+    return `MP4 or MOV videos here appear automatically on Day ${Number(dayEl.value)}. Maximum 500 MB per video.`;
   }
 
   if (kindEl.value === "hero") {
@@ -266,7 +266,7 @@ function hint() {
   }
 
   if (kindEl.value === "videos") {
-    return "MP4 videos here appear automatically on this adventure page. Maximum 500 MB per video.";
+    return "MP4 or MOV videos here appear automatically on this adventure page. Maximum 500 MB per video.";
   }
 
   return "Everything here appears automatically in this adventure's photo gallery.";
@@ -424,23 +424,27 @@ async function upload() {
   if (!files.length) {
     return setStatus(
       isVideoKind()
-        ? "Choose one or more MP4 videos first."
+        ? "Choose one or more MP4 or MOV videos first."
         : "Choose one or more photos first."
     );
   }
 
   if (isVideoKind()) {
     const invalid = files.find(
-      file =>
-        !file.name.toLowerCase().endsWith(".mp4") ||
-        file.size > MAX_VIDEO_BYTES
+      file => {
+        const lower = file.name.toLowerCase();
+        return (
+          (!lower.endsWith(".mp4") && !lower.endsWith(".mov")) ||
+          file.size > MAX_VIDEO_BYTES
+        );
+      }
     );
 
     if (invalid) {
       return setStatus(
         invalid.size > MAX_VIDEO_BYTES
           ? `${invalid.name} is larger than 500 MB.`
-          : `${invalid.name} is not an MP4 video.`
+          : `${invalid.name} is not an MP4 or MOV video.`
       );
     }
   }
@@ -506,7 +510,7 @@ async function uploadVideo(file, completedFiles, totalFiles) {
       prefix: prefix(),
       name: file.name,
       size: file.size,
-      type: file.type || "video/mp4"
+      type: file.type || ""
     })
   });
 
