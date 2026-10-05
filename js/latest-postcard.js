@@ -3,6 +3,31 @@
    Latest Postcard
 ===================================== */
 
+async function r2FolderHasMedia(prefix) {
+    try {
+        const response =
+            await fetch(
+                `/api/r2?prefix=${encodeURIComponent(prefix)}`
+            );
+
+        if (!response.ok) {
+            return false;
+        }
+
+        const data =
+            await response.json();
+
+        return (
+            Array.isArray(data.objects) &&
+            data.objects.length > 0
+        );
+
+    } catch {
+        return false;
+    }
+}
+
+
 async function loadLatestPostcard() {
 
     const section =
@@ -33,8 +58,8 @@ async function loadLatestPostcard() {
 
         /*
          Start with Day 24 and work backward.
-         The newest day containing a journal,
-         photo, or video becomes Latest Postcard.
+         Journal entries and both R2 photos/videos
+         count as a published postcard.
         */
 
         const days =
@@ -64,13 +89,46 @@ async function loadLatestPostcard() {
                 typeof day.journal === "string" &&
                 day.journal.trim() !== "";
 
-            const hasPhotos =
+            const hasLegacyPhotos =
                 Array.isArray(day.photos) &&
                 day.photos.length > 0;
 
-            const hasVideos =
+            const hasLegacyVideos =
                 Array.isArray(day.videos) &&
                 day.videos.length > 0;
+
+
+            let hasPhotos =
+                hasLegacyPhotos;
+
+            let hasVideos =
+                hasLegacyVideos;
+
+
+            if (
+                !hasJournal &&
+                !hasPhotos &&
+                !hasVideos
+            ) {
+
+                const paddedDay =
+                    String(day.dayNumber)
+                        .padStart(2, "0");
+
+                const root =
+                    `trips/the-long-way-around/days/day-${paddedDay}/`;
+
+                [
+                    hasPhotos,
+                    hasVideos
+                ] =
+                    await Promise.all([
+                        r2FolderHasMedia(root),
+                        r2FolderHasMedia(
+                            `${root}videos/`
+                        )
+                    ]);
+            }
 
 
             if (
