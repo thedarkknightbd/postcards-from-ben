@@ -8,11 +8,11 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Send Me a Postcard | Postcards from Ben</title>
+    <title>Send a Photo Postcard | Postcards from Ben</title>
 
     <meta
         name="description"
-        content="Send a private postcard to Ben.">
+        content="Choose a photo from Ben’s Europe trip, add a note, and send it privately by email.">
 
     <meta
         name="theme-color"
@@ -62,13 +62,12 @@
             </p>
 
             <h1>
-                Send Me a Postcard
+                Send a Photo Postcard
             </h1>
 
             <p>
-                Write back from wherever you are.
-                Your postcard comes directly to me and is never
-                posted publicly.
+                Choose a photo from my Europe trip, add a note, and send it directly to me by email.
+                Your message stays private and is never posted on the site.
             </p>
 
         </section>
@@ -82,8 +81,20 @@
                     POSTCARDS FROM BEN
                 </div>
 
+                <div class="postcard-photo-picker">
+                    <label for="postcard-photo-day">Choose a photo from the trip</label>
+                    <p class="postcard-photo-help">Pick a day, then tap a photo to add it to your note.</p>
+                    <select id="postcard-photo-day" aria-label="Choose a trip day"></select>
+                    <div id="postcard-photo-options" class="postcard-photo-options" role="group" aria-label="Photos from the selected day"></div>
+                    <p id="postcard-photo-status" class="postcard-photo-status" role="status" aria-live="polite">Loading trip photos…</p>
+                    <figure id="postcard-photo-preview" class="postcard-photo-preview" hidden>
+                        <img id="postcard-photo-preview-image" alt="">
+                        <figcaption id="postcard-photo-preview-caption"></figcaption>
+                    </figure>
+                </div>
+
                 <label for="postcard-message">
-                    Your postcard
+                    Your note
                 </label>
 
                 <textarea
@@ -191,7 +202,7 @@
                         id="postcard-submit"
                         class="postcard-submit"
                         type="submit">
-                        Send Postcard
+                        Send Photo Postcard
                     </button>
 
 
@@ -210,7 +221,7 @@
 
 
         <p class="postcard-privacy">
-            Your message is private. It isn't published or displayed
+            Your note and selected photo link are sent to Ben by email. Neither is published or displayed
             anywhere on Postcards from Ben.
         </p>
 
