@@ -1,4 +1,4 @@
-import * as maplibregl from "https://unpkg.com/maplibre-gl@^6.11.2/dist/maplibre-gl.mjs";
+import * as maplibregl from "https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.mjs";
 
 /* =====================================
    POSTCARDS FROM BEN
@@ -1063,7 +1063,7 @@ if (pagePhotos.length > 0) {
 
 
     /* =====================================
-       VIDEOS
+       VIDEOS — AUTO-LOAD FROM R2
     ===================================== */
 
     const videoSection =
@@ -1074,10 +1074,92 @@ if (pagePhotos.length > 0) {
 
     videoGrid.innerHTML = "";
 
-    if (
-        data.videos &&
+    let pageVideos = [];
+
+    try {
+
+        const dayFolder =
+            String(data.dayNumber).padStart(2, "0");
+
+        const videoPrefix =
+            `trips/the-long-way-around/days/day-${dayFolder}/videos/`;
+
+        const videoResponse =
+            await fetch(
+                `/api/r2?prefix=${encodeURIComponent(videoPrefix)}`
+            );
+
+        if (videoResponse.ok) {
+
+            const videoData =
+                await videoResponse.json();
+
+            pageVideos =
+                Array.isArray(videoData.objects)
+                    ? videoData.objects
+                    : [];
+
+        } else {
+
+            console.warn(
+                "R2 video listing unavailable:",
+                videoResponse.status
+            );
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to load videos from R2:",
+            error
+        );
+
+    }
+
+
+    if (pageVideos.length > 0) {
+
+        videoSection.hidden = false;
+
+        pageVideos.forEach((video, index) => {
+
+            const wrapper =
+                document.createElement("div");
+
+            wrapper.className =
+                "video-wrapper";
+
+            const player =
+                document.createElement("video");
+
+            player.src =
+                video.url;
+
+            player.controls =
+                true;
+
+            player.preload =
+                "metadata";
+
+            player.playsInline =
+                true;
+
+            player.setAttribute(
+                "aria-label",
+                `Travel video ${index + 1}`
+            );
+
+            wrapper.appendChild(player);
+            videoGrid.appendChild(wrapper);
+        });
+
+    } else if (
+        Array.isArray(data.videos) &&
         data.videos.length > 0
     ) {
+
+        /* Legacy YouTube entries remain supported if present. */
 
         videoSection.hidden = false;
 
@@ -1106,7 +1188,9 @@ if (pagePhotos.length > 0) {
         });
 
     } else {
+
         videoSection.hidden = true;
+
     }
 
 
@@ -1313,6 +1397,62 @@ function createLightbox() {
             "click",
             nextLightboxPhoto
         );
+
+
+    let touchStartX = null;
+    let touchStartY = null;
+
+    lightbox.addEventListener(
+        "touchstart",
+        event => {
+            if (event.touches.length !== 1) {
+                return;
+            }
+
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        },
+        { passive: true }
+    );
+
+    lightbox.addEventListener(
+        "touchend",
+        event => {
+            if (
+                touchStartX === null ||
+                touchStartY === null ||
+                event.changedTouches.length !== 1 ||
+                lightboxPhotos.length < 2
+            ) {
+                touchStartX = null;
+                touchStartY = null;
+                return;
+            }
+
+            const deltaX =
+                event.changedTouches[0].clientX - touchStartX;
+
+            const deltaY =
+                event.changedTouches[0].clientY - touchStartY;
+
+            touchStartX = null;
+            touchStartY = null;
+
+            if (
+                Math.abs(deltaX) < 50 ||
+                Math.abs(deltaX) <= Math.abs(deltaY)
+            ) {
+                return;
+            }
+
+            if (deltaX > 0) {
+                previousLightboxPhoto();
+            } else {
+                nextLightboxPhoto();
+            }
+        },
+        { passive: true }
+    );
 }
 
 
