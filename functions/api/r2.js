@@ -1,5 +1,5 @@
 const IMAGE_RE = /\.(avif|gif|heic|heif|jpe?g|png|webp)$/i;
-const VIDEO_RE = /\.mp4$/i;
+const VIDEO_RE = /\.(mp4|mov)$/i;
 const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
 const MAX_VIDEO_PARTS = 20;
 
@@ -202,24 +202,35 @@ async function startVideoUpload(request, env) {
   }
 
   const prefix = sanitizePrefix(String(body.prefix || ""));
-  const name = String(body.name || "video.mp4");
+  const name = String(body.name || "video.mov");
   const size = Number(body.size);
-  const type = String(body.type || "video/mp4");
+  const type = String(body.type || "");
 
   if (!isVideoFolder(prefix)) {
     return json({ error: "Invalid video folder." }, 400);
   }
 
   if (!VIDEO_RE.test(name)) {
-    return json({ error: "Videos must be MP4 files." }, 400);
+    return json({ error: "Videos must be MP4 or MOV files." }, 400);
   }
 
   if (!Number.isFinite(size) || size <= 0 || size > MAX_VIDEO_BYTES) {
     return json({ error: "Video must be 500 MB or smaller." }, 400);
   }
 
-  if (type && type !== "video/mp4" && type !== "application/mp4") {
-    return json({ error: "Videos must use the MP4 format." }, 400);
+  const extension = name.toLowerCase().endsWith(".mov") ? "mov" : "mp4";
+  const contentType =
+    extension === "mov"
+      ? "video/quicktime"
+      : "video/mp4";
+
+  const allowedTypes =
+    extension === "mov"
+      ? new Set(["", "video/quicktime", "video/mov", "application/octet-stream"])
+      : new Set(["", "video/mp4", "application/mp4", "application/octet-stream"]);
+
+  if (!allowedTypes.has(type)) {
+    return json({ error: "Video file type does not match its extension." }, 400);
   }
 
   const existing = await applySavedOrder(
@@ -232,7 +243,7 @@ async function startVideoUpload(request, env) {
   const key = `${prefix}${Date.now()}-${safeName}`;
 
   const upload = await env.POSTCARDS_MEDIA.createMultipartUpload(key, {
-    httpMetadata: { contentType: "video/mp4" },
+    httpMetadata: { contentType },
     customMetadata: {
       originalName: name,
       declaredSize: String(size)
