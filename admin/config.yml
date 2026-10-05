@@ -108,22 +108,6 @@ collections:
         required: false
 
 
-      - label: "Videos"
-        name: "videos"
-        widget: "list"
-        required: false
-
-        fields:
-
-          - label: "YouTube Video ID"
-            name: "youtubeId"
-            widget: "string"
-
-          - label: "Title"
-            name: "title"
-            widget: "string"
-
-
       - label: "Previous Day"
         name: "previousDay"
         widget: "string"
