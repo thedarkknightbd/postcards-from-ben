@@ -1,7 +1,7 @@
 {
   "dayNumber": 17,
   "date": "November 4, 2026",
-  "title": "Across the Alps to Alsace",
+  "title": "Aosta Valley to Strasbourg via Lake Geneva",
   "route": "Courmayeur → Great St. Bernard Tunnel → Montreux → Strasbourg",
   "facts": [
     {
@@ -25,7 +25,7 @@
       "value": "Strasbourg, France"
     }
   ],
-  "introTitle": "From the Aosta Valley to Lake Geneva.",
+  "introTitle": "Across Switzerland and into France.",
   "intro": "Leave Courmayeur at 8:30 AM and cross the Great St. Bernard Tunnel into Switzerland. Stop in Montreux for a late lunch beside Lake Geneva, then leave by 12:30 PM for Strasbourg, aiming to arrive by 5 PM.",
   "stops": [
     {
@@ -52,7 +52,7 @@
     {
       "type": "Destination",
       "name": "Strasbourg",
-      "description": "Arrive in Strasbourg and settle in for the night in the historic center of Alsace.",
+      "description": "Arrive in Strasbourg and settle in for the night in the city's historic center.",
       "latitude": 48.59733,
       "longitude": 7.75389
     }
