@@ -1,13 +1,13 @@
 {
   "dayNumber": 17,
   "date": "November 4, 2026",
-  "title": "Across France",
-  "route": "Courmayeur → Mont Blanc Tunnel → Strasbourg",
+  "title": "Across the Alps to Alsace",
+  "route": "Courmayeur → Great St. Bernard Tunnel → Montreux → Strasbourg",
   "facts": [
     {
       "icon": "🌍",
       "label": "Countries",
-      "value": "Italy · France"
+      "value": "Italy · Switzerland · France"
     },
     {
       "icon": "🚙",
@@ -17,7 +17,7 @@
     {
       "icon": "🏔️",
       "label": "Mountain Crossing",
-      "value": "Mont Blanc Tunnel"
+      "value": "Great St. Bernard Tunnel"
     },
     {
       "icon": "📍",
@@ -25,27 +25,34 @@
       "value": "Strasbourg, France"
     }
   ],
-  "introTitle": "From the Alps to Alsace.",
-  "intro": "The journey leaves Courmayeur and crosses beneath the Mont Blanc massif into France. From the Alps, the route continues north across eastern France toward Strasbourg, trading high mountain scenery for the historic streets and canals of Alsace.",
+  "introTitle": "From the Aosta Valley to Lake Geneva.",
+  "intro": "Leave Courmayeur at 8:30 AM and cross the Great St. Bernard Tunnel into Switzerland. Stop in Montreux for a late lunch beside Lake Geneva, then leave by 12:30 PM for Strasbourg, aiming to arrive by 5 PM.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Courmayeur",
-      "description": "Leave Courmayeur after two nights beneath Mont Blanc and begin the journey into France.",
+      "description": "Leave Courmayeur after two nights beneath Mont Blanc and head east through the Aosta Valley.",
       "latitude": 45.78381895553412,
       "longitude": 6.973237850469659
     },
     {
-      "type": "Border Crossing",
-      "name": "Mont Blanc Tunnel",
-      "description": "Cross beneath the Mont Blanc massif from Italy into France.",
-      "latitude": 45.866,
-      "longitude": 6.9
+      "type": "Mountain Crossing",
+      "name": "Great St. Bernard Tunnel",
+      "description": "Cross beneath the Alps from Italy into Switzerland through the Great St. Bernard Tunnel.",
+      "latitude": 45.8645,
+      "longitude": 7.17266
+    },
+    {
+      "type": "Lunch Stop",
+      "name": "Montreux",
+      "description": "Pause for a late lunch and a stretch beside Lake Geneva, then continue north toward Strasbourg.",
+      "latitude": 46.431221,
+      "longitude": 6.91068
     },
     {
       "type": "Destination",
       "name": "Strasbourg",
-      "description": "Arrive in Strasbourg and settle in for the night in the heart of Alsace.",
+      "description": "Arrive in Strasbourg and settle in for the night in the historic center of Alsace.",
       "latitude": 48.59733,
       "longitude": 7.75389
     }
