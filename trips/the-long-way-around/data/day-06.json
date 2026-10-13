@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "Into Venice.",
-  "intro": "The route leaves Slovenia and crosses into Italy for a compact visit to Venice. After parking at Tronchetto, take a scenic vaporetto along the Grand Canal to St. Mark's Square, spend around two hours exploring the waterfront and walking toward Rialto Bridge, then return by vaporetto to Tronchetto before driving west to Brescia. Allow approximately 3–3.5 hours for the entire stop, including boat rides and parking.",
+  "intro": "Drive from Kamnik to Tronchetto Parking, the only parking location for this Venice stop. Walk to the nearby ACTV vaporetto stop, take Line 2 through the Grand Canal to San Marco Giardinetti, explore St. Mark's Square and Rialto Bridge for around two hours, then board Line 2 at Rialto for the return to Tronchetto. Collect the car at the same garage and continue to Brescia. Allow roughly 3–3.5 hours for the entire Venice visit, subject to boat schedules.",
   "stops": [
     {
       "type": "Starting Point",
@@ -53,6 +53,14 @@
       "transportToNext": "boat"
     },
     {
+      "type": "Boat Arrival",
+      "name": "San Marco Giardinetti Vaporetto Stop",
+      "description": "Disembark at San Marco Giardinetti and walk a short distance to St. Mark's Square.",
+      "latitude": 45.4328,
+      "longitude": 12.3364,
+      "transportToNext": "walk"
+    },
+    {
       "type": "Scenic Stop",
       "name": "St. Mark's Square",
       "description": "See Piazza San Marco and the waterfront, then explore toward Rialto.",
@@ -66,12 +74,20 @@
       "description": "Enjoy the iconic bridge, photos and a quick coffee.",
       "latitude": 45.436015,
       "longitude": 12.32842,
+      "transportToNext": "walk"
+    },
+    {
+      "type": "Boat Departure",
+      "name": "Rialto Vaporetto Stop",
+      "description": "Board Line 2 toward Piazzale Roma and Tronchetto; check direction and schedule.",
+      "latitude": 45.4377,
+      "longitude": 12.335,
       "transportToNext": "boat"
     },
     {
       "type": "Boat Return",
       "name": "Tronchetto Vaporetto Stop",
-      "description": "Return by vaporetto; confirm the boarding stop and Line 2 schedule on the day.",
+      "description": "Disembark at Tronchetto and walk back to the same parking garage.",
       "latitude": 45.4416,
       "longitude": 12.3072,
       "transportToNext": "walk"
