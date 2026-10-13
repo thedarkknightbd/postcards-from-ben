@@ -4052,3 +4052,9 @@ body.lightbox-open {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* Day route key and featured day explanation */
+.day-map-legend { margin-top: 16px; margin-bottom: 22px; }
+.featured-days-explainer { margin: 8px 0 22px; color: #cbd5df; font-size: .9rem; line-height: 1.55; }
+.featured-days-symbol { color: #e9b85d; margin-right: 5px; }
+.map-legend-line.route-boat { border-top: 4px dashed #00afc8; background: none; }
