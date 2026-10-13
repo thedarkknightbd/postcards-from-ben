@@ -27,6 +27,28 @@ async function loadDayPage() {
         return;
     }
 
+    // A consistent route key below the map on every day page.
+    const dayMap = document.getElementById("day-map");
+    if (dayMap && !document.getElementById("day-map-legend")) {
+        const legend = document.createElement("div");
+        legend.id = "day-map-legend";
+        legend.className = "map-legend day-map-legend";
+        legend.setAttribute("aria-label", "Map route legend");
+        legend.innerHTML = [
+            ["drive", "Driving"], ["walk", "Walking"],
+            ["train", "Train"], ["flight", "Flight"],
+            ["cable", "Cable car"]
+        ].map(([mode, label]) =>
+            '<div class="map-legend-item"><span class="map-legend-line route-' +
+            mode + '"></span><span>' + label + '</span></div>'
+        ).join("");
+        if (document.body.dataset.daySource?.includes("day-06.json")) {
+            legend.insertAdjacentHTML("beforeend",
+                '<div class="map-legend-item"><span class="map-legend-line route-boat"></span><span>Boat</span></div>');
+        }
+        dayMap.insertAdjacentElement("afterend", legend);
+    }
+
     let data;
 
     try {
@@ -848,6 +870,21 @@ map.addLayer({
     }
 });
 
+
+                // Venice-only boat segments, separate from driving and walking.
+                map.addLayer({
+                    id: "day-route-boat",
+                    type: "line",
+                    source: "day-route",
+                    filter: ["==", ["get", "mode"], "boat"],
+                    layout: { "line-cap": "round", "line-join": "round" },
+                    paint: {
+                        "line-color": "#00AFC8",
+                        "line-width": 5,
+                        "line-opacity": 1,
+                        "line-dasharray": [3, 2]
+                    }
+                });
 
                 map.fitBounds(
                     bounds,
