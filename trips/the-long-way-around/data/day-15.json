@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "From the Mediterranean to the Alps.",
-  "intro": "The next chapter of The Long Way Around begins with a drive southwest from Brescia to the Mediterranean and the tiny Principality of Monaco. After a brief stop in Monte Carlo, the route turns north through the mountains toward the Aosta Valley, finishing the day beneath Mont Blanc in Courmayeur.",
+  "intro": "The next chapter of The Long Way Around begins with a drive southwest from Brescia to the Mediterranean and the tiny Principality of Monaco. After a brief stop in Monte Carlo, the route turns north through the mountains toward the Aosta Valley, finishing the day beneath Mont Blanc in Courmayeur. If skies are clear, road access is safe and energy allows after the long drive, consider an optional 30–45-minute dark-sky photography outing toward Planpincieux in Val Ferret around 9 PM. Do not treat it as a fixed commitment.",
   "stops": [
     {
       "type": "Starting Point",
@@ -48,6 +48,13 @@
       "description": "Leave the Mediterranean behind and settle in beneath Mont Blanc in the Italian Alps.",
       "latitude": 45.78381895553412,
       "longitude": 6.973237850469659
+    },
+    {
+      "type": "Optional Evening Photography — Weather & Access Dependent",
+      "name": "Planpincieux — Val Ferret dark-sky photography",
+      "description": "Optional 30–45-minute night-sky photography session around 9 PM, only if rested and skies are clear. Verify road access and safe parking before driving into Val Ferret; skip if winter restrictions or fatigue make the outing unsuitable.",
+      "latitude": 45.846,
+      "longitude": 7
     }
   ],
   "photos": [],
