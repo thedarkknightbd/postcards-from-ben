@@ -2,7 +2,7 @@
   "dayNumber": 6,
   "date": "October 24, 2026",
   "title": "Enter into Italy",
-  "route": "Kamnik → Venice → Brescia",
+  "route": "Kamnik → Soča Valley (Kobarid) → Venice → Brescia",
   "facts": [
     {
       "icon": "🌍",
@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "Into Venice.",
-  "intro": "Drive from Kamnik to Venice and park once at Autorimessa Comunale in Piazzale Roma. Explore the historic center entirely on foot: cross the smaller canals toward Rialto Bridge and the Grand Canal, continue to St. Mark's Square, admire the exterior of Doge's Palace and see the Bridge of Sighs, then return through Venice's streets to the same parking garage. Stop for a quick pizza or sandwich along the way. No vaporetto or paid sightseeing is planned; allow around 2.5–3 hours including parking, walking, photographs and food.",
+  "intro": "Leave Kamnik early and drive to Kobarid for an optional 45–60-minute photography stop at Napoleon Bridge and the emerald Soča River. Continue to Venice, park once at Autorimessa Comunale in Piazzale Roma, and walk to Rialto Bridge, St. Mark's Square, Doge's Palace and the Bridge of Sighs, with a quick meal if desired. No boat rides or paid sightseeing. Drive to Brescia in the late afternoon. If weather or road conditions make the Soča detour impractical, drive directly from Kamnik to Venice.",
   "stops": [
     {
       "type": "Starting Point",
@@ -34,6 +34,14 @@
       "description": "Drive from Slovenia into Italy toward Venice.",
       "latitude": 46.2012,
       "longitude": 14.5953,
+      "transportToNext": "drive"
+    },
+    {
+      "type": "Scenic Stop",
+      "name": "Soča Valley — Napoleon Bridge, Kobarid",
+      "description": "Weather-dependent scenic stop: enjoy views of the emerald Soča River and photograph Napoleon Bridge. Allow about 45–60 minutes; skip this detour if conditions or timing are unfavorable.",
+      "latitude": 46.2459,
+      "longitude": 13.5784,
       "transportToNext": "drive"
     },
     {
