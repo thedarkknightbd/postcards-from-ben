@@ -69,6 +69,14 @@ async function loadDayPage() {
     ===================================== */
 
     let detailedRouteData = null;
+    const embeddedRoute = document.getElementById("day-embedded-route");
+    if (embeddedRoute) {
+        try {
+            detailedRouteData = JSON.parse(embeddedRoute.textContent);
+        } catch (error) {
+            console.warn("Invalid embedded route data:", error);
+        }
+    }
     let railRouteData = null;
 
     try {
@@ -81,7 +89,7 @@ async function loadDayPage() {
         const routeResponse =
             await fetch(routeSource, { cache: "no-store" });
 
-        if (routeResponse.ok) {
+        if (routeResponse.ok && !detailedRouteData) {
 
             detailedRouteData =
                 await routeResponse.json();
