@@ -12,10 +12,10 @@
     {
       "icon": "🚙",
       "label": "Day Type",
-      "value": "Road Trip · Vaporetto · Walking"
+      "value": "Road Trip · Walking"
     },
     {
-      "icon": "🛶",
+      "icon": "🚶",
       "label": "Featured Stop",
       "value": "Venice"
     },
@@ -26,84 +26,68 @@
     }
   ],
   "introTitle": "Into Venice.",
-  "intro": "Drive from Kamnik to Tronchetto Parking, the only parking location for this Venice stop. Walk to the nearby ACTV vaporetto stop, take Line 2 through the Grand Canal to San Marco Giardinetti, explore St. Mark's Square and Rialto Bridge for around two hours, then board Line 2 at Rialto for the return to Tronchetto. Collect the car at the same garage and continue to Brescia. Allow roughly 3–3.5 hours for the entire Venice visit, subject to boat schedules.",
+  "intro": "Drive from Kamnik to Venice and park once at Autorimessa Comunale in Piazzale Roma. Explore the historic center entirely on foot: cross the smaller canals toward Rialto Bridge and the Grand Canal, continue to St. Mark's Square, admire the exterior of Doge's Palace and see the Bridge of Sighs, then return through Venice's streets to the same parking garage. Stop for a quick pizza or sandwich along the way. No vaporetto or paid sightseeing is planned; allow around 2.5–3 hours including parking, walking, photographs and food.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Kamnik",
-      "description": "Leave Kamnik and drive west toward Italy.",
+      "description": "Drive from Slovenia into Italy toward Venice.",
       "latitude": 46.2012,
       "longitude": 14.5953,
       "transportToNext": "drive"
     },
     {
       "type": "Parking",
-      "name": "Tronchetto Parking",
-      "description": "Park the SUV here and walk to the Tronchetto vaporetto stop.",
-      "latitude": 45.4421,
-      "longitude": 12.3054,
+      "name": "Autorimessa Comunale — Piazzale Roma",
+      "description": "Park the SUV here once. This is the starting and ending point for the walking visit.",
+      "latitude": 45.438,
+      "longitude": 12.3181,
       "transportToNext": "walk"
     },
     {
-      "type": "Boat Departure",
-      "name": "Tronchetto Vaporetto Stop",
-      "description": "Board ACTV Line 2 toward San Marco via the Grand Canal; check the current service and direction.",
-      "latitude": 45.4416,
-      "longitude": 12.3072,
-      "transportToNext": "boat"
-    },
-    {
-      "type": "Boat Arrival",
-      "name": "San Marco Giardinetti Vaporetto Stop",
-      "description": "Disembark at San Marco Giardinetti and walk a short distance to St. Mark's Square.",
-      "latitude": 45.4328,
-      "longitude": 12.3364,
+      "type": "Scenic Stop",
+      "name": "Rialto Bridge & Grand Canal",
+      "description": "Enjoy the Grand Canal view and take photos from the bridge.",
+      "latitude": 45.438,
+      "longitude": 12.3359,
       "transportToNext": "walk"
     },
     {
       "type": "Scenic Stop",
       "name": "St. Mark's Square",
-      "description": "See Piazza San Marco and the waterfront, then explore toward Rialto.",
+      "description": "See the basilica and bell tower from outside.",
       "latitude": 45.433914,
       "longitude": 12.337604,
       "transportToNext": "walk"
     },
     {
       "type": "Scenic Stop",
-      "name": "Rialto Bridge & Grand Canal",
-      "description": "Enjoy the iconic bridge, photos and a quick coffee.",
-      "latitude": 45.436015,
-      "longitude": 12.32842,
+      "name": "Doge's Palace",
+      "description": "Admire the Venetian Gothic exterior without an admission ticket.",
+      "latitude": 45.4338,
+      "longitude": 12.3401,
       "transportToNext": "walk"
     },
     {
-      "type": "Boat Departure",
-      "name": "Rialto Vaporetto Stop",
-      "description": "Board Line 2 toward Piazzale Roma and Tronchetto; check direction and schedule.",
-      "latitude": 45.4377,
-      "longitude": 12.335,
-      "transportToNext": "boat"
-    },
-    {
-      "type": "Boat Return",
-      "name": "Tronchetto Vaporetto Stop",
-      "description": "Disembark at Tronchetto and walk back to the same parking garage.",
-      "latitude": 45.4416,
-      "longitude": 12.3072,
+      "type": "Scenic Stop",
+      "name": "Bridge of Sighs",
+      "description": "Take a quick photo of the famous bridge from the public viewing bridge.",
+      "latitude": 45.43405,
+      "longitude": 12.34055,
       "transportToNext": "walk"
     },
     {
       "type": "Return to Car",
-      "name": "Tronchetto Parking",
-      "description": "Collect the car and continue toward Brescia.",
-      "latitude": 45.4421,
-      "longitude": 12.3054,
+      "name": "Autorimessa Comunale — Piazzale Roma",
+      "description": "Walk back through the smaller canals, grabbing something quick to eat if desired.",
+      "latitude": 45.438,
+      "longitude": 12.3181,
       "transportToNext": "drive"
     },
     {
       "type": "Destination",
       "name": "Brescia",
-      "description": "Finish the day at the Brescia base.",
+      "description": "Continue west to your Brescia lodging.",
       "latitude": 45.56578,
       "longitude": 10.23647
     }
