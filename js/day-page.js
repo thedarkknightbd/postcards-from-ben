@@ -79,7 +79,7 @@ async function loadDayPage() {
                 .replace(".json", ".geojson");
 
         const routeResponse =
-            await fetch(routeSource);
+            await fetch(routeSource, { cache: "no-store" });
 
         if (routeResponse.ok) {
 
