@@ -2,7 +2,7 @@
   "dayNumber": 9,
   "date": "October 27, 2026",
   "title": "One More Morning in the Dolomites",
-  "route": "Selva di Val Gardena → Santa Maddalena → San Giovanni in Ranui → Brescia",
+  "route": "Selva di Val Gardena → Santa Maddalena → San Giovanni in Ranui → Lago di Tovel → Brescia",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "One last morning in the mountains.",
-  "intro": "After waking up in Selva di Val Gardena, enjoy one more morning in the Dolomites. Visit the panoramic Santa Maddalena viewpoint in Val di Funes, then photograph the nearby little church of San Giovanni in Ranui with the Odle peaks behind it. Allow around 1–1.5 hours for both photo stops, plus driving and access walks, before returning to Brescia. Respect marked paths and viewpoint access restrictions.",
+  "intro": "Depart Selva di Val Gardena for two classic Val di Funes photo stops: the Santa Maddalena panorama and San Giovanni in Ranui church. Continue to Lago di Tovel for a weather-dependent 60–75-minute lakeside photography stop before returning to Brescia. Plan lunch in Cles or Tuenno en route or bring a picnic, as lakeside dining may be closed in late October. Check lake access road and weather conditions before departure.",
   "stops": [
     {
       "type": "Starting Point",
@@ -48,6 +48,13 @@
       "description": "Photograph the isolated St. Johann church against the Odle peaks from the permitted viewpoint. Allow around 15–30 minutes, plus local travel and walking; respect access restrictions.",
       "latitude": 46.6368,
       "longitude": 11.7207
+    },
+    {
+      "type": "Scenic Lake Stop — Weather Dependent",
+      "name": "Lago di Tovel",
+      "description": "Spend about 60–75 minutes photographing the lake, forest and Brenta Dolomites. Late-October access depends on road and weather conditions. Bring lunch or stop in Cles/Tuenno; do not assume seasonal lakeside restaurants are open.",
+      "latitude": 46.2603,
+      "longitude": 10.9496
     },
     {
       "type": "Destination",
