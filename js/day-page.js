@@ -42,10 +42,6 @@ async function loadDayPage() {
             '<div class="map-legend-item"><span class="map-legend-line route-' +
             mode + '"></span><span>' + label + '</span></div>'
         ).join("");
-        if (document.body.dataset.daySource?.includes("day-06.json")) {
-            legend.insertAdjacentHTML("beforeend",
-                '<div class="map-legend-item"><span class="map-legend-line route-boat"></span><span>Boat</span></div>');
-        }
         dayMap.insertAdjacentElement("afterend", legend);
     }
 
