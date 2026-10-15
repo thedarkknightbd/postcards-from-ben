@@ -4085,3 +4085,15 @@ body.lightbox-open {
 .subscribe-postcards-card > :not(.subscribe-postcards-photo) { margin-left: clamp(22px,5vw,48px); margin-right: clamp(22px,5vw,48px); }
 .subscribe-postcards-card .subscribe-postcards-form { max-width: 480px; margin: 24px auto 0; width: calc(100% - 44px); }
 @media (max-width: 520px) { .subscribe-postcards-photo { height: 210px; } }
+
+
+/* Paused email signups: calm coming-soon treatment */
+.subscribe-postcards-coming-soon {
+    display: inline-block; padding: 12px 24px; border: 1px solid #9baebc;
+    border-radius: 999px; background: #f6f8f9; color: #17212b !important;
+    font-size: .85rem; font-weight: 800; letter-spacing: .06em;
+}
+.subscribe-postcards-card .subscribe-postcards-photo-credit {
+    margin-top: 18px; font-size: .68rem; color: #63717b;
+}
+.subscribe-postcards-photo { object-position: center 22%; }
