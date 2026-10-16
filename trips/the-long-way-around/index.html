@@ -47,36 +47,27 @@
 
 
 
-    <div
-    id="trip-progress"
-    class="trip-progress"
-    data-trip-source="trip.json"
-    hidden>
-
-        <p
-            id="trip-progress-label"
-            class="trip-progress-label">
-        </p>
-
-        <div
-            id="trip-progress-track"
-            class="trip-progress-track"
-            role="progressbar"
-            aria-label="Trip progress"
-            aria-valuemin="0"
-            aria-valuemax="24"
-            aria-valuenow="0">
-
-            <div
-                id="trip-progress-bar"
-                class="trip-progress-bar">
-            </div>
-
-        </div>
-
-    </div>
 
 </header>
+<section class="longway-progress-band" aria-label="Adventure progress">
+    <div
+      id="trip-progress"
+      class="trip-progress"
+      data-trip-source="trip.json"
+      hidden>
+      <div class="longway-progress-topline">
+        <p id="trip-progress-label" class="trip-progress-label"></p>
+        <span id="trip-progress-count" class="longway-progress-count">Day 0 of 24</span>
+      </div>
+      <div id="trip-progress-track" class="trip-progress-track" role="progressbar"
+           aria-label="Trip progress" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0">
+        <div id="trip-progress-bar" class="trip-progress-bar"></div>
+      </div>
+      <div class="longway-progress-endpoints" aria-hidden="true">
+        <span>OCT 19 · MUNICH</span><span>NOV 11 · HOME</span>
+      </div>
+    </div>
+</section>
 <section class="longway-statbar" aria-label="Adventure at a glance"><div><strong>24</strong><span>Days</span></div><div><strong>16</strong><span>Countries</span></div><div><strong>~4,000</strong><span>Miles Driving</span></div><div><strong>5</strong><span>Branch Office Visits</span></div></section>
 <nav class="longway-section-nav" aria-label="Adventure sections"><a href="#route-map">Overview &amp; Route Map</a><a href="#day-by-day">Daily Itinerary</a><a href="#trip-poster">Adventure Poster</a></nav>
 
