@@ -3,17 +3,13 @@
   "short_name": "Postcards",
   "icons": [
     {
-      "src": "/icons/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/icons/postcards-stamp-original.png?v=stamp-2026",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "theme_color": "#17212b",
-  "background_color": "#17212b",
+  "background_color": "#f8f5eb",
   "display": "standalone"
 }
