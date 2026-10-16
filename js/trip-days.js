@@ -169,6 +169,9 @@ async function loadTripDays() {
             const dayImages = {
               4:"https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Bled.jpg?width=640",
               6:"https://commons.wikimedia.org/wiki/Special:FilePath/Venice_grand_canal_1.jpg?width=640",
+              10:"https://commons.wikimedia.org/wiki/Special:FilePath/Riva_del_Garda%2C_Italy.jpg?width=640",
+              12:"https://commons.wikimedia.org/wiki/Special:FilePath/Bernina_Express_from_Train_window_by_ArmAg_(7).jpg?width=640",
+              16:"https://commons.wikimedia.org/wiki/Special:FilePath/Mont_Blanc_massif_4.jpg?width=640",
               11:"https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic_view_from_San_Marino_in_2026.02.jpg?width=640",
               15:"https://commons.wikimedia.org/wiki/Special:FilePath/Monaco-panorama.jpg?width=640",
               8:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640",
