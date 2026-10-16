@@ -16,7 +16,7 @@
 
     <title>Postcards from Ben</title>
 
-    <link rel="stylesheet" href="/css/styles.css?v=20261015-postcards-3">
+    <link rel="stylesheet" href="/css/styles.css?v=20261015-subscribe-1">
 </head>
 
 <body>
@@ -253,8 +253,20 @@
                 <img class="subscribe-postcards-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=1280" alt="The jagged Odle peaks seen from Seceda in the Italian Dolomites" loading="lazy">
                 <p class="section-kicker">A Note from the Road</p>
                 <h2 id="subscribe-postcards-heading">Want a Postcard from the Road?</h2>
-                <p>Email postcards are coming soon. In the meantime, you can explore the journey right here.</p>
-                <p class="subscribe-postcards-coming-soon">✉ Coming Soon</p>
+                <p>Get new stories from the road in your inbox. Choose a daily postcard digest or a weekly roundup.</p>
+                <form id="postcard-subscribe-form" class="postcard-subscribe-form">
+                    <label for="postcard-email">Email address</label>
+                    <input id="postcard-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required>
+                    <fieldset>
+                        <legend>How often would you like a postcard?</legend>
+                        <label><input type="radio" name="frequency" value="daily" checked> Daily digest</label>
+                        <label><input type="radio" name="frequency" value="weekly"> Weekly roundup</label>
+                    </fieldset>
+                    <div class="postcard-honeypot" aria-hidden="true"><label for="postcard-website">Website</label><input id="postcard-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+                    <button type="submit">Send Me Postcards →</button>
+                    <p id="postcard-subscribe-status" role="status" aria-live="polite"></p>
+                    <small>Confirm your email to subscribe. Unsubscribe anytime. No ads or spam.</small>
+                </form>
                 <p class="subscribe-postcards-photo-credit">Seceda photograph: Moroder / Wikimedia Commons</p>
             </div>
         </section>
@@ -311,6 +323,7 @@
     </footer>
 
     <script src="js/latest-postcard.js"></script>
+    <script src="/js/subscribe.js" defer></script>
 
     <script
         type="module"
