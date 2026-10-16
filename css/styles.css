@@ -4430,3 +4430,8 @@ body.lightbox-open {
 .day-page.day-four-showcase .day-four-image-credit a{color:#526b80}
 .day-page.day-four-showcase .stop-content .view-on-map:focus-visible{outline:2px solid #24688d}
 @media(max-width:740px){.day-page.day-four-showcase .day-four-hero[style]{background-position:center center}}
+
+/* Let long day titles breathe while keeping the approved compact hero as the baseline. */
+.day-page.day-four-showcase .day-four-hero{height:auto;min-height:355px}
+@media(max-width:740px){.day-page.day-four-showcase .day-four-hero{height:auto;min-height:305px}.day-page.day-four-showcase .day-hero h1{overflow-wrap:break-word}}
+@media(max-width:440px){.day-page.day-four-showcase .day-four-hero{min-height:295px}}
