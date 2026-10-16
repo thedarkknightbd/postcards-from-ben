@@ -190,6 +190,15 @@ async function loadTripProgress() {
         }
 
 
+        const count = document.getElementById("trip-progress-count");
+        if (count) {
+            count.textContent = today < start
+                ? `Day 0 of ${trip.dayCount}`
+                : today > end
+                    ? `${trip.dayCount} of ${trip.dayCount} days`
+                    : `Day ${completedDays} of ${trip.dayCount}`;
+        }
+
         bar.style.width =
             `${percentage}%`;
 
