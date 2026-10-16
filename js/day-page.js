@@ -177,29 +177,50 @@ async function loadDayPage() {
         const icon = document.createElement("span");
         icon.className = "fact-icon";
         const showcase = document.body.classList.contains("day-four-showcase");
-        const icons = {
-            "Countries": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
-            "Branch Visit": '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
-            "Branch Office Visit": '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
-            "Featured Stop": '<path d="m2 20 7-11 4 6 3-4 6 9H2Z"/><path d="m7 12 2-3 2 3"/>',
-            "Tonight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-            "Overnight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>'
+        const shapes = {
+            globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+            building: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
+            mountain: '<path d="m2 20 7-11 4 6 3-4 6 9H2Z"/><path d="m7 12 2-3 2 3"/>',
+            pin: '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+            calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+            car: '<path d="M5 17H3v-6l2-6h14l2 6v6h-2M5 17h14M5 17v2h3v-2M16 17v2h3v-2M3 11h18"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/>',
+            train: '<rect x="5" y="2" width="14" height="17" rx="3"/><path d="M5 10h14M8 22l3-3M16 22l-3-3M8 15h.01M16 15h.01"/>',
+            cable: '<path d="M3 5h18M12 5v5M8 10h8l2 3v6H6v-6l2-3ZM9 15h.01M15 15h.01"/>',
+            camera: '<path d="M14 4H9L7 7H3v13h18V7h-5l-2-3Z"/><circle cx="12" cy="13" r="3"/>',
+            waves: '<path d="M2 12c2 0 2-2 5-2s3 2 5 2 3-2 5-2 3 2 5 2M2 18c2 0 2-2 5-2s3 2 5 2 3-2 5-2 3 2 5 2"/>',
+            compass: '<circle cx="12" cy="12" r="9"/><path d="m16 8-2.4 5.6L8 16l2.4-5.6L16 8Z"/>',
+            flag: '<path d="M4 22V4M4 5c6-4 10 4 16 0v12c-6 4-10-4-16 0"/>'
         };
-        if (showcase && icons[fact.label]) {
-            icon.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icons[fact.label] + '</svg>';
+        const factLabel = String(fact.label || "");
+        const kind = /branch/i.test(factLabel) ? "building"
+            : /countries|^country$|country stop/i.test(factLabel) ? "globe"
+            : /tonight|overnight|location|starting point|destination|main stop|city stop|quick stop/i.test(factLabel) ? "pin"
+            : /mountain stop|experience/i.test(factLabel) && /seceda|skyway/i.test(String(fact.value)) ? "cable"
+            : /high point|mountain|featured day|featured stop|scenic area|featured area/i.test(factLabel) ? "mountain"
+            : /train|featured journey/i.test(factLabel) && /bernina|train/i.test(String(fact.value)) ? "train"
+            : /scenic stop/i.test(factLabel) ? "camera"
+            : /lakeside/i.test(factLabel) ? "waves"
+            : /scenic drive|road trip|day type/i.test(factLabel) ? "car"
+            : /featured journey|journey|plan/i.test(factLabel) ? "compass"
+            : "flag";
+        if (showcase) {
+            icon.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + shapes[kind] + '</svg>';
         } else {
             icon.textContent = fact.icon;
         }
 
         const content = document.createElement("div");
-
         const label = document.createElement("span");
         label.className = "fact-label";
-        label.textContent = showcase ? (fact.label === "Tonight" ? "Overnight" : fact.label === "Branch Visit" ? "Branch Office Visit" : fact.label) : fact.label;
+        label.textContent = showcase
+            ? factLabel.replace(/^Tonight$/, "Overnight").replace(/^Branch Visits?$/, "Branch Office Visits").replace(/^Featured Journey$/, "Featured Experience").replace(/^Journey$/, "Adventure")
+            : factLabel;
 
         const value = document.createElement("span");
         value.className = "fact-value";
-        value.textContent = showcase && /Branch (Office )?Visit/.test(fact.label) ? String(fact.value).replace(/\bBethel\b/gi, "Branch Office") : fact.value;
+        value.textContent = showcase && /branch/i.test(factLabel)
+            ? String(fact.value).replace(/\bBethel\b/gi, "Branch Office")
+            : fact.value;
 
         content.append(label, value);
         item.append(icon, content);
