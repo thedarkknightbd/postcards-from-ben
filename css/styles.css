@@ -4247,3 +4247,8 @@ body.lightbox-open {
 
 /* Postage stamp identity in the navigation */
 .site-brand-icon{width:31px;height:36px;object-fit:contain}
+
+/* Align the Write Back action with the subscription action at the bottom of its card */
+.postcard-actions-grid .send-postcard-copy{display:flex;flex-direction:column;align-items:center;flex:1}
+.postcard-actions-grid .send-postcard-button{margin-top:auto;margin-bottom:50px;flex-shrink:0}
+@media(max-width:600px){.postcard-actions-grid .send-postcard-button{margin-bottom:24px}}
