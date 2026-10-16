@@ -4404,3 +4404,21 @@ body.lightbox-open {
 .day-page nav.site-nav .site-trip-dropdown .site-all-trips{font-weight:750}
 .day-page nav.site-nav a:hover{text-decoration:none}
 @media(max-width:600px){.day-page nav.site-nav{flex-direction:column;align-items:flex-start;gap:12px;padding:15px 18px}.day-page nav.site-nav .site-nav-links{gap:16px}.day-page nav.site-nav .site-trip-dropdown{left:0;right:auto}}
+
+/* Day 4: compact cinematic route timeline in place of oversized stop cards */
+.day-four-showcase #stops-section{max-width:1050px;margin-inline:auto}
+.day-four-showcase #stops-section>.section-kicker{margin-bottom:3px}
+.day-four-showcase #stops-section>h2{margin-bottom:23px}
+.day-four-showcase .stop-list{display:flex;flex-direction:column;gap:0;margin:0;position:relative}
+.day-four-showcase .stop-list:before{content:"";position:absolute;left:22px;top:23px;bottom:34px;width:2px;background:linear-gradient(#b9c5c9,#dde2e2);z-index:0}
+.day-four-showcase .stop-card{position:relative;z-index:1;display:flex;align-items:flex-start;gap:24px;padding:16px 16px 17px 0;margin:0;background:transparent;border:0;border-radius:0;box-shadow:none;min-height:112px}
+.day-four-showcase .stop-card+.stop-card{border-top:1px solid #e0ded7}
+.day-four-showcase .stop-number{width:46px;height:46px;min-width:46px;flex:0 0 46px;margin-top:2px;font-size:.76rem;border:3px solid #f8f6f1;background:#25475c;box-shadow:0 0 0 1px #bfcbd1;color:#fff}
+.day-four-showcase .stop-content{min-width:0;flex:1}
+.day-four-showcase .stop-type{font-size:.67rem;letter-spacing:.15em;color:#6e7f8b!important;margin:0 0 3px!important}
+.day-four-showcase .stop-content h3{font-size:clamp(1.24rem,2.2vw,1.65rem);font-weight:500;letter-spacing:-.02em;line-height:1.23;margin:0 0 4px;color:#142c3d}
+.day-four-showcase .stop-content>p:not(.stop-type){font-size:.92rem;line-height:1.5;color:#556473;max-width:720px;margin:0}
+.day-four-showcase .stop-card .view-on-map{display:inline-flex;align-items:center;margin:8px 0 0;padding:4px 0;border:0;border-radius:0;box-shadow:none;background:transparent;color:#24688d;font-weight:750;font-size:.78rem;letter-spacing:.01em;text-decoration:none;text-underline-offset:4px}
+.day-four-showcase .stop-card .view-on-map:hover,.day-four-showcase .stop-card .view-on-map:focus-visible{color:#15527a;background:transparent;box-shadow:none;transform:none;text-decoration:underline;outline-offset:4px}
+.day-four-showcase .stop-card.is-map-active{outline:none;background:#eaf2f4;border-radius:10px;padding-left:6px}
+@media(max-width:650px){.day-four-showcase .stop-card{gap:15px;padding:15px 4px 17px 0;min-height:106px}.day-four-showcase .stop-number{width:38px;height:38px;min-width:38px;flex-basis:38px}.day-four-showcase .stop-list:before{left:18px}.day-four-showcase .stop-content>p:not(.stop-type){font-size:.87rem}}
