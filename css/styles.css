@@ -4753,3 +4753,57 @@ body.lightbox-open {
   .trip-page .longway-progress-band .longway-progress-count{font-size:.7rem}
   .trip-page .longway-progress-band .longway-progress-endpoints{font-size:.61rem}
 }
+
+/* The adventure progress is a narrow band, not a page section with the global 70px gap. */
+.trip-page section.longway-progress-band{
+  margin:0;
+  padding:14px max(6vw,24px) 12px;
+  min-height:0;
+  height:auto;
+}
+.trip-page section.longway-progress-band .trip-progress{
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+  position:static;
+  float:none;
+}
+.trip-page section.longway-progress-band .trip-progress-label,
+.trip-page section.longway-progress-band .longway-progress-count{
+  color:#314a5d;
+}
+.trip-page section.longway-progress-band .longway-progress-topline,
+.trip-page section.longway-progress-band .longway-progress-endpoints{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.trip-page section.longway-progress-band .trip-progress-label{
+  text-align:left;
+  max-width:none;
+}
+.trip-page section.longway-progress-band .trip-progress-track{
+  display:block;
+  width:100%;
+  height:6px;
+}
+.trip-page .longway-hero h1{
+  font-size:clamp(2.3rem,3.5vw,3.15rem);
+  max-width:800px;
+  line-height:1.08;
+  text-wrap:pretty;
+}
+@media(min-width:701px){
+  .trip-page .longway-hero{
+    height:400px;
+    min-height:400px;
+    justify-content:center;
+  }
+}
+@media(max-width:700px){
+  .trip-page section.longway-progress-band{padding:12px 20px}
+  .trip-page section.longway-progress-band .longway-progress-topline{gap:8px}
+  .trip-page .longway-hero h1{font-size:clamp(2rem,7.6vw,2.65rem)}
+}
