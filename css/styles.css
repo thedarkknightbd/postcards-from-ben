@@ -4152,3 +4152,34 @@ body.lightbox-open {
   .postcard-actions-grid .subscribe-postcards-card > :not(.subscribe-postcards-photo) { margin-left: 20px; margin-right: 20px; }
   .postcard-actions-grid .send-postcard-card { padding: 32px 24px; }
 }
+
+/* Paired postcard panels: warm reply card with matching photographic header */
+.postcard-actions-grid .send-postcard-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 0 28px;
+  background: #f1eae0 !important;
+  border-color: #ddcfc0 !important;
+}
+.postcard-actions-grid .send-postcard-photo {
+  display: block;
+  width: 100%;
+  height: clamp(160px, 18vw, 240px);
+  flex: 0 0 auto;
+  object-fit: cover;
+  object-position: center 54%;
+  margin: 0 0 28px;
+  background: #d9c4ab;
+}
+.postcard-actions-grid .send-postcard-copy { max-width: none; padding: 0 30px; }
+.postcard-actions-grid .send-postcard-stamp { margin: 20px 30px 0 auto; }
+@media (max-width: 850px) {
+  .postcard-actions-grid .send-postcard-photo { height: clamp(210px, 34vw, 320px); }
+}
+@media (max-width: 520px) {
+  .postcard-actions-grid .send-postcard-copy { padding: 0 24px; }
+  .postcard-actions-grid .send-postcard-stamp { margin-right: 24px; }
+}
