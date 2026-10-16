@@ -258,7 +258,7 @@ async function loadTripDays() {
       link.href = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file.replaceAll(" ", "_"));
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.textContent = "Day " + number + ": " + file.replace(/\\.(jpg|jpeg|png)$/i, "");
+      link.textContent = "Day " + number + ": " + file.replace(/\.(jpg|jpeg|png)$/i, "");
       item.appendChild(link);
       creditList.appendChild(item);
     });
