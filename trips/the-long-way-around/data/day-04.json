@@ -11,8 +11,8 @@
     },
     {
       "icon": "🏢",
-      "label": "Branch Visit",
-      "value": "Hungary Bethel"
+      "label": "Branch Office Visit",
+      "value": "Hungary Branch Office"
     },
     {
       "icon": "🏞️",
@@ -36,8 +36,8 @@
       "longitude": 19.05601
     },
     {
-      "type": "Branch Visit",
-      "name": "Hungary Bethel",
+      "type": "Branch Office Visit",
+      "name": "Hungary Branch Office",
       "description": "Visit the Hungary Branch Office in Budapest.",
       "latitude": 47.50269,
       "longitude": 19.17266

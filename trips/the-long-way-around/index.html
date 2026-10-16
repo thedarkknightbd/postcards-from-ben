@@ -4,15 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="shortcut icon" href="/icons/favicon.ico">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-
-    <link rel="manifest" href="/icons/site.webmanifest">
-    
     <meta name="theme-color" content="#17212b">
 
     <title>The Long Way Around | Postcards from Ben</title>
@@ -22,6 +13,8 @@
     rel="stylesheet"
     href="https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.css"
 >
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=postage-stamp-final-3">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=20261016-reset">
 </head>
 
 
@@ -32,40 +25,27 @@
          TRIP HERO
     ====================================== -->
 
-<header class="trip-hero">
+<nav class="site-nav" aria-label="Main navigation"><a class="site-brand" href="/"><img src="/icons/postcards-stamp-original.png" alt="" class="site-brand-icon"> Postcards <span>from Ben</span></a><div class="site-nav-links"><a href="/">Home</a><details class="site-trip-menu"><summary>My Adventures ▾</summary><div class="site-trip-dropdown"><a href="/trips/the-long-way-around/">The Long Way Around</a><a href="/trips/winter-on-the-black-sea/">Winter on the Black Sea</a><a href="/trips/autumn-in-hungary/">Autumn in Hungary</a><a href="/trips/a-special-convention/">A Special Convention</a><a href="/trips/under-the-mara-sky/">Under the Mara Sky</a><a href="/trips/an-afternoon-with-giants/">An Afternoon with Giants</a><a class="site-all-trips" href="/trips/">View All Trips →</a></div></details><a href="/about/">About</a><a href="/postcard/">Send a Postcard</a></div></nav>
+<header class="trip-hero redesign-trip-hero longway-hero">
 
     <a class="back-link" href="../../index.html">
         ← Postcards from Ben
     </a>
 
-    <p class="trip-label">
-        Europe · 2026
-    </p>
+    <p class="trip-label">Current Adventure</p>
 
     <h1>
         The Long Way Around
     </h1>
 
     <p class="trip-subtitle">
-        October 19 &ndash; November 11, 2026
+        Europe · October 19 to November 11, 2026
     </p>
 
-    <p class="trip-stats">
-        24 Days · 16 Countries · ~4,000 Miles
-    </p>
+    <p class="longway-hero-description">A 24-day road adventure through Europe, exploring historic cities, Alpine landscapes, winding mountain passes, and picturesque lakes, with unforgettable stops along the way.</p>
+    <a class="longway-hero-button" href="#day-by-day">Follow the Adventure →</a>
 
-    <a
-        class="live-location-button live-location-button-dark"
-        href="/live/">
 
-        <span
-            class="live-location-dot"
-            aria-hidden="true">
-        </span>
-
-        Where I Am
-
-    </a>
 
     <div
     id="trip-progress"
@@ -97,18 +77,10 @@
     </div>
 
 </header>
+<section class="longway-statbar" aria-label="Adventure at a glance"><div><strong>24</strong><span>Days</span></div><div><strong>16</strong><span>Countries</span></div><div><strong>~4,000</strong><span>Miles Driving</span></div><div><strong>5</strong><span>Branch Office Visits</span></div></section>
+<nav class="longway-section-nav" aria-label="Adventure sections"><a href="#route-map">Overview &amp; Route Map</a><a href="#day-by-day">Daily Itinerary</a><a href="#trip-poster">Adventure Poster</a></nav>
 
 
-<section class="trip-poster-section">
-
-    <img
-        id="trip-poster"
-        src="https://photos.postcardsfromben.com/trips/the-long-way-around/hero/the-long-way-around-poster.png"
-        alt="The Long Way Around — A European Sabbatical"
-        class="trip-poster"
-    >
-
-</section>
 
 
 
@@ -119,85 +91,32 @@
              INTRODUCTION
         ====================================== -->
 
-        <section class="trip-intro">
-
-            <p class="section-kicker">
-                Europe 2026
-            </p>
-
-            <h2>
-                The Adventure
-            </h2>
-
-            <p>
-                A 24-day road trip across Europe through historic cities,
-                Alpine landscapes, mountain passes, lakes and small countries,
-                with plenty of memorable stops along the way.
-            </p>
-
-        </section>
+        
 
 
         <!-- =====================================
              ROUTE
         ====================================== -->
 
-        <section class="trip-map-preview">
-
-            <p class="section-kicker">
-                The Route
-            </p>
-
-            <h2>
-                Around Europe
-            </h2>
-
-            <p>
-                Germany → Czechia → Austria → Slovakia → Hungary →
-                Slovenia → Croatia → Italy → San Marino → Switzerland →
-                Monaco → France → Luxembourg → Belgium → Netherlands →
-                Germany → Liechtenstein → Germany
-            </p>
-
-            <div
-                id="trip-map"
-                class="interactive-map trip-overview-map"
-                data-trip-source="trip.json">
+        <section id="route-map" class="trip-map-preview longway-route">
+          <div class="longway-route-copy">
+            <p class="section-kicker">The Route</p>
+            <h2>An Adventure Across 16 Countries</h2>
+            <p class="longway-country-list">Germany → Czechia → Austria → Slovakia → Hungary → Slovenia → Croatia → Italy → San Marino → Switzerland → Monaco → France → Luxembourg → Belgium → Netherlands → Liechtenstein</p>
+            <a class="longway-route-link" href="#trip-map">Explore the Interactive Route Map →</a>
+            <div class="map-legend" aria-label="Route legend">
+              <div class="map-legend-item"><span class="map-legend-line route-drive"></span><span>Driving</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-walk"></span><span>Walking</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-train"></span><span>Train</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-cable"></span><span>Cable Car</span></div>
+              <div class="map-legend-item"><span class="longway-legend-symbol">★</span><span>Featured Day</span></div>
+              <div class="map-legend-item"><svg class="longway-line-icon" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg><span>Branch Office Visit</span></div>
             </div>
-            
-            <div class="map-legend" aria-label="Map route legend">
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-drive"></span>
-                    <span>Driving</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-walk"></span>
-                    <span>Walking</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-train"></span>
-                    <span>Train</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-flight"></span>
-                    <span>Flight</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-cable"></span>
-                    <span>Cable Car</span>
-                </div>
-
-            </div>
-
-            <p class="map-note">
-                Colors and line patterns show how each part of the journey is traveled.
-            </p>
-
+          </div>
+          <div class="longway-route-map">
+            <div class="redesign-map-actions"><a href="/live/" class="redesign-map-location">⌖ Where I Am ↗</a></div>
+            <div id="trip-map" class="interactive-map trip-overview-map" data-trip-source="trip.json"></div>
+          </div>
         </section>
 
 
@@ -206,12 +125,12 @@
              DAY BY DAY
         ====================================== -->
 
-        <section class="trip-days">
+        <section id="day-by-day" class="trip-days">
 
     <div class="section-heading">
 
         <p class="section-kicker">
-            24 Days
+            The Adventure
         </p>
 
         <h2>
@@ -220,7 +139,7 @@
 
     </div>
 
-    <p class="featured-days-explainer"><span class="featured-days-symbol" aria-hidden="true">★</span> Highlighted days are featured moments of the journey. Days marked “Branch Visit” include a Bethel visit.</p>
+    <p class="featured-days-explainer"><span class="featured-days-symbol" aria-hidden="true">★</span> Highlighted days are featured moments of the adventure. Days marked “Branch Office Visit” include a visit to a branch office.</p>
 
     <div
         id="day-grid"
@@ -231,6 +150,16 @@
 </section>
 
 
+<section class="trip-poster-section" aria-label="Adventure poster">
+
+    <img
+        id="trip-poster"
+        src="https://photos.postcardsfromben.com/trips/the-long-way-around/hero/the-long-way-around-poster.png"
+        alt="The Long Way Around — A European Sabbatical"
+        class="trip-poster"
+    >
+
+</section>
     </main>
 
 

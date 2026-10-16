@@ -26,12 +26,12 @@
     }
   ],
   "introTitle": "Into the heart of the Dolomites.",
-  "intro": "One of the biggest scenic days of The Long Way Around begins with an early drive from Brescia to Ortisei. After riding the cableways to Seceda for panoramic views across the Dolomites, the adventure continues around the Sella massif through a series of mountain passes, villages and valleys, finishing with Passo Gardena in the late-afternoon light before spending the night in Selva di Val Gardena.",
+  "intro": "Travel from Brescia to Ortisei for views from the Seceda cableways and the dramatic Odle ridgeline. Enjoy lunch in Ortisei before a scenic drive through the Dolomites, following the Sella Ronda mountain passes as conditions and time allow. Finish at Passo Gardena for beautiful late-afternoon scenery before spending the night in Selva di Val Gardena.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Brescia",
-      "description": "Leave Brescia early and head north toward the Dolomites.",
+      "description": "Begin in Brescia and drive north toward Val Gardena and the Dolomites.",
       "latitude": 45.56578,
       "longitude": 10.23647,
       "transportToNext": "drive"
@@ -39,7 +39,7 @@
     {
       "type": "Cable Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Park in Ortisei and begin the cableway adventure up to Seceda.",
+      "description": "Park in Ortisei and take the cableways toward Seceda.",
       "latitude": 46.576421,
       "longitude": 11.675068,
       "transportToNext": "cable"
@@ -47,7 +47,7 @@
     {
       "type": "Featured Scenic Stop",
       "name": "Seceda",
-      "description": "Take in the dramatic ridgeline and panoramic views from high above Val Gardena.",
+      "description": "Enjoy the iconic Odle ridgeline and panoramic Alpine scenery.",
       "latitude": 46.600589,
       "longitude": 11.725794,
       "transportToNext": "cable"
@@ -55,7 +55,7 @@
     {
       "type": "Return to Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Ride back down to Ortisei and begin the scenic driving loop.",
+      "description": "Descend by cableway to Ortisei and enjoy lunch before the mountain drive.",
       "latitude": 46.576421,
       "longitude": 11.675068,
       "transportToNext": "drive"
@@ -63,7 +63,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Sella",
-      "description": "The first major mountain pass of the Sella loop, beneath the dramatic walls of the Sella massif.",
+      "description": "Admire the dramatic Sassolungo and Sella massif scenery from this mountain pass.",
       "latitude": 46.508554,
       "longitude": 11.762924,
       "transportToNext": "drive"
@@ -71,7 +71,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Pordoi",
-      "description": "Continue around the Sella massif over Passo Pordoi.",
+      "description": "Continue through the mountain landscape over Passo Pordoi if conditions and time permit.",
       "latitude": 46.48752,
       "longitude": 11.81226,
       "transportToNext": "drive"
@@ -79,7 +79,7 @@
     {
       "type": "Mountain Village",
       "name": "Arabba",
-      "description": "Descend from Passo Pordoi through the mountain village of Arabba.",
+      "description": "Pass through the mountain village of Arabba on the scenic Sella Ronda route.",
       "latitude": 46.497569,
       "longitude": 11.87485,
       "transportToNext": "drive"
@@ -87,7 +87,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Campolongo",
-      "description": "Climb from Arabba over Passo Campolongo toward Alta Badia.",
+      "description": "Cross Passo Campolongo toward Alta Badia if following the complete loop.",
       "latitude": 46.52,
       "longitude": 11.87417,
       "transportToNext": "drive"
@@ -95,7 +95,7 @@
     {
       "type": "Mountain Village",
       "name": "Corvara",
-      "description": "Pass through Corvara in the heart of Alta Badia before the final climb of the loop.",
+      "description": "Continue through Corvara, surrounded by the peaks of Alta Badia.",
       "latitude": 46.54957,
       "longitude": 11.87403,
       "transportToNext": "drive"
@@ -103,7 +103,7 @@
     {
       "type": "Golden Hour",
       "name": "Passo Gardena",
-      "description": "Save the final major pass for late-afternoon and golden-hour views across the Dolomites.",
+      "description": "A memorable final scenic stop, especially beautiful in the late-afternoon light.",
       "latitude": 46.55,
       "longitude": 11.80944,
       "transportToNext": "drive"
@@ -111,7 +111,7 @@
     {
       "type": "Destination",
       "name": "Selva di Val Gardena",
-      "description": "Descend from Passo Gardena into Selva di Val Gardena and settle in for the night in the heart of the Dolomites.",
+      "description": "Continue down into Selva di Val Gardena for the night.",
       "latitude": 46.553859,
       "longitude": 11.759955
     }
