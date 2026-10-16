@@ -13,7 +13,7 @@ export async function onRequestPost({request,env}) {
   if (data.website) return reply("Please check your inbox for a confirmation email.");
   const email = String(data.email || "").trim().toLowerCase();
   const frequency = String(data.frequency || "");
-  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !["instant","daily","weekly"].includes(frequency)) return reply("Enter a valid email and delivery preference.",400);
+  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !["daily","weekly"].includes(frequency)) return reply("Enter a valid email and delivery preference.",400);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const ipHash = await digest(ip);
   const existing = await env.DB.prepare("SELECT status,confirmation_sent_at FROM subscribers WHERE email=?").bind(email).first();
