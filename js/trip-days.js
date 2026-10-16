@@ -209,7 +209,7 @@ async function loadTripDays() {
             fetch("/api/r2?prefix=" + encodeURIComponent(prefix))
               .then(response => response.ok ? response.json() : null)
               .then(data => {
-                const obj = data && Array.isArray(data.objects) && data.objects.find(o => o.url && /\\.(jpe?g|png|webp|avif)(\\?|$)/i.test(o.url));
+                const obj = data && Array.isArray(data.objects) && data.objects.find(o => o.url && /\.(jpe?g|png|webp|avif)(\?|$)/i.test(o.url));
                 if (obj) photo.style.backgroundImage = "url(" + JSON.stringify(obj.url) + ")";
               }).catch(() => {});
 
