@@ -4276,3 +4276,28 @@ body.lightbox-open {
 .longway-section-nav a:hover{text-decoration:underline;text-underline-offset:6px}
 .trip-page #overview,.trip-page #route-map,.trip-page #day-by-day{scroll-margin-top:24px}
 @media(max-width:650px){.trip-page .longway-hero{min-height:430px;padding:44px 23px 48px;background-position:59% center}.longway-hero h1{font-size:clamp(2.8rem,11vw,4.3rem)}.longway-statbar{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.longway-statbar>div:nth-child(3){border-right:0}.longway-statbar strong{font-size:1.28rem}.longway-statbar span{font-size:.72rem}.longway-section-nav{justify-content:flex-start}}
+
+/* Two-column route presentation and photographic day chapters */
+.trip-page .longway-route{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:30px;align-items:start;max-width:1250px;margin:35px auto;padding:20px 28px}
+.longway-route-copy h2{font-family:Georgia,serif;font-size:clamp(1.8rem,3vw,2.5rem);margin:10px 0}
+.longway-route-copy p{line-height:1.65}
+.longway-route-link{display:inline-block;margin:14px 0 24px;background:#172b39;color:#fff;padding:13px 18px;border-radius:30px;text-decoration:none;font-weight:700}
+.longway-route .map-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 10px;margin-top:16px;padding-top:18px;border-top:1px solid #dedbd4}
+.longway-route .map-legend-item{display:flex;align-items:center;gap:9px;font-size:.78rem}
+.longway-legend-symbol{font-size:1.3rem;color:#b77c20;min-width:20px;text-align:center}
+.longway-route-map{min-width:0;position:relative}
+.longway-route-map .redesign-map-actions{position:absolute;right:12px;top:12px;z-index:2}
+.longway-route-map .trip-overview-map{width:100%;height:370px;min-height:370px;border-radius:12px;overflow:hidden}
+.trip-page .day-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.trip-page .day-card{padding:0;overflow:hidden;border-radius:11px;display:flex;flex-direction:column;background:#fff;text-decoration:none}
+.trip-page .day-card>.day-card-top,.trip-page .day-card>.day-card-date{display:none}
+.longway-day-photo{height:145px;position:relative;background:#e5e7e4 linear-gradient(135deg,#8eabb3,#d5cbb7);background-size:cover;background-position:center;flex-shrink:0}
+.longway-photo-number,.longway-photo-date{position:absolute;top:10px;background:#ffffffeb;color:#142638;border-radius:6px;padding:5px 9px;font-size:.78rem;font-weight:750}
+.longway-photo-number{left:10px}.longway-photo-date{right:10px}
+.longway-day-details{padding:14px 15px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.trip-page .longway-day-details h3{font-family:Georgia,serif;margin:0;font-size:1.15rem}
+.trip-page .longway-day-details p{margin:0;color:#607081;font-size:.83rem}
+.longway-day-notes{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:auto;padding-top:12px;color:#304d68;font-size:.75rem;font-weight:650}
+@media(max-width:1000px){.trip-page .day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:750px){.trip-page .longway-route{grid-template-columns:1fr;padding:18px}.longway-route-map .trip-overview-map{height:320px;min-height:320px}}
+@media(max-width:520px){.trip-page .day-grid{grid-template-columns:1fr}.longway-day-photo{height:200px}}
