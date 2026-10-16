@@ -4266,7 +4266,7 @@ body.lightbox-open {
 .longway-hero .trip-subtitle{font-size:1.13rem;color:#fff;margin-bottom:14px}
 .longway-hero-description{max-width:530px;font-size:1rem;line-height:1.6;color:#f6f6f2;margin:0 0 20px}
 .longway-hero-button{display:inline-block;background:#287db3;color:white;text-decoration:none;border-radius:28px;padding:13px 23px;font-weight:750}
-.longway-statbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:23px max(5vw,20px);background:#f8f6f0;border-bottom:1px solid #e4e1da}
+.longway-statbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:23px max(5vw,20px);background:#f8f6f0;border-bottom:1px solid #e4e1da}
 .longway-statbar>div{text-align:center;border-right:1px solid #dedbd4;display:flex;flex-direction:column;gap:3px}
 .longway-statbar>div:last-child{border-right:0}
 .longway-statbar strong{font-size:1.55rem;color:#14283b}
@@ -4806,4 +4806,14 @@ body.lightbox-open {
   .trip-page section.longway-progress-band{padding:12px 20px}
   .trip-page section.longway-progress-band .longway-progress-topline{gap:8px}
   .trip-page .longway-hero h1{font-size:clamp(2rem,7.6vw,2.65rem)}
+}
+
+/* Four actual adventure facts: four equally sized cells, no phantom fifth column. */
+.trip-page .longway-statbar{grid-template-columns:repeat(4,minmax(0,1fr))}
+.trip-page .longway-statbar>div:nth-child(3){border-right:1px solid #dedbd4}
+.trip-page .longway-statbar>div:last-child{border-right:0}
+@media(max-width:650px){
+  .trip-page .longway-statbar{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}
+  .trip-page .longway-statbar>div:nth-child(even){border-right:0}
+  .trip-page .longway-statbar>div:nth-child(odd){border-right:1px solid #dedbd4}
 }
