@@ -4097,3 +4097,15 @@ body.lightbox-open {
     margin-top: 18px; font-size: .68rem; color: #63717b;
 }
 .subscribe-postcards-photo { object-position: center 22%; }
+
+/* Email postcard subscriptions */
+.postcard-subscribe-form { max-width: 490px; margin: 22px auto 0; text-align: left; display: grid; gap: 12px; }
+.postcard-subscribe-form > label, .postcard-subscribe-form legend { font-size: .9rem; font-weight: 700; }
+.postcard-subscribe-form input[type=email] { box-sizing: border-box; width: 100%; padding: 14px 16px; border: 1px solid #a5b3bc; border-radius: 10px; font: inherit; background: #fff; color: #17212b; }
+.postcard-subscribe-form fieldset { border: 1px solid #c8d1d8; border-radius: 10px; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.postcard-subscribe-form fieldset label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.postcard-subscribe-form button { border: 0; border-radius: 999px; padding: 14px 22px; font: inherit; font-weight: 800; background: #17212b; color: #fff; cursor: pointer; }
+.postcard-subscribe-form button:disabled { opacity: .6; cursor: wait; }
+.postcard-subscribe-form small { text-align: center; color: #596975; }
+.postcard-subscribe-form #postcard-subscribe-status { min-height: 1.2em; margin: 0; font-weight: 600; }
+.postcard-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
