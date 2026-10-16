@@ -132,7 +132,7 @@ async function loadTripProgress() {
         if (today < start) {
 
             label.textContent =
-                "The adventure begins October 19";
+                "ADVENTURE BEGINS OCTOBER 19";
 
             completedDays = 0;
             percentage = 0;
@@ -168,7 +168,7 @@ async function loadTripProgress() {
 
 
             label.textContent =
-                `Day ${completedDays} of ${trip.dayCount}`;
+                "ADVENTURE UNDERWAY";
 
         }
 
@@ -185,18 +185,14 @@ async function loadTripProgress() {
             percentage = 100;
 
             label.textContent =
-                `Adventure Complete · ${trip.dayCount} Days`;
+                "ADVENTURE COMPLETE";
 
         }
 
 
         const count = document.getElementById("trip-progress-count");
         if (count) {
-            count.textContent = today < start
-                ? `Day 0 of ${trip.dayCount}`
-                : today > end
-                    ? `${trip.dayCount} of ${trip.dayCount} days`
-                    : `Day ${completedDays} of ${trip.dayCount}`;
+            count.textContent = `${completedDays} / ${trip.dayCount} DAYS`;
         }
 
         bar.style.width =
