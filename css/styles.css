@@ -4244,3 +4244,6 @@ body.lightbox-open {
  .redesign-home-hero h1{font-size:clamp(2.45rem,9vw,3.65rem)}
  .redesign-home-hero .redesign-hero-description{font-size:.9rem;line-height:1.38}
 }
+
+/* Postage stamp identity in the navigation */
+.site-brand-icon{width:31px;height:36px;object-fit:contain}
