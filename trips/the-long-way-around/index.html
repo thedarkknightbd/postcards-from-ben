@@ -123,64 +123,26 @@
              ROUTE
         ====================================== -->
 
-        <section id="route-map" class="trip-map-preview">
-
-            <p class="section-kicker">
-                The Route
-            </p>
-
-            <h2>
-                Around Europe
-            </h2>
-
-            <p>
-                Germany → Czechia → Austria → Slovakia → Hungary →
-                Slovenia → Croatia → Italy → San Marino → Switzerland →
-                Monaco → France → Luxembourg → Belgium → Netherlands →
-                Germany → Liechtenstein → Germany
-            </p>
-
+        <section id="route-map" class="trip-map-preview longway-route">
+          <div class="longway-route-copy">
+            <p class="section-kicker">The Route</p>
+            <h2>An Adventure Across 16 Countries</h2>
+            <p>From historic cities to Alpine lakes and mountain passes, this adventure combines memorable destinations, beautiful scenery, and visits along the way.</p>
+            <a class="longway-route-link" href="#trip-map">Explore the Interactive Route Map →</a>
+            <div class="map-legend" aria-label="Route legend">
+              <div class="map-legend-item"><span class="map-legend-line route-drive"></span><span>Driving</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-walk"></span><span>Walking</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-train"></span><span>Train</span></div>
+              <div class="map-legend-item"><span class="map-legend-line route-cable"></span><span>Cable Car</span></div>
+              <div class="map-legend-item"><span class="longway-legend-symbol">★</span><span>Featured Day</span></div>
+              <div class="map-legend-item"><span class="longway-legend-symbol">♜</span><span>Branch Office Visit</span></div>
+              <div class="map-legend-item"><span class="longway-legend-symbol">●</span><span>Congregation Meeting</span></div>
+            </div>
+          </div>
+          <div class="longway-route-map">
             <div class="redesign-map-actions"><a href="/live/" class="redesign-map-location">⌖ Where I Am ↗</a></div>
-
-            <div
-                id="trip-map"
-                class="interactive-map trip-overview-map"
-                data-trip-source="trip.json">
-            </div>
-            
-            <div class="map-legend" aria-label="Map route legend">
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-drive"></span>
-                    <span>Driving</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-walk"></span>
-                    <span>Walking</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-train"></span>
-                    <span>Train</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-flight"></span>
-                    <span>Flight</span>
-                </div>
-
-                <div class="map-legend-item">
-                    <span class="map-legend-line route-cable"></span>
-                    <span>Cable Car</span>
-                </div>
-
-            </div>
-
-            <p class="map-note">
-                Colors and line patterns show how each part of the adventure is traveled.
-            </p>
-
+            <div id="trip-map" class="interactive-map trip-overview-map" data-trip-source="trip.json"></div>
+          </div>
         </section>
 
 
