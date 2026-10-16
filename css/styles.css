@@ -4254,6 +4254,6 @@ body.lightbox-open {
 @media(max-width:600px){.postcard-actions-grid .send-postcard-button{margin-bottom:24px}}
 
 /* Adventure cover photos: show the full image without cutting off the subject. */
-.redesign-trip-thumb{position:relative;overflow:hidden;background-color:#344a58;background-position:center;background-size:cover}
-.redesign-trip-thumb::after{content:"";position:absolute;inset:0;background-image:inherit;background-position:center;background-size:contain;background-repeat:no-repeat;pointer-events:none}
+.redesign-trip-thumb{position:relative;overflow:hidden;background-color:#e9e6df;background-position:center;background-size:contain;background-repeat:no-repeat}
+.redesign-trip-thumb::after{content:none}
 @media(max-width:600px){.redesign-trip-grid{grid-template-columns:1fr}.redesign-trip-thumb{height:clamp(190px,56vw,280px)}}
