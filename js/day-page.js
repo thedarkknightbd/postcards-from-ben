@@ -18,6 +18,12 @@ function applyOptimizedImage(image, source, width, quality = 82) {
     image.src = optimizedPhotoUrl(source, width, quality);
 }
 
+
+function showcaseLabel(value) {
+    if (!document.body.classList.contains("day-four-showcase")) return value;
+    return String(value || "").replace(/\\bBranch Visit\\b/gi, "Branch Office Visit").replace(/\\bBethel\\b/gi, "Branch Office");
+}
+
 async function loadDayPage() {
 
     const source = document.body.dataset.daySource;
@@ -173,6 +179,7 @@ async function loadDayPage() {
         const showcase = document.body.classList.contains("day-four-showcase");
         const icons = {
             "Countries": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+            "Branch Visit": '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
             "Branch Office Visit": '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
             "Featured Stop": '<path d="m2 20 7-11 4 6 3-4 6 9H2Z"/><path d="m7 12 2-3 2 3"/>',
             "Tonight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
@@ -188,11 +195,11 @@ async function loadDayPage() {
 
         const label = document.createElement("span");
         label.className = "fact-label";
-        label.textContent = showcase && fact.label === "Tonight" ? "Overnight" : fact.label;
+        label.textContent = showcase ? (fact.label === "Tonight" ? "Overnight" : fact.label === "Branch Visit" ? "Branch Office Visit" : fact.label) : fact.label;
 
         const value = document.createElement("span");
         value.className = "fact-value";
-        value.textContent = showcase && fact.label === "Branch Office Visit" ? "Hungary" : fact.value;
+        value.textContent = showcase && /Branch (Office )?Visit/.test(fact.label) ? String(fact.value).replace(/\\bBethel\\b/gi, "Branch Office") : fact.value;
 
         content.append(label, value);
         item.append(icon, content);
@@ -239,10 +246,10 @@ async function loadDayPage() {
 
         const type = document.createElement("p");
         type.className = "stop-type";
-        type.textContent = stop.type;
+        type.textContent = showcaseLabel(stop.type);
 
         const name = document.createElement("h3");
-        name.textContent = stop.name;
+        name.textContent = showcaseLabel(stop.name);
 
         const description = document.createElement("p");
         description.textContent = stop.description;
