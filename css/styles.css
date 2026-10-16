@@ -4321,3 +4321,44 @@ body.lightbox-open {
 .trip-page .longway-photo-credits a{color:#32566f}
 @media(max-width:800px){.trip-page .longway-photo-credits ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.trip-page .longway-photo-credits ol{grid-template-columns:1fr}}
+
+/* Experimental cinematic day page: Day 4 only. Other days are unchanged. */
+.day-four-showcase{background:#f8f6f1;color:#172735}
+.day-four-showcase .site-nav{margin:0}
+.day-four-showcase .day-four-hero{position:relative;min-height:570px;display:flex;flex-direction:column;justify-content:flex-end;padding:58px max(7vw,25px) 68px;background-image:linear-gradient(90deg,rgba(9,24,36,.82) 0%,rgba(9,24,36,.38) 56%,rgba(9,24,36,.08) 100%),url('https://commons.wikimedia.org/wiki/Special:FilePath/Bled%20Church%20island%20in%20Blue%20hour.jpg?width=1600');background-position:center 45%;background-size:cover;text-shadow:0 2px 18px #0016}
+.day-four-showcase .day-hero-content{max-width:920px;position:relative;z-index:1}
+.day-four-showcase .day-four-eyebrow{font-size:.73rem;font-weight:800;letter-spacing:.2em;color:#f6f0e4;margin:0 0 17px}
+.day-four-showcase .day-hero h1{font-family:"Iowan Old Style",Baskerville,Georgia,serif;font-weight:400;letter-spacing:-.04em;font-size:clamp(3.1rem,7vw,6.5rem);line-height:1.05;margin:8px 0 18px;text-wrap:balance}
+.day-four-showcase .day-label{color:#f6eede;font-size:.81rem;letter-spacing:.13em}
+.day-four-showcase .day-route{margin:13px 0 0;color:#f6f3ed;font-size:1.1rem;max-width:900px}
+.day-four-showcase .back-link{position:relative;z-index:1;color:#fff;font-size:.89rem;margin-bottom:85px}
+.day-four-subnav{display:flex;gap:clamp(14px,3vw,40px);justify-content:center;flex-wrap:wrap;padding:18px 20px;background:#fff;border-bottom:1px solid #e6e2da}
+.day-four-subnav a{color:#233e52;text-decoration:none;font-weight:700;font-size:.88rem}
+.day-four-subnav a:hover{text-decoration:underline;text-underline-offset:5px}
+.day-four-showcase .day-facts{max-width:1120px;margin:36px auto 45px;border:1px solid #e9e5de;box-shadow:0 6px 24px #162c3714;border-radius:12px}
+.day-four-showcase main{width:min(1100px,90%);padding:5px 0 45px}
+.day-four-showcase main section{scroll-margin-top:20px;margin:40px 0 70px}
+.day-four-showcase .day-intro{max-width:910px;padding:23px 0 12px}
+.day-four-showcase .day-intro h2,.day-four-showcase main section>h2{font-family:"Iowan Old Style",Baskerville,Georgia,serif;color:#172735;letter-spacing:-.025em;font-size:clamp(2rem,3.4vw,2.8rem);font-weight:500;margin:8px 0 17px}
+.day-four-showcase .day-lead{font-size:1.15rem;line-height:1.85;max-width:800px}
+.day-four-showcase .section-kicker{color:#47718c;letter-spacing:.17em}
+.day-four-showcase .stop-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.day-four-showcase .stop-card{border:1px solid #e5e2db;border-radius:12px;background:#fff;padding:25px;box-shadow:0 4px 20px #0e20200b}
+.day-four-showcase .stop-number{background:#18384c;color:#fff}
+.day-four-showcase .stop-content h3{font-family:Georgia,serif;font-size:1.28rem}
+.day-four-showcase #map-section{background:#fff;padding:28px;border:1px solid #e8e4dc;border-radius:16px;box-shadow:0 8px 28px #122b3c0a}
+.day-four-showcase #day-map{min-height:425px;border-radius:11px;overflow:hidden}
+.day-four-showcase .day-map-legend .route-flight{display:none}
+.day-four-showcase .day-map-legend .map-legend-item:has(.route-flight){display:none}
+.day-four-showcase .day-navigation{margin-top:45px!important}
+.day-four-showcase .journal-card{border-left-color:#3784ab}
+@media(max-width:740px){
+.day-four-showcase .day-four-hero{min-height:465px;padding:33px 24px 45px;background-position:55% center}
+.day-four-showcase .day-hero h1{font-size:clamp(2.9rem,12vw,4.5rem)}
+.day-four-showcase .back-link{margin-bottom:60px}
+.day-four-showcase .day-facts{width:91%;grid-template-columns:repeat(2,minmax(0,1fr));margin:24px auto 36px}
+.day-four-showcase .stop-list{grid-template-columns:1fr}
+.day-four-showcase #map-section{padding:18px}
+.day-four-showcase #day-map{min-height:330px}
+}
+@media(max-width:430px){.day-four-showcase .day-facts{grid-template-columns:1fr}.day-four-showcase .day-four-subnav{gap:12px}}
