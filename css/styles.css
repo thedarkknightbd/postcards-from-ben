@@ -4451,3 +4451,25 @@ body.lightbox-open {
 
 /* Safari cover fallback until a Mara hero image is uploaded through Media Manager. */
 .thumb-mara{background:linear-gradient(160deg,#e1b16b 0%,#b98855 44%,#455c4a 100%);background-position:center;background-size:cover}
+
+/* Shared hero sizing for primary adventure landing pages, October 2026.
+   The main Home hero already uses 400px desktop / 360px mobile.
+   Keep editorial/utility pages compact rather than adding unnecessary empty space. */
+.trip-page .longway-hero{
+  min-height:400px;
+  padding:42px max(6vw,26px) 46px;
+}
+.past-postcard-page .past-postcard-hero{
+  min-height:400px;
+  padding:42px max(6vw,24px);
+}
+@media(max-width:650px){
+  .trip-page .longway-hero{
+    min-height:360px;
+    padding:35px 23px 40px;
+  }
+  .past-postcard-page .past-postcard-hero{
+    min-height:360px;
+    padding:35px 22px;
+  }
+}
