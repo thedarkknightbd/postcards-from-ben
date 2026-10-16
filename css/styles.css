@@ -4219,3 +4219,9 @@ body.lightbox-open {
   background-position:62% center;
  }
 }
+
+/* Compact cinematic hero and consistent brand mark */
+.site-brand{display:inline-flex;align-items:center;gap:9px}
+.site-brand-icon{width:26px;height:26px;object-fit:contain;flex-shrink:0}
+.redesign-home-hero{min-height:500px;height:500px;padding-top:45px;padding-bottom:45px}
+@media(max-width:700px){.redesign-home-hero{min-height:440px;height:auto;padding-top:50px;padding-bottom:50px}}
