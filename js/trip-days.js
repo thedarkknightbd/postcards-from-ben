@@ -168,7 +168,6 @@ async function loadTripDays() {
             const photo = document.createElement("div");
             photo.className = "longway-day-photo";
             const dayImages = {
-              2:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640",
               8:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640",
               9:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640"
             };
