@@ -174,7 +174,7 @@ async function loadTripDays() {
               5: "Kamnik alps at sunset.jpg",
               6: "View of the Grand Canal from Rialto to Ca'Foscari.jpg",
               7: "Castello di Brescia - panoramio.jpg",
-              8: "Odle, Puez, Sella and Langkofel groups from Seceda, South Tyrol.jpg",
+              8: "Odles as seen from Seceda.JPG",
               9: "Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg",
               10: "Riva del Garda Panorama from sentiero del Ponale.jpg",
               11: "Guaita Fortress and San Marino (2023).jpg",
