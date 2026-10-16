@@ -4435,3 +4435,16 @@ body.lightbox-open {
 .day-page.day-four-showcase .day-four-hero{height:auto;min-height:355px}
 @media(max-width:740px){.day-page.day-four-showcase .day-four-hero{height:auto;min-height:305px}.day-page.day-four-showcase .day-hero h1{overflow-wrap:break-word}}
 @media(max-width:440px){.day-page.day-four-showcase .day-four-hero{min-height:295px}}
+
+/* Day 8 Sella Ronda timing sheet: legible cutoffs within the cinematic day journal. */
+.day-four-showcase main section.day-eight-timing{max-width:960px;margin:25px auto 60px}
+.day-eight-timing-intro{max-width:850px;color:#526574;font-size:1rem;line-height:1.65;margin-bottom:19px}
+.day-eight-schedule{background:#fff;border:1px solid #e2ded5;border-radius:13px;overflow:hidden;box-shadow:0 6px 25px #1831420b}
+.day-eight-schedule>div{display:grid;grid-template-columns:minmax(145px,185px) 1fr;gap:15px;align-items:baseline;padding:13px 21px;border-bottom:1px solid #eeeae4}
+.day-eight-schedule>div:last-child{border-bottom:0}
+.day-eight-schedule time{font-size:.8rem;font-weight:800;color:#315771;font-variant-numeric:tabular-nums}
+.day-eight-schedule span{font-size:.91rem;line-height:1.45;color:#2b3945}
+.day-eight-schedule .day-eight-cutoff{background:#f6ede1;border-left:4px solid #ac7d41;padding-left:17px}
+.day-eight-schedule .day-eight-target{background:#edf3f3;border-left:4px solid #347189;padding-left:17px}
+.day-eight-route-note{margin-top:14px;font-size:.78rem;line-height:1.6;color:#667780}
+@media(max-width:560px){.day-eight-schedule>div{grid-template-columns:1fr;gap:3px;padding:12px 15px}.day-eight-schedule .day-eight-cutoff,.day-eight-schedule .day-eight-target{padding-left:11px}.day-eight-schedule time{font-size:.76rem}.day-eight-schedule span{font-size:.85rem}}
