@@ -1,7 +1,7 @@
 backend:
   name: turbo-github
   turbo_site_id: c7ee06d5-6037-495c-887d-bcbf8f6c9ccc
-  branch: main
+  branch: redesign-2026
 
 site_url: https://postcardsfromben.com
 display_url: https://postcardsfromben.com
@@ -10,6 +10,27 @@ media_folder: "trips/the-long-way-around/images/uploads"
 public_folder: "/trips/the-long-way-around/images/uploads"
 
 collections:
+
+  - name: "homepage"
+    label: "Homepage"
+    editor:
+      preview: false
+    files:
+      - label: "Adventure Cover Photos"
+        name: "adventure_covers"
+        file: "data/homepage.json"
+        fields:
+          - label: "Adventure Covers"
+            name: "covers"
+            widget: "object"
+            fields:
+              - { label: "The Long Way Around", name: "the-long-way-around", widget: "image", required: false }
+              - { label: "Winter on the Black Sea", name: "winter-on-the-black-sea", widget: "image", required: false }
+              - { label: "Autumn in Hungary", name: "autumn-in-hungary", widget: "image", required: false }
+              - { label: "A Special Convention", name: "a-special-convention", widget: "image", required: false }
+              - { label: "Under the Mara Sky", name: "under-the-mara-sky", widget: "image", required: false }
+              - { label: "An Afternoon with Giants", name: "an-afternoon-with-giants", widget: "image", required: false }
+
 
   - name: "long_way_around"
     label: "The Long Way Around"
