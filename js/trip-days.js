@@ -224,7 +224,7 @@ async function loadTripDays() {
             }
             if (branchCount) {
               const branch = document.createElement("span");
-              branch.textContent = "♜ Branch Office Visit";
+              branch.innerHTML = "<svg class=\"longway-line-icon\" viewBox=\"0 0 24 24\" width=\"21\" height=\"21\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"1\"/><path d=\"M9 21v-4h6v4M9 7h.01M15 7h.01M9 11h.01M15 11h.01\"/></svg>" + " Branch Office Visit";
               notes.appendChild(branch);
             }
             details.appendChild(notes);
