@@ -154,8 +154,7 @@ async function loadTripDays() {
             const title =
                 document.createElement("h3");
 
-            title.textContent =
-                day.title;
+            title.textContent = day.title || day.route || ("Day " + day.dayNumber);
 
 
             const route =
@@ -168,6 +167,10 @@ async function loadTripDays() {
             const photo = document.createElement("div");
             photo.className = "longway-day-photo";
             const dayImages = {
+              4:"https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Bled.jpg?width=640",
+              6:"https://commons.wikimedia.org/wiki/Special:FilePath/Venice_grand_canal_1.jpg?width=640",
+              11:"https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic_view_from_San_Marino_in_2026.02.jpg?width=640",
+              15:"https://commons.wikimedia.org/wiki/Special:FilePath/Monaco-panorama.jpg?width=640",
               8:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640",
               9:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640"
             };
@@ -196,11 +199,6 @@ async function loadTripDays() {
               const branch = document.createElement("span");
               branch.textContent = "♜ Branch Office Visit";
               notes.appendChild(branch);
-            }
-            if ((day.stops || []).some(stop => /meeting/i.test(stop.type || ""))) {
-              const meeting = document.createElement("span");
-              meeting.textContent = "● Congregation Meeting";
-              notes.appendChild(meeting);
             }
             details.appendChild(notes);
             card.append(photo, details);
