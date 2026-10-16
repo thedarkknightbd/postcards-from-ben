@@ -173,7 +173,7 @@ async function loadDayPage() {
         const showcase = document.body.classList.contains("day-four-showcase");
         const icons = {
             "Countries": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
-            "Branch Office Visit": '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 21v-4h6v4M9 7h.01M15 7h.01M9 11h.01M15 11h.01"/>',
+            "Branch Office Visit": '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v8h20v-6a2 2 0 0 0-2-2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
             "Featured Stop": '<path d="m2 20 7-11 4 6 3-4 6 9H2Z"/><path d="m7 12 2-3 2 3"/>',
             "Tonight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
             "Overnight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>'
