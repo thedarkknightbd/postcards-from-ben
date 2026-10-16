@@ -26,12 +26,12 @@
     }
   ],
   "introTitle": "Into the heart of the Dolomites.",
-  "intro": "One of the biggest scenic days of The Long Way Around begins with an early drive from Brescia to Ortisei. After riding the cableways to Seceda for panoramic views across the Dolomites, the adventure continues around the Sella massif through a series of mountain passes, villages and valleys, finishing with Passo Gardena in the late-afternoon light before spending the night in Selva di Val Gardena.",
+  "intro": "Leave Brescia around 6:30–7:00 AM for Ortisei, ride the Seceda cableways for about an hour of ridgeline photography, and enjoy lunch in town. Aim to start the Sella Ronda drive by 1:00 PM. The four-pass loop is optional: protect the most important stop, Passo Gardena, by arriving around 4:15 PM for golden-hour light. If still at Passo Sella at 2:00 PM, skip the remaining loop and head via Selva directly to Passo Gardena. Road and lift conditions may require adjustments.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Brescia",
-      "description": "Leave Brescia early and head north toward the Dolomites.",
+      "description": "Leave Brescia around 6:30–7:00 AM. Aim to park at the Seceda cableways in Ortisei around 9:30–10:00 AM.",
       "latitude": 45.56578,
       "longitude": 10.23647,
       "transportToNext": "drive"
@@ -39,7 +39,7 @@
     {
       "type": "Cable Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Park in Ortisei and begin the cableway adventure up to Seceda.",
+      "description": "Arrive in Ortisei, park and ride the cableways to Seceda. Allow time for boarding and descent; target lunch in Ortisei around noon.",
       "latitude": 46.576421,
       "longitude": 11.675068,
       "transportToNext": "cable"
@@ -47,7 +47,7 @@
     {
       "type": "Featured Scenic Stop",
       "name": "Seceda",
-      "description": "Take in the dramatic ridgeline and panoramic views from high above Val Gardena.",
+      "description": "Prioritize about an hour photographing the iconic Odle ridgeline. Descend in time for lunch rather than racing through the afternoon.",
       "latitude": 46.600589,
       "longitude": 11.725794,
       "transportToNext": "cable"
@@ -55,7 +55,7 @@
     {
       "type": "Return to Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Ride back down to Ortisei and begin the scenic driving loop.",
+      "description": "Lunch in Ortisei approximately noon–1:00 PM. Aim to leave by 1:00 PM (latest 1:15 PM) to begin the scenic drive.",
       "latitude": 46.576421,
       "longitude": 11.675068,
       "transportToNext": "drive"
@@ -63,7 +63,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Sella",
-      "description": "The first major mountain pass of the Sella loop, beneath the dramatic walls of the Sella massif.",
+      "description": "First mountain-pass photo stop. Decision cutoff: leave Passo Sella by 2:00 PM to attempt the full loop. If still here at 2:00 PM, skip Pordoi, Arabba and Campolongo; return via Selva toward Passo Gardena.",
       "latitude": 46.508554,
       "longitude": 11.762924,
       "transportToNext": "drive"
@@ -71,7 +71,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Pordoi",
-      "description": "Continue around the Sella massif over Passo Pordoi.",
+      "description": "Optional if ahead of schedule. Leave Passo Pordoi by 3:00 PM; otherwise make no extended photography stops on the remaining loop.",
       "latitude": 46.48752,
       "longitude": 11.81226,
       "transportToNext": "drive"
@@ -79,7 +79,7 @@
     {
       "type": "Mountain Village",
       "name": "Arabba",
-      "description": "Descend from Passo Pordoi through the mountain village of Arabba.",
+      "description": "Drive through Arabba without a long stop if the clock is running late.",
       "latitude": 46.497569,
       "longitude": 11.87485,
       "transportToNext": "drive"
@@ -87,7 +87,7 @@
     {
       "type": "Mountain Pass",
       "name": "Passo Campolongo",
-      "description": "Climb from Arabba over Passo Campolongo toward Alta Badia.",
+      "description": "Optional pass on the full Sella Ronda loop. Keep moving if running behind.",
       "latitude": 46.52,
       "longitude": 11.87417,
       "transportToNext": "drive"
@@ -95,7 +95,7 @@
     {
       "type": "Mountain Village",
       "name": "Corvara",
-      "description": "Pass through Corvara in the heart of Alta Badia before the final climb of the loop.",
+      "description": "Aim to leave Corvara by 3:45 PM; no further sightseeing stops before Passo Gardena.",
       "latitude": 46.54957,
       "longitude": 11.87403,
       "transportToNext": "drive"
@@ -103,7 +103,7 @@
     {
       "type": "Golden Hour",
       "name": "Passo Gardena",
-      "description": "Save the final major pass for late-afternoon and golden-hour views across the Dolomites.",
+      "description": "THE PHOTO PRIORITY: arrive by approximately 4:15 PM, preferably earlier, to capture late-afternoon and golden-hour light. Mountain shadows can arrive before sunset.",
       "latitude": 46.55,
       "longitude": 11.80944,
       "transportToNext": "drive"
@@ -111,7 +111,7 @@
     {
       "type": "Destination",
       "name": "Selva di Val Gardena",
-      "description": "Descend from Passo Gardena into Selva di Val Gardena and settle in for the night in the heart of the Dolomites.",
+      "description": "Descend to your hotel in Selva di Val Gardena after Passo Gardena. Allow extra time for mountain roads and changing weather.",
       "latitude": 46.553859,
       "longitude": 11.759955
     }
