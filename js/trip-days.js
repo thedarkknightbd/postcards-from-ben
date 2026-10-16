@@ -69,7 +69,7 @@ async function loadTripDays() {
             const branchCount =
                 (day.stops || []).filter(
                     stop =>
-                        stop.type === "Branch Visit"
+                        (stop.type === "Branch Visit" || stop.type === "Branch Office Visit")
                 ).length;
 
 
@@ -131,8 +131,8 @@ async function loadTripDays() {
 
                 badge.textContent =
                     branchCount === 1
-                        ? "Branch Visit"
-                        : `${branchCount} Branch Visits`;
+                        ? "Branch Office Visit"
+                        : `${branchCount} Branch Office Visits`;
 
                 top.appendChild(badge);
             }
