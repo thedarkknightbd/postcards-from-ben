@@ -4448,3 +4448,6 @@ body.lightbox-open {
 .day-eight-schedule .day-eight-target{background:#edf3f3;border-left:4px solid #347189;padding-left:17px}
 .day-eight-route-note{margin-top:14px;font-size:.78rem;line-height:1.6;color:#667780}
 @media(max-width:560px){.day-eight-schedule>div{grid-template-columns:1fr;gap:3px;padding:12px 15px}.day-eight-schedule .day-eight-cutoff,.day-eight-schedule .day-eight-target{padding-left:11px}.day-eight-schedule time{font-size:.76rem}.day-eight-schedule span{font-size:.85rem}}
+
+/* Safari cover fallback until a Mara hero image is uploaded through Media Manager. */
+.thumb-mara{background:linear-gradient(160deg,#e1b16b 0%,#b98855 44%,#455c4a 100%);background-position:center;background-size:cover}
