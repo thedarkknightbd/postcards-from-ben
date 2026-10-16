@@ -170,17 +170,29 @@ async function loadDayPage() {
 
         const icon = document.createElement("span");
         icon.className = "fact-icon";
-        icon.textContent = fact.icon;
+        const showcase = document.body.classList.contains("day-four-showcase");
+        const icons = {
+            "Countries": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+            "Branch Office Visit": '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 21v-4h6v4M9 7h.01M15 7h.01M9 11h.01M15 11h.01"/>',
+            "Featured Stop": '<path d="m2 20 7-11 4 6 3-4 6 9H2Z"/><path d="m7 12 2-3 2 3"/>',
+            "Tonight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+            "Overnight": '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>'
+        };
+        if (showcase && icons[fact.label]) {
+            icon.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icons[fact.label] + '</svg>';
+        } else {
+            icon.textContent = fact.icon;
+        }
 
         const content = document.createElement("div");
 
         const label = document.createElement("span");
         label.className = "fact-label";
-        label.textContent = fact.label;
+        label.textContent = showcase && fact.label === "Tonight" ? "Overnight" : fact.label;
 
         const value = document.createElement("span");
         value.className = "fact-value";
-        value.textContent = fact.value;
+        value.textContent = showcase && fact.label === "Branch Office Visit" ? "Hungary" : fact.value;
 
         content.append(label, value);
         item.append(icon, content);
