@@ -260,6 +260,23 @@ async function loadTripDays() {
       link.rel = "noopener noreferrer";
       link.textContent = "Day " + number + ": " + file.replace(/\.(jpg|jpeg|png)$/i, "");
       item.appendChild(link);
+      const verifiedCredits = {
+        "17": { author: "Ank Kumar", license: "CC BY-SA 4.0", url: "https://creativecommons.org/licenses/by-sa/4.0/" },
+        "18": { author: "Nikilux", license: "CC BY-SA 3.0 Luxembourg", url: "https://creativecommons.org/licenses/by-sa/3.0/lu/deed.en" }
+      };
+      const credit = verifiedCredits[number];
+      if (credit) {
+        const details = document.createElement("span");
+        details.append(" · Photo: " + credit.author + " · ");
+        const license = document.createElement("a");
+        license.href = credit.url;
+        license.target = "_blank";
+        license.rel = "noopener noreferrer";
+        license.textContent = credit.license;
+        details.appendChild(license);
+        details.append(" · Card image cropped to fit");
+        item.appendChild(details);
+      }
       creditList.appendChild(item);
     });
     credits.appendChild(creditList);
