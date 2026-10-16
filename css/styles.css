@@ -4382,3 +4382,15 @@ body.lightbox-open {
 .day-four-showcase #journal-section .journal-card{max-width:850px;padding:30px 36px;border-radius:0 14px 14px 0;line-height:1.8}
 @media(max-width:740px){.day-four-showcase .day-four-hero{height:305px;min-height:305px;padding:20px 23px 28px}.day-four-showcase .day-hero h1{font-size:clamp(2.35rem,9vw,3.6rem)}.day-four-showcase .back-link{margin-bottom:0}.day-four-showcase #photos-section .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.day-four-showcase #video-section .video-grid{grid-template-columns:1fr}}
 @media(max-width:440px){.day-four-showcase .day-four-hero{height:295px;min-height:295px}.day-four-showcase .day-four-eyebrow{font-size:.6rem}.day-four-showcase .day-route{font-size:.86rem}.day-four-showcase #journal-section .journal-card{padding:20px 23px}}
+
+/* Unified navy icon system: day quick facts and trip overview */
+.day-four-showcase .day-facts{grid-template-columns:repeat(4,minmax(0,1fr));margin:20px auto 40px}
+.day-four-showcase .fact{min-width:0;padding:19px 15px;gap:12px;align-items:center}
+.day-four-showcase .fact-icon{display:inline-flex;flex:0 0 29px;align-items:center;justify-content:center;color:#203d52}
+.day-four-showcase .fact-label{color:#74828b;font-size:.67rem;letter-spacing:.07em;line-height:1.3}
+.day-four-showcase .fact-value{font-size:.86rem;line-height:1.35;overflow-wrap:anywhere}
+.trip-page .longway-line-icon{display:inline-block;vertical-align:middle;flex:0 0 21px;color:#203d52}
+.trip-page .map-legend-item .longway-line-icon{margin-right:2px}
+.trip-page .longway-day-notes span{display:inline-flex;align-items:center;gap:5px}
+@media(max-width:900px){.day-four-showcase .day-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.day-four-showcase .fact:nth-child(2){border-right:0}.day-four-showcase .fact:nth-child(-n+2){border-bottom:1px solid #ece9e3}}
+@media(max-width:440px){.day-four-showcase .day-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.day-four-showcase .fact{padding:15px 11px;gap:8px}.day-four-showcase .fact-icon{flex-basis:24px}.day-four-showcase .fact-icon svg{width:23px;height:23px}.day-four-showcase .fact-value{font-size:.78rem}.day-four-showcase .fact-label{font-size:.6rem}}
