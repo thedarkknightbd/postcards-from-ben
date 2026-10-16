@@ -4196,3 +4196,13 @@ body.lightbox-open {
 .postcard-actions-grid .send-postcard-card{position:relative}.postcard-actions-grid .send-postcard-copy{text-align:center;display:flex;flex-direction:column;align-items:center}.postcard-actions-grid .send-postcard-stamp{align-self:center;margin:22px auto 16px;order:0}.postcard-actions-grid .send-postcard-button{margin-top:18px}.postcard-actions-grid .send-postcard-card{display:flex}.postcard-actions-grid .send-postcard-copy{flex:1}.postcard-actions-grid .send-postcard-stamp{margin-top:16px}
 .about-page .travel-history{margin-top:0}.redesign-simple-hero{background:#17212b;color:#fff;padding:80px max(7vw,24px);text-align:center}.redesign-simple-hero h1{font-family:Georgia,serif;font-size:clamp(2.6rem,6vw,4.8rem);margin:8px auto}.redesign-simple-hero p{color:#e4e9ed;max-width:660px;margin:auto}
 @media(max-width:950px){.redesign-trip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.site-nav{flex-direction:column;align-items:flex-start;padding:15px 18px}.site-nav-links{gap:16px}.site-trip-dropdown{left:0;right:auto;min-width:245px}.redesign-trip-grid{grid-template-columns:1fr 1fr;gap:10px}.redesign-trip-thumb{height:110px}.redesign-trip-card>div:last-child{padding:12px}.redesign-trip-card h3{font-size:1rem}.redesign-home-hero{padding:58px 24px;min-height:520px}.redesign-hero-links{flex-wrap:wrap}}
+
+/* Refined editorial typography and postcard actions */
+.redesign-home-hero h1{font-family:"Iowan Old Style","Baskerville","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;letter-spacing:-.035em;line-height:1.08;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.15)}
+.redesign-trip-hero h1{font-family:"Iowan Old Style","Baskerville","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;letter-spacing:-.035em;line-height:1.08}
+.redesign-adventures h2,.redesign-simple-hero h1{font-family:"Iowan Old Style",Baskerville,Palatino,Georgia,serif;font-weight:500}
+.postcard-actions-grid .send-postcard-copy{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1}
+.postcard-actions-grid .send-postcard-stamp{align-self:center;margin:24px auto 16px;flex:0 0 auto}
+.postcard-actions-grid .send-postcard-button{margin:0 auto 8px;display:inline-flex;justify-content:center;align-items:center}
+.postcard-actions-grid .send-postcard-card{display:flex;flex-direction:column}
+@media(max-width:600px){.redesign-home-hero h1{font-size:clamp(2.8rem,11vw,4.3rem)}}
