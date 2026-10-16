@@ -167,18 +167,42 @@ async function loadTripDays() {
             const photo = document.createElement("div");
             photo.className = "longway-day-photo";
             const dayImages = {
-              4:"https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Bled.jpg?width=640",
-              6:"https://commons.wikimedia.org/wiki/Special:FilePath/Venice_grand_canal_1.jpg?width=640",
-              10:"https://commons.wikimedia.org/wiki/Special:FilePath/Riva_del_Garda%2C_Italy.jpg?width=640",
-              12:"https://commons.wikimedia.org/wiki/Special:FilePath/Bernina_Express_from_Train_window_by_ArmAg_(7).jpg?width=640",
-              16:"https://commons.wikimedia.org/wiki/Special:FilePath/Mont_Blanc_massif_4.jpg?width=640",
-              11:"https://commons.wikimedia.org/wiki/Special:FilePath/Panoramic_view_from_San_Marino_in_2026.02.jpg?width=640",
-              15:"https://commons.wikimedia.org/wiki/Special:FilePath/Monaco-panorama.jpg?width=640",
-              8:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640",
-              9:"https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=640"
+              1: "Dallas-Fort Worth International Airport.jpg",
+              2: "Lipno Lake in the Czech Rep (2).jpg",
+              3: "Bratislava Castle with Danube.jpeg",
+              4: "Bled Church island in Blue hour.jpg",
+              5: "St. Marks sq Zagreb aerial.jpg",
+              6: "View of the Grand Canal from Rialto to Ca'Foscari.jpg",
+              7: "Castello di Brescia - panoramio.jpg",
+              8: "Odle, Puez, Sella and Langkofel groups from Seceda, South Tyrol.jpg",
+              9: "Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg",
+              10: "Riva del Garda Panorama from sentiero del Ponale.jpg",
+              11: "Guaita Fortress and San Marino (2023).jpg",
+              12: "Bernina express Viaduc de Brusio.jpg",
+              13: "Brescia - Piazza della Loggia.jpg",
+              14: "Brescia - Piazza Paolo VI (48747822708).jpg",
+              15: "Monaco Hercule Harbour Panorama.jpg",
+              16: "Mont Blanc de Courmayeur.jpg",
+              17: "Chillon Castle at Lake Geneva.jpg",
+              18: "Luxembourg Grund Old Town.jpg",
+              19: "Hunebed D27 2020.jpg",
+              20: "Marksburg Castle Rhine River Valley Braubach Germany.JPG",
+              21: "Römerberg in Frankfurt.jpg",
+              22: "München. Marienplatz met Neues Rathaus, GD013722.jpg",
+              23: "Liechtenstein-00190 - Vaduz Castle (19627815986).jpg",
+              24: "MUC Terminal 2 from air 20251011.jpg"
             };
-            if (dayImages[day.dayNumber]) {
-              photo.style.backgroundImage = "url(" + JSON.stringify(dayImages[day.dayNumber]) + ")";
+            const imageFile = dayImages[day.dayNumber];
+            if (imageFile) {
+              const photoUrl = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(imageFile) + "?width=960";
+              const img = new Image();
+              img.alt = "";
+              img.loading = "lazy";
+              img.decoding = "async";
+              img.className = "longway-cover-image";
+              img.src = photoUrl;
+              img.onerror = () => { img.remove(); photo.classList.add("longway-photo-unavailable"); };
+              photo.appendChild(img);
             }
             const photoNumber = document.createElement("span");
             photoNumber.className = "longway-photo-number";
@@ -205,15 +229,6 @@ async function loadTripDays() {
             }
             details.appendChild(notes);
             card.append(photo, details);
-            const prefix = "trips/the-long-way-around/days/day-" + paddedDay + "/";
-            fetch("/api/r2?prefix=" + encodeURIComponent(prefix))
-              .then(response => response.ok ? response.json() : null)
-              .then(data => {
-                const obj = data && Array.isArray(data.objects) && data.objects.find(o => o.url && /\.(jpe?g|png|webp|avif)(\?|$)/i.test(o.url));
-                if (obj) photo.style.backgroundImage = "url(" + JSON.stringify(obj.url) + ")";
-              }).catch(() => {});
-
-
             grid.appendChild(card);
 
 
@@ -227,6 +242,28 @@ async function loadTripDays() {
         }
 
     }
+
+
+    // External cover photograph credits are separate from personal day journals.
+    const credits = document.createElement("details");
+    credits.className = "longway-photo-credits";
+    const summary = document.createElement("summary");
+    summary.textContent = "Cover photograph credits and licensing";
+    credits.appendChild(summary);
+    const creditList = document.createElement("ol");
+    const creditFiles = {"1":"Dallas-Fort Worth International Airport.jpg","2":"Lipno Lake in the Czech Rep (2).jpg","3":"Bratislava Castle with Danube.jpeg","4":"Bled Church island in Blue hour.jpg","5":"St. Marks sq Zagreb aerial.jpg","6":"View of the Grand Canal from Rialto to Ca'Foscari.jpg","7":"Castello di Brescia - panoramio.jpg","8":"Odle, Puez, Sella and Langkofel groups from Seceda, South Tyrol.jpg","9":"Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg","10":"Riva del Garda Panorama from sentiero del Ponale.jpg","11":"Guaita Fortress and San Marino (2023).jpg","12":"Bernina express Viaduc de Brusio.jpg","13":"Brescia - Piazza della Loggia.jpg","14":"Brescia - Piazza Paolo VI (48747822708).jpg","15":"Monaco Hercule Harbour Panorama.jpg","16":"Mont Blanc de Courmayeur.jpg","17":"Chillon Castle at Lake Geneva.jpg","18":"Luxembourg Grund Old Town.jpg","19":"Hunebed D27 2020.jpg","20":"Marksburg Castle Rhine River Valley Braubach Germany.JPG","21":"Römerberg in Frankfurt.jpg","22":"München. Marienplatz met Neues Rathaus, GD013722.jpg","23":"Liechtenstein-00190 - Vaduz Castle (19627815986).jpg","24":"MUC Terminal 2 from air 20251011.jpg"};
+    Object.entries(creditFiles).forEach(([number, file]) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file.replaceAll(" ", "_"));
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Day " + number + ": " + file.replace(/\\.(jpg|jpeg|png)$/i, "");
+      item.appendChild(link);
+      creditList.appendChild(item);
+    });
+    credits.appendChild(creditList);
+    grid.insertAdjacentElement("afterend", credits);
 
 }
 
