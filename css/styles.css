@@ -4257,3 +4257,22 @@ body.lightbox-open {
 .redesign-trip-thumb{position:relative;overflow:hidden;background-color:#e9e6df;background-position:center;background-size:contain;background-repeat:no-repeat}
 .redesign-trip-thumb::after{content:none}
 @media(max-width:600px){.redesign-trip-grid{grid-template-columns:1fr}.redesign-trip-thumb{height:clamp(190px,56vw,280px)}}
+
+/* The Long Way Around: cinematic editorial adventure layout */
+.trip-page .longway-hero{min-height:440px;box-sizing:border-box;padding:58px max(6vw,26px) 64px;background-image:linear-gradient(90deg,rgba(9,23,35,.78),rgba(9,23,35,.14)),url('https://commons.wikimedia.org/wiki/Special:FilePath/Odles_as_seen_from_Seceda.JPG?width=1600');background-size:cover;background-position:center 47%;color:#fff}
+.longway-hero .back-link{display:none}
+.longway-hero .trip-label{color:#f2f2ed;text-transform:uppercase;letter-spacing:.19em;font-size:.79rem;font-weight:750}
+.longway-hero h1{max-width:640px;font-size:clamp(3.3rem,6.5vw,6rem);line-height:1.02;margin:12px 0 18px;text-wrap:balance;color:#fff}
+.longway-hero .trip-subtitle{font-size:1.13rem;color:#fff;margin-bottom:14px}
+.longway-hero-description{max-width:530px;font-size:1rem;line-height:1.6;color:#f6f6f2;margin:0 0 20px}
+.longway-hero-button{display:inline-block;background:#287db3;color:white;text-decoration:none;border-radius:28px;padding:13px 23px;font-weight:750}
+.longway-statbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:23px max(5vw,20px);background:#f8f6f0;border-bottom:1px solid #e4e1da}
+.longway-statbar>div{text-align:center;border-right:1px solid #dedbd4;display:flex;flex-direction:column;gap:3px}
+.longway-statbar>div:last-child{border-right:0}
+.longway-statbar strong{font-size:1.55rem;color:#14283b}
+.longway-statbar span{font-size:.78rem;color:#566879}
+.longway-section-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(12px,3vw,42px);padding:17px 18px;background:#f8f6f0;border-bottom:1px solid #e4e1da}
+.longway-section-nav a{color:#294b64;text-decoration:none;font-weight:650;font-size:.89rem}
+.longway-section-nav a:hover{text-decoration:underline;text-underline-offset:6px}
+.trip-page #overview,.trip-page #route-map,.trip-page #day-by-day{scroll-margin-top:24px}
+@media(max-width:650px){.trip-page .longway-hero{min-height:430px;padding:44px 23px 48px;background-position:59% center}.longway-hero h1{font-size:clamp(2.8rem,11vw,4.3rem)}.longway-statbar{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.longway-statbar>div:nth-child(3){border-right:0}.longway-statbar strong{font-size:1.28rem}.longway-statbar span{font-size:.72rem}.longway-section-nav{justify-content:flex-start}}
