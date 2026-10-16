@@ -4473,3 +4473,49 @@ body.lightbox-open {
     padding:35px 22px;
   }
 }
+
+/* Photographic editorial headers for the two main non-trip landing pages. */
+.redesign-simple-hero{
+  position:relative;
+  box-sizing:border-box;
+  min-height:340px;
+  padding:65px max(7vw,24px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background-color:#17212b;
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  isolation:isolate;
+  text-shadow:0 2px 15px rgba(0,0,0,.48);
+}
+.redesign-simple-hero p{line-height:1.55}
+.adventures-landing .redesign-simple-hero{
+  background-image:linear-gradient(90deg,rgba(9,23,35,.78),rgba(9,23,35,.30)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Elephant_on_the_savannah_%2842359536110%29.jpg?width=1600");
+  background-position:center 52%;
+}
+.about-page .redesign-simple-hero{
+  background-image:linear-gradient(90deg,rgba(9,23,35,.80),rgba(9,23,35,.36)),url('/postcard-write-back.jpg');
+  background-position:center 54%;
+}
+.redesign-simple-hero .hero-photo-credit{
+  position:absolute;
+  right:16px;
+  bottom:10px;
+  margin:0;
+  max-width:70%;
+  color:#fff;
+  font-size:.65rem;
+  text-align:right;
+  text-shadow:0 1px 4px #102331;
+}
+.redesign-simple-hero .hero-photo-credit a{color:inherit;text-decoration:underline}
+@media(max-width:700px){
+  .redesign-simple-hero{min-height:310px;padding:52px 23px;text-align:center}
+  .redesign-simple-hero h1{font-size:clamp(2.25rem,10vw,3.5rem)}
+  .adventures-landing .redesign-simple-hero{background-position:62% center}
+  .about-page .redesign-simple-hero{background-position:54% center}
+  .redesign-simple-hero .hero-photo-credit{font-size:.58rem}
+}
