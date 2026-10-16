@@ -4109,3 +4109,46 @@ body.lightbox-open {
 .postcard-subscribe-form small { text-align: center; color: #596975; }
 .postcard-subscribe-form #postcard-subscribe-status { min-height: 1.2em; margin: 0; font-weight: 600; }
 .postcard-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Homepage: two complementary postcard actions, side by side */
+.postcard-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 24px;
+  margin: 64px auto 40px;
+}
+.postcard-actions-grid > section { min-width: 0; margin: 0; }
+.postcard-actions-grid .subscribe-postcards-card,
+.postcard-actions-grid .send-postcard-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 18px;
+}
+.postcard-actions-grid .subscribe-postcards-card { padding-bottom: 28px; }
+.postcard-actions-grid .subscribe-postcards-photo { height: clamp(160px, 18vw, 240px); }
+.postcard-actions-grid .subscribe-postcards-card > :not(.subscribe-postcards-photo) { margin-left: 26px; margin-right: 26px; }
+.postcard-actions-grid .subscribe-postcards-card h2,
+.postcard-actions-grid .send-postcard-card h2 { font-size: clamp(1.65rem, 2.35vw, 2.2rem); }
+.postcard-actions-grid .postcard-subscribe-form { max-width: none; margin-top: 18px; }
+.postcard-actions-grid .postcard-subscribe-form fieldset { gap: 10px 18px; }
+.postcard-actions-grid .send-postcard-card {
+  padding: 36px 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+}
+.postcard-actions-grid .send-postcard-stamp { align-self: flex-end; }
+@media (max-width: 850px) {
+  .postcard-actions-grid { grid-template-columns: 1fr; gap: 22px; margin-top: 48px; }
+  .postcard-actions-grid .subscribe-postcards-photo { height: clamp(210px, 34vw, 320px); }
+  .postcard-actions-grid .send-postcard-card { min-height: 290px; }
+}
+@media (max-width: 520px) {
+  .postcard-actions-grid .subscribe-postcards-card > :not(.subscribe-postcards-photo) { margin-left: 20px; margin-right: 20px; }
+  .postcard-actions-grid .send-postcard-card { padding: 32px 24px; }
+}
