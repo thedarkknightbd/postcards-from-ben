@@ -21,7 +21,7 @@ function applyOptimizedImage(image, source, width, quality = 82) {
 
 function showcaseLabel(value) {
     if (!document.body.classList.contains("day-four-showcase")) return value;
-    return String(value || "").replace(/\\bBranch Visit\\b/gi, "Branch Office Visit").replace(/\\bBethel\\b/gi, "Branch Office");
+    return String(value || "").replace(/\bBranch Visit\b/gi, "Branch Office Visit").replace(/\bBethel\b/gi, "Branch Office");
 }
 
 async function loadDayPage() {
@@ -199,7 +199,7 @@ async function loadDayPage() {
 
         const value = document.createElement("span");
         value.className = "fact-value";
-        value.textContent = showcase && /Branch (Office )?Visit/.test(fact.label) ? String(fact.value).replace(/\\bBethel\\b/gi, "Branch Office") : fact.value;
+        value.textContent = showcase && /Branch (Office )?Visit/.test(fact.label) ? String(fact.value).replace(/\bBethel\b/gi, "Branch Office") : fact.value;
 
         content.append(label, value);
         item.append(icon, content);
