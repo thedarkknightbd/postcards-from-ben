@@ -4206,3 +4206,16 @@ body.lightbox-open {
 .postcard-actions-grid .send-postcard-button{margin:0 auto 8px;display:inline-flex;justify-content:center;align-items:center}
 .postcard-actions-grid .send-postcard-card{display:flex;flex-direction:column}
 @media(max-width:600px){.redesign-home-hero h1{font-size:clamp(2.8rem,11vw,4.3rem)}}
+
+/* Custom BMW X5 Alpine-lake hero photograph */
+.redesign-home-hero{
+ background-image:linear-gradient(90deg,rgba(8,24,36,.78) 0%,rgba(8,24,36,.45) 37%,rgba(8,24,36,.04) 72%),url('/homepage-hero.jpg');
+ background-position:center center;
+ background-size:cover;
+}
+@media(max-width:700px){
+ .redesign-home-hero{
+  background-image:linear-gradient(90deg,rgba(8,24,36,.85),rgba(8,24,36,.37)),url('/homepage-hero.jpg');
+  background-position:62% center;
+ }
+}
