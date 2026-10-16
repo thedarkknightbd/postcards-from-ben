@@ -4394,3 +4394,13 @@ body.lightbox-open {
 .trip-page .longway-day-notes span{display:inline-flex;align-items:center;gap:5px}
 @media(max-width:900px){.day-four-showcase .day-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.day-four-showcase .fact:nth-child(2){border-right:0}.day-four-showcase .fact:nth-child(-n+2){border-bottom:1px solid #ece9e3}}
 @media(max-width:440px){.day-four-showcase .day-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.day-four-showcase .fact{padding:15px 11px;gap:8px}.day-four-showcase .fact-icon{flex-basis:24px}.day-four-showcase .fact-icon svg{width:23px;height:23px}.day-four-showcase .fact-value{font-size:.78rem}.day-four-showcase .fact-label{font-size:.6rem}}
+
+/* Shared site navigation on every itinerary day: isolate from old day-navigation rules. */
+.day-page nav.site-nav{display:flex;align-items:center;justify-content:space-between;gap:22px;margin:0;padding:17px max(5vw,24px);border-top:0;border-bottom:1px solid #e6e0d5;background:#f9f6ef;position:relative;z-index:50}
+.day-page nav.site-nav .site-nav-links{display:flex;align-items:center;gap:clamp(12px,2.3vw,32px);flex-wrap:wrap}
+.day-page nav.site-nav .site-brand{font-family:Georgia,serif;font-size:1.35rem;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.day-page nav.site-nav .site-nav-links>a,.day-page nav.site-nav .site-trip-menu>summary{color:#243644;font-size:.9rem;font-weight:650;text-decoration:none}
+.day-page nav.site-nav .site-trip-dropdown a{color:#17212b;font-size:.88rem;font-weight:500;text-decoration:none}
+.day-page nav.site-nav .site-trip-dropdown .site-all-trips{font-weight:750}
+.day-page nav.site-nav a:hover{text-decoration:none}
+@media(max-width:600px){.day-page nav.site-nav{flex-direction:column;align-items:flex-start;gap:12px;padding:15px 18px}.day-page nav.site-nav .site-nav-links{gap:16px}.day-page nav.site-nav .site-trip-dropdown{left:0;right:auto}}
