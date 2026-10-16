@@ -4301,3 +4301,10 @@ body.lightbox-open {
 @media(max-width:1000px){.trip-page .day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:750px){.trip-page .longway-route{grid-template-columns:1fr;padding:18px}.longway-route-map .trip-overview-map{height:320px;min-height:320px}}
 @media(max-width:520px){.trip-page .day-grid{grid-template-columns:1fr}.longway-day-photo{height:200px}}
+
+/* Place the interactive map first, with route information and legend beside it. */
+@media(min-width:751px){.trip-page .longway-route{grid-template-columns:minmax(0,1.18fr) minmax(0,1fr)}.trip-page .longway-route-map{grid-column:1;grid-row:1}.trip-page .longway-route-copy{grid-column:2;grid-row:1}}
+@media(max-width:750px){.trip-page .longway-route-map{order:-1}.trip-page .longway-route-copy{order:1}}
+.trip-page .featured-days-explainer{color:#586879}
+.trip-page .longway-day-details h3{color:#17212b;line-height:1.25;overflow-wrap:anywhere}
+.trip-page .longway-day-details p{color:#607081;line-height:1.4}
