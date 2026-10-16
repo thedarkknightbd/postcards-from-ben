@@ -5,6 +5,9 @@
   const slug = card.getAttribute('href').split('/').filter(Boolean)[1];
   const thumb = card.querySelector('.redesign-trip-thumb');
   if (!slug || !thumb) return;
+  // Kenya's homepage cover is intentionally unassigned until a verified Mara photo is selected.
+  // Do not auto-pick an unrelated first image from the R2 hero folder.
+  if (slug === 'under-the-mara-sky') return;
   try {
    const response = await fetch('/api/r2?prefix=' + encodeURIComponent('trips/' + slug + '/hero/'));
    if (!response.ok) return;
