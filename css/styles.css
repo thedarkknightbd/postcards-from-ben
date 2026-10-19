@@ -4817,3 +4817,13 @@ body.lightbox-open {
   .trip-page .longway-statbar>div:nth-child(even){border-right:0}
   .trip-page .longway-statbar>div:nth-child(odd){border-right:1px solid #dedbd4}
 }
+
+/* Day 1: cinematic hero and uncropped full-photo viewer */
+.day-page[data-day-source="../data/day-01.json"] .day-four-hero{height:100svh;min-height:600px;box-sizing:border-box;position:relative}
+.day-one-view-photo{position:absolute;right:clamp(16px,4vw,48px);top:90px;z-index:4;border:1px solid rgba(255,255,255,.65);border-radius:999px;background:rgba(10,25,35,.7);color:#fff;padding:11px 18px;font:600 14px system-ui,sans-serif;cursor:pointer;backdrop-filter:blur(8px)}
+.day-one-view-photo:focus-visible,.day-one-photo-close:focus-visible{outline:3px solid #70c7ef;outline-offset:3px}
+.day-one-photo-dialog{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:#080b10;overflow:hidden}
+.day-one-photo-dialog::backdrop{background:rgba(0,0,0,.96)}
+.day-one-photo-dialog img{width:100%;height:100%;object-fit:contain;display:block}
+.day-one-photo-close{position:absolute;right:18px;top:max(18px,env(safe-area-inset-top));z-index:2;border:1px solid #ffffff80;border-radius:999px;background:#14212be0;color:white;padding:12px 17px;font:600 15px system-ui,sans-serif;cursor:pointer}
+@media(max-width:740px){.day-page[data-day-source="../data/day-01.json"] .day-four-hero{height:100svh;min-height:500px}.day-one-view-photo{top:76px;right:16px}}
