@@ -40,7 +40,6 @@
         </a>
 
 
-        <button type="button" class="day-one-view-photo" id="day-one-open-photo" aria-haspopup="dialog">⛶ View full photo</button>
         <div class="day-hero-content"><p class="day-four-eyebrow">THE LONG WAY AROUND · EUROPE 2026</p>
 
             <p id="day-label"
@@ -57,7 +56,6 @@
         </div>
 
     </header>
-<dialog id="day-one-photo-dialog" class="day-one-photo-dialog" aria-label="Full Day 1 photograph"><button type="button" class="day-one-photo-close" aria-label="Close photograph">× Close</button><img src="https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-01/1792426732089-img_0222.jpeg" alt="Delta aircraft and airport ramp at DFW, October 19, 2026"></dialog>
 <div class="day-four-subnav"><a href="#intro-section">The Day</a><a href="#stops-section">Highlights</a><a href="#map-section">Route Map</a><a href="#photos-section">Photographs</a></div>
 <p class="day-four-image-credit">Day 1 photograph · My travels</p>
 
@@ -229,16 +227,6 @@
     <script type="module" src="../../../js/day-page.js"></script>
 
 
-<script>
-(() => {
-  const dialog = document.getElementById("day-one-photo-dialog");
-  const open = document.getElementById("day-one-open-photo");
-  if (!dialog || !open) return;
-  open.addEventListener("click", () => dialog.showModal());
-  dialog.querySelector(".day-one-photo-close").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
-})();
-</script>
 </body>
 
 </html>
