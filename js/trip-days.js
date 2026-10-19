@@ -167,7 +167,7 @@ async function loadTripDays() {
             const photo = document.createElement("div");
             photo.className = "longway-day-photo";
             const dayImages = {
-              1: "Dallas-Fort Worth International Airport.jpg",
+              1: null,
               2: "Schönbrunn Palace.jpg",
               3: "Bratislava Castle with Danube.jpeg",
               4: "Bled Church island in Blue hour.jpg",
@@ -193,8 +193,8 @@ async function loadTripDays() {
               24: "MUC Terminal 2 from air 20251011.jpg"
             };
             const imageFile = dayImages[day.dayNumber];
-            if (imageFile) {
-              const photoUrl = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(imageFile) + "?width=960";
+            if (imageFile || day.dayNumber === 1) {
+              const photoUrl = day.dayNumber === 1 ? "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-01/1792426732089-img_0222.jpeg" : "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(imageFile) + "?width=960";
               const img = new Image();
               img.alt = "";
               img.loading = "lazy";
@@ -251,7 +251,7 @@ async function loadTripDays() {
     summary.textContent = "Cover photograph credits and licensing";
     credits.appendChild(summary);
     const creditList = document.createElement("ol");
-    const creditFiles = {"1":"Dallas-Fort Worth International Airport.jpg","2":"Schönbrunn Palace.jpg","3":"Bratislava Castle with Danube.jpeg","4":"Bled Church island in Blue hour.jpg","5":"Kamnik alps at sunset.jpg","6":"View of the Grand Canal from Rialto to Ca'Foscari.jpg","7":"Brescia castello ponte levatoio torre dei Prigionieri panorama di Brescia.jpg","8":"Odle, Puez, Sella and Langkofel groups from Seceda, South Tyrol.jpg","9":"Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg","10":"Riva del Garda Panorama from sentiero del Ponale.jpg","11":"Guaita Fortress and San Marino (2023).jpg","12":"Bernina express Viaduc de Brusio.jpg","13":"Brescia - Piazza della Loggia.jpg","14":"Brescia - Piazza Paolo VI (48747822708).jpg","15":"Monaco Hercule Harbour Panorama.jpg","16":"Mont Blanc de Courmayeur.jpg","17":"Chillon Castle at Lake Geneva.jpg","18":"Luxembourg Grund Old Town.jpg","19":"Hunebed D27 2020.jpg","20":"Mittelrhein-Burg-Stahleck-JR-E-1700-2017-05-27.jpg","21":"Römerberg in Frankfurt.jpg","22":"Neues Rathaus und Marienplatz München.jpg","23":"Liechtenstein-00190 - Vaduz Castle (19627815986).jpg","24":"MUC Terminal 2 from air 20251011.jpg"};
+    const creditFiles = {"2":"Schönbrunn Palace.jpg","3":"Bratislava Castle with Danube.jpeg","4":"Bled Church island in Blue hour.jpg","5":"Kamnik alps at sunset.jpg","6":"View of the Grand Canal from Rialto to Ca'Foscari.jpg","7":"Brescia castello ponte levatoio torre dei Prigionieri panorama di Brescia.jpg","8":"Odle, Puez, Sella and Langkofel groups from Seceda, South Tyrol.jpg","9":"Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg","10":"Riva del Garda Panorama from sentiero del Ponale.jpg","11":"Guaita Fortress and San Marino (2023).jpg","12":"Bernina express Viaduc de Brusio.jpg","13":"Brescia - Piazza della Loggia.jpg","14":"Brescia - Piazza Paolo VI (48747822708).jpg","15":"Monaco Hercule Harbour Panorama.jpg","16":"Mont Blanc de Courmayeur.jpg","17":"Chillon Castle at Lake Geneva.jpg","18":"Luxembourg Grund Old Town.jpg","19":"Hunebed D27 2020.jpg","20":"Mittelrhein-Burg-Stahleck-JR-E-1700-2017-05-27.jpg","21":"Römerberg in Frankfurt.jpg","22":"Neues Rathaus und Marienplatz München.jpg","23":"Liechtenstein-00190 - Vaduz Castle (19627815986).jpg","24":"MUC Terminal 2 from air 20251011.jpg"};
     Object.entries(creditFiles).forEach(([number, file]) => {
       const item = document.createElement("li");
       const link = document.createElement("a");
