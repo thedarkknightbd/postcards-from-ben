@@ -19,6 +19,12 @@
       "lng": -69.9683
     },
     {
+      "name": "Austria",
+      "mapNames": [
+        "Austria"
+      ]
+    },
+    {
       "name": "Bahamas",
       "mapNames": [
         "The Bahamas",
@@ -86,6 +92,13 @@
       "name": "Colombia",
       "mapNames": [
         "Colombia"
+      ]
+    },
+    {
+      "name": "Czechia",
+      "mapNames": [
+        "Czechia",
+        "Czech Republic"
       ]
     },
     {
@@ -162,6 +175,15 @@
       "lng": -66.5901
     },
     {
+      "name": "Romania",
+      "mapNames": [
+        "Romania"
+      ],
+      "trips": [
+        "special-convention"
+      ]
+    },
+    {
       "name": "Sint Maarten",
       "mapNames": [
         "Sint Maarten"
@@ -235,15 +257,6 @@
       "small": true,
       "lat": 41.9029,
       "lng": 12.4534
-    },
-    {
-      "name": "Romania",
-      "mapNames": [
-        "Romania"
-      ],
-      "trips": [
-        "special-convention"
-      ]
     }
   ],
   "trips": {
