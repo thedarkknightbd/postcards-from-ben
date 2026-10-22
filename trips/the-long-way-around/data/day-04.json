@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-03.html",
   "dayNumber": 4,
-  "date": "October 22, 2026",
-  "title": "Lake Bled & Slovenia",
-  "route": "Budapest → Lake Bled → Kamnik",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Kamnik, Slovenia"
     }
   ],
-  "introTitle": "From Budapest to the Slovenian Alps.",
-  "intro": "The day begins in Budapest with a visit to the Hungary branch office before heading west toward Slovenia. Late in the afternoon, the route reaches Lake Bled for one of the first major Alpine views of the trip before continuing to Kamnik for the night.",
+  "route": "Budapest → Lake Bled → Kamnik",
+  "nextDay": "day-05.html",
+  "intro": "The morning began under gray skies in Budapest, with rain accompanying the start of another day on the road. My first stop was Hungary Bethel, where I enjoyed visiting the branch and spending time with the friends before continuing toward Slovenia.\n\nLeaving Budapest, the drive along the M7 brought autumn scenery and the area around Lake Balaton was simply magnificent. The changing colors and rolling countryside gave me plenty to enjoy along the way. Although the crosswinds today provided a new challenge.  \n\nAs I made my way along Hungary’s M70 motorway, approaching the Slovenian border, I experienced something I hadn’t enjoyed much during this trip: an almost empty motorway. For once, it felt like I had the road almost entirely to myself. No cars crowding behind me, nobody tailgating, and no one pushing me to drive faster. Just an open road, beautiful countryside, and the freedom to enjoy the drive at my own pace.\n\nAfter the stressful encounters on Austria’s incredibly narrow roads and the exceptionally tight streets of Budapest, this peaceful stretch of motorway was a welcome change.\n\nAnd before long, I crossed the border into Slovenia! Another country, another chapter of The Long Way Around, and a much-needed moment to simply enjoy the journey. The scenery became absolutely breathtaking as I continued toward Lake Bled.\n\nArriving at Lake Bled was a wonderful way to close the day. Seeing the snowcapped mountains in the background with the evening sun shining directly on them was absolutely stunning. The castle stood in the distance, and although the church on the island was partly hidden, the view was still beautiful.\n\nWatching the rowers out on the water, with the lake spread out before me and the sun lighting the mountains beyond, was a moment worth stopping for. After a day of driving, it was wonderful simply to stand there and take it all in.\n\nSome places are beautiful in photographs. Others remind you that no photograph can fully capture what it feels like to be there. Lake Bled was one of those places.",
+  "introTitle": "Budapest to Lake Bled: The Hills Have Eyes",
+  "date": "October 22, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -57,9 +59,7 @@
       "longitude": 14.5953
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-03.html",
-  "nextDay": "day-05.html"
+  "title": "Lake Bled & Slovenia",
+  "videos": []
 }
