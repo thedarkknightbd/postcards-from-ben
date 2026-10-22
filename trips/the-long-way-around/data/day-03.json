@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-02.html",
   "dayNumber": 3,
-  "date": "October 21, 2026",
-  "title": "Vienna to Budapest",
-  "route": "Vienna → Bratislava → Budapest",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Budapest, Hungary"
     }
   ],
-  "introTitle": "Three countries in one day.",
-  "intro": "The adventure continues east from Vienna into Slovakia for a visit to the branch office in Bratislava before crossing another border and continuing to Budapest.",
+  "route": "Vienna → Bratislava → Budapest",
+  "nextDay": "day-04.html",
+  "intro": "Today took me from Vienna to Bratislava and on to Budapest - three cities in three countries, all in one day.\n\nThe morning began with a practical stop in Vienna to sort out my CPAP supplies before heading toward Slovakia for my visit to the branch office.\n\nThe highlight of my day was visiting Slovakia Bethel and spending time with the wonderful friends there. Those opportunities to meet and spend time with friends are such a special part of this trip.\n\nGetting around in the Volvo continued to provide its own entertainment, particularly when it came to parking. One especially tight spot required what felt like a 93-point maneuver. I’m still getting used to the size of this vehicle, and Europe’s narrow streets and parking spaces haven’t exactly eased me into it.\n\nFrom Bratislava, I continued toward Budapest. Arriving in the city at night and driving across the bridge with the Parliament building shining brightly against the night sky was an incredible sight. That was quite a welcome to Budapest - and a moment that deserved a little more attention than the navigation instructions.\n\nThe exceptionally tight streets brought their own challenges as I worked my way through the city in the Volvo, but that view of Parliament was a beautiful way to finish the day’s drive.\n\nFrom Vienna in the morning to wonderful association at Slovakia Bethel, then arriving in Budapest with the city lit up around me - three cities, three countries, and one incredible day.",
+  "introTitle": "Three Cities, Three Countries, One Incredible Day",
+  "date": "October 21, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -50,9 +52,7 @@
       "longitude": 19.05601
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-02.html",
-  "nextDay": "day-04.html"
+  "title": "Vienna to Budapest",
+  "videos": []
 }
