@@ -4828,3 +4828,6 @@ body.lightbox-open {
 .day-one-photo-dialog img{width:100%;height:100%;object-fit:contain;display:block}
 .day-one-photo-close{position:absolute;right:18px;top:max(18px,env(safe-area-inset-top));z-index:2;border:1px solid #ffffff80;border-radius:999px;background:#14212be0;color:white;padding:12px 17px;font:600 15px system-ui,sans-serif;cursor:pointer}
 @media(max-width:740px){.day-page.day-four-showcase .day-four-hero{height:400px;min-height:400px}.day-one-view-photo{top:76px;right:16px}}
+
+/* Preserve journal paragraph breaks entered in the admin editor. */
+.day-page #intro-text{white-space:pre-line}
