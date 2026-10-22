@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-01.html",
   "dayNumber": 2,
-  "date": "October 20, 2026",
-  "title": "Germany, Czechia & Austria",
-  "route": "Munich → Lake Lipno → Vienna",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Vienna, Austria"
     }
   ],
-  "introTitle": "The European road trip begins.",
-  "intro": "After landing in Munich, I pick up the car and begin the first drive of The Long Way Around. The route crosses into Czechia for a short lakeside stop at Lipno before continuing east to Vienna.",
+  "route": "Munich → Lake Lipno → Vienna",
+  "nextDay": "day-03.html",
+  "intro": "After months of planning, The Long Way Around was finally underway. I landed in Munich, picked up my rental Volvo XC90 (such a disappointment), and headed toward Lake Lipno in Czechia. There was something exciting about finally being here, driving through the places I had spent so much time planning to visit.\n\nThe weather became more overcast as I got closer to Lipno, but the hills of the Czech countryside were still absolutely beautiful. Arriving at the lake and having lunch by the water was an enjoyable way to pause before continuing toward Vienna.\n\nLeaving Lake Lipno behind, I headed toward Austria expecting a relatively straightforward drive. Google Maps, however, apparently had other plans.\n\nBetween getting used to the Volvo, an unreliable CarPlay connection, and directions taking me onto incredibly narrow roads, the drive had its frustrating moments. Some roads were supposedly wide enough for two vehicles, but barely seemed wide enough for one. At one point, I found myself facing a semi-truck with almost nowhere to go. Somehow, we managed to squeeze past each other without touching, although it felt like there were only millimeters to spare.\n\nBut driving through Austria also brought some absolutely stunning scenery. The hills and countryside were beautiful, and even with the navigation frustrations, there were moments when I could simply appreciate where I was. Those views were a reminder of why I wanted to take this journey in the first place.",
+  "introTitle": "The Long Way Around Begins",
+  "date": "October 20, 2026",
   "stops": [
     {
       "type": "Arrival",
@@ -50,9 +52,7 @@
       "longitude": 16.316665897236785
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-01.html",
-  "nextDay": "day-03.html"
+  "title": "Germany, Czechia & Austria",
+  "videos": []
 }
