@@ -193,6 +193,18 @@
       "lng": -63.0548
     },
     {
+      "name": "Slovakia",
+      "mapNames": [
+        "Slovakia"
+      ]
+    },
+    {
+      "name": "Slovenia",
+      "mapNames": [
+        "Slovenia"
+      ]
+    },
+    {
       "name": "St Lucia",
       "mapNames": [
         "Saint Lucia",
