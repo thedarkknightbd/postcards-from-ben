@@ -236,8 +236,24 @@ async function loadDayPage() {
     document.getElementById("intro-title").textContent =
         data.introTitle || "";
 
-    document.getElementById("intro-text").textContent =
-        data.intro || "";
+    // Render editor blank lines as separate paragraphs.
+    const existingIntro = document.getElementById("intro-text");
+    const introContainer = document.createElement("div");
+    introContainer.id = existingIntro.id;
+    introContainer.className = existingIntro.className;
+    introContainer.style.whiteSpace = "normal";
+    String(data.intro || "")
+        .trim()
+        .split(/\r?\n\s*\r?\n/)
+        .filter(text => text.trim())
+        .forEach(text => {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = text.trim();
+            paragraph.style.setProperty("margin", "0 0 1.25em", "important");
+            paragraph.style.whiteSpace = "pre-line";
+            introContainer.appendChild(paragraph);
+        });
+    existingIntro.replaceWith(introContainer);
 
 
     /* =====================================
