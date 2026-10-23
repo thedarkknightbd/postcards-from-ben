@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-04.html",
   "dayNumber": 5,
-  "date": "October 23, 2026",
-  "title": "Slovenia & Croatia",
-  "route": "Kamnik → Zagreb → Kamnik",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Kamnik, Slovenia"
     }
   ],
-  "introTitle": "Two branch visits in one day.",
-  "intro": "The day begins in Kamnik with a visit to the Slovenia Bethel Branch office. From there, the route crosses into Croatia for a visit to the Croatia Bethel Branch Office in Zagreb before turning north again and returning to Kamnik for the night.",
+  "route": "Kamnik → Zagreb → Kamnik",
+  "nextDay": "day-06.html",
+  "intro": "As the fog settled around Kamnik, the morning began with a visit to the Slovenia Bethel. It was an early start to an otherwise overcast day, but the warmth and friendliness of the Bethel family made it a wonderful morning.\n\nThere was also a little excitement among the family, as the cooks were preparing pizza for everyone that day. Sometimes it’s those little details that make a visit memorable.\n\nAfter leaving the Slovenia Bethel, it was time to make the roughly two-hour drive south toward Zagreb, Croatia.\n\nThe drive surprised me. As I made my way through the mountains, the road kept descending, seemingly more and more with every turn. I hadn’t realized just how high up I was until I found myself continually traveling downhill. It was quite a contrast to the return journey later in the day, when the landscape felt more like rolling foothills.\n\nArriving in Zagreb was another surprise. At first, the city seemed incredibly spacious, with wide roads and modern amenities. But as I approached the historic center, everything began to tighten.\n\nOne thing that particularly caught my attention was how the city’s public transportation system was integrated into the streets. Trams shared the roads with cars, weaving through the city alongside cobblestone streets and older buildings. It was an interesting combination of modern transportation and the historic character of Zagreb.\n\nFinding parking took longer than expected, and navigating the tight parking areas was another adventure in itself. Unfortunately, that left little time to explore the city before my next appointment.\n\nI managed a short walk toward the old city gates, where I could take in a view of the historic surroundings. I didn’t make it all the way to the main square, but even that brief glimpse gave me an appreciation for the city’s character.\n\nNestled behind the tight streets and residential neighborhoods is the Zagreb Bethel. The family was warm and welcoming, making for another enjoyable visit.\n\nBefore I knew it, the tour was over. It was time to say goodbye to some new friends and begin the journey back to Slovenia.\n\nLeaving Zagreb, the landscape opened up into beautiful rolling hills. They weren’t quite mountains, but seeing the countryside from a different perspective was absolutely amazing.\n\nAs I continued driving, clouds rested along the tops of the hills, almost as though they were hiding a secret city somewhere just beyond them. It was one of those views that made the drive itself part of the experience.\n\nThe return journey brought me back toward Kamnik, where I had one more experience waiting before calling it a day.\n\nAfter a full day exploring Slovenia and Croatia, I stopped at Gostilna Repnik for a traditional Slovenian dinner.\n\nI started with Rindssuppe mit Nudeln, a comforting beef noodle soup that reminded me a little of ramen. For the main course, I had Hühnerroulade mit Pilzsauce, a chicken roulade served with mushroom sauce, seasonal vegetables, braised fennel, and cottage cheese dumpling.\n\nMushrooms have never been my favorite, and that hasn’t changed, but I have to admit the mushroom sauce was absolutely delicious!\n\nThe restaurant had a nice, quiet atmosphere, the food was excellent, and the service was quick. It was the perfect way to end my time here in Slovenia.\n\nTomorrow, it’s onward to Italy, but not before one final stop to discover a hidden gem tucked away in the Slovenian mountains.",
+  "introTitle": "From Slovenia to Croatia and Back",
+  "date": "October 23, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -60,9 +62,7 @@
       "longitude": 14.5953
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-04.html",
-  "nextDay": "day-06.html"
+  "title": "Slovenia & Croatia",
+  "videos": []
 }
