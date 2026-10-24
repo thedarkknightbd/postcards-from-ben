@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-05.html",
   "dayNumber": 6,
-  "date": "October 24, 2026",
-  "title": "Enter into Italy",
-  "route": "Kamnik → Soča Valley (Kobarid) → Venice → Brescia",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "Into Venice.",
-  "intro": "Leave Kamnik early and drive to Kobarid for an optional 45–60-minute photography stop at Napoleon Bridge and the emerald Soča River. Continue to Venice, park once at Autorimessa Comunale in Piazzale Roma, and walk to Rialto Bridge, St. Mark's Square, Doge's Palace and the Bridge of Sighs, with a quick meal if desired. No boat rides or paid sightseeing. Drive to Brescia in the late afternoon. If weather or road conditions make the Soča detour impractical, drive directly from Kamnik to Venice.",
+  "route": "Kamnik → Soča Valley (Kobarid) → Venice → Brescia",
+  "nextDay": "day-07.html",
+  "intro": "Today began with one final adventure through Slovenia, and what an adventure it turned out to be.\n\nLeaving Kamnik, I headed toward the Soča Valley and Napoleon’s Bridge. What looked like a beautiful scenic drive quickly became one of the most nerve-racking experiences of the trip.\n\nThe roads grew narrower, the curves tighter, and the descent through the mountains seemed endless. With wet pavement, sharp turns, and an unfamiliar Volvo XC90 that already felt enormous on these European roads, I found myself concentrating on every inch of the journey.\n\nIf Day 2 had been a 10 out of 10 for driving stress, this morning was easily a 15.\n\nAnd yet, the scenery was absolutely beautiful.\n\nSlovenia’s mountains reminded me of the Appalachian Mountains back home, but there was something distinctly different about them. Everything felt closer and more intimate. The mountains rose immediately beside the road, the valleys were narrow, and small homes dotted the slopes among the changing autumn colors.\n\nIn the Appalachians, you feel like you’re driving through the mountains. Here in Slovenia, you feel like you’re part of them.\n\nUnfortunately, I was so focused on navigating the road that I couldn’t fully appreciate everything around me.\n\nBy the time I reached the bottom of that mountain descent, I was more than ready for a little breathing room.\n\n\nMy final destination before leaving Slovenia was Napoleon’s Bridge, near Kobarid, in the beautiful Soča Valley.\n\nThe bridge and its surrounding landscape offered one last opportunity to experience the natural beauty that had made Slovenia such a memorable part of this journey.\n\nThe mountains, the river, and the dramatic terrain were a reminder of just how much this small country has to offer.\n\nSlovenia had certainly challenged me behind the wheel, but it had also surprised me with its beauty.\n\nAnd with that, it was time to say goodbye to Slovenia and make my way into Italy.\n\n\nVenice was next.\n\nAfter the morning’s mountain adventure, I was looking forward to trading winding roads for canals and historic streets.\n\nGetting into Venice was an experience of its own. Once the car was parked, I made my way into the city using the People Mover and continued on foot toward its famous landmarks.\n\nWalking through Venice was interesting. There were narrow streets, bridges, canals, and beautiful old buildings around nearly every corner.\n\nEventually, I made my way to St. Mark’s Square and the Bridge of Sighs.\n\nSeeing these places in person was nice, and I appreciated the history and architecture. But I wouldn’t say they were necessarily the highlight of my visit.\n\nThat came a little later.\n\nFor the return journey, I boarded a water bus along the Grand Canal.\n\nAnd that changed everything.\n\nAs the boat made its way through Venice, the afternoon sunlight illuminated the colorful buildings lining the canal. The reflections danced across the water, and the entire city seemed to come alive.\n\nFrom the boat, I could finally take in Venice from a completely different perspective.\n\nThe architecture, the waterways, the boats passing by, and the sunlight shining down on everything made for an absolutely beautiful experience.\n\nIt was easily my favorite part of Venice.\n\nLooking back, I don’t feel like I missed anything by keeping my visit relatively short. I saw the places I wanted to see, wandered through the city, and experienced the Grand Canal in a way that brought the whole visit together.\n\nIt felt complete.\n\nAnd there was something fitting about that final boat ride. The wind and cooler air almost felt like a preview of what was still ahead.\n\nBecause while Venice had been today’s adventure, the mountains were calling again.\n\nThe Dolomites were waiting.\n\n\nWith Venice behind me, it was time to continue toward Brescia.\n\nAfter several days of moving between countries, visiting branch offices, exploring unfamiliar cities, and navigating some unforgettable roads, Brescia would become my home base for the next part of the journey.\n\nAnd after today’s adventures, the thought of settling into one place for a little while sounded pretty wonderful.\n\nFor dinner, I decided to embrace the local cuisine and try casonsei, a traditional Brescian stuffed pasta. It seemed only fitting that my first evening in Brescia would include a dish that the region is known for.\n\nAfter a day filled with mountain roads, Venetian canals, and plenty of unexpected moments, sitting down to a traditional Italian meal was a welcome change of pace.\n\nFrom the mountains of Slovenia to the canals of Venice, today had been another day of contrasts.\n\nSome moments tested my nerves. Others simply took my breath away.\n\nAnd sometimes, the most memorable part of a place isn’t necessarily its most famous landmark.\n\nSometimes, it’s a simple boat ride in the afternoon sunshine that makes the entire experience worthwhile.",
+  "introTitle": "From Mountain Roads to Venetian Canals",
+  "date": "October 24, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -100,9 +102,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-05.html",
-  "nextDay": "day-07.html"
+  "title": "Enter into Italy",
+  "videos": []
 }
