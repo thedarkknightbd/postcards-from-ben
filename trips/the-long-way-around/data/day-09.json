@@ -2,7 +2,7 @@
   "dayNumber": 9,
   "date": "October 27, 2026",
   "title": "One More Morning in the Dolomites",
-  "route": "Selva di Val Gardena → Santa Maddalena → San Giovanni in Ranui → Lago di Tovel → Brescia",
+  "route": "Selva di Val Gardena → Lago di Carezza → Brescia",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -15,9 +15,9 @@
       "value": "The Dolomites"
     },
     {
-      "icon": "📷",
+      "icon": "🏞️",
       "label": "Scenic Stop",
-      "value": "Val di Funes"
+      "value": "Lago di Carezza"
     },
     {
       "icon": "📍",
@@ -25,41 +25,27 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "One last morning in the mountains.",
-  "intro": "Depart Selva di Val Gardena for two classic Val di Funes photo stops: the Santa Maddalena panorama and San Giovanni in Ranui church. Continue to Lago di Tovel for a weather-dependent 60–75-minute lakeside photography stop before returning to Brescia. Plan lunch in Cles or Tuenno en route or bring a picnic, as lakeside dining may be closed in late October. Check lake access road and weather conditions before departure.",
+  "introTitle": "A peaceful farewell to the Dolomites.",
+  "intro": "Enjoy breakfast at Hotel Granbaita before checking out around 10 AM. Drive to Lago di Carezza for mountain-and-lake views, photographs and a relaxed lunch. Take the main-road approach and check weather and road conditions before setting off. After the lake, continue to Brescia for a late-afternoon hotel check-in. No additional mountain-village detours are planned.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Selva di Val Gardena",
-      "description": "Begin the morning in the heart of Val Gardena before heading toward Val di Funes.",
+      "description": "Breakfast at Hotel Granbaita, then check out and depart around 10 AM.",
       "latitude": 46.553859,
       "longitude": 11.759955
     },
     {
       "type": "Featured Scenic Stop",
-      "name": "Santa Maddalena — Val di Funes",
-      "description": "Spend part of the morning in Val di Funes, surrounded by the dramatic Odle peaks and classic Dolomite scenery.",
-      "latitude": 46.64146,
-      "longitude": 11.71533
-    },
-    {
-      "type": "Scenic Photo Stop",
-      "name": "San Giovanni in Ranui — Val di Funes",
-      "description": "Photograph the isolated St. Johann church against the Odle peaks from the permitted viewpoint. Allow around 15–30 minutes, plus local travel and walking; respect access restrictions.",
-      "latitude": 46.6368,
-      "longitude": 11.7207
-    },
-    {
-      "type": "Scenic Lake Stop — Weather Dependent",
-      "name": "Lago di Tovel",
-      "description": "Spend about 60–75 minutes photographing the lake, forest and Brenta Dolomites. Late-October access depends on road and weather conditions. Bring lunch or stop in Cles/Tuenno; do not assume seasonal lakeside restaurants are open.",
-      "latitude": 46.2603,
-      "longitude": 10.9496
+      "name": "Lago di Carezza",
+      "description": "Enjoy the lake and surrounding mountain scenery, take photos and stop for lunch. Use designated parking and check road conditions before departure.",
+      "latitude": 46.4094,
+      "longitude": 11.5755
     },
     {
       "type": "Destination",
       "name": "Brescia",
-      "description": "Leave the Dolomites behind and return to Brescia for the next stretch of the adventure.",
+      "description": "Return to Brescia and check into the Hilton in the late afternoon.",
       "latitude": 45.56578,
       "longitude": 10.23647
     }
