@@ -2,7 +2,7 @@
   "dayNumber": 8,
   "date": "October 26, 2026",
   "title": "Seceda & the Dolomites",
-  "route": "Brescia → Ortisei → Seceda → Sella Ronda → Selva di Val Gardena",
+  "route": "Brescia → Ortisei → Seceda → Selva di Val Gardena",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -18,15 +18,10 @@
       "icon": "🚠",
       "label": "Mountain Stop",
       "value": "Seceda"
-    },
-    {
-      "icon": "🚙",
-      "label": "Scenic Drive",
-      "value": "Four Dolomite Passes"
     }
   ],
   "introTitle": "Into the heart of the Dolomites.",
-  "intro": "Travel from Brescia to Ortisei for views from the Seceda cableways and the dramatic Odle ridgeline. Enjoy lunch in Ortisei before a scenic drive through the Dolomites, following the Sella Ronda mountain passes as conditions and time allow. Finish at Passo Gardena for beautiful late-afternoon scenery before spending the night in Selva di Val Gardena.",
+  "intro": "Travel from Brescia to Ortisei and ride the cableways to Seceda for the dramatic Odle ridgeline and Alpine scenery. Enjoy time on the mountain, then descend to Ortisei and drive directly to Selva di Val Gardena for a relaxing afternoon and overnight stay. The Sella Ronda mountain-pass circuit is not part of today's plan.",
   "stops": [
     {
       "type": "Starting Point",
@@ -55,63 +50,15 @@
     {
       "type": "Return to Car",
       "name": "Seceda Cableways — Ortisei",
-      "description": "Descend by cableway to Ortisei and enjoy lunch before the mountain drive.",
+      "description": "Descend by cableway to Ortisei, then return to the car for the short drive to Selva.",
       "latitude": 46.576421,
       "longitude": 11.675068,
       "transportToNext": "drive"
     },
     {
-      "type": "Mountain Pass",
-      "name": "Passo Sella",
-      "description": "Admire the dramatic Sassolungo and Sella massif scenery from this mountain pass.",
-      "latitude": 46.508554,
-      "longitude": 11.762924,
-      "transportToNext": "drive"
-    },
-    {
-      "type": "Mountain Pass",
-      "name": "Passo Pordoi",
-      "description": "Continue through the mountain landscape over Passo Pordoi if conditions and time permit.",
-      "latitude": 46.48752,
-      "longitude": 11.81226,
-      "transportToNext": "drive"
-    },
-    {
-      "type": "Mountain Village",
-      "name": "Arabba",
-      "description": "Pass through the mountain village of Arabba on the scenic Sella Ronda route.",
-      "latitude": 46.497569,
-      "longitude": 11.87485,
-      "transportToNext": "drive"
-    },
-    {
-      "type": "Mountain Pass",
-      "name": "Passo Campolongo",
-      "description": "Cross Passo Campolongo toward Alta Badia if following the complete loop.",
-      "latitude": 46.52,
-      "longitude": 11.87417,
-      "transportToNext": "drive"
-    },
-    {
-      "type": "Mountain Village",
-      "name": "Corvara",
-      "description": "Continue through Corvara, surrounded by the peaks of Alta Badia.",
-      "latitude": 46.54957,
-      "longitude": 11.87403,
-      "transportToNext": "drive"
-    },
-    {
-      "type": "Golden Hour",
-      "name": "Passo Gardena",
-      "description": "A memorable final scenic stop, especially beautiful in the late-afternoon light.",
-      "latitude": 46.55,
-      "longitude": 11.80944,
-      "transportToNext": "drive"
-    },
-    {
       "type": "Destination",
-      "name": "Selva di Val Gardena",
-      "description": "Continue down into Selva di Val Gardena for the night.",
+      "name": "Hotel Granbaita — Selva di Val Gardena",
+      "description": "Drive directly from Ortisei to the hotel, without the Sella Ronda mountain-pass circuit.",
       "latitude": 46.553859,
       "longitude": 11.759955
     }
