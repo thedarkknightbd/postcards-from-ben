@@ -13,12 +13,14 @@
         if (!res.ok) return null;
         const day = await res.json();
         const journal = typeof day.journal === 'string' ? day.journal.trim() : '';
-        // An itinerary alone is not a published postcard.
-        if (!journal) return null;
+        const story = typeof day.intro === 'string' ? day.intro.trim() : '';
+        // CMS saves actual stories in intro; short itinerary summaries are not published posts.
+        const publishedText = journal || (story.length >= 650 ? story : '');
+        if (!publishedText) return null;
         const number = Number(day.dayNumber);
         if (!Number.isInteger(number) || number < 1 || number > 24) return null;
         return {number, title: day.title || 'Day ' + number, date: day.date || '',
-          excerpt: journal.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,177),
+          excerpt: publishedText.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,177),
           href:'/trips/the-long-way-around/days/day-' + String(number).padStart(2,'0') + '.html'};
       } catch (err) { console.warn('Skipping unreadable postcard', ref.file, err); return null; }
     }));
