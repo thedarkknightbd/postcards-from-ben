@@ -1,222 +1,54 @@
-/* =====================================
-   POSTCARDS FROM BEN
-   Latest Postcard
-===================================== */
-
-async function r2FolderHasMedia(prefix) {
-    try {
-        const response =
-            await fetch(
-                `/api/r2?prefix=${encodeURIComponent(prefix)}`
-            );
-
-        if (!response.ok) {
-            return false;
-        }
-
-        const data =
-            await response.json();
-
-        return (
-            Array.isArray(data.objects) &&
-            data.objects.length > 0
-        );
-
-    } catch {
-        return false;
+/* Latest and previous published journal entries for the homepage. */
+(async function loadHomePostcards() {
+  const section = document.getElementById('latest-postcard-section');
+  if (!section) return;
+  try {
+    const response = await fetch('/trips/the-long-way-around/trip.json', {cache:'no-store'});
+    if (!response.ok) throw new Error('Trip index unavailable');
+    const trip = await response.json();
+    const entries = await Promise.all((trip.days || []).map(async ref => {
+      try {
+        const url = new URL(ref.file, response.url);
+        const res = await fetch(url.href, {cache:'no-store'});
+        if (!res.ok) return null;
+        const day = await res.json();
+        const journal = typeof day.journal === 'string' ? day.journal.trim() : '';
+        // An itinerary alone is not a published postcard.
+        if (!journal) return null;
+        const number = Number(day.dayNumber);
+        if (!Number.isInteger(number) || number < 1 || number > 24) return null;
+        return {number, title: day.title || 'Day ' + number, date: day.date || '',
+          excerpt: journal.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,177),
+          href:'/trips/the-long-way-around/days/day-' + String(number).padStart(2,'0') + '.html'};
+      } catch (err) { console.warn('Skipping unreadable postcard', ref.file, err); return null; }
+    }));
+    const published = entries.filter(Boolean).sort((a,b)=>b.number-a.number);
+    if (!published.length) return;
+    const latest = published[0];
+    document.getElementById('latest-postcard-meta').textContent = 'Day ' + latest.number + ' · ' + latest.date;
+    document.getElementById('latest-postcard-title').textContent = latest.title;
+    document.getElementById('latest-postcard-excerpt').textContent = latest.excerpt + (latest.excerpt.length === 177 ? '…' : '');
+    document.getElementById('latest-postcard-link').href = latest.href;
+    const previous = published.slice(1);
+    const container = document.getElementById('previous-postcards');
+    const grid = document.getElementById('previous-postcards-grid');
+    if (container && grid && previous.length) {
+      previous.forEach(post => {
+        const article = document.createElement('article');
+        article.className = 'previous-postcard-card';
+        const meta = document.createElement('p');
+        meta.className = 'latest-postcard-meta';
+        meta.textContent = 'Day ' + post.number + ' · ' + post.date;
+        const title = document.createElement('h4');
+        title.textContent = post.title;
+        const link = document.createElement('a');
+        link.href = post.href;
+        link.textContent = 'Read Postcard →';
+        article.append(meta,title,link);
+        grid.appendChild(article);
+      });
+      container.hidden = false;
     }
-}
-
-
-async function loadLatestPostcard() {
-
-    const section =
-        document.getElementById(
-            "latest-postcard-section"
-        );
-
-    if (!section) {
-        return;
-    }
-
-    try {
-
-        const tripResponse =
-            await fetch(
-                "trips/the-long-way-around/trip.json"
-            );
-
-        if (!tripResponse.ok) {
-            throw new Error(
-                "Could not load trip data."
-            );
-        }
-
-        const trip =
-            await tripResponse.json();
-
-
-        /*
-         Start with Day 24 and work backward.
-         Journal entries and both R2 photos/videos
-         count as a published postcard.
-        */
-
-        const days =
-            [...trip.days].reverse();
-
-
-        for (const dayReference of days) {
-
-            const dayUrl =
-                new URL(
-                    dayReference.file,
-                    tripResponse.url
-                ).href;
-
-            const dayResponse =
-                await fetch(dayUrl);
-
-            if (!dayResponse.ok) {
-                continue;
-            }
-
-            const day =
-                await dayResponse.json();
-
-
-            const hasJournal =
-                typeof day.journal === "string" &&
-                day.journal.trim() !== "";
-
-            const hasLegacyPhotos =
-                Array.isArray(day.photos) &&
-                day.photos.length > 0;
-
-            const hasLegacyVideos =
-                Array.isArray(day.videos) &&
-                day.videos.length > 0;
-
-
-            let hasPhotos =
-                hasLegacyPhotos;
-
-            let hasVideos =
-                hasLegacyVideos;
-
-
-            if (
-                !hasJournal &&
-                !hasPhotos &&
-                !hasVideos
-            ) {
-
-                const paddedDay =
-                    String(day.dayNumber)
-                        .padStart(2, "0");
-
-                const root =
-                    `trips/the-long-way-around/days/day-${paddedDay}/`;
-
-                [
-                    hasPhotos,
-                    hasVideos
-                ] =
-                    await Promise.all([
-                        r2FolderHasMedia(root),
-                        r2FolderHasMedia(
-                            `${root}videos/`
-                        )
-                    ]);
-            }
-
-
-            if (
-                !hasJournal &&
-                !hasPhotos &&
-                !hasVideos
-            ) {
-                continue;
-            }
-
-
-            document.getElementById(
-                "latest-postcard-meta"
-            ).textContent =
-                `Day ${day.dayNumber} · ${day.date}`;
-
-
-            document.getElementById(
-                "latest-postcard-title"
-            ).textContent =
-                day.title;
-
-
-            let excerpt;
-
-
-            if (hasJournal) {
-
-                excerpt =
-                    day.journal
-                        .replace(/\s+/g, " ")
-                        .trim();
-
-                if (excerpt.length > 180) {
-
-                    excerpt =
-                        excerpt
-                            .slice(0, 177)
-                            .trimEnd() + "…";
-
-                }
-
-            } else if (hasPhotos) {
-
-                excerpt =
-                    `New photos from ${day.title}.`;
-
-            } else {
-
-                excerpt =
-                    `A new video update from ${day.title}.`;
-
-            }
-
-
-            document.getElementById(
-                "latest-postcard-excerpt"
-            ).textContent =
-                excerpt;
-
-
-            const paddedDay =
-                String(day.dayNumber)
-                    .padStart(2, "0");
-
-
-            document.getElementById(
-                "latest-postcard-link"
-            ).href =
-                `trips/the-long-way-around/days/day-${paddedDay}.html`;
-
-
-            section.hidden = false;
-
-            return;
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "Unable to load latest postcard:",
-            error
-        );
-
-    }
-
-}
-
-
-loadLatestPostcard();
+    section.hidden = false;
+  } catch(err) { console.error('Unable to load homepage postcards:', err); }
+})();
