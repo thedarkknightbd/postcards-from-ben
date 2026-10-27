@@ -4831,3 +4831,15 @@ body.lightbox-open {
 
 /* Preserve journal paragraph breaks entered in the admin editor. */
 .day-page #intro-text{white-space:pre-line}
+
+/* Homepage journal archive */
+.home-postcards{max-width:1120px;margin:56px auto;padding:0 24px}
+.home-postcards[hidden],.previous-postcards[hidden]{display:none!important}
+.home-postcards>h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:22px}
+.home-postcards .latest-postcard-card{padding:28px;border:1px solid #dce3e8;border-radius:16px;background:#fff;box-shadow:0 6px 22px #142a3810}
+.previous-postcards{margin-top:34px}
+.previous-postcards>h3{font-size:1.45rem;margin-bottom:18px}
+.previous-postcards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:16px}
+.previous-postcard-card{padding:22px;border:1px solid #dce3e8;border-radius:14px;background:#fff}
+.previous-postcard-card h4{margin:10px 0 16px;font-size:1.15rem;line-height:1.35}
+.previous-postcard-card a,.home-postcards a{color:#16638e;font-weight:650}
