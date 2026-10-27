@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-07.html",
   "dayNumber": 8,
-  "date": "October 26, 2026",
-  "title": "Seceda & the Dolomites",
-  "route": "Brescia → Ortisei → Seceda → Selva di Val Gardena",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -20,8 +19,11 @@
       "value": "Seceda"
     }
   ],
-  "introTitle": "Into the heart of the Dolomites.",
-  "intro": "Travel from Brescia to Ortisei and ride the cableways to Seceda for the dramatic Odle ridgeline and Alpine scenery. Enjoy time on the mountain, then descend to Ortisei and drive directly to Selva di Val Gardena for a relaxing afternoon and overnight stay. The Sella Ronda mountain-pass circuit is not part of today's plan.",
+  "route": "Brescia → Ortisei → Seceda → Selva di Val Gardena",
+  "nextDay": "day-09.html",
+  "intro": "Today was a day I had been looking forward to for quite some time: finally seeing the Dolomites.\n\nLeaving Brescia, I headed north toward Ortisei, watching the landscape gradually change as I made my way into the mountains. What struck me almost immediately was the sheer scale of everything around me. From a distance, some of the mountains looked almost like little hills, but the closer I got, the more I realized just how enormous they were.\n\nThere was something remarkable about driving through the valleys with mountains rising on either side. I wasn’t simply looking at the mountains from a distance. I was right in the middle of them.\n\nAnd then I caught my first glimpse of the snow-capped Dolomites.\n\nAbsolutely breathtaking.\n\nThe sharp angles, jagged ridgelines, and beautiful snow-covered peaks left me in awe. Every turn seemed to reveal something even more spectacular. I had seen countless photographs of these mountains, but nothing compared to seeing them in person. The sheer beauty and scale were almost overwhelming.\n\nArriving in Ortisei brought a few challenges of its own. The streets were narrow, and I managed to take a wrong turn that required turning the Volvo XC90 around. After some of the difficult roads I’d already experienced during this trip, I was especially conscious of how large this vehicle feels in these little mountain towns.\n\nEventually, I reached the Seceda cable cars, ready to experience one of the places I had been most excited to visit.\n\nAs the cable car climbed higher into the mountains, the views became increasingly spectacular. The surrounding valleys stretched out below, and the dramatic peaks of the Dolomites seemed to rise in every direction.\n\nBut nothing quite prepared me for the view at the top.\n\nStanding at Seceda, looking out over those incredible jagged peaks, was an experience I won’t soon forget. The rock formations seemed almost impossibly dramatic, with their sharp edges and steep slopes. It was cold, but the scenery made it worth every moment.\n\nI spent time taking photographs and simply enjoying the opportunity to be there. It was one of those places where you could stand in silence and just appreciate the beauty of creation.\n\nAfter descending from Seceda, I drove to Selva di Val Gardena and checked into Hotel Granbaita Dolomites. Nestled among the mountains, the hotel was a wonderful place to spend the night. After days of driving across Europe, it felt especially good to slow down and enjoy my surroundings.\n\nAs evening approached, I stepped outside to take in the golden-hour light. The warm glow settling over the mountains was precious to see. The peaks that had looked so dramatic earlier in the day took on a softer appearance as the sunlight changed.\n\nDinner at the hotel was another highlight. From the moment I arrived, the service was exceptional. They knew my name and had my table ready, which was a lovely touch.\n\nThe five-course dinner was beautifully prepared, beginning with a salad featuring delicious cheeses, followed by a creamy tomato soup with basil caviar. The chanterelle ravioli was wonderful, and the Tyrolean Gröstl with tender beef cheek was another memorable course. Dessert was a Saint-Honoré, a fitting finish to an excellent meal.\n\nWhat a day.\n\nFrom the first glimpse of those snow-capped peaks to standing above the valleys at Seceda, relaxing at a beautiful mountain hotel, and enjoying an exceptional dinner, today was everything I had hoped my visit to the Dolomites would be.\n\nSome places are beautiful in photographs, but their true scale and beauty can only be appreciated in person.\n\nThe Dolomites are certainly one of those places.",
+  "introTitle": "Into the Heart of the Dolomit",
+  "date": "October 26, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -63,9 +65,7 @@
       "longitude": 11.759955
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-07.html",
-  "nextDay": "day-09.html"
+  "title": "Seceda & the Dolomites",
+  "videos": []
 }
