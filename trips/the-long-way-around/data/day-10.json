@@ -2,7 +2,7 @@
   "dayNumber": 10,
   "date": "October 28, 2026",
   "title": "A Drive to Salò",
-  "route": "Brescia → Limone sul Garda → Riva del Garda → Brescia",
+  "route": "Brescia → Salò → Brescia",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -12,12 +12,12 @@
     {
       "icon": "🌊",
       "label": "Featured Area",
-      "value": "Northern Lake Garda"
+      "value": "Lake Garda"
     },
     {
       "icon": "🏘️",
-      "label": "Lakeside Stops",
-      "value": "Limone · Riva del Garda"
+      "label": "Lakeside Stop",
+      "value": "Salò"
     },
     {
       "icon": "📍",
@@ -25,8 +25,8 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "North along Lake Garda.",
-  "intro": "The day follows the western shore of Lake Garda toward its more dramatic northern end, where steep mountains rise directly from the water. The first stop is Limone sul Garda for its waterfront, historic lanes and lakeside scenery before continuing north to Riva del Garda at the head of the lake. From there, the route turns back toward Brescia for the evening.",
+  "introTitle": "A change of pace along Lake Garda.",
+  "intro": "After unforgettable days exploring the Dolomites, today's adventure takes me to Lake Garda, Italy's largest lake. Today's destination is Salò, a charming town along the southwestern shore, known for its beautiful waterfront promenade, historic buildings and views across the lake. After days of dramatic mountain scenery and winding roads, I'm looking forward to a change of pace: a leisurely drive, time along the waterfront, and another opportunity to appreciate the beauty of northern Italy. More to come as the day unfolds.",
   "stops": [
     {
       "type": "Starting Point",
@@ -36,29 +36,22 @@
       "longitude": 10.23647
     },
     {
-      "type": "Featured Scenic Stop",
-      "name": "Limone sul Garda",
-      "description": "Explore the waterfront and historic center of Limone sul Garda, tucked between Lake Garda and the surrounding mountains.",
-      "latitude": 45.8141,
-      "longitude": 10.7928
-    },
-    {
-      "type": "Scenic Stop",
-      "name": "Riva del Garda",
-      "description": "Continue to the mountainous northern end of Lake Garda for views where the lake narrows beneath the surrounding peaks.",
-      "latitude": 45.8858,
-      "longitude": 10.8412
+      "type": "Featured Lakeside Stop",
+      "name": "Salò",
+      "description": "Explore the waterfront promenade and historic center of Salò.",
+      "latitude": 45.6068,
+      "longitude": 10.5224
     },
     {
       "type": "Destination",
       "name": "Brescia",
-      "description": "Return to Brescia after a scenic day along northern Lake Garda.",
+      "description": "Return to Brescia after visiting Salò.",
       "latitude": 45.56578,
       "longitude": 10.23647
     }
   ],
   "photos": [],
-  "journal": "",
+  "journal": "After unforgettable days exploring the Dolomites, today's adventure takes me to Lake Garda, Italy's largest lake. Today's destination is Salò, a charming town along the southwestern shore, known for its beautiful waterfront promenade, historic buildings and views across the lake. After days of dramatic mountain scenery and winding roads, I'm looking forward to a change of pace: a leisurely drive, time along the waterfront, and another opportunity to appreciate the beauty of northern Italy. More to come as the day unfolds.",
   "videos": [],
   "previousDay": "day-09.html",
   "nextDay": "day-11.html"
