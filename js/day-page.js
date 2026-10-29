@@ -113,6 +113,61 @@ async function loadDayPage() {
 
 
     /* =====================================
+       ROAD-FOLLOWING ROUTES FOR DAYS 9–10
+       Existing GeoJSON has only straight stop-to-stop lines.
+       Fetch actual driving-road geometry while retaining the
+       original file as a fallback if routing is unavailable.
+    ===================================== */
+
+    if ([9, 10].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
+        try {
+            const waypoints = data.stops.map(stop =>
+                [Number(stop.longitude), Number(stop.latitude)]
+            );
+            if (waypoints.every(point => point.every(Number.isFinite))) {
+                const routingUrl = "https://router.project-osrm.org/route/v1/driving/" +
+                    waypoints.map(point => point.join(",")).join(";") +
+                    "?overview=full&geometries=geojson&steps=false";
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 9000);
+                let routingResponse;
+                try {
+                    routingResponse = await fetch(routingUrl, { signal: controller.signal });
+                } finally {
+                    clearTimeout(timeout);
+                }
+                if (!routingResponse.ok) throw new Error("Routing HTTP " + routingResponse.status);
+                const routingResult = await routingResponse.json();
+                const geometry = routingResult.routes?.[0]?.geometry;
+                if (routingResult.code !== "Ok" ||
+                    geometry?.type !== "LineString" ||
+                    !Array.isArray(geometry.coordinates) ||
+                    geometry.coordinates.length < 10) {
+                    throw new Error("Routing service did not return detailed road geometry");
+                }
+                detailedRouteData = {
+                    type: "FeatureCollection",
+                    features: [{
+                        type: "Feature",
+                        properties: {
+                            mode: "drive",
+                            fromStopIndex: 0,
+                            toStopIndex: waypoints.length - 1,
+                            fromName: data.stops[0].name,
+                            toName: data.stops[data.stops.length - 1].name,
+                            routeNote: "Road route from OpenStreetMap routing data; not live navigation."
+                        },
+                        geometry
+                    }]
+                };
+            }
+        } catch (error) {
+            console.warn("Road routing unavailable; showing itinerary waypoint overview:", error);
+        }
+    }
+
+
+    /* =====================================
        DETAILED RAIL GEOMETRY
     ===================================== */
 
