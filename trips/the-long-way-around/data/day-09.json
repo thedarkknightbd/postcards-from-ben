@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-08.html",
   "dayNumber": 9,
-  "date": "October 27, 2026",
-  "title": "One More Morning in the Dolomites",
-  "route": "Selva di Val Gardena → Lago di Carezza → Brescia",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -25,8 +24,11 @@
       "value": "Brescia, Italy"
     }
   ],
+  "route": "Selva di Val Gardena → Lago di Carezza → Brescia",
+  "nextDay": "day-10.html",
+  "intro": "The first week of this journey has been truly memorable. It’s hard to believe how quickly the days have passed, yet somehow it feels as though I’ve been traveling for years. So many places, experiences, and breathtaking moments have filled this short time.\n\nLeaving the Dolomites was especially bittersweet. After one last morning among the mountains, I started the drive down toward Lago di Carezza. The road descended from high mountain country toward the valley. Driving through the green hills, with the mountains still rising around me, was beautiful—but the unfamiliar roads and the cars behind me made me nervous. I kept my own pace and made it down safely.\n\nThen I came out of a tunnel and the peaks appeared again: sudden, jagged ridges and absolute beauty. At Lago di Carezza, I had one more chance to pause and take in the Dolomites before continuing toward Brescia.\n\nThere was something almost magical about those towering peaks, the winding roads through quiet valleys, and the villages tucked beneath mountains that seemed too beautiful to be real. As I drove away, I wanted to look back just one more time and hold on to the view a little longer. It was hard to say goodbye to a place that had captured my heart so quickly. But there is still so much beauty ahead, and so many adventures waiting around the next bend.",
   "introTitle": "A peaceful farewell to the Dolomites.",
-  "intro": "Enjoy breakfast at Hotel Granbaita before checking out around 10 AM. Drive to Lago di Carezza for mountain-and-lake views, photographs and a relaxed lunch. Take the main-road approach and check weather and road conditions before setting off. After the lake, continue to Brescia for a late-afternoon hotel check-in. No additional mountain-village detours are planned.",
+  "date": "October 27, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -50,9 +52,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-08.html",
-  "nextDay": "day-10.html"
+  "title": "One More Morning in the Dolomites",
+  "videos": []
 }
