@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-09.html",
   "dayNumber": 10,
-  "date": "October 28, 2026",
-  "title": "A Drive to Salò",
-  "route": "Brescia → Salò → Brescia",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -25,8 +24,11 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "A meaningful morning, then Lake Garda.",
-  "intro": "Today began a little differently. Rather than immediately heading out to explore another part of Italy, I spent the morning with new friends here in Brescia, sharing something meaningful and getting to know them a bit better. It reminded me that some of the most memorable parts of this journey aren't always the landscapes or famous landmarks, but the people I meet along the way.\n\nWith a rewarding morning behind me, it was time for another adventure. Today's destination: Salò, along the beautiful shores of Lake Garda. After days of dramatic mountain scenery and winding roads, I'm looking forward to a change of pace, some time along the waterfront, and another opportunity to appreciate northern Italy. More to come as the day unfolds.",
+  "route": "Brescia → Salò → Brescia",
+  "nextDay": "day-11.html",
+  "intro": "The morning began with time spent with local friends in Brescia. It was a lovely reminder that some of the most meaningful parts of a journey come from the people you meet along the way. Then I headed toward Salò, on the shore of Lake Garda.\n\nOn the drive, a mountain with broad stretches of pale stone caught my eye. A friend told me it was Italian marble. We stopped for lunch at Locanda Trattoria La Tana d’Orso, where I had spicy spaghetti with chili, a thin steak, and Parmesan. We also talked about olive oil and how differences in the soil and acidity can affect its flavor and texture.\n\nIn Salò, I walked along the lakeshore and watched the crystal-clear water move in gentle waves. Across the lake, the opposite shore made a beautiful backdrop. I stopped for gelato and noticed olive trees growing along the way. Seeing the olives brought back our conversation about Lake Garda olive oil and made it easier to picture how the landscape shapes what’s produced here.\n\nAfter the dramatic mountain scenery of the past few days, Lake Garda offered a gentler kind of beauty. It was a welcome chance to slow down, take in the water, and enjoy another side of Italy before returning to Brescia",
+  "introTitle": "Lake Garda: A Moment to Slow Down",
+  "date": "October 28, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -50,9 +52,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "Today began a little differently. Rather than immediately heading out to explore another part of Italy, I spent the morning with new friends here in Brescia, sharing something meaningful and getting to know them a bit better. It reminded me that some of the most memorable parts of this journey aren't always the landscapes or famous landmarks, but the people I meet along the way.\n\nWith a rewarding morning behind me, it was time for another adventure. Today's destination: Salò, along the beautiful shores of Lake Garda. After days of dramatic mountain scenery and winding roads, I'm looking forward to a change of pace, some time along the waterfront, and another opportunity to appreciate northern Italy. More to come as the day unfolds.",
-  "videos": [],
-  "previousDay": "day-09.html",
-  "nextDay": "day-11.html"
+  "title": "A Drive to Salò",
+  "videos": []
 }
