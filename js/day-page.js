@@ -113,15 +113,16 @@ async function loadDayPage() {
 
 
     /* =====================================
-       ROAD-FOLLOWING ROUTES FOR DAYS 9–10
+       ROAD-FOLLOWING ROUTES FOR DAYS 9–11
        Existing GeoJSON has only straight stop-to-stop lines.
        Fetch actual driving-road geometry while retaining the
        original file as a fallback if routing is unavailable.
     ===================================== */
 
-    if ([9, 10].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
+    if ([9, 10, 11].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
         try {
-            const waypoints = data.stops.map(stop =>
+            const routingStops = data.routeVia?.length ? [...data.stops.slice(0, -1), ...data.routeVia, data.stops[data.stops.length - 1]] : data.stops;
+            const waypoints = routingStops.map(stop =>
                 [Number(stop.longitude), Number(stop.latitude)]
             );
             if (waypoints.every(point => point.every(Number.isFinite))) {
