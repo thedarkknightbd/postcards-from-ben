@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-10.html",
   "dayNumber": 11,
-  "date": "October 29, 2026",
-  "title": "San Marino & Bologna",
-  "route": "Brescia → San Marino → Bologna → Brescia",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "A tiny country and one of Italy's great cities.",
-  "intro": "The day begins with a drive across northern Italy to the Republic of San Marino for a short visit high above the surrounding countryside. From there, the route turns toward Bologna for lunch and time in its historic center before returning to Brescia for the evening.",
+  "route": "Brescia → San Marino → Bologna → Brescia",
+  "nextDay": "day-12.html",
+  "intro": "The drive toward San Marino began with a beautiful surprise. As I approached, I could see the mountains rising in the distance, softened by the haze. They almost looked like shadows in a painting.\n\nSan Marino turned out to be different from what I expected. After taking the elevator up toward the historic center, I found myself walking along old stone streets that seemed to climb endlessly. One steep incline would level off, turn around a sharp hairpin bend, and then begin climbing again.\n\nThere was something fascinating about walking through a city built into the side of a mountain, surrounded by centuries of history and beautiful views. It was amazing to think that this tiny country, one of the oldest republics in the world, had preserved so much of its character through the centuries.\n\nFrom there, I headed toward Bologna, hoping to experience another side of Italy, particularly its famous food.\n\nPassing through Gatteo, I noticed an incredible number of cyclists tackling the hills. It almost felt like the Tour de France was taking place right here in Italy. Watching them climb those steep roads was impressive.\n\nBut Bologna had other plans.\n\nDriving into the city in a large Volvo XC90 was stressful. Between the narrow streets, confusing directions, and the possibility of accidentally entering a restricted traffic zone, I was exhausted before I even parked.\n\nEventually, I found a garage and made my way on foot through the city center. Yet even as I walked through Bologna’s historic streets, I couldn’t quite shake the worry that I might have accidentally driven into a Zona Traffico Limitato, one of Italy’s restricted traffic areas. It was difficult to fully enjoy the city with that thought lingering in the back of my mind.\n\nI eventually found what seemed like a hidden little restaurant, tucked away with hardly any seating and very little room to move around. It was certainly an intimate dining experience! I ordered the Birichino, which turned out to be quite good. Unfortunately, even a good Italian meal couldn’t completely quiet the thoughts still running through my head.\n\nAfter eating, I decided it was time to make my way back to Brescia. But I couldn’t leave Bologna without one final treat. I stopped at a dessert shop and discovered macarons shaped like little ravioli. What a clever Italian twist on a French dessert! They were absolutely delicious and provided a sweet ending to an otherwise stressful afternoon.\n\nWith that, I returned to the car and began the journey back to Brescia. As daylight faded, I drove through the Italian evening, reflecting on two cities that had given me very different experiences.\n\nSan Marino had surprised me with its steep stone streets, mountain setting, and historic charm. Bologna, on the other hand, reminded me that traveling isn’t always effortless. Sometimes the challenges of navigating unfamiliar places can overshadow the very things you came to experience.\n\nBut the day wasn’t quite finished.\n\nBack at the hotel in Brescia, I decided to enjoy a relaxing dinner rather than venture out again. After the stress of navigating Bologna, it was exactly what I needed. And what an incredible dining experience it turned out to be!\n\nFor my main course, I ordered the Galletto ruspante ripieno alla bresciana, a free-range spit-roasted chicken served with thyme-infused vegetable ratatouille. But it wasn’t just the food that made this dish memorable. It was the presentation.\n\nWhen the dish arrived, it was completely enveloped in smoke. As the smoke slowly drifted away, it revealed the beautifully presented chicken underneath. It was almost like watching a little culinary performance right at my table. And the taste? Absolutely delicious!\n\nThen came dessert, and somehow the presentation became even more extravagant.\n\nI ordered the Sacher e Oro 23K, a rich Sacher cake served with whipped cream and decorated with actual 23-karat edible gold! Yes, real gold that you can eat!\n\nThe delicate gold flakes shimmered across the cake, making it look almost too beautiful to touch. I certainly wasn’t expecting to end my evening eating gold in Italy! It was one of those little surprises that made the experience feel especially memorable.\n\nAnd beyond its luxurious presentation, the dessert was absolutely delicious. After a long day filled with unexpected challenges, this was a wonderfully indulgent way to end the evening.\n\nAs I settled in for the night, I found myself reflecting on how different the two cities had been. San Marino offered historic charm, mountain views, and a sense of discovery. Bologna brought a little more adventure than I had bargained for, along with a few anxious moments behind the wheel.\n\nYet somehow, the day ended with a wonderful meal, a memorable dessert, and another collection of experiences that I wouldn’t have had if I hadn’t taken this journey.\n\nThat’s something I’m learning along the way. Not every destination will be exactly what I imagined, and not every moment will go according to plan. But even the challenging days have their own stories, and sometimes the best surprises come when you least expect them.\n\nTomorrow brings something I’ve been especially looking forward to: Switzerland aboard the Bernina Express. From the busy streets of Italy to the breathtaking landscapes of the Swiss Alps, another completely different experience awaits.",
+  "introTitle": "Two Cities, Two Very Different Experiences",
+  "date": "October 29, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -57,9 +59,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-10.html",
-  "nextDay": "day-12.html"
+  "title": "San Marino & Bologna",
+  "videos": []
 }
