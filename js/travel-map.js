@@ -29,11 +29,26 @@ async function initTravelMap() {
 
         status.hidden = true;
 
+        // Match countries by both display name and stable atlas numeric ID.
+        // World Atlas country names can differ from travel-history labels.
+        const visitedIdMap = new Map();
+        const countryIds = {
+            "Bosnia & Herzegovina": "070",
+            "Croatia": "191",
+            "San Marino": "674",
+            "Switzerland": "756"
+        };
+        data.places.forEach(place => {
+            const id = countryIds[place.name];
+            if (id) visitedIdMap.set(id, place);
+        });
+
         const visitedNameMap = new Map();
 
         data.places.forEach(place => {
             (place.mapNames || []).forEach(name => {
                 visitedNameMap.set(normalize(name), place);
+                visitedNameMap.set(normalize(place.name), place);
             });
         });
 
@@ -218,6 +233,18 @@ function normalize(value = "") {
 
 
 function findPlace(feature, visitedNameMap) {
+    const numericId = String(feature?.id ?? "").padStart(3, "0");
+    const byId = {
+        "070": "Bosnia & Herzegovina",
+        "191": "Croatia",
+        "674": "San Marino",
+        "756": "Switzerland"
+    };
+    const mappedName = byId[numericId];
+    if (mappedName) {
+        const matched = visitedNameMap.get(normalize(mappedName));
+        if (matched) return matched;
+    }
     const candidates = [
         feature?.properties?.name,
         feature?.properties?.NAME,
