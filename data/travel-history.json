@@ -193,6 +193,13 @@
       "lng": -63.0548
     },
     {
+      "name": "San Marino",
+      "mapNames": ["San Marino"],
+      "small": true,
+      "lat": 43.9424,
+      "lng": 12.4578
+    },
+    {
       "name": "Slovakia",
       "mapNames": [
         "Slovakia"
@@ -222,6 +229,10 @@
       "small": true,
       "lat": 18.0826,
       "lng": -63.0523
+    },
+    {
+      "name": "Switzerland",
+      "mapNames": ["Switzerland"]
     },
     {
       "name": "UAE",
