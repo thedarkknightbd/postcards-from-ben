@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-11.html",
   "dayNumber": 12,
-  "date": "October 30, 2026",
-  "title": "The Bernina Express",
-  "route": "Brescia → Tirano → Bernina Pass → St. Moritz → Tirano → Brescia",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,11 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "Across the Alps by rail.",
-  "intro": "One of the signature experiences of The Long Way Around begins in Tirano, where the Bernina Express climbs from Italy into the Swiss Alps. The railway winds through Valposchiavo, crosses the famous Brusio Circular Viaduct, climbs past Alp Grüm to the Bernina Pass and Lago Bianco, and continues through Pontresina to St. Moritz. After reaching St. Moritz, the journey retraces the spectacular Bernina route back to Tirano before returning to Brescia.",
+  "route": "Brescia → Tirano → Bernina Pass → St. Moritz → Tirano → Brescia",
+  "nextDay": "day-13.html",
+  "intro": "Today was one of those days that started with a little adventure and turned into something truly spectacular.\n\nI left Brescia early this morning, heading north toward Tirano, where I would board the Bernina Express for the journey into Switzerland. I knew I had a 10:00 a.m. train to catch, so timing was important.\n\nOne of the challenges of driving through Europe has been trying to follow the on-screen GPS. It's not always the easiest thing to do, especially when cell service is delayed and the directions don't quite keep up with where you are. Before you know it, you've missed a turn or taken the wrong road.\n\nAnd that's exactly what happened this morning.\n\nBut this particular wrong turn turned into something wonderful.\n\nInstead of following my intended route, I found myself driving right alongside Lake Iseo. And when I say alongside the lake, I mean it almost felt as though I was driving directly on the water!\n\nThe lake was right there beside me, with the mountains rising around it. It was such a beautiful and unexpected experience. What could have been just another frustrating navigation mistake became one of those moments I know I'll remember for a long time.\n\nSometimes the wrong turn turns out to be the right one.\n\nBut the morning still had another surprise waiting for me.\n\nAs I approached one of the tunnels, traffic suddenly came to a stop. At first, I wasn't sure what was happening. Then I noticed the Italian fire department ahead. They stopped traffic so their vehicles could get through, and eventually we began moving slowly through the tunnel.\n\nWhat made this particularly interesting was watching the firefighters inspecting the tunnel, shining their flashlights on different sections as we drove through.\n\nI couldn't help wondering, \"Is this thing safe? Is it going to collapse?\"\n\nNot exactly the kind of thought you want going through your mind while driving through a mountain tunnel!\n\nThe delay cost me several valuable minutes, and suddenly my comfortable arrival time in Tirano wasn't looking quite so comfortable anymore.\n\nBy the time I reached Tirano, I was cutting it extremely close.\n\nAfter parking, I had to speed-walk and even run a little to reach the train. And I mean I barely made it. As soon as I stepped aboard, the train started moving!\n\nTalk about timing!\n\nAfter all that, I could finally settle into my seat and enjoy what I had come all this way to experience.\n\nAnd what an experience it was.\n\nAs the Bernina Express began climbing through the Swiss Alps, the scenery became increasingly spectacular. But my first real “wow” moment came when we reached Lago di Poschiavo.\n\nThere it was, this beautiful lake nestled between steep, forested mountains, with the railway winding along its edge. Looking out from the train, watching the lake and mountains unfold together, I was simply amazed. It was one of those views that makes you realize just how extraordinary this journey really is.\n\nAnd somehow, the scenery only kept getting better.\n\nAs we climbed higher toward the Bernina Pass, the landscape changed dramatically. The mountains became more rugged, and eventually we reached Lago Bianco, surrounded by magnificent alpine scenery.\n\nThe beauty alone would have made this moment unforgettable. The mountains, the lake, and the train winding through this incredible landscape were simply breathtaking.\n\nBut then came something I hadn’t expected to learn.\n\nThis area sits along a continental watershed. Water on one side flows toward the Adriatic Sea, while water on the other side eventually reaches the Black Sea!\n\nThat absolutely blew my mind! 🤯\n\nHere I was, riding a train high through the Swiss Alps, surrounded by breathtaking mountains and lakes, discovering that water from this same mountain region could travel in completely opposite directions and eventually reach two different seas.\n\nThe scenery was incredible, but understanding that made it even more remarkable.\n\nEventually, the train arrived in St. Moritz, the famous Swiss alpine resort town.\n\nRather than spending my time exploring luxury shops, I wanted to experience the town itself and enjoy the scenery. After the excitement of the morning, it was nice to have some time to explore at a more relaxed pace.\n\nFor lunch, I stopped at Hauser, where I decided to try something local: pizokels, a traditional specialty from the Graubünden region of Switzerland.\n\nIt seemed only fitting to have a regional dish while visiting this part of the country.\n\nAnd, of course, there was room for dessert!\n\nI finished lunch with homemade profiteroles served with chocolate sauce and a cappuccino. A wonderful way to enjoy a little time in St. Moritz before heading back to the station.\n\nThe return journey gave me another opportunity to appreciate the extraordinary scenery of the Bernina railway. Having already experienced the excitement of the climb, I could reflect on everything I had seen throughout the day.\n\nThe mountains, the lakes, the dramatic changes in elevation, and the engineering required to build a railway through this landscape all made the journey remarkable.\n\nWhat stays with me most, though, is how the day unfolded.\n\nIt began with an early morning drive through beautiful mountain scenery, an unexpected tunnel inspection, and a frantic dash to catch a train that literally started moving the moment I boarded.\n\nThen came the beauty of Lago di Poschiavo, my first real “wow” moment of the journey, followed by the even more remarkable experience of Lago Bianco and learning about the watersheds that lead toward two different seas.\n\nSometimes the most memorable travel experiences aren’t just about seeing something beautiful. They’re about discovering something you never knew before.\n\nAnd today gave me plenty of both.",
+  "introTitle": "Across the Alps on the Bernina Express",
+  "date": "October 30, 2026",
   "stops": [
     {
       "type": "Starting Point",
@@ -108,9 +110,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-11.html",
-  "nextDay": "day-13.html"
+  "title": "The Bernina Express",
+  "videos": []
 }
