@@ -95,6 +95,12 @@
       ]
     },
     {
+      "name": "Croatia",
+      "mapNames": [
+        "Croatia"
+      ]
+    },
+    {
       "name": "Czechia",
       "mapNames": [
         "Czechia",
@@ -184,6 +190,15 @@
       ]
     },
     {
+      "name": "San Marino",
+      "mapNames": [
+        "San Marino"
+      ],
+      "small": true,
+      "lat": 43.9424,
+      "lng": 12.4578
+    },
+    {
       "name": "Sint Maarten",
       "mapNames": [
         "Sint Maarten"
@@ -191,13 +206,6 @@
       "small": true,
       "lat": 18.0425,
       "lng": -63.0548
-    },
-    {
-      "name": "San Marino",
-      "mapNames": ["San Marino"],
-      "small": true,
-      "lat": 43.9424,
-      "lng": 12.4578
     },
     {
       "name": "Slovakia",
@@ -232,7 +240,9 @@
     },
     {
       "name": "Switzerland",
-      "mapNames": ["Switzerland"]
+      "mapNames": [
+        "Switzerland"
+      ]
     },
     {
       "name": "UAE",
