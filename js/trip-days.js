@@ -178,7 +178,7 @@ async function loadTripDays() {
               9: "Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg",
               10: "Riva del Garda Panorama from sentiero del Ponale.jpg",
               11: "Guaita Fortress and San Marino (2023).jpg",
-              12: "Bernina express Viaduc de Brusio.jpg",
+              12: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-12/1793365957145-img_1082.jpeg",
               13: "Brescia - Piazza della Loggia.jpg",
               14: "Brescia - Piazza Paolo VI (48747822708).jpg",
               15: "Monaco Hercule Harbour Panorama.jpg",
