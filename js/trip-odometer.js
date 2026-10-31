@@ -18,4 +18,8 @@
   if (!recorded) { milesElement.textContent = "—"; return; }
   milesElement.textContent = Math.round(totalKm * 0.621371).toLocaleString("en-US");
   if (kmElement) kmElement.textContent = totalKm.toLocaleString("en-US") + " km recorded";
+  const odometerMiles = document.getElementById("trip-odometer-miles");
+  const odometerKm = document.getElementById("trip-odometer-km");
+  if (odometerMiles) odometerMiles.textContent = Math.round(totalKm * 0.621371).toLocaleString("en-US");
+  if (odometerKm) odometerKm.textContent = totalKm.toLocaleString("en-US");
 })().catch(error => console.warn("Driving odometer unavailable",error));
