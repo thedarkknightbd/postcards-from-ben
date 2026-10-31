@@ -225,7 +225,14 @@ async function loadDayPage() {
 
     factsContainer.innerHTML = "";
 
-    (data.facts || []).forEach(fact => {
+    const dailyFacts = [...(data.facts || [])];
+    if (Number.isFinite(Number(data.kilometersDriven)) && data.kilometersDriven !== undefined && data.kilometersDriven !== null && data.kilometersDriven !== "") {
+        const km = Number(data.kilometersDriven);
+        const miles = Math.round(km * 0.621371);
+        dailyFacts.push({icon: "🚗", label: "Distance Driven", value: `${miles.toLocaleString("en-US")} miles (${km.toLocaleString("en-US")} km)`});
+    }
+
+    dailyFacts.forEach(fact => {
 
         const item = document.createElement("div");
         item.className = "fact";
@@ -256,7 +263,7 @@ async function loadDayPage() {
             : /train|featured journey/i.test(factLabel) && /bernina|train/i.test(String(fact.value)) ? "train"
             : /scenic stop/i.test(factLabel) ? "camera"
             : /lakeside/i.test(factLabel) ? "waves"
-            : /scenic drive|road trip|day type/i.test(factLabel) ? "car"
+            : /distance driven|scenic drive|road trip|day type/i.test(factLabel) ? "car"
             : /featured journey|journey|plan/i.test(factLabel) ? "compass"
             : "flag";
         if (showcase) {
