@@ -54,6 +54,13 @@ collections:
         widget: "text"
 
 
+      - label: "Kilometers Driven"
+        name: "kilometersDriven"
+        widget: "number"
+        value_type: "int"
+        min: 0
+        required: false
+
       - label: "Quick Facts"
         name: "facts"
         widget: "list"
