@@ -285,6 +285,16 @@ async function loadDayPage() {
             ? String(fact.value).replace(/\bBethel\b/gi, "Branch Office")
             : fact.value;
 
+        if (factLabel === "Distance Driven" && Number.isFinite(Number(data.kilometersDriven))) {
+            const km = Number(data.kilometersDriven);
+            value.textContent = `${Math.round(km * 0.621371).toLocaleString("en-US")} miles`;
+            const secondary = document.createElement("small");
+            secondary.textContent = `${km.toLocaleString("en-US")} km`;
+            secondary.style.display = "block";
+            secondary.style.opacity = "0.75";
+            secondary.style.fontSize = "0.8em";
+            value.appendChild(secondary);
+        }
         content.append(label, value);
         item.append(icon, content);
 
