@@ -179,6 +179,7 @@ async function loadTripDays() {
               10: "Riva del Garda Panorama from sentiero del Ponale.jpg",
               11: "Guaita Fortress and San Marino (2023).jpg",
               12: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-12/1793365957145-img_1082.jpeg",
+              15: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-15/1793657514510-img_1361.jpeg",
               13: "Brescia - Piazza della Loggia.jpg",
               14: "Brescia - Piazza Paolo VI (48747822708).jpg",
               15: "Monaco Hercule Harbour Panorama.jpg",
