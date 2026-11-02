@@ -177,7 +177,7 @@ async function loadTripDays() {
               8: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-08/1793014225436-img_0708.jpeg",
               9: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-09/1793255032702-img_0877.jpeg",
               10: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-10/1793255296922-img_0902.jpeg",
-              11: "Guaita Fortress and San Marino (2023).jpg",
+              11: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-11/1793336112826-img_0928.jpeg",
               12: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-12/1793365957145-img_1082.jpeg",
               15: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-15/1793657514510-img_1361.jpeg",
               13: "Brescia - Piazza della Loggia.jpg",
