@@ -1,8 +1,8 @@
 {
   "dayNumber": 17,
   "date": "November 4, 2026",
-  "title": "Aosta Valley to Strasbourg via Lake Geneva",
-  "route": "Courmayeur → Great St. Bernard Tunnel → Montreux → Strasbourg",
+  "title": "Aosta Valley to Strasbourg",
+  "route": "Courmayeur → Great St. Bernard Tunnel → Strasbourg",
   "facts": [
     {
       "icon": "🌍",
@@ -26,7 +26,7 @@
     }
   ],
   "introTitle": "Across Switzerland and into France.",
-  "intro": "Leave Courmayeur at 8:30 AM and cross the Great St. Bernard Tunnel into Switzerland. Stop in Montreux for a late lunch beside Lake Geneva, then leave by 12:30 PM for Strasbourg, aiming to arrive by 5 PM.",
+  "intro": "Leave Courmayeur at 8:30 AM and cross the Great St. Bernard Tunnel into Switzerland, continuing toward Strasbourg without a sightseeing detour. Allow about an hour for lunch along the way, plus fuel and rest stops. Driving time is currently estimated at 5 hours 40 minutes to 7 hours, before stops; arrival depends on traffic and breaks.",
   "stops": [
     {
       "type": "Starting Point",
@@ -41,13 +41,6 @@
       "description": "Cross beneath the Alps from Italy into Switzerland through the Great St. Bernard Tunnel.",
       "latitude": 45.8645,
       "longitude": 7.17266
-    },
-    {
-      "type": "Lunch Stop",
-      "name": "Montreux",
-      "description": "Pause for a late lunch and a stretch beside Lake Geneva, then continue north toward Strasbourg.",
-      "latitude": 46.431221,
-      "longitude": 6.91068
     },
     {
       "type": "Destination",
