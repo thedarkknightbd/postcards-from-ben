@@ -4209,13 +4209,13 @@ body.lightbox-open {
 
 /* Custom BMW X5 Alpine-lake hero photograph */
 .redesign-home-hero{
- background-image:linear-gradient(90deg,rgba(8,24,36,.78) 0%,rgba(8,24,36,.45) 37%,rgba(8,24,36,.04) 72%),url('/homepage-hero.jpg');
+ background-image:linear-gradient(90deg,rgba(8,24,36,.78) 0%,rgba(8,24,36,.45) 37%,rgba(8,24,36,.04) 72%),url('/homepage-hero.jpg?v=20261103');
  background-position:center center;
  background-size:cover;
 }
 @media(max-width:700px){
  .redesign-home-hero{
-  background-image:linear-gradient(90deg,rgba(8,24,36,.85),rgba(8,24,36,.37)),url('/homepage-hero.jpg');
+  background-image:linear-gradient(90deg,rgba(8,24,36,.85),rgba(8,24,36,.37)),url('/homepage-hero.jpg?v=20261103');
   background-position:62% center;
  }
 }
