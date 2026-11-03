@@ -1,3 +1,4 @@
+import '/js/heights.js?v=draft-2';
 
 // Remove outdated stock-photo attribution when the day hero is a personal photo.
 (() => {
