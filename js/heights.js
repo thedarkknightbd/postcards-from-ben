@@ -1,1 +1,17 @@
 (()=>{'use strict';const select=document.getElementById('heights-day'),plot=document.getElementById('heights-plot'),caption=document.getElementById('heights-status');if(!select||!plot)return;const baseline=[1235,1235,1235,1235,1235];function draw(){const day=select.value;const actual=day==='16';const pts=actual?baseline:[];const x0=48,x1=750,y0=40,y1=212;const axis='<path d="M48 40V212H750" fill="none" stroke="#9fb4bd" stroke-width="1"/><g stroke="#d8e4e7" stroke-dasharray="3 5"><path d="M48 83H750M48 127H750M48 171H750"/></g>';let content='';if(actual){const xy=pts.map((v,i)=>[x0+(x1-x0)*i/(pts.length-1),126]);content='<path d="M'+xy.map(p=>p.join(' ')).join(' L')+'" stroke="#438fa5" stroke-width="4" stroke-linecap="round" fill="none"/><g fill="#657d89" font-size="13"><text x="50" y="242">10:37 PM</text><text x="650" y="242">10:43 PM</text><text x="56" y="116">1,235 m</text></g>';caption.textContent='Day 16: five GPS readings recorded in Courmayeur, all at 1,235 m. This is an evening snapshot, not a full-day profile.';}else{content='<g fill="#6b8290" font-size="16" text-anchor="middle"><text x="400" y="116">Elevation profile awaiting verified data</text><text x="400" y="142" font-size="13">No invented elevations are displayed</text></g>';caption.textContent=day==='all'?'Overall 24-day profile will combine verified GPS readings and clearly labeled route reconstructions.':'This day has no published, verified elevation profile yet.';}plot.innerHTML=axis+content;}select.addEventListener('change',draw);draw();})();
+/* Shared daily postcard elevation section. Injected by the shared day-page engine. */
+(()=>{
+ const body=document.body;
+ if(!body.classList.contains('day-page')||document.getElementById('day-heights'))return;
+ const match=(body.dataset.daySource||'').match(/day-(\d+)\.json/);
+ if(!match)return;
+ const day=Number(match[1]);
+ const anchor=document.getElementById('map-section');
+ if(!anchor)return;
+ if(!document.querySelector('link[href*="heights.css"]')){const link=document.createElement('link');link.rel='stylesheet';link.href='/css/heights.css?v=draft-1';document.head.appendChild(link);}
+ const section=document.createElement('section');
+ section.id='day-heights';section.className='heights-section';
+ const hasData=day===16;
+ section.innerHTML='<div class="heights-panel"><p class="heights-eyebrow">The Long Way Around · Day '+day+'</p><h2 class="heights-heading">The Day in Elevation</h2><p class="heights-intro">A closer look at the climbs and descents along today\'s journey.</p><svg class="heights-chart" viewBox="0 0 800 260" role="img" aria-label="Elevation profile for day '+day+'"><g stroke="#d8e4e7" stroke-dasharray="3 5"><path d="M48 83H750M48 127H750M48 171H750"/></g><path d="M48 40V212H750" fill="none" stroke="#9fb4bd"/>'+(hasData?'<path d="M48 126H750" fill="none" stroke="#438fa5" stroke-width="4" stroke-linecap="round"/><g fill="#657d89" font-size="13"><text x="50" y="116">1,235 m</text><text x="50" y="242">10:37 PM</text><text x="650" y="242">10:43 PM</text></g>':'<text x="400" y="126" text-anchor="middle" fill="#6b8290" font-size="16">Awaiting verified elevation data</text>')+'</svg><p class="heights-caption">'+(hasData?'Five verified GPS readings from the evening of November 3 in Courmayeur; this is not a full-day elevation profile.':'Historical route elevation is not yet reconstructed; no estimated values are presented as measured.')+'</p></div>';
+ anchor.insertAdjacentElement('afterend',section);
+})();
