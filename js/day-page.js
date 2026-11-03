@@ -1,3 +1,16 @@
+
+// Remove outdated stock-photo attribution when the day hero is a personal photo.
+(() => {
+  const hero = document.querySelector(".day-hero");
+  const credit = document.querySelector(".day-four-image-credit");
+  if (!hero || !credit) return;
+  const cover = hero.style.getPropertyValue("--day-cover");
+  const isPersonalPhoto = /photos\.postcardsfromben\.com|\/trips\/the-long-way-around\/images\/uploads\//i.test(cover);
+  if (isPersonalPhoto && /Destination cover:|Image source and license details/i.test(credit.textContent)) {
+    credit.remove();
+  }
+})();
+
 import * as maplibregl from "https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.mjs";
 
 /* =====================================
