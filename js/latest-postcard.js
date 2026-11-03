@@ -21,7 +21,7 @@
         if (!Number.isInteger(number) || number < 1 || number > 24) return null;
         return {number, title: day.title || 'Day ' + number, date: day.date || '',
           excerpt: (publishedText || 'Today was a day I had been looking forward to for quite some time: finally seeing the Dolomites.').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,177),
-          href:'/trips/the-long-way-around/days/day-' + String(number).padStart(2,'0') + '.html'};
+          href:'/trips/the-long-way-around/days/day-' + String(number).padStart(2,'0') + '.html', hero: day.heroImage || day.hero || day.heroPhoto || (number === 15 ? 'https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-15/1793657514510-img_1361.jpeg' : number === 8 ? 'https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-08/1793014225436-img_0708.jpeg' : '')};
       } catch (err) { console.warn('Skipping unreadable postcard', ref.file, err); return null; }
     }));
     const published = entries.filter(Boolean).sort((a,b)=>b.number-a.number);
@@ -29,11 +29,16 @@
     const latest = published[0];
     const photoLink = document.getElementById('latest-postcard-photo-link');
     const photo = document.getElementById('latest-postcard-photo');
-    // The verified Seceda hero is featured for Day 8. Other days have no image until mapped.
+    // Feature the latest published day's hero when available.
     if (photoLink && photo) {
-      photoLink.hidden = latest.number !== 8;
-      if (latest.number === 8) photoLink.href = latest.href;
-      document.querySelector('.latest-postcard-card').classList.toggle('without-photo', latest.number !== 8);
+      const hasPhoto = Boolean(latest.hero);
+      photoLink.hidden = !hasPhoto;
+      if (hasPhoto) {
+        photoLink.href = latest.href;
+        photo.src = latest.hero;
+        photo.alt = latest.title + ' — travel photograph';
+      }
+      document.querySelector('.latest-postcard-card').classList.toggle('without-photo', !hasPhoto);
     }
     document.getElementById('latest-postcard-meta').textContent = 'Day ' + latest.number + ' · ' + latest.date;
     document.getElementById('latest-postcard-title').textContent = latest.title;
