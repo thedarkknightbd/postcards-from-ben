@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "properties": {
     "dayNumber": 17,
-    "title": "Aosta Valley to Strasbourg via Lake Geneva"
+    "title": "Aosta Valley to Strasbourg"
   },
   "features": [
     {
@@ -77,13 +77,18 @@
         "fromStopIndex": 1,
         "toStopIndex": 2,
         "fromName": "Great St. Bernard Tunnel",
-        "toName": "Montreux",
+        "toName": "Strasbourg",
         "waypointNames": [
           "Great St. Bernard Tunnel",
           "Bourg-Saint-Pierre",
           "Orsières",
           "Martigny",
-          "Montreux"
+          "Lausanne",
+          "Fribourg",
+          "Bern",
+          "Basel",
+          "Colmar",
+          "Strasbourg"
         ]
       },
       "geometry": {
@@ -140,38 +145,6 @@
           [
             6.949,
             46.381
-          ],
-          [
-            6.91068,
-            46.431221
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mode": "drive",
-        "fromStopIndex": 2,
-        "toStopIndex": 3,
-        "fromName": "Montreux",
-        "toName": "Strasbourg",
-        "waypointNames": [
-          "Montreux",
-          "Lausanne",
-          "Fribourg",
-          "Bern",
-          "Basel",
-          "Colmar",
-          "Strasbourg"
-        ]
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            6.91068,
-            46.431221
           ],
           [
             6.846,
