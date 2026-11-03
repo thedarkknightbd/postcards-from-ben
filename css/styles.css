@@ -4856,3 +4856,7 @@ body.lightbox-open {
 @media(max-width:700px){.home-postcards{margin:24px auto 38px}.home-postcards .latest-postcard-card{grid-template-columns:1fr}.latest-postcard-photo-link,.latest-postcard-photo-link img{min-height:0;height:240px}.latest-postcard-copy{padding:24px}}
 
 .home-postcards .latest-postcard-card.without-photo{grid-template-columns:1fr}
+
+/* Ensure readable contrast for the featured postcard CTA. */
+.home-postcards #latest-postcard-link{display:inline-block;background:#17212b;color:#fff;text-decoration:none;padding:13px 18px;border-radius:8px;font-weight:700}
+.home-postcards #latest-postcard-link:hover,.home-postcards #latest-postcard-link:focus-visible{background:#293b4b;color:#fff}
