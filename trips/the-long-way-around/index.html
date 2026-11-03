@@ -15,6 +15,7 @@
 >
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=postage-stamp-final-3">
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=20261016-reset">
+<link rel="stylesheet" href="/css/heights.css?v=draft-1">
 </head>
 
 
@@ -74,7 +75,7 @@
   <div style="font-size:clamp(2rem,6vw,3.5rem);font-weight:700;line-height:1.2"><span id="trip-odometer-miles">2,359</span> <span style="font-size:.45em;font-weight:400">miles driven</span></div>
   <p style="margin:7px 0 0;opacity:.85"><span id="trip-odometer-km">3,797</span> km recorded · Train travel excluded</p>
 </section>
-<nav class="longway-section-nav" aria-label="Adventure sections"><a href="#route-map">Overview &amp; Route Map</a><a href="/trips/the-long-way-around/elevation/">Elevation Journey</a><a href="#day-by-day">Daily Itinerary</a><a href="#trip-poster">Adventure Poster</a></nav>
+<nav class="longway-section-nav" aria-label="Adventure sections"><a href="#route-map">Overview &amp; Route Map</a><a href="#across-the-heights">Elevation Journey</a><a href="#day-by-day">Daily Itinerary</a><a href="#trip-poster">Adventure Poster</a></nav>
 
 
 
@@ -116,6 +117,8 @@
         </section>
 
 
+
+<section id="across-the-heights" class="heights-section" aria-labelledby="heights-title"><div class="heights-panel"><p class="heights-eyebrow">The Long Way Around · Elevation</p><h2 id="heights-title" class="heights-heading">Across the Heights of Europe</h2><p class="heights-intro">From winding Alpine roads to soaring mountain summits, follow the changing elevation of the journey across Europe.</p><div class="heights-controls"><label for="heights-day">Explore the journey</label><select id="heights-day"><option value="all">Overall trip · 24 days</option><option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option><option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option><option value="7">Day 7</option><option value="8">Day 8</option><option value="9">Day 9</option><option value="10">Day 10</option><option value="11">Day 11</option><option value="12">Day 12</option><option value="13">Day 13</option><option value="14">Day 14</option><option value="15">Day 15</option><option value="16">Day 16</option><option value="17">Day 17</option><option value="18">Day 18</option><option value="19">Day 19</option><option value="20">Day 20</option><option value="21">Day 21</option><option value="22">Day 22</option><option value="23">Day 23</option><option value="24">Day 24</option></select></div><svg class="heights-chart" viewBox="0 0 800 260" role="img" aria-label="Elevation chart; choose a day to view available readings"><g id="heights-plot"></g></svg><p id="heights-status" class="heights-caption" aria-live="polite"></p><div class="heights-legend"><span><span class="heights-swatch"></span>Recorded GPS data</span><span><span class="heights-swatch estimated"></span>Historical reconstructions (coming soon)</span></div></div></section>
 
         <!-- =====================================
              DAY BY DAY
@@ -181,6 +184,7 @@
 
     <script src="../../js/trip-progress.js"></script>
     <script src="../../js/trip-odometer.js?v=20261031-2"></script>
+<script src="/js/heights.js?v=draft-1"></script>
 </body>
 
 </html>
