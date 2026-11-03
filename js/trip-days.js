@@ -182,7 +182,7 @@ async function loadTripDays() {
               15: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-15/1793657514510-img_1361.jpeg",
               13: "Brescia - Piazza della Loggia.jpg",
               14: "Brescia - Piazza Paolo VI (48747822708).jpg",
-              16: "Mont Blanc de Courmayeur.jpg",
+              16: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-16/1793730802363-img_1526.jpeg",
               17: "Château de Chillon(Chillon Castle) on the Lake Geneva Shore (Ank Kumar) 01.jpg",
               18: "Grund from Corniche.JPG",
               19: "Hunebed D27 2020.jpg",
