@@ -29,7 +29,18 @@
     const latest = published[0];
     const photoLink = document.getElementById('latest-postcard-photo-link');
     const photo = document.getElementById('latest-postcard-photo');
-    // Feature the latest published day's hero when available.
+    // Read the day page's actual hero so future postcards update automatically.
+    if (!latest.hero) {
+      try {
+        const pageResponse = await fetch(latest.href, {cache:'no-store'});
+        if (pageResponse.ok) {
+          const page = new DOMParser().parseFromString(await pageResponse.text(), 'text/html');
+          const cover = page.querySelector('.day-hero')?.style.getPropertyValue('--day-cover') || '';
+          const match = cover.match(/url\(\s*['\"]?([^'\")]+)['\"]?\s*\)/i);
+          if (match) latest.hero = match[1];
+        }
+      } catch (err) { console.warn('Unable to load latest postcard hero', err); }
+    }
     if (photoLink && photo) {
       const hasPhoto = Boolean(latest.hero);
       photoLink.hidden = !hasPhoto;
@@ -37,6 +48,10 @@
         photoLink.href = latest.href;
         photo.src = latest.hero;
         photo.alt = latest.title + ' — travel photograph';
+        photo.onerror = () => {
+          photoLink.hidden = true;
+          document.querySelector('.latest-postcard-card')?.classList.add('without-photo');
+        };
       }
       document.querySelector('.latest-postcard-card').classList.toggle('without-photo', !hasPhoto);
     }
