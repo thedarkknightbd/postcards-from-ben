@@ -239,6 +239,45 @@ async function loadTripMap() {
         }
 
 
+        // Day 18 changed after the Belgium branch cancellation. Resolve its
+        // road-following geometry rather than drawing misleading straight lines.
+        // This uses the public OSRM driving endpoint; other days retain their
+        // saved, precomputed routes.
+        if (Number(day.dayNumber) === 18 && !detailedRouteData) {
+            try {
+                const waypointString = mappedStops.map(({ stop }) =>
+                    Number(stop.longitude) + "," + Number(stop.latitude)
+                ).join(";");
+                const endpoint = "https://router.project-osrm.org/route/v1/driving/" +
+                    waypointString + "?overview=full&geometries=geojson";
+                const response = await fetch(endpoint);
+                if (!response.ok) throw new Error("Routing service unavailable");
+                const result = await response.json();
+                const road = result.routes && result.routes[0];
+                if (!road || !road.geometry || road.geometry.coordinates.length < 2) {
+                    throw new Error("No driving route returned");
+                }
+                detailedRouteData = {
+                    type: "FeatureCollection",
+                    features: [{
+                        type: "Feature",
+                        properties: {
+                            mode: "drive",
+                            fromStopIndex: 0,
+                            toStopIndex: mappedStops.length - 1,
+                            fromName: mappedStops[0].stop.name,
+                            toName: mappedStops[mappedStops.length - 1].stop.name,
+                            distanceMeters: road.distance,
+                            durationSeconds: road.duration
+                        },
+                        geometry: road.geometry
+                    }]
+                };
+            } catch (error) {
+                console.warn("Day 18 road geometry unavailable:", error);
+            }
+        }
+
         const coveredSegments =
             new Set();
 
@@ -411,6 +450,12 @@ async function loadTripMap() {
                 continue;
             }
 
+
+            // Do not misrepresent the revised Day 18 route as straight roads
+            // if the live driving geometry cannot be retrieved.
+            if (Number(day.dayNumber) === 18 && mode === "drive") {
+                continue;
+            }
 
             routeFeatures.push({
 
