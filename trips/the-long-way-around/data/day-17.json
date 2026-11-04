@@ -1,8 +1,8 @@
 {
   "dayNumber": 17,
   "date": "November 4, 2026",
-  "title": "Aosta Valley to Strasbourg",
-  "route": "Courmayeur → Great St. Bernard Tunnel → Strasbourg",
+  "title": "Through Mont Blanc to Strasbourg",
+  "route": "Courmayeur → Mont Blanc Tunnel → Chamonix → Switzerland → Strasbourg",
   "facts": [
     {
       "icon": "🌍",
@@ -17,7 +17,7 @@
     {
       "icon": "🏔️",
       "label": "Mountain Crossing",
-      "value": "Great St. Bernard Tunnel"
+      "value": "Mont Blanc Tunnel"
     },
     {
       "icon": "📍",
@@ -25,27 +25,41 @@
       "value": "Strasbourg, France"
     }
   ],
-  "introTitle": "Across Switzerland and into France.",
-  "intro": "Leave Courmayeur at 8:30 AM and cross the Great St. Bernard Tunnel into Switzerland, continuing toward Strasbourg without a sightseeing detour. Allow about an hour for lunch along the way, plus fuel and rest stops. Driving time is currently estimated at 5 hours 40 minutes to 7 hours, before stops; arrival depends on traffic and breaks.",
+  "introTitle": "Through Mont Blanc and across Switzerland.",
+  "intro": "Departing Courmayeur, I crossed into France through the Mont Blanc Tunnel and emerged near Chamonix beneath the Alps. I continued through Switzerland, passing vineyards, rolling hills, and views of Lake Geneva, before reaching Strasbourg. This was the actual route taken, replacing the earlier Great St. Bernard Tunnel plan.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Courmayeur",
-      "description": "Leave Courmayeur after two nights beneath Mont Blanc and head east through the Aosta Valley.",
-      "latitude": 45.78381895553412,
-      "longitude": 6.973237850469659
+      "description": "Depart Courmayeur after two nights beneath Mont Blanc.",
+      "latitude": 45.783819,
+      "longitude": 6.973238
     },
     {
       "type": "Mountain Crossing",
-      "name": "Great St. Bernard Tunnel",
-      "description": "Cross beneath the Alps from Italy into Switzerland through the Great St. Bernard Tunnel.",
-      "latitude": 45.8645,
-      "longitude": 7.17266
+      "name": "Mont Blanc Tunnel",
+      "description": "Cross beneath Mont Blanc from Italy into France.",
+      "latitude": 45.818,
+      "longitude": 6.951
+    },
+    {
+      "type": "Scenic Route",
+      "name": "Chamonix",
+      "description": "Continue from the French side of the tunnel near Chamonix.",
+      "latitude": 45.9237,
+      "longitude": 6.8694
+    },
+    {
+      "type": "Transit",
+      "name": "Switzerland",
+      "description": "Drive through Switzerland, with Lake Geneva and vineyards visible along the way.",
+      "latitude": 46.46,
+      "longitude": 6.85
     },
     {
       "type": "Destination",
       "name": "Strasbourg",
-      "description": "Arrive in Strasbourg and settle in for the night in the city's historic center.",
+      "description": "Arrive in Strasbourg for the night.",
       "latitude": 48.59733,
       "longitude": 7.75389
     }
