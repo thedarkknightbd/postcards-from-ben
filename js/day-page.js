@@ -132,7 +132,7 @@ async function loadDayPage() {
        original file as a fallback if routing is unavailable.
     ===================================== */
 
-    if ([9, 10, 11, 18].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
+    if ([9, 10, 11, 17, 18].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
         try {
             const routingStops = data.routeVia?.length ? [...data.stops.slice(0, -1), ...data.routeVia, data.stops[data.stops.length - 1]] : data.stops;
             const waypoints = routingStops.map(stop =>
@@ -176,7 +176,7 @@ async function loadDayPage() {
                 };
             }
         } catch (error) {
-            console.warn("Road routing unavailable; showing itinerary waypoint overview:", error);
+            console.warn("Road routing unavailable; not displaying an unverified straight-line route:", error);
         }
     }
 
