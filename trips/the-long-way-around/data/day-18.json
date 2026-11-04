@@ -26,33 +26,33 @@
     }
   ],
   "introTitle": "A castle viewpoint and a Belgian railway landmark.",
-  "intro": "Leave Strasbourg at 7:30 AM for a brief photo stop overlooking Bourscheid Castle and the Sûre Valley in Luxembourg. Continue to Liège-Guillemins railway station in Belgium for photos and lunch, then drive to Emmen in the Netherlands. No Belgium branch visit is planned. Driving estimate: 7 hours 19 minutes, excluding stops and traffic.",
+  "intro": "From the historic city of Strasbourg, the route crosses Luxembourg's wooded Sûre Valley near Bourscheid Castle, continues into Belgium at Liège's celebrated Guillemins railway station, and finishes in Emmen in the northeastern Netherlands.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Strasbourg",
-      "description": "Depart at approximately 7:30 AM.",
+      "description": "Historic Alsatian city on the Rhine, known for its cathedral, canals, and timber-framed architecture.",
       "latitude": 48.59733,
       "longitude": 7.75389
     },
     {
       "type": "Photo Stop",
       "name": "Bourscheid Castle viewpoint",
-      "description": "Exterior viewpoint photos of the castle and Sûre Valley; allow 10–15 minutes. No castle tour.",
+      "description": "A medieval hilltop fortress overlooking the wooded Sûre Valley in northern Luxembourg.",
       "latitude": 49.905,
       "longitude": 6.079
     },
     {
       "type": "Lunch & Photos",
       "name": "Liège-Guillemins railway station (P9 parking)",
-      "description": "Park at P9 on Rue de Sclessin, photograph the station, and have lunch nearby; allow about 60 minutes.",
+      "description": "A landmark railway station designed by Santiago Calatrava, with a sweeping steel-and-glass canopy. P9 parking is on Rue de Sclessin.",
       "latitude": 50.6245,
       "longitude": 5.56947
     },
     {
       "type": "Destination",
       "name": "Emmen",
-      "description": "Arrive in Emmen, aiming for 5–6 PM with traffic buffer.",
+      "description": "A city in the Dutch province of Drenthe, known for its green spaces and nearby prehistoric hunebed monuments.",
       "latitude": 52.77537826899138,
       "longitude": 6.892010726301086
     }
