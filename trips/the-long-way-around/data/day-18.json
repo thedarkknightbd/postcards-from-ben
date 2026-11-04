@@ -2,7 +2,7 @@
   "dayNumber": 18,
   "date": "November 5, 2026",
   "title": "Luxembourg & Belgium",
-  "route": "Strasbourg → Luxembourg → Kraainem → Emmen",
+  "route": "Strasbourg → Bourscheid Castle viewpoint → Liège-Guillemins → Emmen",
   "facts": [
     {
       "icon": "🌍",
@@ -10,14 +10,14 @@
       "value": "France · Luxembourg · Belgium · Netherlands"
     },
     {
-      "icon": "☕",
-      "label": "Quick Stop",
-      "value": "Luxembourg City"
+      "icon": "🏰",
+      "label": "Photo Stop",
+      "value": "Bourscheid Castle viewpoint"
     },
     {
-      "icon": "🏢",
-      "label": "Branch Visit",
-      "value": "Belgium Bethel"
+      "icon": "🚉",
+      "label": "Lunch & Photos",
+      "value": "Liège-Guillemins railway station"
     },
     {
       "icon": "📍",
@@ -25,34 +25,34 @@
       "value": "Emmen, Netherlands"
     }
   ],
-  "introTitle": "Four countries in one day.",
-  "intro": "The journey continues north from Strasbourg with a brief stop in Luxembourg City before crossing into Belgium for a visit to the branch office in Kraainem. From there, the road continues through Belgium and into the Netherlands, finishing the day in Emmen.",
+  "introTitle": "A castle viewpoint and a Belgian railway landmark.",
+  "intro": "Leave Strasbourg at 7:30 AM for a brief photo stop overlooking Bourscheid Castle and the Sûre Valley in Luxembourg. Continue to Liège-Guillemins railway station in Belgium for photos and lunch, then drive to Emmen in the Netherlands. No Belgium branch visit is planned. Driving estimate: 7 hours 19 minutes, excluding stops and traffic.",
   "stops": [
     {
       "type": "Starting Point",
       "name": "Strasbourg",
-      "description": "Leave Strasbourg and begin the drive north toward Luxembourg.",
+      "description": "Depart at approximately 7:30 AM.",
       "latitude": 48.59733,
       "longitude": 7.75389
     },
     {
-      "type": "Coffee Stop",
-      "name": "Place d'Armes — Luxembourg City",
-      "description": "Make a short stop in the heart of Luxembourg City for coffee before continuing toward Belgium.",
-      "latitude": 49.611111,
-      "longitude": 6.128889
+      "type": "Photo Stop",
+      "name": "Bourscheid Castle viewpoint",
+      "description": "Exterior viewpoint photos of the castle and Sûre Valley; allow 10–15 minutes. No castle tour.",
+      "latitude": 49.905,
+      "longitude": 6.079
     },
     {
-      "type": "Branch Visit",
-      "name": "Belgium Bethel — Kraainem",
-      "description": "Visit the Belgium Branch Office in Kraainem, just outside Brussels.",
-      "latitude": 50.8616,
-      "longitude": 4.4695
+      "type": "Lunch & Photos",
+      "name": "Liège-Guillemins railway station (P9 parking)",
+      "description": "Park at P9 on Rue de Sclessin, photograph the station, and have lunch nearby; allow about 60 minutes.",
+      "latitude": 50.6245,
+      "longitude": 5.56947
     },
     {
       "type": "Destination",
       "name": "Emmen",
-      "description": "Cross into the Netherlands and settle in for the night in Emmen.",
+      "description": "Arrive in Emmen, aiming for 5–6 PM with traffic buffer.",
       "latitude": 52.77537826899138,
       "longitude": 6.892010726301086
     }
