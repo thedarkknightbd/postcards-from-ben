@@ -2,7 +2,8 @@
   "type": "FeatureCollection",
   "properties": {
     "dayNumber": 17,
-    "title": "Aosta Valley to Strasbourg"
+    "title": "Through Mont Blanc to Strasbourg",
+    "routeAccuracy": "Approximate route overview, not a verified GPS track"
   },
   "features": [
     {
@@ -10,14 +11,17 @@
       "properties": {
         "mode": "drive",
         "fromStopIndex": 0,
-        "toStopIndex": 1,
+        "toStopIndex": 4,
         "fromName": "Courmayeur",
-        "toName": "Great St. Bernard Tunnel",
+        "toName": "Strasbourg",
+        "routeNote": "Approximate route via Mont Blanc Tunnel, Chamonix and Switzerland; road geometry not GPS verified",
         "waypointNames": [
           "Courmayeur",
-          "Aosta",
-          "Etroubles",
-          "Great St. Bernard Tunnel"
+          "Mont Blanc Tunnel",
+          "Chamonix",
+          "Lake Geneva region",
+          "Switzerland",
+          "Strasbourg"
         ]
       },
       "geometry": {
@@ -28,186 +32,71 @@
             45.783819
           ],
           [
-            7.03,
-            45.773
+            6.951,
+            45.818
           ],
           [
-            7.102,
-            45.755
+            6.8694,
+            45.9237
           ],
           [
-            7.19,
-            45.738
+            6.86,
+            46.07
           ],
           [
-            7.315,
-            45.737
+            6.95,
+            46.32
           ],
           [
-            7.294,
-            45.778
+            6.85,
+            46.46
           ],
           [
-            7.261,
-            45.805
+            6.63,
+            46.52
           ],
           [
-            7.23,
-            45.823
-          ],
-          [
-            7.204,
-            45.839
-          ],
-          [
-            7.185,
-            45.852
-          ],
-          [
-            7.17266,
-            45.8645
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mode": "drive",
-        "fromStopIndex": 1,
-        "toStopIndex": 2,
-        "fromName": "Great St. Bernard Tunnel",
-        "toName": "Strasbourg",
-        "waypointNames": [
-          "Great St. Bernard Tunnel",
-          "Bourg-Saint-Pierre",
-          "Orsières",
-          "Martigny",
-          "Lausanne",
-          "Fribourg",
-          "Bern",
-          "Basel",
-          "Colmar",
-          "Strasbourg"
-        ]
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            7.17266,
-            45.8645
-          ],
-          [
-            7.184,
-            45.889
-          ],
-          [
-            7.198,
-            45.917
-          ],
-          [
-            7.2078,
-            45.95
-          ],
-          [
-            7.186,
-            45.979
-          ],
-          [
-            7.145,
-            46.03
-          ],
-          [
-            7.151,
-            46.079
-          ],
-          [
-            7.11,
-            46.096
-          ],
-          [
-            7.072,
-            46.102
-          ],
-          [
-            7.024,
-            46.142
-          ],
-          [
-            6.991,
-            46.218
-          ],
-          [
-            6.965,
-            46.318
-          ],
-          [
-            6.949,
-            46.381
-          ],
-          [
-            6.846,
-            46.462
-          ],
-          [
-            6.731,
-            46.489
-          ],
-          [
-            6.632,
-            46.519
-          ],
-          [
-            6.683,
+            6.68,
             46.66
           ],
           [
-            6.938,
-            46.822
+            6.94,
+            46.82
           ],
           [
-            7.151,
-            46.806
+            7.15,
+            46.81
           ],
           [
-            7.241,
-            46.862
-          ],
-          [
-            7.447,
-            46.948
+            7.45,
+            46.95
           ],
           [
             7.65,
             47.08
           ],
           [
-            7.903,
-            47.35
+            7.59,
+            47.56
           ],
           [
-            7.588,
-            47.559
+            7.48,
+            47.65
           ],
           [
-            7.482,
-            47.653
-          ],
-          [
-            7.338,
+            7.34,
             47.75
           ],
           [
-            7.358,
-            48.079
+            7.36,
+            48.08
           ],
           [
-            7.509,
-            48.289
+            7.51,
+            48.29
           ],
           [
-            7.754,
+            7.75389,
             48.59733
           ]
         ]
