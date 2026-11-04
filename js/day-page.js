@@ -176,6 +176,7 @@ async function loadDayPage() {
                 };
             }
         } catch (error) {
+            if (Number(data.dayNumber) === 17) detailedRouteData = null;
             console.warn("Road routing unavailable; not displaying an unverified straight-line route:", error);
         }
     }
