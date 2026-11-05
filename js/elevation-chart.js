@@ -95,7 +95,7 @@
       const [c, d] = nodes[i];
       const h = (c - a) / 3;
 
-      path += ` C${a + h} ${b + slopes[i - 1] * h}
+      path += day === 16 && estimated ? ` L${c} ${d}` : ` C${a + h} ${b + slopes[i - 1] * h}
         ${c - h} ${d - slopes[i] * h} ${c} ${d}`;
     }
 
@@ -124,7 +124,9 @@
       ? "ESTIMATED ELEVATION"
       : "RECORDED ELEVATION";
 
-    const footnote = estimated
+    const footnote = estimated && day === 16
+      ? "Reconstructed from traveler-reported cable-car times and elevations, with a road profile adapted from the following day’s GPS readings. Fuel-stop elevation and road timing are approximate; intermediate points are interpolated."
+      : estimated
       ? "Reconstructed road route and terrain elevations. Intermediate times are estimated; hotel arrival is approximate. OpenStreetMap contributors; EU-DEM via Open Topo Data."
       : "Five-minute GPS averages, subject to GPS accuracy.";
 
