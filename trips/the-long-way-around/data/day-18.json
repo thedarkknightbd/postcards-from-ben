@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-17.html",
   "dayNumber": 18,
-  "date": "November 5, 2026",
-  "title": "Luxembourg & Belgium",
-  "route": "Strasbourg → Bourscheid Castle viewpoint → Liège-Guillemins → Emmen",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,12 @@
       "value": "Emmen, Netherlands"
     }
   ],
-  "introTitle": "A castle viewpoint and a Belgian railway landmark.",
-  "intro": "From the historic city of Strasbourg, the route crosses Luxembourg's wooded Sûre Valley near Bourscheid Castle, continues into Belgium at Liège's celebrated Guillemins railway station, and finishes in Emmen in the northeastern Netherlands.",
+  "route": "Strasbourg → Bourscheid Castle viewpoint → Liège-Guillemins → Emmen",
+  "nextDay": "day-19.html",
+  "intro": "After breakfast this morning, I left my hotel in Strasbourg at about eight o’clock. Something happened that hadn’t happened on any other day of this trip, even in the mountains: when I got to the car, the windows were iced over. I spent part of the morning defrosting them. It’s interesting that I’d been in colder places, yet today was the first time I encountered ice on the car.\n\nI hadn’t seen much of Strasbourg itself, and with reports of a large protest planned in France, I was eager to get on the road.\n\nAs I drove along the motorway toward Luxembourg, the landscape became hillier. Small towns appeared through the morning haze as the sun rose, making for a picturesque scene. Traffic added about thirty minutes to the drive, but I wasn’t particularly bothered. It was a calm morning, and I found myself thinking about the days ahead.\n\nLuxembourg would be country number 13 of the 16 planned for this adventure.\n\nAs I made my way through Luxembourg, the roads wound through smaller towns, forests, and hills. Some were narrow, but the countryside was beautiful. There was something about the landscape that reminded me of a place where people would go camping or simply spend time enjoying nature.\n\nI made my way to Bourscheid Castle, arriving around 11:15. I had been looking forward to this stop, imagining something a little more dramatic, something that would make me stop and say, “Wow.” But as the castle came into view in the distance, I found myself feeling a little underwhelmed. It wasn’t that the castle wasn’t impressive in its own right; it just didn’t quite stir the excitement I had expected. Maybe I’ve been spoiled by all the incredible places I’ve seen on this journey. After a while, I suppose it takes a little more to surprise me, and I found myself wondering if my expectations had simply gotten too high.\n\nThe viewing area didn’t help matters. There were logs piled up near a bench in what should have been one of the best spots to take in the castle, partially blocking the view. It felt a little awkward, as though I had arrived at the perfect place to admire the castle but couldn’t quite get the view I was hoping for.\n\nIn the end, though, I realized that the real beauty of this stop wasn’t necessarily the castle itself. It was the winding drive through the countryside, the rolling hills, and the scenery along the way. Sometimes the journey to a place leaves a bigger impression than the destination, and this was definitely one of those moments.\n\nLeaving Luxembourg and entering Belgium, Apple Maps once again decided to take me along smaller back roads, winding between towns before connecting me to the E25 toward Liège. Thankfully, that portion of the drive didn’t last long.\n\nOnce on the motorway, I was surrounded by rolling hills, trees changing colors, and stretches of green grass. It wasn’t dramatic scenery, just a pleasant drive through the countryside.\n\nArriving in Liège, I found a city that felt comfortable in size, with a modern character that wasn’t overwhelming.\n\nOne of my stops was the Liège-Guillemins railway station, an impressive piece of modern architecture. I spent some time taking photographs and appreciating its design.\n\nFor lunch, I stopped at Tripick, where I tried a Belgian specialty: two meatballs served with a sauce containing raisins. The raisins weren’t particularly noticeable in the flavor, but the dish was comforting and enjoyable.\n\nAnd then came dessert. Belgian waffles with caramel. The caramel was absolutely delightful and a wonderful way to finish lunch.\n\nI was also surprised to find that French was the language spoken in Liège. It was another reminder of how much the cultures and languages can change as I travel through Europe.\n\nAfter lunch, I began the drive north toward Emmen in the Netherlands. There was quite a bit of traffic along the way, but what really captured my attention was the scenery.\n\nThe canals were breathtaking.\n\nI’d seen scenes like these in photographs before, but seeing them in person was something entirely different. The waterways, surrounding landscape, and character of the towns made me realize how many hidden gems there must be throughout the Netherlands. It’s definitely somewhere I’d like to return and explore further.\n\nBy around 5:30 in the evening, the sun had already been down for approximately half an hour. The days are getting noticeably shorter, and the chilly weather has been a constant companion throughout much of this journey.\n\nAs I was looking for my hotel in Emmen, I was surprised to see the Netherlands branch office along the way! I hadn’t realized it was so close. As it turns out, my hotel is just a few blocks away - literally a nine-minute walk or a two-minute drive. 🙂\n\nTomorrow morning, I’ll be visiting the branch at 10:00, something I’m really looking forward to. Afterward, I’ll begin the final leg of this adventure, heading back into Germany for the next few days.\n\nIt’s hard to believe that 18 days have already passed. It certainly doesn’t feel like it. I’ve traveled through so many different places and experienced so much, yet somehow it feels like this adventure only began a short time ago.\n\nThere are still a few days left in this adventure, and I’m looking forward to making the most of every one of them. It’s hard to believe how quickly the time has passed.\n\nAnd with today’s travels, I’ve now visited 15 countries, with just one more to go. And no, it’s not Germany! Perhaps I’ve saved the best for last. I guess we’ll have to wait and see. 🙂",
+  "introTitle": "Four Countries, One Day",
+  "date": "November 5, 2026",
+  "kilometersDriven": 728,
   "stops": [
     {
       "type": "Starting Point",
@@ -57,9 +60,7 @@
       "longitude": 6.892010726301086
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-17.html",
-  "nextDay": "day-19.html"
+  "title": "Luxembourg & Belgium",
+  "videos": []
 }
