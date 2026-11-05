@@ -95,7 +95,7 @@
       const [c, d] = nodes[i];
       const h = (c - a) / 3;
 
-      path += day === 16 && estimated ? ` L${c} ${d}` : ` C${a + h} ${b + slopes[i - 1] * h}
+      path += ` C${a + h} ${b + slopes[i - 1] * h}
         ${c - h} ${d - slopes[i] * h} ${c} ${d}`;
     }
 
@@ -112,7 +112,8 @@
     }
 
     let grid = "";
-    for (let v = floor; v <= ceil; v += 200) {
+    const gridStep = day === 16 ? 400 : 200;
+    for (let v = floor; v <= ceil; v += gridStep) {
       grid += `<path d="M${L} ${y(v)}H${W - R}"
         stroke="#d4dce2"/>
         <text x="65" y="${y(v) + 4}"
