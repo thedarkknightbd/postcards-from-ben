@@ -243,7 +243,7 @@ async function loadTripMap() {
         // road-following geometry rather than drawing misleading straight lines.
         // This uses the public OSRM driving endpoint; other days retain their
         // saved, precomputed routes.
-        if ([17, 18].includes(Number(day.dayNumber))) {
+        if (Number(day.dayNumber) === 18) {
             try {
                 const waypointString = mappedStops.map(({ stop }) =>
                     Number(stop.longitude) + "," + Number(stop.latitude)
