@@ -3,8 +3,9 @@
   if (!root) return;
 
   const day = Number(
+    root.dataset.elevationDay ||
     root.dataset.day ||
-    location.pathname.match(/day-(\d+)\.html/)?.[1]
+    location.pathname.match(/\/day-(\d+)(?:\.html)?\/?$/)?.[1]
   );
   if (!Number.isInteger(day) || day < 1 || day > 24) return;
 
