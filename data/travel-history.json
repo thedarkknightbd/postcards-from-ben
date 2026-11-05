@@ -44,6 +44,12 @@
       "lng": -59.5432
     },
     {
+      "name": "Belgium",
+      "mapNames": [
+        "Belgium"
+      ]
+    },
+    {
       "name": "Bermuda",
       "mapNames": [
         "Bermuda"
@@ -163,6 +169,12 @@
       "trips": [
         "under-mara-sky",
         "afternoon-with-giants"
+      ]
+    },
+    {
+      "name": "Luxembourg",
+      "mapNames": [
+        "Luxembourg"
       ]
     },
     {
