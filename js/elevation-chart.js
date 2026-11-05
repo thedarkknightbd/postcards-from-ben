@@ -17,9 +17,35 @@
     if (!response.ok) throw Error("Unavailable");
 
     const data = await response.json();
-    const points = (data.points || []).filter(
+    const timeZone = data.timeZone || "Europe/Vienna";
+    const localClock = new Intl.DateTimeFormat("en-GB", {
+      timeZone, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+    });
+    const samples = (data.points || []).filter(
       p => Number.isFinite(p.minute) && Number.isFinite(p.meters)
-    );
+    ).map(p => {
+      const parts = localClock.formatToParts(
+        new Date((data.startTimestamp + p.minute * 60) * 1000)
+      );
+      const hour = Number(parts.find(v => v.type === "hour").value);
+      const minute = Number(parts.find(v => v.type === "minute").value);
+      return { ...p, minute: hour * 60 + minute };
+    }).sort((a, b) => a.minute - b.minute);
+    const windowStart = 7 * 60, windowEnd = 21 * 60;
+    const atBoundary = minute => {
+      const before = samples.filter(p => p.minute <= minute).at(-1);
+      const after = samples.find(p => p.minute >= minute);
+      if (!before) return { ...after, minute };
+      if (!after || before.minute === after.minute) return { ...before, minute };
+      return { ...before, minute, meters: before.meters +
+        (after.meters - before.meters) *
+        (minute - before.minute) / (after.minute - before.minute) };
+    };
+    const points = samples.length ? [
+      atBoundary(windowStart),
+      ...samples.filter(p => p.minute > windowStart && p.minute < windowEnd),
+      atBoundary(windowEnd)
+    ] : [];
 
     if (!points.length) {
       root.querySelector("p").textContent =
@@ -38,9 +64,9 @@
     const L = 75, R = 30, T = 45, B = 75;
     const floor = Math.min(0, Math.floor(low / 200) * 200);
     const ceil = Math.ceil((high + 100) / 200) * 200;
-    const span = data.dayMinutes || 1440;
+    const span = windowEnd - windowStart;
 
-    const x = m => L + (W - L - R) * m / span;
+    const x = m => L + (W - L - R) * (m - windowStart) / span;
     const y = v =>
       T + (H - T - B) * (1 - (v - floor) / (ceil - floor));
 
@@ -73,17 +99,13 @@
         ${c - h} ${d - slopes[i] * h} ${c} ${d}`;
     }
 
-    const clock = m =>
-      new Intl.DateTimeFormat("en-US", {
-        timeZone: data.timeZone || "Europe/Vienna",
-        hour: "numeric",
-        minute: "2-digit"
-      }).format(
-        new Date((data.startTimestamp + m * 60) * 1000)
-      );
+    const clock = m => {
+      const hour = Math.floor(m / 60);
+      return (hour % 12 || 12) + ":00 " + (hour < 12 ? "AM" : "PM");
+    };
 
     let ticks = "";
-    for (let m = 0; m <= span; m += 120) {
+    for (let m = windowStart; m <= windowEnd; m += 120) {
       ticks += `<text x="${x(m)}" y="337"
         text-anchor="middle" font-size="13"
         fill="#20364a">${clock(m)}</text>`;
