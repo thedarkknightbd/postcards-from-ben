@@ -2,7 +2,7 @@
   "dayNumber": 20,
   "date": "November 7, 2026",
   "title": "A Day in Wiesbaden",
-  "route": "Wiesbaden",
+  "route": "Courtyard Wiesbaden-Nordenstadt → Wiesbaden City Center → Courtyard Wiesbaden-Nordenstadt",
   "facts": [
     {
       "icon": "🇩🇪",
@@ -21,14 +21,30 @@
     }
   ],
   "introTitle": "Exploring Wiesbaden.",
-  "intro": "Spent the day in the city of Wiesbaden rather than taking the originally planned Rhine Valley excursion. The Rhine remains a possible outing for another day.",
+  "intro": "Visited Wiesbaden city center, driving from the hotel in Wiesbaden-Nordenstadt and returning afterward. The previously planned Rhine Valley excursion did not take place.",
   "stops": [
     {
+      "type": "Starting Point",
+      "name": "Courtyard Wiesbaden-Nordenstadt",
+      "description": "Depart from the hotel in Wiesbaden-Nordenstadt.",
+      "latitude": 50.06299672429767,
+      "longitude": 8.348715139561602,
+      "transportToNext": "drive"
+    },
+    {
       "type": "City Visit",
-      "name": "Wiesbaden",
-      "description": "Visited the city of Wiesbaden; the planned Rhine Valley excursion did not take place.",
+      "name": "Wiesbaden City Center",
+      "description": "Visit central Wiesbaden instead of the originally planned Rhine excursion.",
       "latitude": 50.0826,
-      "longitude": 8.24
+      "longitude": 8.24,
+      "transportToNext": "drive"
+    },
+    {
+      "type": "Destination",
+      "name": "Courtyard Wiesbaden-Nordenstadt",
+      "description": "Return to the hotel after visiting Wiesbaden.",
+      "latitude": 50.06299672429767,
+      "longitude": 8.348715139561602
     }
   ],
   "photos": [],
