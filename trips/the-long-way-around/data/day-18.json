@@ -83,9 +83,27 @@
       "afterStopIndex": 2
     },
     {
-      "name": "Zwolle, Netherlands",
-      "latitude": 52.5168,
-      "longitude": 6.083,
+      "name": "A50 near Nijmegen, Netherlands",
+      "latitude": 51.837,
+      "longitude": 5.739,
+      "afterStopIndex": 2
+    },
+    {
+      "name": "A50 near Apeldoorn, Netherlands",
+      "latitude": 52.185,
+      "longitude": 5.946,
+      "afterStopIndex": 2
+    },
+    {
+      "name": "A28 near Zwolle, Netherlands",
+      "latitude": 52.521,
+      "longitude": 6.075,
+      "afterStopIndex": 2
+    },
+    {
+      "name": "Hoogeveen, Netherlands",
+      "latitude": 52.722,
+      "longitude": 6.476,
       "afterStopIndex": 2
     }
   ]
