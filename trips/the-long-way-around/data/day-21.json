@@ -24,7 +24,7 @@
       "value": "Frankfurt, Germany"
     }
   ],
-  "route": "Wiesbaden, Germany",
+  "route": "Wiesbaden → Eltville am Rhein",
   "nextDay": "day-22.html",
   "intro": "This morning, I decided to take a drive to Eltville am Rhein, a small town along the Rhine River. With the trip quickly approaching its final days, I wanted to spend some time exploring another part of Germany.\n\nAfter arriving in Eltville, I spent some time walking along the Rhine, enjoying the river and seeing the castles in the area. It was a nice change of pace from the long days of driving that have been such a big part of this adventure.\n\nThere was something enjoyable about simply walking along the river, taking in the surroundings, and exploring without having to cover a great distance.",
   "introTitle": "A quiet day in Frankfurt.",
@@ -36,6 +36,13 @@
       "description": "A relaxed day based in Frankfurt before beginning the final stretch of The Long Way Around.",
       "latitude": 50.06299672429767,
       "longitude": 8.348715139561602
+    },
+    {
+      "type": "Rhine River Walk",
+      "name": "Eltville am Rhein",
+      "description": "Walked along the Rhine River and enjoyed the views of the castles in the area.",
+      "latitude": 50.02556,
+      "longitude": 8.11917
     }
   ],
   "journal": "",
