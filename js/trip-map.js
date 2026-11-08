@@ -239,11 +239,10 @@ async function loadTripMap() {
         }
 
 
-        // Day 18 changed after the Belgium branch cancellation. Resolve its
-        // road-following geometry rather than drawing misleading straight lines.
-        // This uses the public OSRM driving endpoint; other days retain their
-        // saved, precomputed routes.
-        if (Number(day.dayNumber) === 18) {
+        // Days 18 and 20 use road-following geometry from the public OSRM
+        // driving service. Day 20 is hotel → Wiesbaden → hotel.
+        // Other days retain their saved, precomputed routes.
+        if ([18, 20].includes(Number(day.dayNumber))) {
             try {
                 const waypointString = mappedStops.map(({ stop }) =>
                     Number(stop.longitude) + "," + Number(stop.latitude)
@@ -274,7 +273,7 @@ async function loadTripMap() {
                     }]
                 };
             } catch (error) {
-                console.warn("Day 18 road geometry unavailable:", error);
+                console.warn(`Day ${day.dayNumber} road geometry unavailable:`, error);
             }
         }
 
@@ -453,7 +452,7 @@ async function loadTripMap() {
 
             // Do not misrepresent the revised Day 18 route as straight roads
             // if the live driving geometry cannot be retrieved.
-            if ([17, 18].includes(Number(day.dayNumber)) && mode === "drive") {
+            if ([17, 18, 20].includes(Number(day.dayNumber)) && mode === "drive") {
                 continue;
             }
 
