@@ -1,8 +1,8 @@
 {
   "dayNumber": 20,
   "date": "November 7, 2026",
-  "title": "An Afternoon on the Rhine",
-  "route": "Frankfurt → Rhine Valley → Frankfurt",
+  "title": "A Day in Wiesbaden",
+  "route": "Wiesbaden",
   "facts": [
     {
       "icon": "🇩🇪",
@@ -12,12 +12,7 @@
     {
       "icon": "☕",
       "label": "Day Type",
-      "value": "Easy Afternoon"
-    },
-    {
-      "icon": "🌊",
-      "label": "Scenic Area",
-      "value": "Rhine Valley"
+      "value": "City Visit"
     },
     {
       "icon": "📍",
@@ -25,29 +20,15 @@
       "value": "Frankfurt, Germany"
     }
   ],
-  "introTitle": "A slower afternoon along the Rhine.",
-  "intro": "After a relaxed morning in Frankfurt, the day leaves plenty of room for an easy afternoon drive toward the Rhine Valley. The plan is intentionally simple: enjoy some river scenery, spend a little time around the Rüdesheim area, and return to Frankfurt without turning the day into another long road trip.",
+  "introTitle": "Exploring Wiesbaden.",
+  "intro": "Spent the day in the city of Wiesbaden rather than taking the originally planned Rhine Valley excursion. The Rhine remains a possible outing for another day.",
   "stops": [
     {
-      "type": "Starting Point",
-      "name": "Frankfurt",
-      "description": "Enjoy a slower morning in Frankfurt before heading west toward the Rhine.",
-      "latitude": 50.06299672429767,
-      "longitude": 8.348715139561602
-    },
-    {
-      "type": "Scenic Area",
-      "name": "Rhine Valley — Rüdesheim Area",
-      "description": "Spend part of the afternoon along the Rhine near Rüdesheim, with time for river views and a relaxed stop before heading back.",
-      "latitude": 49.9786,
-      "longitude": 7.9242
-    },
-    {
-      "type": "Destination",
-      "name": "Frankfurt",
-      "description": "Return to Frankfurt after a relaxed afternoon along the Rhine.",
-      "latitude": 50.06299672429767,
-      "longitude": 8.348715139561602
+      "type": "City Visit",
+      "name": "Wiesbaden",
+      "description": "Visited the city of Wiesbaden; the planned Rhine Valley excursion did not take place.",
+      "latitude": 50.0826,
+      "longitude": 8.24
     }
   ],
   "photos": [],
