@@ -46,6 +46,37 @@ async function loadDayPage() {
         return;
     }
 
+    // Ensure every trip day has an elevation section, including newly created days.
+    // Older pages already contain the section and their own chart script.
+    const dayNumber = Number(
+        document.body.dataset.elevationDay ||
+        source.match(/day-(\\d+)/)?.[1] ||
+        location.pathname.match(/day-(\\d+)/)?.[1]
+    );
+    if (Number.isInteger(dayNumber) && dayNumber >= 1 && dayNumber <= 24) {
+        let elevationRoot = document.getElementById("day-elevation");
+        if (!elevationRoot) {
+            const mapSection = document.getElementById("map-section");
+            const photosSection = document.getElementById("photos-section");
+            const section = document.createElement("section");
+            section.id = "elevation-section";
+            section.className = "day-elevation-section";
+            section.setAttribute("aria-label", "Elevation profile");
+            elevationRoot = document.createElement("div");
+            elevationRoot.id = "day-elevation";
+            elevationRoot.dataset.elevationDay = String(dayNumber);
+            elevationRoot.innerHTML = "<p>Loading elevation profile…</p>";
+            section.appendChild(elevationRoot);
+            if (mapSection) mapSection.insertAdjacentElement("afterend", section);
+            else if (photosSection) photosSection.insertAdjacentElement("beforebegin", section);
+        }
+        if (elevationRoot && !document.querySelector('script[src*="/elevation-chart.js"]')) {
+            const chartScript = document.createElement("script");
+            chartScript.src = "/js/elevation-chart.js?v=20261108-auto";
+            document.body.appendChild(chartScript);
+        }
+    }
+
     // A consistent route key below the map on every day page.
     const dayMap = document.getElementById("day-map");
     if (dayMap && !document.getElementById("day-map-legend")) {
