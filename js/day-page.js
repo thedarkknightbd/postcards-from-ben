@@ -179,7 +179,15 @@ async function loadDayPage() {
     if (!hasDetailedDrivingRoute && allDriving && dayStops.length >= 2) {
         try {
             const via = Array.isArray(data.routeVia) ? data.routeVia : [];
-            const routingStops = [...dayStops.slice(0, -1), ...via, dayStops[dayStops.length - 1]];
+            const routingStops = [];
+            dayStops.forEach((stop, index) => {
+                routingStops.push(stop);
+                if (index < dayStops.length - 1) {
+                    routingStops.push(...via.filter(point =>
+                        Number(point.afterStopIndex ?? dayStops.length - 2) === index
+                    ));
+                }
+            });
             const waypoints = routingStops.map(stop =>
                 [Number(stop.longitude), Number(stop.latitude)]
             );
