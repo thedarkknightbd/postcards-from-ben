@@ -185,8 +185,8 @@ async function loadTripDays() {
               16: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-16/1793730802363-img_1526.jpeg",
               17: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-17/1793860465052-img_1637.jpeg",
               18: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-18/1793906171092-img_1664.jpeg",
-              19: "Hunebed D27 2020.jpg",
-              20: "Mittelrhein-Burg-Stahleck-JR-E-1700-2017-05-27.jpg",
+              19: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-19/1794119555689-img_1809.jpeg",
+              20: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-20/1794119711106-img_1813.jpeg",
               21: "Römerberg in Frankfurt.jpg",
               22: "Neues Rathaus und Marienplatz München.jpg",
               23: "Liechtenstein-00190 - Vaduz Castle (19627815986).jpg",
@@ -251,7 +251,7 @@ async function loadTripDays() {
     summary.textContent = "Cover photograph credits and licensing";
     credits.appendChild(summary);
     const creditList = document.createElement("ol");
-    const creditFiles = {"2":"Schönbrunn Palace.jpg","3":"Bratislava Castle with Danube.jpeg","7":"Brescia castello ponte levatoio torre dei Prigionieri panorama di Brescia.jpg","9":"Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg","10":"Riva del Garda Panorama from sentiero del Ponale.jpg","11":"Guaita Fortress and San Marino (2023).jpg","12":"Bernina express Viaduc de Brusio.jpg","13":"Brescia - Piazza della Loggia.jpg","14":"Brescia - Piazza Paolo VI (48747822708).jpg","15":"Monaco Hercule Harbour Panorama.jpg","16":"Mont Blanc de Courmayeur.jpg","19":"Hunebed D27 2020.jpg","20":"Mittelrhein-Burg-Stahleck-JR-E-1700-2017-05-27.jpg","21":"Römerberg in Frankfurt.jpg","22":"Neues Rathaus und Marienplatz München.jpg","23":"Liechtenstein-00190 - Vaduz Castle (19627815986).jpg","24":"MUC Terminal 2 from air 20251011.jpg"};
+    const creditFiles = {"2":"Schönbrunn Palace.jpg","3":"Bratislava Castle with Danube.jpeg","7":"Brescia castello ponte levatoio torre dei Prigionieri panorama di Brescia.jpg","9":"Santa Maddalena, Funes, chiesa di San Giovanni in Ranui 06.jpg","10":"Riva del Garda Panorama from sentiero del Ponale.jpg","11":"Guaita Fortress and San Marino (2023).jpg","12":"Bernina express Viaduc de Brusio.jpg","13":"Brescia - Piazza della Loggia.jpg","14":"Brescia - Piazza Paolo VI (48747822708).jpg","15":"Monaco Hercule Harbour Panorama.jpg","16":"Mont Blanc de Courmayeur.jpg","21":"Römerberg in Frankfurt.jpg","22":"Neues Rathaus und Marienplatz München.jpg","23":"Liechtenstein-00190 - Vaduz Castle (19627815986).jpg","24":"MUC Terminal 2 from air 20251011.jpg"};
     Object.entries(creditFiles).forEach(([number, file]) => {
       const item = document.createElement("li");
       const link = document.createElement("a");
