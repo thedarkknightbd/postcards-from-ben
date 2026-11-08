@@ -163,7 +163,7 @@ async function loadDayPage() {
        original file as a fallback if routing is unavailable.
     ===================================== */
 
-    if ([9, 10, 11, 18].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
+    if ([9, 10, 11, 18, 21].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
         try {
             const routingStops = data.routeVia?.length ? [...data.stops.slice(0, -1), ...data.routeVia, data.stops[data.stops.length - 1]] : data.stops;
             const waypoints = routingStops.map(stop =>
@@ -780,7 +780,7 @@ async function loadDayPage() {
 
 
                     // Never depict Day 18 as direct straight-line roads.
-                    if ([17, 18].includes(Number(data.dayNumber)) && mode === "drive") continue;
+                    if (mode === "drive") continue;
 
                     routeFeatures.push({
 
