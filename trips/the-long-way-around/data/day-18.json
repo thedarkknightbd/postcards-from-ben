@@ -67,7 +67,8 @@
     {
       "name": "Bastogne, Belgium",
       "latitude": 50.0035,
-      "longitude": 5.7184
+      "longitude": 5.7184,
+      "afterStopIndex": 1
     }
   ]
 }
