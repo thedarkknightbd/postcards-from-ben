@@ -98,7 +98,12 @@ async function loadDayPage() {
     let data;
 
     try {
-        const response = await fetch(source);
+        // Day data must not remain stale after a route correction.
+        const dayDataUrl = new URL(source, location.href);
+        if (/day-18\.json$/.test(dayDataUrl.pathname)) {
+            dayDataUrl.searchParams.set("routeRevision", "20261108-a50-v2");
+        }
+        const response = await fetch(dayDataUrl.href, { cache: "no-store" });
 
         if (!response.ok) {
             throw new Error(
