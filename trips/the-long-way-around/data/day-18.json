@@ -69,6 +69,24 @@
       "latitude": 50.0035,
       "longitude": 5.7184,
       "afterStopIndex": 1
+    },
+    {
+      "name": "Maastricht, Netherlands",
+      "latitude": 50.8514,
+      "longitude": 5.69097,
+      "afterStopIndex": 2
+    },
+    {
+      "name": "Eindhoven, Netherlands",
+      "latitude": 51.4416,
+      "longitude": 5.4697,
+      "afterStopIndex": 2
+    },
+    {
+      "name": "Zwolle, Netherlands",
+      "latitude": 52.5168,
+      "longitude": 6.083,
+      "afterStopIndex": 2
     }
   ]
 }
