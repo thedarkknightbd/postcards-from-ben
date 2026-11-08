@@ -157,15 +157,29 @@ async function loadDayPage() {
 
 
     /* =====================================
-       ROAD-FOLLOWING ROUTES FOR DAYS 9–11 AND 18
-       Existing GeoJSON has only straight stop-to-stop lines.
-       Fetch actual driving-road geometry while retaining the
-       original file as a fallback if routing is unavailable.
+       ROAD ROUTING FOR MISSING / STRAIGHT GEOMETRY
+       Preserve detailed saved routes and non-driving modes.
     ===================================== */
 
-    if ([9, 10, 11, 18, 21].includes(Number(data.dayNumber)) && (data.stops || []).length >= 2) {
+    const savedFeatures = Array.isArray(detailedRouteData?.features)
+        ? detailedRouteData.features : [];
+    const hasDetailedDrivingRoute = savedFeatures.some(feature =>
+        feature.properties?.mode === "drive" &&
+        feature.geometry?.type === "LineString" &&
+        Array.isArray(feature.geometry.coordinates) &&
+        feature.geometry.coordinates.length >= 10
+    );
+    const dayStops = data.stops || [];
+    const allDriving = dayStops.slice(0, -1).every(stop =>
+        !stop.transportToNext || stop.transportToNext === "drive"
+    );
+
+    // Only infer a road route when the complete itinerary is by car.
+    // Never overwrite saved walking, train, cable-car or detailed road geometry.
+    if (!hasDetailedDrivingRoute && allDriving && dayStops.length >= 2) {
         try {
-            const routingStops = data.routeVia?.length ? [...data.stops.slice(0, -1), ...data.routeVia, data.stops[data.stops.length - 1]] : data.stops;
+            const via = Array.isArray(data.routeVia) ? data.routeVia : [];
+            const routingStops = [...dayStops.slice(0, -1), ...via, dayStops[dayStops.length - 1]];
             const waypoints = routingStops.map(stop =>
                 [Number(stop.longitude), Number(stop.latitude)]
             );
@@ -188,27 +202,38 @@ async function loadDayPage() {
                     geometry?.type !== "LineString" ||
                     !Array.isArray(geometry.coordinates) ||
                     geometry.coordinates.length < 10) {
-                    throw new Error("Routing service did not return detailed road geometry");
+                    throw new Error("Routing service did not return road geometry");
                 }
+                // Replace only a sparse, stop-to-stop driving route. Preserve
+                // other geometry such as walks and scenic/rail segments.
+                const preserved = savedFeatures.filter(feature =>
+                    feature.properties?.mode !== "drive"
+                );
                 detailedRouteData = {
                     type: "FeatureCollection",
-                    features: [{
+                    features: [...preserved, {
                         type: "Feature",
                         properties: {
                             mode: "drive",
                             fromStopIndex: 0,
-                            toStopIndex: waypoints.length - 1,
-                            fromName: data.stops[0].name,
-                            toName: data.stops[data.stops.length - 1].name,
-                            routeNote: "Road route from OpenStreetMap routing data; not live navigation."
+                            toStopIndex: dayStops.length - 1,
+                            routeNote: "Estimated road route; actual driven roads may differ."
                         },
                         geometry
                     }]
                 };
             }
         } catch (error) {
-            if (Number(data.dayNumber) === 17) detailedRouteData = null;
-            console.warn("Road routing unavailable; not displaying an unverified straight-line route:", error);
+            // Do not draw sparse driving polylines as if they follow roads.
+            detailedRouteData = {
+                type: "FeatureCollection",
+                features: savedFeatures.filter(feature =>
+                    feature.properties?.mode !== "drive" ||
+                    (feature.geometry?.type === "LineString" &&
+                     feature.geometry.coordinates?.length >= 10)
+                )
+            };
+            console.warn("Road routing unavailable:", error);
         }
     }
 
