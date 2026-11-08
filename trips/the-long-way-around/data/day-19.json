@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-18.html",
   "dayNumber": 19,
-  "date": "November 6, 2026",
-  "title": "Netherlands to Germany",
-  "route": "Emmen → Netherlands Bethel → Frankfurt",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,12 @@
       "value": "Frankfurt, Germany"
     }
   ],
+  "route": "Emmen → Netherlands Bethel → Frankfurt",
+  "nextDay": "day-20.html",
+  "intro": "The morning began in the Netherlands with breakfast before heading to the branch office for my 10:00 AM tour. This was another visit I had been looking forward to, and it turned out to be a wonderful experience.\n\nOne of the highlights was the Bethel museum. It featured four rooms exploring the history and work of the organization, including Christian neutrality, the preaching work, and the Bible. One display focused on the experiences of those who maintained their neutrality during the concentration camp era. An additional exhibition outside highlighted the many ways love has been demonstrated. Each section offered something meaningful, making the visit a truly wonderful opportunity and one of the highlights of my day.\n\nI also had the wonderful privilege of joining the Bethel family for lunch. There was salmon, green bean and pasta salads, along with other selections. It was a wonderful time to share it with the family.\n\nThe visit also included the translation and broadcasting departments, giving me another opportunity to appreciate the work being accomplished behind the scenes. Every branch office I have visited on this trip has offered something special, and the Netherlands was certainly no exception.\n\nAfter leaving Bethel, it was time to make my way into Germany. I had originally anticipated a drive of approximately four to four and a half hours to Frankfurt, but as the afternoon progressed, that estimate continued to grow. What should have been a relatively straightforward drive was now looking closer to six hours.\n\nOnce I was able to get moving on the Autobahn, the driving itself became another interesting part of the day.\n\nFor the first time, I was traveling on stretches of highway without a posted speed limit. I found myself cruising between 130 and 140 kilometers per hour, while also being mindful of the Volvo XC90 and its winter tires. At those speeds, my attention was focused primarily on the road rather than the countryside passing around me.\n\nOne thing I have really come to appreciate about driving in Germany is the discipline of the drivers. Even on sections without a posted speed limit, there is an orderly way everyone seems to operate. Drivers generally remain in the right lane unless overtaking, leaving the left lanes available for those traveling faster.\n\nIt’s a system that makes a tremendous amount of sense, and when everyone follows it, driving becomes remarkably enjoyable. Despite the heavy traffic and accidents along the way, I found myself appreciating this aspect of Germany’s roadways.\n\nAfter passing Düsseldorf, an accident near Cologne added approximately 45 minutes to the journey. I eventually made a manual adjustment to the route to avoid some of the congestion. With a congregation meeting scheduled for 7:00 PM in Frankfurt, I was becoming increasingly concerned about the timing. I wasn’t frustrated by the delays, but I was certainly conscious of the clock and hoping everything would work out.\n\nWhat began as another wonderful morning at Bethel turned into a long afternoon behind the wheel. But even with the delays, it was another day filled with experiences that made this journey special. From the warm hospitality of the Netherlands branch to experiencing the German Autobahn, Day 19 offered another memorable chapter of The Long Way Around.",
   "introTitle": "From the Netherlands into Germany.",
-  "intro": "The morning begins in Emmen with a visit to the Netherlands branch office before The Long Way Around continues southeast into Germany. The day finishes in Frankfurt, which becomes the base for the next few days.",
+  "date": "November 6, 2026",
+  "kilometersDriven": 522,
   "stops": [
     {
       "type": "Starting Point",
@@ -50,9 +53,7 @@
       "longitude": 8.348715139561602
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-18.html",
-  "nextDay": "day-20.html"
+  "title": "Netherlands to Germany",
+  "videos": []
 }
