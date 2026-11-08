@@ -50,8 +50,8 @@ async function loadDayPage() {
     // Older pages already contain the section and their own chart script.
     const dayNumber = Number(
         document.body.dataset.elevationDay ||
-        source.match(/day-(\\d+)/)?.[1] ||
-        location.pathname.match(/day-(\\d+)/)?.[1]
+        source.match(/day-(\d+)/)?.[1] ||
+        location.pathname.match(/day-(\d+)/)?.[1]
     );
     if (Number.isInteger(dayNumber) && dayNumber >= 1 && dayNumber <= 24) {
         let elevationRoot = document.getElementById("day-elevation");
