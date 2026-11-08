@@ -62,5 +62,12 @@
   ],
   "journal": "",
   "title": "Luxembourg & Belgium",
-  "videos": []
+  "videos": [],
+  "routeVia": [
+    {
+      "name": "Bastogne, Belgium",
+      "latitude": 50.0035,
+      "longitude": 5.7184
+    }
+  ]
 }
