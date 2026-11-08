@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-19.html",
   "dayNumber": 20,
-  "date": "November 7, 2026",
-  "title": "A Day in Wiesbaden",
-  "route": "Courtyard Wiesbaden-Nordenstadt → Wiesbaden City Center → Courtyard Wiesbaden-Nordenstadt",
   "facts": [
     {
       "icon": "🇩🇪",
@@ -20,8 +19,12 @@
       "value": "Frankfurt, Germany"
     }
   ],
+  "route": "Courtyard Wiesbaden-Nordenstadt → Wiesbaden City Center → Courtyard Wiesbaden-Nordenstadt",
+  "nextDay": "day-21.html",
+  "intro": "After so many days of traveling across Europe, today was an opportunity to slow things down a little. With just a few days remaining before heading home, I wanted to take care of some shopping and pick up a few gifts to bring back.\n\nI headed into Wiesbaden to explore some of the shops and spend a little time walking around the city. It was a different pace from the long drives, mountain passes, and sightseeing that have filled much of this adventure.\n\nNot every day has to be filled with spectacular destinations. Sometimes it’s nice to have a more ordinary day, even when you’re thousands of miles from home.\n\nWith the journey nearing its end, I’m becoming increasingly aware of just how quickly these past twenty days have gone by. There are still a few things I want to accomplish before leaving Germany, and one final country waiting for me before this adventure comes to a close.",
   "introTitle": "Exploring Wiesbaden.",
-  "intro": "Visited Wiesbaden city center, driving from the hotel in Wiesbaden-Nordenstadt and returning afterward. The previously planned Rhine Valley excursion did not take place.",
+  "date": "November 7, 2026",
+  "kilometersDriven": 37,
   "stops": [
     {
       "type": "Starting Point",
@@ -47,9 +50,7 @@
       "longitude": 8.348715139561602
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-19.html",
-  "nextDay": "day-21.html"
+  "title": "A Day in Wiesbaden",
+  "videos": []
 }
