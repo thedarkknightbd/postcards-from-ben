@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-22.html",
   "dayNumber": 23,
-  "date": "November 10, 2026",
-  "title": "Liechtenstein",
-  "route": "Munich → Vaduz → Munich",
   "facts": [
     {
       "icon": "🌍",
@@ -25,8 +24,12 @@
       "value": "Munich, Germany"
     }
   ],
-  "introTitle": "One more country before heading home.",
-  "intro": "With the road trip nearly complete, there is time for one final day trip from Munich. The route heads southwest through the Alps to Vaduz for a short visit to Liechtenstein before turning back toward Munich for the final night of The Long Way Around.",
+  "route": "Munich → Vaduz → Munich",
+  "nextDay": "day-24.html",
+  "intro": "Today marked the final full day of The Long Way Around, and there was one last country waiting to be checked off my list: Liechtenstein.\n\nAfter spending the night near Munich Airport, I set out for Vaduz, the capital of Liechtenstein. This would be a relatively simple day compared with some of the long drives of the past three weeks. My goal wasn’t to spend hours exploring. I just wanted to visit the country, take a few photographs, enjoy the scenery, and complete the journey through all the countries I had planned to visit.\n\nThe morning began under gloomy skies, with clouds and rain around Munich. But as I traveled southwest toward the Alps, the scenery began to change. The mountains rose around me, and eventually I passed through a tunnel that seemed to divide two completely different weather systems. On the other side, the conditions improved, revealing the beautiful Alpine landscape.\n\nArriving in Vaduz, I immediately noticed the castle perched high on the hillside overlooking the town. Vaduz Castle was an impressive sight, sitting above the capital with the mountains rising behind it. I learned that the castle wasn’t open to visitors, and the gentleman at the visitor center offered a rather amusing explanation: the princess was still sleeping! I couldn’t help but appreciate his sense of humor.\n\nWhat struck me most about Vaduz was its setting. The town was nestled between the Alps, surrounded by dramatic mountain scenery. It was beautiful, peaceful, and exactly the kind of place I enjoy discovering during my travels.\n\nMy visit was brief, just as I had planned. I took some photographs, enjoyed the surroundings, and appreciated the fact that I had finally reached the last country on my itinerary.\n\nWith Liechtenstein complete, I had officially visited all 16 countries on this adventure.\n\nThen it was time to turn the Volvo around and head back toward Munich.\n\nAs I made my way north, I passed through the mountain tunnel again. Almost immediately after emerging on the German side, the rain returned. It was remarkable how the mountains appeared to be holding back the weather, with much better conditions on one side than the other.\n\nFor a while, I considered driving into central Munich. After traveling throughout Europe, it seemed almost strange that I hadn’t spent any meaningful time exploring the city where the journey began. But the rain, traffic, and thought of finding parking made the decision easier. I had seen so many extraordinary places already, and I didn’t feel the need to force one more stop.\n\nInstead, I decided to head back toward the airport and begin returning the rental car.\n\nAfter nearly four days’ worth of accumulated driving time, I was ready to say goodbye to the Volvo XC90. It had carried me across mountains, through tunnels, along winding roads, and across much of Europe. I won’t particularly miss its enormous turning radius or the challenges of maneuvering it through narrow streets and parking areas. But I will miss the freedom of being on the road and seeing Europe unfold through the windshield.\n\nThe trip computer showed approximately 6,880 kilometers and 92 hours of driving, although the final totals will need to account for the distance traveled before the trip computer was reset.\n\nAs I prepared to return the vehicle, I found myself feeling two things at once: relief that the driving was finally over and sadness that the adventure was coming to an end.\n\nTomorrow, I’ll begin the journey home.\n\nFor 23 days, The Long Way Around has taken me through extraordinary landscapes, beautiful cities, mountain passes, and unforgettable experiences. There have been stressful moments, unexpected changes, and plenty of long days behind the wheel. But there have also been experiences and memories that I will carry with me for years.\n\nToday, standing in Liechtenstein with the Alps surrounding me, I finally closed the loop on the journey I had set out to complete.\n\nThe Long Way Around had brought me almost all the way back to where it began.",
+  "introTitle": "One Last Country, One Last Drive",
+  "date": "November 10, 2026",
+  "kilometersDriven": 555,
   "stops": [
     {
       "type": "Starting Point",
@@ -50,9 +53,7 @@
       "longitude": 11.788780241425268
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-22.html",
-  "nextDay": "day-24.html"
+  "title": "Liechtenstein",
+  "videos": []
 }
