@@ -188,6 +188,8 @@ async function loadTripDays() {
               19: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-19/1794119555689-img_1809.jpeg",
               20: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-20/1794119711106-img_1813.jpeg",
               21: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-21/1794163969035-img_1829.jpeg",
+              22: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-22/1794349263661-img_2066.jpeg",
+              23: "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-23/1794349541699-img_2080.jpeg",
               22: "Neues Rathaus und Marienplatz München.jpg",
               23: "Liechtenstein-00190 - Vaduz Castle (19627815986).jpg",
               24: "MUC Terminal 2 from air 20251011.jpg"
