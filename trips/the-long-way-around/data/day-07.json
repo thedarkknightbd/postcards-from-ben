@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-06.html",
   "dayNumber": 7,
-  "date": "October 25, 2026",
-  "title": "A Day in Brescia",
-  "route": "Brescia, Italy",
   "facts": [
     {
       "icon": "🇮🇹",
@@ -25,8 +24,12 @@
       "value": "Brescia, Italy"
     }
   ],
-  "introTitle": "A slower day in Brescia.",
+  "route": "Brescia, Italy",
+  "nextDay": "day-08.html",
   "intro": "After several days of moving from country to country, this is a chance to slow the pace and spend the day in Brescia before heading back into the mountains.",
+  "introTitle": "A slower day in Brescia.",
+  "date": "October 25, 2026",
+  "kilometersDriven": 22,
   "stops": [
     {
       "type": "Base",
@@ -36,10 +39,7 @@
       "longitude": 10.23647
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-06.html",
-  "nextDay": "day-08.html",
-  "kilometersDriven": 14
+  "title": "A Day in Brescia",
+  "videos": []
 }
