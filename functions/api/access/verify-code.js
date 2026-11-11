@@ -8,7 +8,7 @@ export async function onRequestPost({request,env}){
  const challenge=await env.ACCESS_DB.prepare(`SELECT c.id,c.code_hash,c.attempts,c.expires_at,c.consumed_at,c.user_id,u.permission FROM access_email_challenges c JOIN access_users u ON u.id=c.user_id WHERE c.id=? AND u.email=? AND u.state='approved'`).bind(id,email).first();
  if(!challenge||challenge.consumed_at||challenge.attempts>=5||Date.parse(challenge.expires_at)<=Date.now())return response({error:"Code expired or invalid"},401);
  // Increment attempts atomically before validating the code, so parallel requests cannot bypass limits.
- const bump=await env.ACCESS_DB.prepare("UPDATE access_email_challenges SET attempts=attempts+1 WHERE id=? AND consumed_at IS NULL AND attempts<5 AND expires_at>CURRENT_TIMESTAMP").bind(id).run();
+ const bump=await env.ACCESS_DB.prepare("UPDATE access_email_challenges SET attempts=attempts+1 WHERE id=? AND consumed_at IS NULL AND attempts<5 AND datetime(expires_at)>CURRENT_TIMESTAMP").bind(id).run();
  if(!bump.meta?.changes)return response({error:"Code expired or invalid"},401);
  const hash=await digest(id+":"+code,env.ACCESS_SESSION_SECRET);
  if(hash!==challenge.code_hash)return response({error:"Incorrect code"},401);
