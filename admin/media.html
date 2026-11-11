@@ -380,6 +380,40 @@ function render() {
   });
 }
 
+const tripStartDates = {"the-long-way-around":"2026-10-19"};
+let atlasPlaces = [];
+fetch("/data/travel-history.json").then(r => r.ok ? r.json() : null).then(data => {
+  atlasPlaces = Array.isArray(data?.places) ? data.places : [];
+}).catch(() => {});
+function dayDate(adventure, day) {
+  const start = tripStartDates[adventure];
+  if (!start || !day || !Number.isInteger(Number(day))) return "";
+  const d = new Date(start + "T12:00:00Z");
+  d.setUTCDate(d.getUTCDate() + Number(day) - 1);
+  return d.toISOString().slice(0,10);
+}
+function countryOptions(select) {
+  const names = new Intl.DisplayNames(["en"], {type:"region"});
+  const codes = new Set(["US","DE","IT","AT","CZ","SK","HU","SI","HR","SM","CH","MC","FR","LU","BE","NL","LI","GB","CA","GR","KE","ZA","TZ","AE"]);
+  for (let i=65;i<=90;i++) for (let j=65;j<=90;j++) {
+    const code=String.fromCharCode(i,j), name=names.of(code);
+    if (name && name!==code && !/^[A-Z]{2}$/.test(name)) codes.add(code);
+  }
+  const entries=[...codes].map(code=>({code,name:names.of(code)})).filter(x=>x.name && x.name!==x.code).sort((a,b)=>a.name.localeCompare(b.name));
+  select.add(new Option("Choose country (optional)",""));
+  for (const {code,name} of entries) select.add(new Option(name,code));
+}
+function destinationSuggestions(countryCode, datalist) {
+  datalist.replaceChildren();
+  const display = new Intl.DisplayNames(["en"],{type:"region"});
+  const name = countryCode ? display.of(countryCode) : "";
+  const matches = atlasPlaces.filter(p => p.name === name || (name === "Czechia" && p.name === "Czechia"));
+  const seen = new Set();
+  for (const p of matches) for (const dest of p.destinations || []) {
+    if (!seen.has(dest.name)) { datalist.appendChild(new Option(dest.name)); seen.add(dest.name); }
+  }
+}
+
 async function openMetadata(item, obj, button) {
   const old = item.querySelector(".metadata-panel");
   if (old) { old.remove(); button.textContent = "Tag photo"; return; }
@@ -399,12 +433,33 @@ async function openMetadata(item, obj, button) {
   const inferredDay = isCurrentTrip() && (kindEl.value === "days" || kindEl.value === "videos") ? Number(dayEl.value) : "";
   const caption = field("Caption", "caption", "", "textarea");
   const alt = field("Alt text (accessibility)", "alt_text", "", "textarea");
-  const country = field("Country code (e.g. IT, DE, LI)", "country");
-  country.querySelector("input").maxLength = 2;
-  const destination = field("Destination (e.g. Lake Carezza)", "destination");
-  const adventure = field("Adventure slug", "adventure", tripEl.value);
+  const country = document.createElement("label");
+  country.textContent = "Country";
+  const countrySelect = document.createElement("select");
+  countrySelect.name = "country";
+  countryOptions(countrySelect);
+  country.appendChild(countrySelect);
+  const destination = field("Destination (choose a suggestion or enter your own)", "destination");
+  const suggestions = document.createElement("datalist");
+  suggestions.id = "destinations-" + crypto.randomUUID();
+  destination.querySelector("input").setAttribute("list",suggestions.id);
+  destination.appendChild(suggestions);
+  countrySelect.addEventListener("change",()=>destinationSuggestions(countrySelect.value,suggestions));
+  const adventure = document.createElement("label");
+  adventure.textContent = "Adventure";
+  const adventureSelect = tripEl.cloneNode(true);
+  adventureSelect.removeAttribute("id");
+  adventureSelect.name = "adventure";
+  adventureSelect.value = tripEl.value;
+  adventure.appendChild(adventureSelect);
   const day = field("Day number (leave blank for trip-wide photos)", "day", inferredDay, "number");
-  const taken = field("Date taken (optional)", "taken_at", "", "date");
+  const taken = field("Date taken (editable)", "taken_at", dayDate(tripEl.value,inferredDay), "date");
+  const updateDateDefault = () => {
+    if (!taken.querySelector("input").dataset.userEdited) taken.querySelector("input").value = dayDate(adventureSelect.value,day.querySelector("input").value);
+  };
+  taken.querySelector("input").addEventListener("change",()=>{taken.querySelector("input").dataset.userEdited="1";});
+  adventureSelect.addEventListener("change",updateDateDefault);
+  day.querySelector("input").addEventListener("change",updateDateDefault);
   const latitude = field("Latitude (optional)", "latitude", "", "number");
   latitude.querySelector("input").step = "any";
   const longitude = field("Longitude (optional)", "longitude", "", "number");
@@ -434,11 +489,13 @@ async function openMetadata(item, obj, button) {
     if (!res.ok) throw new Error(data.error || "Could not load metadata");
     const p = data.photo;
     if (p) {
-      for (const name of ["caption","alt_text","taken_at","latitude","longitude"]) get(name).value = p[name] ?? "";
+      for (const name of ["caption","alt_text","latitude","longitude"]) get(name).value = p[name] ?? "";
+      if (p.taken_at) get("taken_at").value = p.taken_at.slice(0,10);
       get("status").value = p.status;
       get("featured").checked = Boolean(p.featured);
       if (p.destinations?.length) {
         get("country").value = p.destinations[0].country_code;
+        destinationSuggestions(get("country").value,suggestions);
         get("destination").value = p.destinations[0].name;
       }
       if (p.adventures?.length) {
