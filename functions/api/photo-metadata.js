@@ -39,8 +39,7 @@ export async function onRequest({request, env}) {
   const destination = clean(body.destination,120);
   if (country && !/^[A-Z]{2}$/.test(country)) return reply({error:"Use a two-letter country code"},400);
   if (destination && !country) return reply({error:"Choose a country for the destination"},400);
-  const status = clean(body.status,20) || "needs_review";
-  if (!["needs_review","draft","published"].includes(status)) return reply({error:"Invalid status"},400);
+  const status = "published"; // Uploading and tagging are sufficient; no review workflow.
   const coords = ["latitude","longitude"].map(k => body[k] === "" || body[k] == null ? null : Number(body[k]));
   if ((coords[0] != null && (!Number.isFinite(coords[0]) || Math.abs(coords[0]) > 90)) ||
       (coords[1] != null && (!Number.isFinite(coords[1]) || Math.abs(coords[1]) > 180))) return reply({error:"Invalid coordinates"},400);
@@ -58,7 +57,7 @@ export async function onRequest({request, env}) {
       VALUES (?,?,?,?,?,?,?,?,?,?,?)
       ON CONFLICT(r2_key) DO UPDATE SET caption=excluded.caption,alt_text=excluded.alt_text,taken_at=excluded.taken_at,
       latitude=excluded.latitude,longitude=excluded.longitude,status=excluded.status,featured=excluded.featured,updated_at=datetime('now')`)
-      .bind(id,r2Key,r2Key.split("/").pop(),image(r2Key)?"image":"video",caption,alt,taken,coords[0],coords[1],status,body.featured?1:0).run();
+      .bind(id,r2Key,r2Key.split("/").pop(),image(r2Key)?"image":"video",caption,alt,taken,coords[0],coords[1],status,0).run();
     const row = await db.prepare("SELECT id FROM photos WHERE r2_key=?").bind(r2Key).first();
     // Replace associations only after photo upsert succeeds.
     await db.prepare("DELETE FROM photo_destinations WHERE photo_id=?").bind(row.id).run();
