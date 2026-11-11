@@ -28,6 +28,24 @@ async function initTravelMap() {
         ).features;
 
         status.hidden = true;
+        const countryList = document.getElementById("atlas-country-list");
+        if (countryList) {
+            const sortedPlaces = [...data.places].sort((a,b) => a.name.localeCompare(b.name));
+            sortedPlaces.forEach(place => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.textContent = place.name;
+                button.setAttribute("aria-pressed", "false");
+                button.addEventListener("click", () => {
+                    countryList.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", "false"));
+                    button.setAttribute("aria-pressed", "true");
+                    selectPlace(place, data, details);
+                    details.scrollIntoView({behavior: "smooth", block: "nearest"});
+                });
+                countryList.appendChild(button);
+            });
+        }
+
 
         // Match countries by both display name and stable atlas numeric ID.
         // World Atlas country names can differ from travel-history labels.
