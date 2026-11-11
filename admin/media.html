@@ -30,6 +30,11 @@
     .item-meta { padding:9px; font-size:11px; color:#aeb8c4; word-break:break-all; }
     .item-actions { display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:6px; padding:0 9px 9px; }
     .item-actions button { padding:9px 6px; font-size:13px; }
+    .metadata-panel { margin:10px; padding:12px; border:1px solid #34475d; border-radius:12px; background:#142438; }
+    .metadata-panel label { font-size:13px; margin:10px 0 4px; }
+    .metadata-panel textarea { width:100%; min-height:65px; border-radius:10px; border:1px solid #34475d; background:#0c1724; color:white; padding:10px; font:inherit; }
+    .metadata-panel .row { grid-template-columns:1fr 1fr; }
+    .metadata-panel .status { min-height:0; }
     .hint { margin:8px 0 0; font-size:12px; color:#91a0af; }
     .hidden { display:none; }
     .progress { width:100%; height:8px; margin-top:10px; overflow:hidden; border-radius:999px; background:#263648; }
@@ -361,9 +366,102 @@ function render() {
     del.textContent = "Delete";
     del.addEventListener("click", () => removeMedia(obj));
 
+    if (!isVideoKind()) {
+      const edit = document.createElement("button");
+      edit.className = "secondary";
+      edit.textContent = "Tag photo";
+      edit.style.gridColumn = "1 / -1";
+      edit.addEventListener("click", () => openMetadata(item, obj, edit));
+      actions.append(edit);
+    }
     actions.append(up, down, del);
     item.append(meta, actions);
     gridEl.appendChild(item);
+  });
+}
+
+
+async function openMetadata(item, obj, button) {
+  const old = item.querySelector(".metadata-panel");
+  if (old) { old.remove(); button.textContent = "Tag photo"; return; }
+  button.textContent = "Close tags";
+  const panel = document.createElement("form");
+  panel.className = "metadata-panel";
+  const field = (label, name, value = "", type = "text") => {
+    const wrap = document.createElement("label");
+    wrap.textContent = label;
+    const input = document.createElement(type === "textarea" ? "textarea" : "input");
+    if (type !== "textarea") input.type = type;
+    input.name = name;
+    input.value = value == null ? "" : value;
+    wrap.appendChild(input);
+    return wrap;
+  };
+  const inferredDay = isCurrentTrip() && (kindEl.value === "days" || kindEl.value === "videos") ? Number(dayEl.value) : "";
+  const caption = field("Caption", "caption", "", "textarea");
+  const alt = field("Alt text (accessibility)", "alt_text", "", "textarea");
+  const country = field("Country code (e.g. IT, DE, LI)", "country");
+  country.querySelector("input").maxLength = 2;
+  const destination = field("Destination (e.g. Lake Carezza)", "destination");
+  const adventure = field("Adventure slug", "adventure", tripEl.value);
+  const day = field("Day number (leave blank for trip-wide photos)", "day", inferredDay, "number");
+  const taken = field("Date taken (optional)", "taken_at", "", "date");
+  const latitude = field("Latitude (optional)", "latitude", "", "number");
+  latitude.querySelector("input").step = "any";
+  const longitude = field("Longitude (optional)", "longitude", "", "number");
+  longitude.querySelector("input").step = "any";
+  const statusLabel = document.createElement("label");
+  statusLabel.textContent = "Publication status";
+  const status = document.createElement("select");
+  status.name = "status";
+  for (const [value, label] of [["needs_review","Needs review"],["draft","Draft"],["published","Published"]]) {
+    const opt = document.createElement("option"); opt.value=value; opt.textContent=label; status.appendChild(opt);
+  }
+  statusLabel.appendChild(status);
+  const featuredLabel = document.createElement("label");
+  const featured = document.createElement("input");
+  featured.type = "checkbox"; featured.name = "featured"; featured.style.width = "auto";
+  featuredLabel.append(featured, document.createTextNode(" Featured in Atlas"));
+  const save = document.createElement("button");
+  save.type = "submit"; save.textContent = "Save metadata";
+  const message = document.createElement("div");
+  message.className = "status";
+  panel.append(caption,alt,country,destination,adventure,day,taken,latitude,longitude,statusLabel,featuredLabel,save,message);
+  item.appendChild(panel);
+  const get = name => panel.elements.namedItem(name);
+  try {
+    const res = await fetch("/api/photo-metadata?key="+encodeURIComponent(obj.key), {headers:authHeaders()});
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not load metadata");
+    const p = data.photo;
+    if (p) {
+      for (const name of ["caption","alt_text","taken_at","latitude","longitude"]) get(name).value = p[name] ?? "";
+      get("status").value = p.status;
+      get("featured").checked = Boolean(p.featured);
+      if (p.destinations?.length) {
+        get("country").value = p.destinations[0].country_code;
+        get("destination").value = p.destinations[0].name;
+      }
+      if (p.adventures?.length) {
+        get("adventure").value = p.adventures[0].adventure_slug;
+        get("day").value = p.adventures[0].day_number ?? "";
+      }
+    }
+  } catch (error) { message.textContent = error.message; }
+  panel.addEventListener("submit", async event => {
+    event.preventDefault();
+    save.disabled = true;
+    message.textContent = "Saving…";
+    try {
+      const payload = {key:obj.key};
+      for (const name of ["caption","alt_text","country","destination","adventure","day","taken_at","latitude","longitude","status"]) payload[name] = get(name).value;
+      payload.featured = get("featured").checked;
+      const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Save failed");
+      message.textContent = "Metadata saved to PHOTO_DB.";
+    } catch(error) { message.textContent = error.message; }
+    finally { save.disabled = false; }
   });
 }
 
