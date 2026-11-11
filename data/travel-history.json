@@ -29,7 +29,7 @@
       "destinations": [
         {
           "name": "Vienna",
-          "url": "/trips/the-long-way-around/day-02.html",
+          "url": "/trips/the-long-way-around/days/day-02.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -64,7 +64,7 @@
       "destinations": [
         {
           "name": "Liège",
-          "url": "/trips/the-long-way-around/day-18.html",
+          "url": "/trips/the-long-way-around/days/day-18.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -131,7 +131,7 @@
       "destinations": [
         {
           "name": "Croatia Bethel visit",
-          "url": "/trips/the-long-way-around/day-05.html",
+          "url": "/trips/the-long-way-around/days/day-05.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -148,7 +148,7 @@
       "destinations": [
         {
           "name": "Lipno region",
-          "url": "/trips/the-long-way-around/day-02.html",
+          "url": "/trips/the-long-way-around/days/day-02.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -164,12 +164,12 @@
       "destinations": [
         {
           "name": "Chamonix and the Mont Blanc Tunnel",
-          "url": "/trips/the-long-way-around/day-17.html",
+          "url": "/trips/the-long-way-around/days/day-17.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Strasbourg",
-          "url": "/trips/the-long-way-around/day-18.html",
+          "url": "/trips/the-long-way-around/days/day-18.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -185,22 +185,22 @@
       "destinations": [
         {
           "name": "Munich arrival",
-          "url": "/trips/the-long-way-around/day-02.html",
+          "url": "/trips/the-long-way-around/days/day-02.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Wiesbaden and Frankfurt",
-          "url": "/trips/the-long-way-around/day-19.html",
+          "url": "/trips/the-long-way-around/days/day-19.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Eltville on the Rhine",
-          "url": "/trips/the-long-way-around/day-21.html",
+          "url": "/trips/the-long-way-around/days/day-21.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Selters Bethel",
-          "url": "/trips/the-long-way-around/day-22.html",
+          "url": "/trips/the-long-way-around/days/day-22.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -226,12 +226,12 @@
       "destinations": [
         {
           "name": "Budapest",
-          "url": "/trips/the-long-way-around/day-03.html",
+          "url": "/trips/the-long-way-around/days/day-03.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Budapest Bethel",
-          "url": "/trips/the-long-way-around/day-04.html",
+          "url": "/trips/the-long-way-around/days/day-04.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -259,37 +259,37 @@
       "destinations": [
         {
           "name": "Venice",
-          "url": "/trips/the-long-way-around/day-06.html",
+          "url": "/trips/the-long-way-around/days/day-06.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Seceda and the Dolomites",
-          "url": "/trips/the-long-way-around/day-08.html",
+          "url": "/trips/the-long-way-around/days/day-08.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Lake Carezza",
-          "url": "/trips/the-long-way-around/day-09.html",
+          "url": "/trips/the-long-way-around/days/day-09.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Lake Garda and Salò",
-          "url": "/trips/the-long-way-around/day-10.html",
+          "url": "/trips/the-long-way-around/days/day-10.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Bologna",
-          "url": "/trips/the-long-way-around/day-11.html",
+          "url": "/trips/the-long-way-around/days/day-11.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Bernina railway from Tirano",
-          "url": "/trips/the-long-way-around/day-12.html",
+          "url": "/trips/the-long-way-around/days/day-12.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Courmayeur",
-          "url": "/trips/the-long-way-around/day-15.html",
+          "url": "/trips/the-long-way-around/days/day-15.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -318,7 +318,7 @@
       "destinations": [
         {
           "name": "Vaduz",
-          "url": "/trips/the-long-way-around/day-23.html",
+          "url": "/trips/the-long-way-around/days/day-23.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -334,7 +334,7 @@
       "destinations": [
         {
           "name": "Bourscheid Castle",
-          "url": "/trips/the-long-way-around/day-18.html",
+          "url": "/trips/the-long-way-around/days/day-18.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -359,7 +359,7 @@
       "destinations": [
         {
           "name": "Monaco",
-          "url": "/trips/the-long-way-around/day-15.html",
+          "url": "/trips/the-long-way-around/days/day-15.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -375,12 +375,12 @@
       "destinations": [
         {
           "name": "Emmen",
-          "url": "/trips/the-long-way-around/day-18.html",
+          "url": "/trips/the-long-way-around/days/day-18.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Netherlands Bethel",
-          "url": "/trips/the-long-way-around/day-19.html",
+          "url": "/trips/the-long-way-around/days/day-19.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -417,7 +417,7 @@
       "destinations": [
         {
           "name": "San Marino",
-          "url": "/trips/the-long-way-around/day-11.html",
+          "url": "/trips/the-long-way-around/days/day-11.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -442,7 +442,7 @@
       "destinations": [
         {
           "name": "Bratislava",
-          "url": "/trips/the-long-way-around/day-03.html",
+          "url": "/trips/the-long-way-around/days/day-03.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -458,12 +458,12 @@
       "destinations": [
         {
           "name": "Lake Bled and Kamnik",
-          "url": "/trips/the-long-way-around/day-04.html",
+          "url": "/trips/the-long-way-around/days/day-04.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Slovenia Bethel",
-          "url": "/trips/the-long-way-around/day-05.html",
+          "url": "/trips/the-long-way-around/days/day-05.html",
           "description": "View this day's photographs and travel story"
         }
       ]
@@ -498,12 +498,12 @@
       "destinations": [
         {
           "name": "Bernina Express and St. Moritz",
-          "url": "/trips/the-long-way-around/day-12.html",
+          "url": "/trips/the-long-way-around/days/day-12.html",
           "description": "View this day's photographs and travel story"
         },
         {
           "name": "Swiss landscapes",
-          "url": "/trips/the-long-way-around/day-17.html",
+          "url": "/trips/the-long-way-around/days/day-17.html",
           "description": "View this day's photographs and travel story"
         }
       ]
