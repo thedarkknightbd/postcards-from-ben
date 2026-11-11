@@ -102,6 +102,18 @@
   <section class="card">
     <strong id="folderLabel">Current folder</strong>
     <p class="hint">Use ↑ and ↓ to control display order. Changes save immediately.</p>
+    <div id="bulkTools" class="metadata-panel" hidden>
+      <strong>Bulk tag photos</strong>
+      <p class="hint">Only checked fields are changed. Existing captions, alt text, and coordinates are preserved.</p>
+      <div id="bulkCount">0 selected</div>
+      <div class="row"><label><input type="checkbox" id="bulkCountryOn"> Set country<select id="bulkCountry"></select></label>
+      <label><input type="checkbox" id="bulkDestOn"> Set destination<input id="bulkDest" placeholder="Optional destination"></label></div>
+      <div class="row"><label><input type="checkbox" id="bulkAdventureOn"> Set adventure<select id="bulkAdventure"></select></label>
+      <label><input type="checkbox" id="bulkDayOn"> Set day<input id="bulkDay" type="number" min="1" max="366" placeholder="Day number"></label></div>
+      <label><input type="checkbox" id="bulkDateOn"> Set date<input id="bulkDate" type="date"></label>
+      <div class="actions"><button id="bulkApply" type="button">Apply to selected</button><button id="bulkClear" type="button" class="secondary">Clear selection</button></div>
+      <div id="bulkStatus" class="status" role="status"></div>
+    </div>
     <div id="grid" class="grid"></div>
   </section>
 
@@ -127,6 +139,17 @@ const uploadButton = document.getElementById("upload");
 const progressEl = document.getElementById("progress");
 const progressBar = progressEl.querySelector("span");
 let currentObjects = [];
+const selectedPhotos = new Set();
+const bulkTools = document.getElementById("bulkTools");
+const bulkCount = document.getElementById("bulkCount");
+const bulkStatus = document.getElementById("bulkStatus");
+countryOptions(document.getElementById("bulkCountry"));
+const bulkAdventure = document.getElementById("bulkAdventure");
+bulkAdventure.innerHTML = tripEl.innerHTML;
+bulkAdventure.value = tripEl.value;
+function updateBulkUi() { bulkTools.hidden = !selectedPhotos.size; bulkCount.textContent = selectedPhotos.size + " selected"; }
+document.getElementById("bulkClear").addEventListener("click",()=>{selectedPhotos.clear();render();});
+document.getElementById("bulkApply").addEventListener("click",applyBulk);
 
 for (let i = 1; i <= 24; i++) {
   const n = String(i).padStart(2, "0");
@@ -306,6 +329,7 @@ async function refresh() {
     if (!res.ok) throw new Error(data.error || "Could not list folder.");
 
     currentObjects = data.objects || [];
+    selectedPhotos.clear();
     render();
     const noun = isVideoKind() ? "video" : "photo";
     setStatus(
@@ -320,6 +344,7 @@ async function refresh() {
 
 function render() {
   gridEl.innerHTML = "";
+  updateBulkUi();
 
   currentObjects.forEach((obj, index) => {
     const item = document.createElement("article");
@@ -367,6 +392,14 @@ function render() {
     del.addEventListener("click", () => removeMedia(obj));
 
     if (!isVideoKind()) {
+      const selectLabel = document.createElement("label");
+      selectLabel.style.cssText = "display:flex;align-items:center;gap:8px;padding:6px;font-size:14px";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox"; checkbox.style.width = "auto";
+      checkbox.checked = selectedPhotos.has(obj.key);
+      checkbox.addEventListener("change",()=>{if(checkbox.checked) selectedPhotos.add(obj.key); else selectedPhotos.delete(obj.key); updateBulkUi();});
+      selectLabel.append(checkbox,document.createTextNode(" Select for bulk tagging"));
+      item.appendChild(selectLabel);
       const edit = document.createElement("button");
       edit.className = "secondary";
       edit.textContent = "Tag photo";
@@ -412,6 +445,64 @@ function destinationSuggestions(countryCode, datalist) {
   for (const p of matches) for (const dest of p.destinations || []) {
     if (!seen.has(dest.name)) { datalist.appendChild(new Option(dest.name)); seen.add(dest.name); }
   }
+}
+
+
+async function applyBulk() {
+  const chosen = [...selectedPhotos];
+  if (!chosen.length) return;
+  const checked = name => document.getElementById("bulk"+name+"On").checked;
+  const value = name => document.getElementById("bulk"+name).value.trim();
+  const fields = {};
+  for (const [name,field] of [["Country","country"],["Dest","destination"],["Adventure","adventure"],["Day","day"],["Date","taken_at"]]) {
+    if (checked(name)) fields[field] = value(name);
+  }
+  if (!Object.keys(fields).length) { bulkStatus.textContent = "Check at least one field to change."; return; }
+  if (checked("Country") && !fields.country) { bulkStatus.textContent = "Choose a country."; return; }
+  if (checked("Dest") && (!fields.destination || (!checked("Country") && chosen.length))) {
+    bulkStatus.textContent = "For destination updates, check both Country and Destination."; return;
+  }
+  if (checked("Day") && (!Number.isInteger(Number(fields.day)) || Number(fields.day)<1 || Number(fields.day)>366)) {
+    bulkStatus.textContent = "Enter a valid day (1–366)."; return;
+  }
+  if (checked("Adventure") && !fields.adventure) { bulkStatus.textContent = "Choose an adventure."; return; }
+  if (checked("Date") && !fields.taken_at) { bulkStatus.textContent = "Choose a date."; return; }
+  if (!confirm("Apply the checked fields to "+chosen.length+" selected photos? Existing individual details will be kept where possible.")) return;
+  const button = document.getElementById("bulkApply");
+  button.disabled = true;
+  let done=0, failures=[];
+  for (const key of chosen) {
+    try {
+      const read = await fetch("/api/photo-metadata?key="+encodeURIComponent(key),{headers:authHeaders()});
+      const loaded = await read.json();
+      if (!read.ok) throw Error(loaded.error || "Read failed");
+      const p = loaded.photo || {};
+      const dest = p.destinations?.[0] || {};
+      const adv = p.adventures?.[0] || {};
+      const payload = {
+        key, caption:p.caption||"",alt_text:p.alt_text||"",
+        country:dest.country_code||"",destination:dest.name||"",
+        adventure:adv.adventure_slug||key.split("/")[1],
+        day:adv.day_number ?? (key.match(/\/day-(\d{2})\//)?.[1] || ""),
+        taken_at:p.taken_at||"",latitude:p.latitude??"",longitude:p.longitude??"",
+        status:p.status||"needs_review",featured:!!p.featured
+      };
+      Object.assign(payload,fields);
+      // Never silently reassign a destination to a different country.
+      if (checked("Country") && !checked("Dest") && payload.country !== dest.country_code) payload.destination = "";
+      const save = await fetch("/api/photo-metadata",{method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
+      const result = await save.json();
+      if (!save.ok) throw Error(result.error || "Save failed");
+      done++;
+      selectedPhotos.delete(key);
+    } catch(e) { failures.push(key.split("/").pop()+": "+e.message); }
+    bulkStatus.textContent = done+" of "+chosen.length+" saved"+(failures.length?" · "+failures.length+" failed":"");
+  }
+  button.disabled = false;
+  updateBulkUi();
+  if (failures.length) bulkStatus.textContent += ". Failed: "+failures.slice(0,3).join("; ");
+  else bulkStatus.textContent = "Saved "+done+" photos. Existing captions and individual metadata retained.";
+  render();
 }
 
 async function openMetadata(item, obj, button) {
