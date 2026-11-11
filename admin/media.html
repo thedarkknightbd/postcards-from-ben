@@ -124,7 +124,7 @@
     <input id="libraryQuery" placeholder="e.g. Carezza">
     <div class="row">
       <label>Country<select id="libraryCountry"></select></label>
-      <label>Review status<select id="libraryStatus"><option value="">All statuses</option><option value="needs_review">Needs review</option><option value="draft">Draft</option><option value="published">Published</option><option value="untagged">No destination</option></select></label>
+      <label>Destination filter<select id="libraryStatus"><option value="">All photos</option><option value="untagged">No destination</option></select></label>
       <label>Adventure<select id="libraryAdventure"><option value="">All adventures</option></select></label>
       <label>Day<input id="libraryDay" type="number" min="1" max="366" placeholder="Any day"></label>
     </div>
@@ -501,7 +501,7 @@ async function applyBulk() {
         adventure:adv.adventure_slug||key.split("/")[1],
         day:adv.day_number ?? (key.match(/\/day-(\d{2})\//)?.[1] || ""),
         taken_at:p.taken_at||"",latitude:p.latitude??"",longitude:p.longitude??"",
-        status:p.status||"needs_review",featured:!!p.featured
+        
       };
       Object.assign(payload,fields);
       // Never silently reassign a destination to a different country.
@@ -556,7 +556,7 @@ async function searchLibrary(page=1) {
       img.src="https://photos.postcardsfromben.com/"+photo.r2_key.split("/").map(encodeURIComponent).join("/");
       card.appendChild(img);
       const info=document.createElement("div");info.className="item-meta";
-      info.textContent=[photo.original_filename,photo.destination,photo.country,photo.adventure,photo.day?"Day "+photo.day:"",photo.status].filter(Boolean).join(" · ");
+      info.textContent=[photo.original_filename,photo.destination,photo.country,photo.adventure,photo.day?"Day "+photo.day:""].filter(Boolean).join(" · ");
       card.appendChild(info);
       const go=document.createElement("button");go.className="secondary";go.textContent="Open folder to edit";
       go.style.margin="8px";go.style.width="calc(100% - 16px)";
@@ -629,23 +629,11 @@ async function openMetadata(item, obj, button) {
   latitude.querySelector("input").step = "any";
   const longitude = field("Longitude (optional)", "longitude", "", "number");
   longitude.querySelector("input").step = "any";
-  const statusLabel = document.createElement("label");
-  statusLabel.textContent = "Publication status";
-  const status = document.createElement("select");
-  status.name = "status";
-  for (const [value, label] of [["needs_review","Needs review"],["draft","Draft"],["published","Published"]]) {
-    const opt = document.createElement("option"); opt.value=value; opt.textContent=label; status.appendChild(opt);
-  }
-  statusLabel.appendChild(status);
-  const featuredLabel = document.createElement("label");
-  const featured = document.createElement("input");
-  featured.type = "checkbox"; featured.name = "featured"; featured.style.width = "auto";
-  featuredLabel.append(featured, document.createTextNode(" Featured in Atlas"));
   const save = document.createElement("button");
   save.type = "submit"; save.textContent = "Save metadata";
   const message = document.createElement("div");
   message.className = "status";
-  panel.append(caption,alt,country,destination,adventure,day,taken,latitude,longitude,statusLabel,featuredLabel,save,message);
+  panel.append(caption,alt,country,destination,adventure,day,taken,latitude,longitude,save,message);
   item.appendChild(panel);
   const get = name => panel.elements.namedItem(name);
   try {
@@ -656,8 +644,6 @@ async function openMetadata(item, obj, button) {
     if (p) {
       for (const name of ["caption","alt_text","latitude","longitude"]) get(name).value = p[name] ?? "";
       if (p.taken_at) get("taken_at").value = p.taken_at.slice(0,10);
-      get("status").value = p.status;
-      get("featured").checked = Boolean(p.featured);
       if (p.destinations?.length) {
         get("country").value = p.destinations[0].country_code;
         destinationSuggestions(get("country").value,suggestions);
@@ -675,8 +661,7 @@ async function openMetadata(item, obj, button) {
     message.textContent = "Saving…";
     try {
       const payload = {key:obj.key};
-      for (const name of ["caption","alt_text","country","destination","adventure","day","taken_at","latitude","longitude","status"]) payload[name] = get(name).value;
-      payload.featured = get("featured").checked;
+      for (const name of ["caption","alt_text","country","destination","adventure","day","taken_at","latitude","longitude"]) payload[name] = get(name).value;
       const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Save failed");
