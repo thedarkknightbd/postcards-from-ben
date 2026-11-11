@@ -28,6 +28,24 @@ async function initTravelMap() {
         ).features;
 
         status.hidden = true;
+        const countryList = document.getElementById("atlas-country-list");
+        if (countryList) {
+            const sortedPlaces = [...data.places].sort((a,b) => a.name.localeCompare(b.name));
+            sortedPlaces.forEach(place => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.textContent = place.name;
+                button.setAttribute("aria-pressed", "false");
+                button.addEventListener("click", () => {
+                    countryList.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", "false"));
+                    button.setAttribute("aria-pressed", "true");
+                    selectPlace(place, data, details);
+                    details.scrollIntoView({behavior: "smooth", block: "nearest"});
+                });
+                countryList.appendChild(button);
+            });
+        }
+
 
         // Match countries by both display name and stable atlas numeric ID.
         // World Atlas country names can differ from travel-history labels.
@@ -276,44 +294,28 @@ function selectPlace(place, data, details) {
             element.classList.remove("is-selected");
         });
 
-    const trips = (place.trips || [])
-        .map(id => data.trips[id])
-        .filter(Boolean);
-
-    const tripMarkup = trips.length
-        ? trips.map(trip => `
-            <div class="travel-memory">
-                <strong>${escapeHtml(trip.title)}</strong>
-                <span>${escapeHtml(trip.location)}</span>
-                <span>${escapeHtml(trip.date)}</span>
-
-                ${trip.url ? `
-                    <a
-                        class="travel-memory-link"
-                        href="${escapeHtml(trip.url)}">
-                        View postcard →
-                    </a>
-                ` : ""}
-            </div>
-        `).join("")
-        : `
-            <p class="travel-memory-note">
-                A place from an earlier journey.
-            </p>
-        `;
-
+    const destinations = (place.destinations || []);
+    const destinationMarkup = destinations.length
+        ? `<div class="atlas-destinations"><h4>Places to explore</h4><div class="atlas-destination-grid">${destinations.map(destination => `
+            <article class="atlas-destination">
+                <h5>${escapeHtml(destination.name)}</h5>
+                <p>${escapeHtml(destination.description || "Explore this destination")}</p>
+                <a href="${escapeHtml(destination.url)}">See photographs and journal →</a>
+            </article>
+        `).join("")}</div></div>`
+        : `<p class="travel-memory-note">Photographs and individual destinations for this country are being organized.</p>`;
+    const trips = (place.trips || []).map(id => data.trips[id]).filter(Boolean);
+    const relatedMarkup = trips.length
+        ? `<details class="atlas-related"><summary>Related full adventures</summary>${trips.map(trip => `
+            <p><a href="${escapeHtml(trip.url)}">${escapeHtml(trip.title)}</a></p>
+        `).join("")}</details>`
+        : "";
     details.innerHTML = `
-        <p class="travel-detail-label">
-            Postcard from
-        </p>
-
-        <h3>
-            ${escapeHtml(place.name)}
-        </h3>
-
-        ${tripMarkup}
+        <p class="travel-detail-label">Explore by country</p>
+        <h3>${escapeHtml(place.name)}</h3>
+        ${destinationMarkup}
+        ${relatedMarkup}
     `;
-
     details.hidden = false;
 }
 

@@ -1,0 +1,25 @@
+name: Rename My Adventures photograph
+on:
+  push:
+    branches: [feature/site-evolution]
+    paths: [.github/workflows/rename-my-adventures.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/site-evolution
+      - name: Rename image
+        run: |
+          set -euo pipefail
+          if [ -f images/IMG_2109.jpeg ] && [ ! -e images/my-adventures.jpg ]; then
+            git mv images/IMG_2109.jpeg images/my-adventures.jpg
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Rename My Adventures photo"
+            git push origin HEAD:feature/site-evolution
+          fi

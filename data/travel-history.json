@@ -22,6 +22,16 @@
       "name": "Austria",
       "mapNames": [
         "Austria"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Vienna",
+          "url": "/trips/the-long-way-around/days/day-02.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -47,6 +57,16 @@
       "name": "Belgium",
       "mapNames": [
         "Belgium"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Liège",
+          "url": "/trips/the-long-way-around/days/day-18.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -104,6 +124,16 @@
       "name": "Croatia",
       "mapNames": [
         "Croatia"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Croatia Bethel visit",
+          "url": "/trips/the-long-way-around/days/day-05.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -111,18 +141,68 @@
       "mapNames": [
         "Czechia",
         "Czech Republic"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Lipno region",
+          "url": "/trips/the-long-way-around/days/day-02.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
       "name": "France",
       "mapNames": [
         "France"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Chamonix and the Mont Blanc Tunnel",
+          "url": "/trips/the-long-way-around/days/day-17.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Strasbourg",
+          "url": "/trips/the-long-way-around/days/day-18.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
       "name": "Germany",
       "mapNames": [
         "Germany"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Munich arrival",
+          "url": "/trips/the-long-way-around/days/day-02.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Wiesbaden and Frankfurt",
+          "url": "/trips/the-long-way-around/days/day-19.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Eltville on the Rhine",
+          "url": "/trips/the-long-way-around/days/day-21.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Selters Bethel",
+          "url": "/trips/the-long-way-around/days/day-22.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -140,7 +220,20 @@
         "Hungary"
       ],
       "trips": [
-        "autumn-hungary"
+        "autumn-hungary",
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Budapest",
+          "url": "/trips/the-long-way-around/days/day-03.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Budapest Bethel",
+          "url": "/trips/the-long-way-around/days/day-04.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -159,6 +252,46 @@
       "name": "Italy",
       "mapNames": [
         "Italy"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Venice",
+          "url": "/trips/the-long-way-around/days/day-06.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Seceda and the Dolomites",
+          "url": "/trips/the-long-way-around/days/day-08.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Lake Carezza",
+          "url": "/trips/the-long-way-around/days/day-09.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Lake Garda and Salò",
+          "url": "/trips/the-long-way-around/days/day-10.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Bologna",
+          "url": "/trips/the-long-way-around/days/day-11.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Bernina railway from Tirano",
+          "url": "/trips/the-long-way-around/days/day-12.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Courmayeur",
+          "url": "/trips/the-long-way-around/days/day-15.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -178,12 +311,32 @@
       ],
       "small": true,
       "lat": 47.141,
-      "lng": 9.5209
+      "lng": 9.5209,
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Vaduz",
+          "url": "/trips/the-long-way-around/days/day-23.html",
+          "description": "View this day's photographs and travel story"
+        }
+      ]
     },
     {
       "name": "Luxembourg",
       "mapNames": [
         "Luxembourg"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Bourscheid Castle",
+          "url": "/trips/the-long-way-around/days/day-18.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -199,12 +352,37 @@
       ],
       "small": true,
       "lat": 43.7384,
-      "lng": 7.4246
+      "lng": 7.4246,
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Monaco",
+          "url": "/trips/the-long-way-around/days/day-15.html",
+          "description": "View this day's photographs and travel story"
+        }
+      ]
     },
     {
       "name": "Netherlands",
       "mapNames": [
         "Netherlands"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Emmen",
+          "url": "/trips/the-long-way-around/days/day-18.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Netherlands Bethel",
+          "url": "/trips/the-long-way-around/days/day-19.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -232,7 +410,17 @@
       ],
       "small": true,
       "lat": 43.9424,
-      "lng": 12.4578
+      "lng": 12.4578,
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "San Marino",
+          "url": "/trips/the-long-way-around/days/day-11.html",
+          "description": "View this day's photographs and travel story"
+        }
+      ]
     },
     {
       "name": "Sint Maarten",
@@ -247,12 +435,37 @@
       "name": "Slovakia",
       "mapNames": [
         "Slovakia"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Bratislava",
+          "url": "/trips/the-long-way-around/days/day-03.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
       "name": "Slovenia",
       "mapNames": [
         "Slovenia"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Lake Bled and Kamnik",
+          "url": "/trips/the-long-way-around/days/day-04.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Slovenia Bethel",
+          "url": "/trips/the-long-way-around/days/day-05.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -278,6 +491,21 @@
       "name": "Switzerland",
       "mapNames": [
         "Switzerland"
+      ],
+      "trips": [
+        "long-way-around"
+      ],
+      "destinations": [
+        {
+          "name": "Bernina Express and St. Moritz",
+          "url": "/trips/the-long-way-around/days/day-12.html",
+          "description": "View this day's photographs and travel story"
+        },
+        {
+          "name": "Swiss landscapes",
+          "url": "/trips/the-long-way-around/days/day-17.html",
+          "description": "View this day's photographs and travel story"
+        }
       ]
     },
     {
@@ -358,6 +586,12 @@
       "location": "Nairobi, Kenya",
       "date": "July 2011",
       "url": "/trips/an-afternoon-with-giants/"
+    },
+    "long-way-around": {
+      "title": "The Long Way Around",
+      "location": "Sixteen European countries",
+      "date": "October–November 2026",
+      "url": "/trips/the-long-way-around/"
     }
   }
 }
