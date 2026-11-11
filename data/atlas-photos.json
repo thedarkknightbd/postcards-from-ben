@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "description": "Curated photo-to-destination associations. Add only verified photographs; do not infer location from a multi-country day.",
+  "photos": [
+    {
+      "id": "day09-dolomites-cover",
+      "url": "https://photos.postcardsfromben.com/trips/the-long-way-around/days/day-09/1793255032702-img_0877.jpeg",
+      "country": "Italy",
+      "destination": "Seceda and the Dolomites",
+      "trip": "long-way-around",
+      "day": 9,
+      "caption": "The Dolomites — Day 9 cover photograph",
+      "source": "day-09.html hero"
+    }
+  ]
+}
