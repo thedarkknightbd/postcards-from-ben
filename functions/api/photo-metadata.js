@@ -48,7 +48,12 @@ export async function onRequest({request, env}) {
   const day = body.day === "" || body.day == null ? inferred.day : Number(body.day);
   if (!/^[a-z0-9-]+$/.test(adventure) || (day != null && (!Number.isInteger(day) || day < 1 || day > 366))) return reply({error:"Invalid adventure or day"},400);
   const journalUrl = day != null ? `/trips/${adventure}/days/day-${String(day).padStart(2,"0")}.html` : `/trips/${adventure}/`;
-  const caption = clean(body.caption,1000), alt = clean(body.alt_text,500), taken = clean(body.taken_at,40) || null;
+  const caption = clean(body.caption,1000), alt = clean(body.alt_text,500);
+  // Preserve EXIF-derived values when the simplified editor does not send them.
+  const existing = await env.PHOTO_DB.prepare("SELECT taken_at,latitude,longitude,gps_altitude_m,camera_make,camera_model FROM photos WHERE r2_key=?").bind(r2Key).first();
+  const taken = existing?.taken_at ?? (clean(body.taken_at,40) || null);
+  const savedLat = existing?.latitude ?? coords[0];
+  const savedLon = existing?.longitude ?? coords[1];
   const id = crypto.randomUUID();
   const db = env.PHOTO_DB;
   try {
@@ -57,7 +62,7 @@ export async function onRequest({request, env}) {
       VALUES (?,?,?,?,?,?,?,?,?,?,?)
       ON CONFLICT(r2_key) DO UPDATE SET caption=excluded.caption,alt_text=excluded.alt_text,taken_at=excluded.taken_at,
       latitude=excluded.latitude,longitude=excluded.longitude,status=excluded.status,featured=excluded.featured,updated_at=datetime('now')`)
-      .bind(id,r2Key,r2Key.split("/").pop(),image(r2Key)?"image":"video",caption,alt,taken,coords[0],coords[1],status,0).run();
+      .bind(id,r2Key,r2Key.split("/").pop(),image(r2Key)?"image":"video",caption,alt,taken,savedLat,savedLon,status,0).run();
     const row = await db.prepare("SELECT id FROM photos WHERE r2_key=?").bind(r2Key).first();
     // Replace associations only after photo upsert succeeds.
     await db.prepare("DELETE FROM photo_destinations WHERE photo_id=?").bind(row.id).run();
