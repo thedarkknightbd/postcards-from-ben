@@ -9,8 +9,9 @@ async function initTravelMap() {
     const status = document.getElementById("travel-map-status");
 
     try {
-        const [dataResponse, d3, topo, worldModule] = await Promise.all([
+        const [dataResponse, photoResponse, d3, topo, worldModule] = await Promise.all([
             fetch("/data/travel-history.json", { cache: "no-store" }),
+            fetch("/data/atlas-photos.json", { cache: "no-store" }),
             import("https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"),
             import("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/+esm"),
             import("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json/+esm")
@@ -21,6 +22,8 @@ async function initTravelMap() {
         }
 
         const data = await dataResponse.json();
+        const photoIndex = photoResponse.ok ? await photoResponse.json() : {photos: []};
+        data.atlasPhotos = Array.isArray(photoIndex.photos) ? photoIndex.photos : [];
         const world = worldModule.default;
         const countries = topo.feature(
             world,
@@ -294,6 +297,10 @@ function selectPlace(place, data, details) {
             element.classList.remove("is-selected");
         });
 
+    const countryPhotos = (data.atlasPhotos || []).filter(photo => photo.country === place.name);
+    const photoMarkup = countryPhotos.length ? `<section class="atlas-photo-section"><h4>Photographs from ${escapeHtml(place.name)}</h4><div class="atlas-photo-grid">${countryPhotos.map(photo => `
+        <figure><a href="${escapeHtml(photo.url)}" target="_blank" rel="noopener noreferrer"><img src="${escapeHtml(photo.url)}" alt="${escapeHtml(photo.caption)}" loading="lazy"></a><figcaption>${escapeHtml(photo.caption)}</figcaption></figure>
+    `).join("")}</div></section>` : "";
     const destinations = (place.destinations || []);
     const destinationMarkup = destinations.length
         ? `<div class="atlas-destinations"><h4>Places to explore</h4><div class="atlas-destination-grid">${destinations.map(destination => `
@@ -313,6 +320,7 @@ function selectPlace(place, data, details) {
     details.innerHTML = `
         <p class="travel-detail-label">Explore by country</p>
         <h3>${escapeHtml(place.name)}</h3>
+        ${photoMarkup}
         ${destinationMarkup}
         ${relatedMarkup}
     `;
