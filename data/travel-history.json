@@ -22,6 +22,9 @@
       "name": "Austria",
       "mapNames": [
         "Austria"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -47,6 +50,9 @@
       "name": "Belgium",
       "mapNames": [
         "Belgium"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -104,6 +110,9 @@
       "name": "Croatia",
       "mapNames": [
         "Croatia"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -111,18 +120,27 @@
       "mapNames": [
         "Czechia",
         "Czech Republic"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
       "name": "France",
       "mapNames": [
         "France"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
       "name": "Germany",
       "mapNames": [
         "Germany"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -140,7 +158,8 @@
         "Hungary"
       ],
       "trips": [
-        "autumn-hungary"
+        "autumn-hungary",
+        "long-way-around"
       ]
     },
     {
@@ -159,6 +178,9 @@
       "name": "Italy",
       "mapNames": [
         "Italy"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -178,12 +200,18 @@
       ],
       "small": true,
       "lat": 47.141,
-      "lng": 9.5209
+      "lng": 9.5209,
+      "trips": [
+        "long-way-around"
+      ]
     },
     {
       "name": "Luxembourg",
       "mapNames": [
         "Luxembourg"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -199,12 +227,18 @@
       ],
       "small": true,
       "lat": 43.7384,
-      "lng": 7.4246
+      "lng": 7.4246,
+      "trips": [
+        "long-way-around"
+      ]
     },
     {
       "name": "Netherlands",
       "mapNames": [
         "Netherlands"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -232,7 +266,10 @@
       ],
       "small": true,
       "lat": 43.9424,
-      "lng": 12.4578
+      "lng": 12.4578,
+      "trips": [
+        "long-way-around"
+      ]
     },
     {
       "name": "Sint Maarten",
@@ -247,12 +284,18 @@
       "name": "Slovakia",
       "mapNames": [
         "Slovakia"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
       "name": "Slovenia",
       "mapNames": [
         "Slovenia"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -278,6 +321,9 @@
       "name": "Switzerland",
       "mapNames": [
         "Switzerland"
+      ],
+      "trips": [
+        "long-way-around"
       ]
     },
     {
@@ -358,6 +404,12 @@
       "location": "Nairobi, Kenya",
       "date": "July 2011",
       "url": "/trips/an-afternoon-with-giants/"
+    },
+    "long-way-around": {
+      "title": "The Long Way Around",
+      "location": "Sixteen European countries",
+      "date": "October–November 2026",
+      "url": "/trips/the-long-way-around/"
     }
   }
 }
