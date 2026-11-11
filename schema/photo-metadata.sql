@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS photo_destinations (
 
 -- An image can be linked to multiple adventures/days without duplicating its R2 object.
 CREATE TABLE IF NOT EXISTS photo_adventures (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   photo_id TEXT NOT NULL REFERENCES photos(id) ON DELETE CASCADE,
   adventure_slug TEXT NOT NULL,
-  day_number INTEGER CHECK (day_number IS NULL OR day_number > 0),
+  day_number INTEGER,
   journal_url TEXT,
-  display_order INTEGER,
-  PRIMARY KEY (photo_id, adventure_slug, day_number)
+  display_order INTEGER
 );
 
 CREATE INDEX IF NOT EXISTS idx_photos_status ON photos(status);
