@@ -110,7 +110,6 @@
       <label><input type="checkbox" id="bulkDestOn"> Set destination<input id="bulkDest" placeholder="Optional destination"></label></div>
       <div class="row"><label><input type="checkbox" id="bulkAdventureOn"> Set adventure<select id="bulkAdventure"></select></label>
       <label><input type="checkbox" id="bulkDayOn"> Set day<input id="bulkDay" type="number" min="1" max="366" placeholder="Day number"></label></div>
-      <label><input type="checkbox" id="bulkDateOn"> Set date<input id="bulkDate" type="date"></label>
       <div class="actions"><button id="bulkApply" type="button">Apply to selected</button><button id="bulkClear" type="button" class="secondary">Clear selection</button></div>
       <div id="bulkStatus" class="status" role="status"></div>
     </div>
@@ -470,7 +469,7 @@ async function applyBulk() {
   const checked = name => document.getElementById("bulk"+name+"On").checked;
   const value = name => document.getElementById("bulk"+name).value.trim();
   const fields = {};
-  for (const [name,field] of [["Country","country"],["Dest","destination"],["Adventure","adventure"],["Day","day"],["Date","taken_at"]]) {
+  for (const [name,field] of [["Country","country"],["Dest","destination"],["Adventure","adventure"],["Day","day"]]) {
     if (checked(name)) fields[field] = value(name);
   }
   if (!Object.keys(fields).length) { bulkStatus.textContent = "Check at least one field to change."; return; }
@@ -482,7 +481,6 @@ async function applyBulk() {
     bulkStatus.textContent = "Enter a valid day (1–366)."; return;
   }
   if (checked("Adventure") && !fields.adventure) { bulkStatus.textContent = "Choose an adventure."; return; }
-  if (checked("Date") && !fields.taken_at) { bulkStatus.textContent = "Choose a date."; return; }
   if (!confirm("Apply the checked fields to "+chosen.length+" selected photos? Existing individual details will be kept where possible.")) return;
   const button = document.getElementById("bulkApply");
   button.disabled = true;
@@ -618,22 +616,11 @@ async function openMetadata(item, obj, button) {
   adventureSelect.value = tripEl.value;
   adventure.appendChild(adventureSelect);
   const day = field("Day number (leave blank for trip-wide photos)", "day", inferredDay, "number");
-  const taken = field("Date taken (editable)", "taken_at", dayDate(tripEl.value,inferredDay), "date");
-  const updateDateDefault = () => {
-    if (!taken.querySelector("input").dataset.userEdited) taken.querySelector("input").value = dayDate(adventureSelect.value,day.querySelector("input").value);
-  };
-  taken.querySelector("input").addEventListener("change",()=>{taken.querySelector("input").dataset.userEdited="1";});
-  adventureSelect.addEventListener("change",updateDateDefault);
-  day.querySelector("input").addEventListener("change",updateDateDefault);
-  const latitude = field("Latitude (optional)", "latitude", "", "number");
-  latitude.querySelector("input").step = "any";
-  const longitude = field("Longitude (optional)", "longitude", "", "number");
-  longitude.querySelector("input").step = "any";
   const save = document.createElement("button");
   save.type = "submit"; save.textContent = "Save metadata";
   const message = document.createElement("div");
   message.className = "status";
-  panel.append(caption,alt,country,destination,adventure,day,taken,latitude,longitude,save,message);
+  panel.append(caption,alt,country,destination,adventure,day,save,message);
   item.appendChild(panel);
   const get = name => panel.elements.namedItem(name);
   try {
@@ -642,8 +629,6 @@ async function openMetadata(item, obj, button) {
     if (!res.ok) throw new Error(data.error || "Could not load metadata");
     const p = data.photo;
     if (p) {
-      for (const name of ["caption","alt_text","latitude","longitude"]) get(name).value = p[name] ?? "";
-      if (p.taken_at) get("taken_at").value = p.taken_at.slice(0,10);
       if (p.destinations?.length) {
         get("country").value = p.destinations[0].country_code;
         destinationSuggestions(get("country").value,suggestions);
@@ -661,7 +646,7 @@ async function openMetadata(item, obj, button) {
     message.textContent = "Saving…";
     try {
       const payload = {key:obj.key};
-      for (const name of ["caption","alt_text","country","destination","adventure","day","taken_at","latitude","longitude"]) payload[name] = get(name).value;
+      for (const name of ["caption","alt_text","country","destination","adventure","day"]) payload[name] = get(name).value;
       const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Save failed");
