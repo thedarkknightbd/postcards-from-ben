@@ -28,7 +28,7 @@ async function diagnose(){
  try{
   const r=await fetch("/api/location-diagnostics",{credentials:"same-origin",cache:"no-store"});
   const d=await r.json();if(!r.ok)throw Error(d.error||"Diagnostic failed");
-  out.textContent="Anonymous access: "+d.anonymous+(d.anonymous_status?" (HTTP "+d.anonymous_status+")":"")+
+  out.textContent="Connection: "+(d.transport==="service_binding"?"internal Cloudflare service binding":d.transport==="public_url"?"public Worker URL":"not configured")+". Anonymous access: "+d.anonymous+(d.anonymous_status?" (HTTP "+d.anonymous_status+")":"")+
    ". Authenticated access: "+d.authenticated+(d.authenticated_status?" (HTTP "+d.authenticated_status+")":"")+
    ". "+(d.message||"");
  }catch(e){out.textContent=e.message}finally{button.disabled=false}
