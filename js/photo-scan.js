@@ -37,3 +37,13 @@ for(const library of ["public","private"]){
  $('[data-start="'+library+'"]').addEventListener("click",()=>run(library));
  $('[data-stop="'+library+'"]').addEventListener("click",()=>{if(jobs[library])jobs[library].active=false});
 }
+$("[data-start-all]").addEventListener("click",async event=>{
+ const button=event.currentTarget,status=$("[data-all-status]");
+ if(jobs.public||jobs.private)return;
+ button.disabled=true;
+ try{
+  status.textContent="Scanning public photographs…";await run("public");
+  status.textContent="Scanning private photographs…";await run("private");
+  status.textContent="Both scan passes finished. Review their counts and any errors above.";
+ }finally{button.disabled=false}
+});
