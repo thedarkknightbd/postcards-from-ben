@@ -1,4 +1,4 @@
-import {currentUser,isOwner} from "../../_lib/access-auth.js";
+import {currentUser,isOwner} from "../_lib/access-auth.js";
 
 export async function onRequest(context){
  const {request,env}=context;
