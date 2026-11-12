@@ -4860,3 +4860,85 @@ body.lightbox-open {
 /* Ensure readable contrast for the featured postcard CTA. */
 .home-postcards #latest-postcard-link{display:inline-block;background:#17212b;color:#fff;text-decoration:none;padding:13px 18px;border-radius:8px;font-weight:700}
 .home-postcards #latest-postcard-link:hover,.home-postcards #latest-postcard-link:focus-visible{background:#293b4b;color:#fff}
+
+
+/* Postcards from Ben — shared editorial page language, November 2026.
+   This is deliberately scoped to landing, adventure and utility headings.
+   Journal day pages, the route map, CMS and form controls are unchanged. */
+:root { --pbf-brand-navy:#0b2d55; --pbf-brand-sky:#7bafd4; --pbf-brand-cream:#f7f3e8; }
+.adventures-landing, .about-page, .past-postcard-page {background:var(--pbf-brand-cream)}
+/* Matching photographic editorial heroes for About and Adventures. */
+:is(.adventures-landing,.about-page) .redesign-simple-hero {
+  box-sizing:border-box;
+  min-height:300px;
+  padding:52px clamp(24px,6vw,76px);
+  background-color:var(--pbf-brand-navy);
+  justify-content:center;
+}
+:is(.adventures-landing,.about-page) .redesign-simple-hero h1 {
+  color:#fff;
+  font:400 clamp(2.45rem,4.1vw,3.55rem)/1.09 Georgia,'Times New Roman',serif;
+  letter-spacing:-.025em;
+  margin:10px auto;
+}
+:is(.adventures-landing,.about-page) .redesign-simple-hero .section-kicker {
+  color:#c0e2f6;
+  font-size:.72rem;
+  letter-spacing:.16em;
+}
+:is(.adventures-landing,.about-page) .redesign-simple-hero>p:not(.section-kicker):not(.hero-photo-credit) {
+  color:#eef4f7;line-height:1.6;font-size:1rem;max-width:600px;
+}
+/* Trip collection: one consistent photographic title treatment, with
+   full trip content and historical photographs preserved. */
+.trip-page .longway-hero,
+.past-postcard-page .past-postcard-hero {
+  box-sizing:border-box;
+  min-height:350px;
+  height:auto;
+  padding:42px clamp(24px,6vw,76px);
+  background-color:var(--pbf-brand-navy);
+  color:#fff;
+}
+.trip-page .longway-hero {height:370px;min-height:370px}
+.past-postcard-page .past-postcard-hero {justify-content:flex-end}
+.trip-page .longway-hero h1,
+.past-postcard-page .past-postcard-hero h1 {
+  font:400 clamp(2.45rem,4vw,3.5rem)/1.1 Georgia,'Times New Roman',serif;
+  letter-spacing:-.025em;
+  color:#fff;
+  max-width:800px;
+  margin:8px 0 12px;
+  text-wrap:balance;
+}
+.past-postcard-page .past-postcard-kicker {color:#c5e4f5!important;font-size:.73rem!important}
+.past-postcard-page .past-postcard-subtitle {color:#eff5fb!important;font-size:1rem!important;line-height:1.55}
+.past-postcard-page .past-postcard-main {padding-top:45px}
+.past-postcard-page .past-postcard-main section {margin-bottom:48px}
+/* Send a Postcard is intentionally a compact utility introduction rather
+   than a competing full-bleed hero. Keep the actual postcard form intact. */
+.postcard-page {background:#102a44}
+.postcard-page .postcard-page-header {padding-top:22px}
+.postcard-page .postcard-page-main {padding-top:32px}
+.postcard-page .postcard-heading {max-width:760px;margin-bottom:28px}
+.postcard-page .postcard-heading h1 {
+  font:400 clamp(2.4rem,4vw,3.5rem)/1.12 Georgia,'Times New Roman',serif;
+  letter-spacing:-.025em;
+  color:#fff;
+  margin:8px 0 12px;
+}
+.postcard-page .postcard-heading .section-kicker {color:#a9d5f0}
+.postcard-page .postcard-heading>p:last-child {color:#e0eaf3;font-size:1rem;line-height:1.58}
+@media(max-width:700px) {
+  :is(.adventures-landing,.about-page) .redesign-simple-hero {
+    min-height:260px;padding:38px 22px;
+  }
+  :is(.adventures-landing,.about-page) .redesign-simple-hero h1 {font-size:clamp(2.15rem,8vw,3rem)}
+  .trip-page .longway-hero {min-height:340px;height:auto;padding:32px 22px}
+  .past-postcard-page .past-postcard-hero {min-height:305px;padding:34px 22px}
+  .trip-page .longway-hero h1,.past-postcard-page .past-postcard-hero h1 {
+    font-size:clamp(2.1rem,8vw,2.9rem);
+  }
+  .postcard-page .postcard-page-main {padding-top:24px}
+  .postcard-page .postcard-heading h1 {font-size:clamp(2.15rem,8vw,2.85rem)}
+}
