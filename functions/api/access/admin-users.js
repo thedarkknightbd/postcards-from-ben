@@ -1,7 +1,8 @@
 import {response,currentUser,isOwner} from "../../_lib/access-auth.js";
 export async function onRequest({request,env}){
  if(!env.ACCESS_DB)return response({error:"Not configured"},503);
- if(!isOwner(await currentUser(request,env)))return response({error:"Unauthorized"},401);
+ let owner=false;try{owner=isOwner(await currentUser(request,env));}catch{return response({error:"Unauthorized"},401)}
+ if(!owner)return response({error:"Unauthorized"},401);
  if(request.method==="GET"){
   const state=new URL(request.url).searchParams.get("state")||"pending";
   if(!["pending","approved","revoked","all"].includes(state))return response({error:"Invalid filter"},400);
