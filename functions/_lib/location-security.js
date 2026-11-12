@@ -9,13 +9,19 @@ export async function locationSharingState(env){
   return {sharing:state?.sharing===true,available:true,updated_at:state?.updated_at||null};
  }catch{return {sharing:false,available:false}}
 }
+const LOCATION_URL="https://postcards-live-location.bjdominguez.workers.dev/location";
+const SERVICE_REQUEST_URL="https://location-worker.internal/location";
+export const locationTransport=env=>env.LOCATION_WORKER&&typeof env.LOCATION_WORKER.fetch==="function"?"service_binding":"public_url";
 export function upstreamConfigured(env){
- try{
-  const url=new URL("https://postcards-live-location.bjdominguez.workers.dev/location");
-  return url.protocol==="https:"&&url.username===""&&url.password===""&&
-   !url.search&&!url.hash&&url.hostname!=="postcardsfromben.com"&&
-   Boolean(env.LOCATION_READ_TOKEN);
- }catch{return false}
+ return Boolean(env.LOCATION_READ_TOKEN);
+}
+export async function requestLocationWorker(env,authenticated=false){
+ const service=locationTransport(env)==="service_binding";
+ const url=service?SERVICE_REQUEST_URL:LOCATION_URL;
+ const headers={"accept":"application/json"};
+ if(authenticated)headers.authorization="Bearer "+env.LOCATION_READ_TOKEN;
+ const request=new Request(url,{method:"GET",headers,redirect:"error",signal:AbortSignal.timeout(6000)});
+ return service?env.LOCATION_WORKER.fetch(request):fetch(request,{cache:"no-store"});
 }
 export function workerVerified(env){
  // Availability only: activation performs a fresh unauthenticated-denial check
@@ -47,15 +53,9 @@ export function sanitizeLocation(data){
 export async function readProtectedWorker(env){
  if(!workerVerified(env))return {ok:false,error:"Worker integration is not verified"};
  try{
-  const denied=await fetch("https://postcards-live-location.bjdominguez.workers.dev/location",{
-   method:"GET",headers:{"accept":"application/json"},redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)
-  });
+  const denied=await requestLocationWorker(env,false);
   if(![401,403,404].includes(denied.status))return {ok:false,error:"Worker allows unauthenticated access or returned an unexpected status"};
-  const res=await fetch("https://postcards-live-location.bjdominguez.workers.dev/location",{
-   method:"GET",
-   headers:{"authorization":"Bearer "+env.LOCATION_READ_TOKEN,"accept":"application/json"},
-   redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)
-  });
+  const res=await requestLocationWorker(env,true);
   if(!res.ok)return {ok:false,error:"Protected Worker did not provide location",status:res.status};
   if(!String(res.headers.get("content-type")||"").toLowerCase().includes("application/json"))
    return {ok:false,error:"Worker returned an unexpected content type"};
