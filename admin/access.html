@@ -14,6 +14,16 @@ async function load(){
    title.textContent=user.display_name+" · "+user.email;
    sub.textContent="Status: "+user.state+(user.state==="approved"?" · Current access: "+user.permission:"");
    sub.className="muted";row.className="row";
+   // Show the owner account for visibility but never present mutation controls.
+   // Server-side protections in admin-users.js remain authoritative.
+   if(user.email?.toLowerCase()==="bjdominguez@me.com"){
+    const ownerNote=document.createElement("p");
+    ownerNote.className="muted";
+    ownerNote.textContent="Site owner · protected account (permissions cannot be changed here).";
+    item.append(title,sub,ownerNote);
+    $("users").append(item);
+    continue;
+   }
    for(const p of ["public","location","private"])permission.add(new Option(({public:"Public — standard approved account",location:"Location — eligible for location if sharing is enabled",private:"Private — eligible for private galleries"})[p],p));
    permission.value=["public","location","private"].includes(user.permission)?user.permission:"public";
    const action=async(state)=>{try{await api("/api/access/admin-users",{id:user.id,permission:permission.value,state});await load();message((state==="approved"?"Access saved for ":"Access revoked for ")+user.display_name)}catch(e){message(e.message)}};
