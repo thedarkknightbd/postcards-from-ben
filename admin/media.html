@@ -102,6 +102,7 @@
   <section class="card">
     <strong id="folderLabel">Current folder</strong>
     <p class="hint">Use ↑ and ↓ to control display order. Changes save immediately.</p>
+    <div class="actions"><button id="bulkSelectAll" type="button" class="secondary">Select all photos in this folder</button></div>
     <div id="bulkTools" class="metadata-panel" hidden>
       <strong>Bulk tag photos</strong>
       <p class="hint">Only checked fields are changed. Existing captions, alt text, and coordinates are preserved.</p>
@@ -163,6 +164,7 @@ const bulkAdventure = document.getElementById("bulkAdventure");
 bulkAdventure.innerHTML = tripEl.innerHTML;
 bulkAdventure.value = tripEl.value;
 function updateBulkUi() { bulkTools.hidden = !selectedPhotos.size; bulkCount.textContent = selectedPhotos.size + " selected"; }
+document.getElementById("bulkSelectAll").addEventListener("click",()=>{for(const obj of currentObjects) if(!isVideoKind()) selectedPhotos.add(obj.key); render();});
 document.getElementById("bulkClear").addEventListener("click",()=>{selectedPhotos.clear();render();});
 document.getElementById("bulkApply").addEventListener("click",applyBulk);
 
