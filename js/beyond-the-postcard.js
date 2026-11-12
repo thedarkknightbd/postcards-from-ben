@@ -70,13 +70,14 @@ $("albumForm").addEventListener("submit",async e=>{
 });
 $("uploadForm").addEventListener("submit",async e=>{
  e.preventDefault();if(!owner)return;
+ const uploadForm=e.currentTarget;
  const button=$("uploadButton"),status=$("status");button.disabled=true;status.textContent="Uploading…";
  try{
-  const form=new FormData(e.currentTarget);
+  const form=new FormData(uploadForm);
   form.set("collection",selected);form.set("album",currentAlbum);
   const response=await fetch("/api/private-photos",{method:"POST",credentials:"same-origin",body:form});
   const data=await response.json();if(!response.ok)throw Error(data.error||"Upload failed");
-  status.textContent="Photograph added privately.";e.currentTarget.reset();await load();
+  status.textContent="Photograph added privately.";uploadForm.reset();await load();
  }catch(err){status.textContent=err.message}finally{button.disabled=false}
 });
 (async()=>{
