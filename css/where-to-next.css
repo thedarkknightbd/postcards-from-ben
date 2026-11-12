@@ -31,3 +31,26 @@
 @media (max-width: 600px) {
   .next-grid { grid-template-columns: minmax(0,1fr); }
 }
+
+/* Clear, centered hero call to action, using the site's Carolina blue. */
+.next-hero .next-text-link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  align-self:center;
+  margin:20px auto 0;
+  padding:13px 22px;
+  min-height:44px;
+  border-radius:12px;
+  background:var(--sky);
+  color:var(--navy);
+  font-size:.95rem;
+  line-height:1.35;
+  font-weight:750;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(0,0,0,.14);
+  transition:background-color .2s ease,transform .2s ease;
+}
+.next-hero .next-text-link:hover {background:#a9d5f0;transform:translateY(-1px)}
+.next-hero .next-text-link:focus-visible {outline:3px solid white;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.next-hero .next-text-link{transition:none}.next-hero .next-text-link:hover{transform:none}}
