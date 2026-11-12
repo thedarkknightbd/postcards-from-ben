@@ -28,10 +28,9 @@ async function scanPrivate(env,item){
  for(const [field,value] of Object.entries(extracted)){
   if(existing[field]==null||existing[field]==="")additions[field]=value;
  }
- if(!existing.original_filename){
-  // Historical UUID-based storage cannot reconstruct the uploaded filename.
-  additions.original_filename=item.customMetadata?.originalName||key.split("/").pop();
- }
+ // Do not invent an original filename for historical UUID-based uploads.
+ if(!existing.original_filename&&item.customMetadata?.originalName)
+  additions.original_filename=String(item.customMetadata.originalName).slice(0,260);
  if(existing.file_size_bytes==null)additions.file_size_bytes=item.size;
  if(!existing.mime_type)additions.mime_type=item.httpMetadata?.contentType||imageType(key);
  if(!existing.uploaded_at)additions.uploaded_at=item.uploaded?.toISOString?.()||new Date().toISOString();
