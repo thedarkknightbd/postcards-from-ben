@@ -1,8 +1,7 @@
-import {response} from "../../_lib/access-auth.js";
-function owner(request,env){return Boolean(env.ACCESS_ADMIN_TOKEN&&request.headers.get("authorization")==="Bearer "+env.ACCESS_ADMIN_TOKEN);}
+import {response,adminAuthorized} from "../../_lib/access-auth.js";
 export async function onRequest({request,env}){
  if(!env.ACCESS_DB)return response({error:"Not configured"},503);
- if(!owner(request,env))return response({error:"Unauthorized"},401);
+ if(!await adminAuthorized(request,env))return response({error:"Unauthorized"},401);
  if(request.method==="GET"){
   const settings=await env.ACCESS_DB.prepare("SELECT live_location_enabled FROM access_privacy WHERE id=1").first();
   return response({share_location:settings?.live_location_enabled===1});
