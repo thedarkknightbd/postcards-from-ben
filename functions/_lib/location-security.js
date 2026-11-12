@@ -20,8 +20,11 @@ export async function requestLocationWorker(env,authenticated=false){
  const url=service?SERVICE_REQUEST_URL:LOCATION_URL;
  const headers={"accept":"application/json"};
  if(authenticated)headers.authorization="Bearer "+env.LOCATION_READ_TOKEN;
- const request=new Request(url,{method:"GET",headers,redirect:"error",signal:AbortSignal.timeout(6000)});
- return service?env.LOCATION_WORKER.fetch(request):fetch(request,{cache:"no-store"});
+ const request=new Request(url,{method:"GET",headers,redirect:"manual",signal:AbortSignal.timeout(6000)});
+ const response=service?await env.LOCATION_WORKER.fetch(request):await fetch(request,{cache:"no-store"});
+ // Never follow an upstream redirect, especially when credentials are attached.
+ if(response.status>=300&&response.status<400)throw Error("Location Worker redirect refused");
+ return response;
 }
 export function workerVerified(env){
  // Availability only: activation performs a fresh unauthenticated-denial check
