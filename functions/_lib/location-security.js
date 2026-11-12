@@ -18,9 +18,9 @@ export function upstreamConfigured(env){
  }catch{return false}
 }
 export function workerVerified(env){
- // Set only after the separate Worker is audited for protected GET, preserved
- // OwnTracks ingestion, and its production routes are tested.
- return upstreamConfigured(env)&&env.LOCATION_WORKER_VERIFIED==="true";
+ // Availability only: activation performs a fresh unauthenticated-denial check
+ // and a valid authenticated GET before persisting the ON state.
+ return upstreamConfigured(env);
 }
 export function sanitizeLocation(data){
  if(!data||typeof data!=="object")return null;
@@ -47,6 +47,10 @@ export function sanitizeLocation(data){
 export async function readProtectedWorker(env){
  if(!workerVerified(env))return {ok:false,error:"Worker integration is not verified"};
  try{
+  const denied=await fetch("https://postcards-live-location.bjdominguez.workers.dev/location",{
+   method:"GET",headers:{"accept":"application/json"},redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)
+  });
+  if(![401,403,404].includes(denied.status))return {ok:false,error:"Worker allows unauthenticated access or returned an unexpected status"};
   const res=await fetch("https://postcards-live-location.bjdominguez.workers.dev/location",{
    method:"GET",
    headers:{"authorization":"Bearer "+env.LOCATION_READ_TOKEN,"accept":"application/json"},
