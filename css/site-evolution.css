@@ -110,3 +110,151 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
   .evolution-intro h1 { font-size: clamp(2.6rem, 4vw, 4.5rem); line-height: 1.08; }
   .evolution-intro-actions { margin-top: 1.35rem; }
 }
+
+
+/* Refined editorial homepage — scoped adjustments, no shared trip-page changes.
+   Desktop hero, featured story, postcard, Atlas and correspondence are intentionally
+   more compact; preserve the existing imagery, palette, and content. */
+@media (min-width: 761px) {
+  .evolution-intro {
+    height: clamp(410px, 51svh, 510px);
+    min-height: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .evolution-intro-inner {
+    padding: 2.25rem clamp(2rem, 5vw, 5rem);
+  }
+  .evolution-intro h1 {
+    font-size: clamp(2.5rem, 3.75vw, 3.85rem);
+    line-height: 1.075;
+    margin: .75rem 0;
+  }
+  .evolution-intro-inner>p:not(.section-kicker) {
+    font-size: clamp(.94rem, 1.1vw, 1.04rem);
+    line-height: 1.55;
+    max-width: 30rem;
+  }
+  .evolution-intro-actions {margin-top: 1.2rem;gap: 1.15rem}
+  .evolution-intro-actions a {font-size: .9rem}
+  .evolution-intro>img {left: 50%;width: 50%;object-position:center 54%}
+}
+.evolution-feature,
+#latest-postcard-section,
+.evo-adventures-tile,
+.redesign-atlas,
+.evo-correspondence {
+  max-width: 1120px!important;
+}
+.evolution-feature {
+  margin: 3.5rem auto 3rem;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(1.5rem, 3.7vw, 3.5rem);
+  padding: 0 1.5rem;
+}
+.evolution-feature-image,
+.evolution-feature-image img {
+  min-height: 0;
+  height: clamp(270px, 29vw, 330px);
+}
+.evolution-feature-copy h2 {
+  font-size: clamp(2.1rem, 3.5vw, 3.15rem);
+  line-height: 1.08;
+  margin: .4rem 0 .65rem;
+}
+.evolution-feature-copy>p:not(.section-kicker) {
+  font-size: .98rem;
+  line-height: 1.55;
+}
+.evolution-feature-date {font-size:.77rem!important}
+.evolution-link {margin-top:.45rem;padding:.75rem 1.05rem;font-size:.9rem}
+.evolution-feature-meta {margin-top:.85rem;gap:1.2rem;font-size:.9rem}
+#latest-postcard-section {
+  margin: 2.8rem auto 3.2rem;
+  padding: 0 1.5rem;
+}
+#latest-postcard-section>h2 {font-size:clamp(1.65rem,2.4vw,2rem);margin-bottom:1rem}
+#latest-postcard-section .latest-postcard-card {
+  max-height: 280px;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  border-radius:14px;
+}
+#latest-postcard-section .latest-postcard-photo-link,
+#latest-postcard-section .latest-postcard-photo-link img {
+  height: 280px;
+  min-height:0;
+}
+#latest-postcard-section .latest-postcard-copy {
+  padding: 1.35rem clamp(1.3rem,2.5vw,2rem);
+}
+#latest-postcard-section .latest-postcard-copy h3 {
+  font-size:clamp(1.45rem,2vw,1.8rem);
+  margin:.45rem 0 .55rem;
+}
+#latest-postcard-section #latest-postcard-excerpt {
+  font-size:.91rem;line-height:1.5;margin-bottom:.85rem;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+#latest-postcard-section #latest-postcard-link {
+  padding: .65rem .9rem;
+  font-size:.86rem;
+}
+.evo-adventures-tile {margin:3rem auto;padding:0 1.5rem}
+.evo-adventures-link {min-height:clamp(320px,35vw,410px)}
+.evo-adventures-overlay {padding:clamp(1.6rem,4vw,3.2rem)}
+.evo-adventures-overlay h2 {font-size:clamp(2.7rem,4.6vw,4rem)}
+.evo-adventures-overlay>p:not(.section-kicker) {font-size:1rem;line-height:1.55}
+.redesign-atlas {
+  margin:3.25rem auto!important;
+  padding:0 1.5rem!important;
+}
+.redesign-atlas>a {gap:0 clamp(1.5rem,3vw,3rem)}
+.redesign-atlas img {
+  height:clamp(240px,26vw,305px)!important;
+  max-height:305px!important;
+}
+.redesign-atlas h2 {font-size:clamp(2.2rem,3.5vw,3.15rem);margin:.4rem 0}
+.redesign-atlas p:last-child {font-size:.97rem;line-height:1.6}
+.evo-correspondence {margin:3.25rem auto;padding:0 1.5rem}
+.evo-correspondence-heading {margin-bottom:1.6rem}
+.evo-correspondence-heading h2 {font-size:clamp(2.2rem,3.6vw,3.2rem)}
+.redesign-friends {max-width:1120px!important;margin:3rem auto!important}
+@media (min-width:761px) and (max-width:1050px) {
+  .evolution-intro {height:460px}
+  .evolution-intro-inner {padding:1.6rem 2rem}
+  .evolution-intro h1 {font-size:clamp(2.35rem,4.1vw,3rem)}
+  .evolution-feature {margin:2.75rem auto}
+  .evolution-feature-copy h2 {font-size:clamp(2rem,3.4vw,2.65rem)}
+  .evolution-feature-image,.evolution-feature-image img {height:285px}
+  .redesign-atlas img {height:255px!important}
+}
+@media (max-width:760px) {
+  .evolution-intro>img {height:215px}
+  .evolution-intro-inner {padding:1.85rem 1.3rem 2.2rem}
+  .evolution-intro h1 {font-size:clamp(2.35rem,8.4vw,3.4rem);margin:.75rem 0}
+  .evolution-intro-inner>p:not(.section-kicker) {font-size:.98rem;line-height:1.55}
+  .evolution-intro-actions {gap:.8rem;margin-top:1.2rem}
+  .evolution-feature {margin:2.35rem auto;gap:1rem}
+  .evolution-feature-image,.evolution-feature-image img {height:245px;min-height:0}
+  .evolution-feature-copy h2 {font-size:clamp(2.15rem,8vw,3rem);margin:.4rem 0}
+  .evolution-feature-copy>p:not(.section-kicker) {font-size:.96rem;line-height:1.55}
+  #latest-postcard-section {margin:2.4rem auto;padding:0 1.25rem}
+  #latest-postcard-section .latest-postcard-card {max-height:none;grid-template-columns:1fr}
+  #latest-postcard-section .latest-postcard-photo-link,
+  #latest-postcard-section .latest-postcard-photo-link img {height:205px;min-height:0}
+  #latest-postcard-section .latest-postcard-copy {padding:1.3rem}
+  #latest-postcard-section .latest-postcard-copy h3 {font-size:1.65rem}
+  #latest-postcard-section #latest-postcard-excerpt {margin-bottom:1rem}
+  .evo-adventures-tile {margin:2.4rem auto;padding:0 1.25rem}
+  .evo-adventures-link,.evo-adventures-overlay {min-height:320px}
+  .evo-adventures-overlay h2 {font-size:clamp(2.5rem,10vw,3.1rem)}
+  .redesign-atlas {margin:2.5rem auto!important;padding:0 1.25rem!important}
+  .redesign-atlas img {height:230px!important;max-height:230px!important}
+  .redesign-atlas h2 {font-size:2.35rem}
+  .evo-correspondence {margin:2.5rem auto}
+  .evo-correspondence-heading h2 {font-size:clamp(2.1rem,8vw,2.8rem)}
+  .redesign-friends {margin:2.5rem 1.25rem!important}
+}
+
+/* Center hero actions as a group beneath the centered message, not across the photo. */
+.evolution-intro-actions {justify-content:center;align-items:center;width:100%;}
+@media(max-width:420px){.evolution-intro-actions{flex-direction:column;align-items:stretch}.evolution-intro-actions a{text-align:center}}

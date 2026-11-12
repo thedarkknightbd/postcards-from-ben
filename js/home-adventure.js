@@ -24,10 +24,10 @@
       },
       between: {
         kicker: 'BETWEEN ADVENTURES',
-        title: 'The Journey<br><em>Continues.</em>',
-        description: 'The suitcase is unpacked, but the stories are still unfolding. Twenty-four days across Europe, countless memories, and already dreaming about where to go next.',
-        button: 'Explore My Adventures →',
-        url: '/trips/'
+        title: 'Where to<br><em>Next?</em>',
+        description: 'The Long Way Around may be over, but there is still so much of the world to discover. New places are calling, and the next adventure is already on my mind.',
+        button: 'Explore What’s Next →',
+        url: '/where-to-next/'
       }
     };
     // Never announce an unconfigured trip or navigate to a nonexistent placeholder.
