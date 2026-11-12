@@ -14,6 +14,16 @@ export async function onRequestPost({request,env}){
  const challengeId=crypto.randomUUID(),hash=await digest(challengeId+":"+code,env.ACCESS_SESSION_SECRET);
  await env.ACCESS_DB.prepare("INSERT INTO access_email_challenges(id,user_id,code_hash,expires_at) VALUES(?,?,?,?)").bind(challengeId,user.id,hash,isoAfter(10*60*1000)).run();
  const emailResult=await fetch("https://api.resend.com/emails",{method:"POST",headers:{"authorization":"Bearer "+env.RESEND_API_KEY,"content-type":"application/json"},body:JSON.stringify({from:env.ACCESS_EMAIL_FROM,to:[email],subject:"Your Postcards from Ben sign-in code",text:"Your sign-in code is "+code+". It expires in 10 minutes. If you didn't request this, ignore this email."})});
- if(!emailResult.ok)return response({error:"Unable to send code. Try again later."},503);
+ if(!emailResult.ok){
+  // The provider explicitly rejected this message. The undelivered code
+  // must not consume the user's 15-minute allowance.
+  try{
+   await env.ACCESS_DB.prepare("DELETE FROM access_email_challenges WHERE id=? AND consumed_at IS NULL").bind(challengeId).run();
+  }catch(error){
+   console.error("Unable to clear rejected sign-in challenge",error);
+  }
+  console.error("Sign-in email rejected by provider, HTTP status:",emailResult.status);
+  return response({error:"Unable to send code. Try again later."},503);
+ }
  return response({...generic,challenge_id:challengeId});
 }
