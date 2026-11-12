@@ -5034,35 +5034,35 @@ body.lightbox-open {
   .adventures-landing .pbf-unified-adventure-hero {padding-bottom:60px}
 }
 
-/* Shared centered brand + navigation: same visual hierarchy throughout the site. */
+/* Restore original one-row navigation: brand left, links right. */
 nav.site-nav {
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  flex-direction:row;
   align-items:center;
-  gap:9px;
-  padding:12px max(20px,4vw) 13px;
-  text-align:center;
+  justify-content:space-between;
+  gap:22px;
+  padding:14px max(5vw,24px);
+  text-align:left;
 }
 nav.site-nav .site-brand {
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  text-align:center;
-  margin:0 auto;
+  justify-content:flex-start;
+  margin:0;
+  flex-shrink:0;
+  text-align:left;
 }
 nav.site-nav .site-nav-links {
   display:flex;
-  justify-content:center;
   align-items:center;
-  gap:clamp(14px,2.1vw,30px);
+  justify-content:flex-end;
+  gap:clamp(12px,2.1vw,28px);
+  margin:0 0 0 auto;
   flex-wrap:wrap;
-  margin:0 auto;
-  text-align:center;
+  text-align:right;
 }
-nav.site-nav .site-trip-menu {text-align:left}
-@media(max-width:600px) {
-  nav.site-nav {gap:10px;padding:12px 16px}
-  nav.site-nav .site-nav-links {justify-content:center;gap:10px 16px}
-  nav.site-nav .site-brand {font-size:1.2rem}
+nav.site-nav .site-trip-menu{text-align:left}
+@media(max-width:600px){
+  nav.site-nav {gap:12px;padding:12px 18px;flex-direction:column;align-items:flex-start}
+  nav.site-nav .site-nav-links{margin:0;justify-content:flex-start;text-align:left;gap:10px 16px}
 }
