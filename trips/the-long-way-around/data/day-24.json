@@ -1,8 +1,7 @@
 {
+  "photos": [],
+  "previousDay": "day-23.html",
   "dayNumber": 24,
-  "date": "November 11, 2026",
-  "title": "The Long Way Home",
-  "route": "Munich → Atlanta → DFW Airport → North Fort Worth",
   "facts": [
     {
       "icon": "✈️",
@@ -25,8 +24,11 @@
       "value": "The Long Way Around"
     }
   ],
+  "route": "Munich → Atlanta → DFW Airport → North Fort Worth",
+  "nextDay": "",
+  "intro": "After 24 days exploring Europe, the day had finally arrived to go home.\n\nI woke up in Munich knowing that The Long Way Around was coming to an end. There were no more countries to check off, no mountain roads to navigate, and no new destinations waiting on the map. The only place I needed to get to was home.\n\nIt had been a long trip.\n\nOver the past three weeks, I had traveled through 16 countries, driven thousands of kilometers, crossed mountain passes, explored beautiful towns, and experienced places I had previously only seen in photographs. There were breathtaking moments, exhausting days, unexpected challenges, and experiences that I will remember for the rest of my life.\n\nBut what stands out most isn’t necessarily how far I traveled. It’s what I experienced along the way.\n\nI think about the beautiful lakes of Slovenia and Italy, the remarkable scenery of the Dolomites, the Bernina railway winding through the Swiss Alps, and the wonderful hospitality I experienced while visiting Bethel facilities and meeting brothers and sisters across Europe.\n\nAnd then there’s Mont Blanc.\n\nOf everything I saw during this journey, Mont Blanc remains my favorite. The sheer scale of the mountain, its jagged peaks reaching into the sky, and the incredible beauty of the Alps left an impression that is difficult to describe. Even the little town of Courmayeur, nestled beneath those towering mountains, felt special.\n\nThere was something about being surrounded by those peaks that made me want to stay just a little longer.\n\nThe flight home was simply the final stretch of a very long journey. I wasn’t feeling particularly emotional about leaving. After weeks of traveling, planning routes, navigating unfamiliar roads, and moving from place to place, I was ready to be home.\n\nBy the time I finally arrived home, I had been awake for 24 hours. Between leaving Munich, the long flight, and traveling back home, it had been an exhausting day.\n\nWalking through my own front door felt wonderful. After 24 days of traveling across Europe, I was finally back in my own house. No more hotels, no more driving, no more figuring out where I needed to be next. I could simply relax.\n\nAnd after being awake for an entire day, that was exactly what I needed.\n\nYet, even with all that exhaustion, it didn’t take long before I started missing Europe - especially the Alps.\n\nIt’s interesting how, after such a long and sometimes exhausting trip, I can already find myself wishing I were back among those mountains. The beautiful scenery, the little towns, the winding roads, and those incredible Alpine peaks are things I won’t soon forget.\n\nThis trip was ambitious, and there were certainly moments when I questioned some of my decisions. But looking back, I’m grateful for the opportunity to experience so much, visit six Bethel facilities, meet wonderful people, and see so many beautiful sights.\n\nI started this journey with a map, an itinerary, and a long list of places I wanted to see. I returned with photographs, memories, and experiences that will stay with me for years to come.\n\nThe Long Way Around has finally come to an end.\n\nFor now, I’m happy to be home, to rest, and to return to a familiar routine.\n\nBut I already know that whenever I look back at this trip, my thoughts will return to those magnificent mountains surrounding Mont Blanc.\n\nAnd I’ll be glad I took the long way around.",
   "introTitle": "The long way home.",
-  "intro": "After 24 days on the road, The Long Way Around comes to an end. The final journey begins at Munich Airport, crosses the Atlantic through Atlanta, continues to DFW Airport, and finishes with the drive home to North Fort Worth.",
+  "date": "November 11, 2026",
   "stops": [
     {
       "type": "Departure",
@@ -60,9 +62,7 @@
       "longitude": -97.31655
     }
   ],
-  "photos": [],
   "journal": "",
-  "videos": [],
-  "previousDay": "day-23.html",
-  "nextDay": ""
+  "title": "The Long Way Home",
+  "videos": []
 }
