@@ -4965,10 +4965,13 @@ body.lightbox-open {
   color:#fff;
 }
 .adventures-landing .pbf-unified-adventure-hero {
-  background-image:linear-gradient(90deg,rgba(9,28,49,.87),rgba(9,28,49,.33)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Elephant_on_the_savannah_%2842359536110%29.jpg?width=1600");
+  background-image:linear-gradient(90deg,rgba(9,28,49,.87),rgba(9,28,49,.33)),url("/images/my-adventures.jpg");
   background-position:center 52%;
 }
-.trip-page .pbf-unified-adventure-hero {background-position:center 47%}
+.trip-page .pbf-unified-adventure-hero {
+  background-image:linear-gradient(90deg,rgba(9,28,49,.84),rgba(9,28,49,.30)),url("/images/featured-adventure.jpg");
+  background-position:center 47%;
+}
 :is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero h1 {
   font:400 clamp(2.5rem,4.2vw,3.6rem)/1.08 Georgia,'Times New Roman',serif;
   letter-spacing:-.03em;
@@ -5029,4 +5032,37 @@ body.lightbox-open {
   }
   .trip-page .pbf-unified-adventure-hero .back-link {margin-bottom:10px}
   .adventures-landing .pbf-unified-adventure-hero {padding-bottom:60px}
+}
+
+/* Shared centered brand + navigation: same visual hierarchy throughout the site. */
+nav.site-nav {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  padding:12px max(20px,4vw) 13px;
+  text-align:center;
+}
+nav.site-nav .site-brand {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin:0 auto;
+}
+nav.site-nav .site-nav-links {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:clamp(14px,2.1vw,30px);
+  flex-wrap:wrap;
+  margin:0 auto;
+  text-align:center;
+}
+nav.site-nav .site-trip-menu {text-align:left}
+@media(max-width:600px) {
+  nav.site-nav {gap:10px;padding:12px 16px}
+  nav.site-nav .site-nav-links {justify-content:center;gap:10px 16px}
+  nav.site-nav .site-brand {font-size:1.2rem}
 }
