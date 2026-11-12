@@ -104,6 +104,7 @@ function addCountrySelector(form, currentValue){
  const countries=countryCodes.map(code=>({code,name:display?.of(code)||code}))
    .sort((a,b)=>a.name.localeCompare(b.name,"en"));
  for(const country of countries)selector.add(new Option(country.name,country.name));
+ selector.add(new Option("Other — enter country name","__custom__"));
  const current=String(currentValue||"").trim();
  if(current){
   let option=[...selector.options].find(o=>o.value.toLocaleLowerCase("en")===current.toLocaleLowerCase("en")||o.text===current);
@@ -115,6 +116,12 @@ function addCountrySelector(form, currentValue){
   selector.value=option.value;
  }
  form.append(selector);
+ const custom=document.createElement("input");custom.type="text";custom.id="meta-country-custom";
+ custom.placeholder="Enter country or territory";custom.maxLength=100;
+ custom.setAttribute("aria-label","Custom country or territory");
+ custom.hidden=true;form.append(custom);
+ const toggle=()=>{custom.hidden=selector.value!=="__custom__";custom.required=!custom.hidden};
+ selector.addEventListener("change",toggle);toggle();
 }
 const readonlyFields=[["file_size_bytes","File size (bytes)"],["mime_type","File type"],["uploaded_at","Uploaded at"],["pixel_width","Width (pixels)"],["pixel_height","Height (pixels)"]];
 function albumOptions(){
@@ -172,6 +179,9 @@ async function changePhoto(body){
 $("photoEditForm").addEventListener("submit",async event=>{
  event.preventDefault();if(!owner||!selectedPhoto)return;
  const metadata=Object.fromEntries(new FormData(event.currentTarget).entries());
+ if(metadata.country==="__custom__")metadata.country=$("meta-country-custom").value.trim();
+ if(metadata.country.length>100){$("detailStatus").textContent="Country must be 100 characters or fewer.";return}
+ if(metadata.country==="__custom__"){ $("detailStatus").textContent="Enter a country name.";return }
  $("detailStatus").textContent="Saving metadata…";
  try{const data=await changePhoto({operation:"edit",metadata});
   await openPhoto({key:selectedPhoto});
