@@ -3,10 +3,25 @@
 <body><main><p class="eyebrow">POSTCARDS FROM BEN · LOCATION</p><a href="/admin/">← Admin dashboard</a><h1>Location sharing</h1><p>This page is reserved for approved Location members and the site owner. Sharing is off by default and requires a secure connection to your separate Cloudflare location Worker.</p>
 <section class="card"><h2 id="state">Checking privacy settings…</h2><p id="availability">Reading the server’s location-sharing controls.</p>
 <div id="control" hidden><button id="on" disabled>Enable private sharing</button> <button id="off" disabled>Turn sharing off</button></div><p id="message" role="status" aria-live="polite"></p></section>
-<section class="card"><h2>Tracking versus sharing</h2><p><strong>Sharing</strong> determines whether the site can provide location information to approved members. <strong>Tracking</strong> is OwnTracks sending positions to the separate Worker. This website control does not stop OwnTracks uploads or clear the D1 location history.</p><p class="warning">No live coordinates are displayed here until the protected Worker connection and its server-side permissions have been verified. Previous live location pages remain retired.</p></section>
+<section class="card" id="liveCard" hidden><h2>Latest shared location</h2><p id="latest">Checking location…</p><p id="latestTime"></p><button id="refresh" type="button">Refresh location</button></section>
+<section class="card"><h2>Tracking versus sharing</h2><p><strong>Sharing</strong> determines whether the site can provide location information to approved members. <strong>Tracking</strong> is OwnTracks sending positions to the separate Worker. This website control does not stop OwnTracks uploads or clear the D1 location history.</p><p class="warning">Live coordinates are shown only to approved Location members while sharing is enabled and the protected Worker connection has been verified. Previous public location pages remain retired.</p></section>
 </main><script>
 const $=id=>document.getElementById(id);
-async function check(){try{const r=await fetch("/api/location-sharing",{cache:"no-store",credentials:"same-origin"});if(!r.ok)throw Error("Location settings are unavailable");const state=await r.json();$("state").textContent=state.sharing?"Private sharing enabled":"Private sharing off";$("availability").textContent=state.worker_ready?"Protected Worker connection configured; live viewer verification is still required.":"Protected Worker connection is not configured. Live sharing cannot be enabled yet."; $("control").hidden=!state.can_manage;$("on").disabled=!state.can_manage||!state.worker_ready||state.sharing;$("off").disabled=!state.can_manage||!state.sharing;}catch(e){$("state").textContent="Location unavailable";$("availability").textContent=e.message}}
+async function check(){try{const r=await fetch("/api/location-sharing",{cache:"no-store",credentials:"same-origin"});if(!r.ok)throw Error("Location settings are unavailable");const state=await r.json();$("state").textContent=state.sharing?"Private sharing enabled":"Private sharing off";$("availability").textContent=state.worker_ready?"Protected Worker connection configured; live viewer verification is still required.":"Protected Worker connection is not configured. Live sharing cannot be enabled yet."; $("control").hidden=!state.can_manage;$("on").disabled=!state.can_manage||!state.worker_ready||state.sharing;$("off").disabled=!state.can_manage||!state.sharing;$("liveCard").hidden=!state.sharing;if(state.sharing)await refreshLocation();}catch(e){$("state").textContent="Location unavailable";$("availability").textContent=e.message}}
 async function change(sharing){if(sharing&&!confirm("Enable private location sharing for approved Location members?"))return;const button=$(sharing?"on":"off");button.disabled=true;try{const r=await fetch("/api/location-sharing",{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify({sharing})});const d=await r.json();if(!r.ok)throw Error(d.error||"Could not change sharing");$("message").textContent=sharing?"Private sharing setting enabled.":"Private sharing is off.";await check()}catch(e){$("message").textContent=e.message;await check()}}
+async function refreshLocation(){
+ const latest=$("latest");latest.textContent="Checking protected location…";$("latestTime").textContent="";
+ try{
+  const r=await fetch("/api/location-live",{credentials:"same-origin",cache:"no-store"});
+  const d=await r.json();if(!r.ok)throw Error(d.error||"Location not available");
+  const l=d.location;
+  latest.textContent="Latitude "+Number(l.latitude).toFixed(5)+" · Longitude "+Number(l.longitude).toFixed(5);
+  if(l.timestamp){
+   const ms=Number(l.timestamp)*(Number(l.timestamp)<1e11?1000:1);
+   $("latestTime").textContent="Recorded "+new Date(ms).toLocaleString();
+  }else $("latestTime").textContent="Capture time unavailable";
+ }catch(e){latest.textContent=e.message}
+}
+$("refresh").onclick=refreshLocation;
 $("on").onclick=()=>change(true);$("off").onclick=()=>change(false);check();
 </script></body></html>
