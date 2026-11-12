@@ -11,10 +11,10 @@ export async function locationSharingState(env){
 }
 export function upstreamConfigured(env){
  try{
-  const url=new URL(env.LOCATION_WORKER_READ_URL||"");
+  const url=new URL("https://postcards-live-location.bjdominguez.workers.dev/location");
   return url.protocol==="https:"&&url.username===""&&url.password===""&&
    !url.search&&!url.hash&&url.hostname!=="postcardsfromben.com"&&
-   Boolean(env.LOCATION_WORKER_READ_TOKEN);
+   Boolean(env.LOCATION_READ_TOKEN);
  }catch{return false}
 }
 export function workerVerified(env){
@@ -47,9 +47,9 @@ export function sanitizeLocation(data){
 export async function readProtectedWorker(env){
  if(!workerVerified(env))return {ok:false,error:"Worker integration is not verified"};
  try{
-  const res=await fetch(env.LOCATION_WORKER_READ_URL,{
+  const res=await fetch("https://postcards-live-location.bjdominguez.workers.dev/location",{
    method:"GET",
-   headers:{"authorization":"Bearer "+env.LOCATION_WORKER_READ_TOKEN,"accept":"application/json"},
+   headers:{"authorization":"Bearer "+env.LOCATION_READ_TOKEN,"accept":"application/json"},
    redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)
   });
   if(!res.ok)return {ok:false,error:"Protected Worker did not provide location",status:res.status};
