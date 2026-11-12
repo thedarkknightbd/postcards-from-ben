@@ -85,16 +85,41 @@ $("albumForm").addEventListener("submit",async e=>{
 $("uploadForm").addEventListener("submit",async e=>{
  e.preventDefault();if(!owner)return;
  const uploadForm=e.currentTarget;
- const button=$("uploadButton"),status=$("status");button.disabled=true;status.textContent="Uploading…";
- try{
-  const form=new FormData(uploadForm);
-  form.set("collection",selected);form.set("album",currentAlbum);
-  const response=await fetch("/api/private-photos",{method:"POST",credentials:"same-origin",body:form});
-  const data=await response.json();if(!response.ok)throw Error(data.error||"Upload failed");
-  status.textContent="Photograph added privately.";uploadForm.reset();await load();
- }catch(err){status.textContent=err.message}finally{button.disabled=false}
+ const button=$("uploadButton"),status=$("status"),failureBox=$("uploadFailures");
+ const input=$("photo"),files=Array.from(input.files||[]);
+ const destinationCollection=selected,destinationAlbum=currentAlbum;
+ if(!files.length){status.textContent="Choose one or more photographs first.";return}
+ if(files.length>50){status.textContent="Please select up to 50 photographs per batch.";return}
+ const validTypes=new Set(["image/jpeg","image/png","image/webp","image/avif"]);
+ button.disabled=true;input.disabled=true;failureBox.replaceChildren();
+ let uploaded=0,failed=0;
+ const failures=[];
+ for(let i=0;i<files.length;i++){
+  const file=files[i];
+  status.textContent="Uploading "+(i+1)+" of "+files.length+" · "+uploaded+" completed · "+failed+" failed";
+  if(!validTypes.has(file.type)||file.size<1||file.size>12*1024*1024){
+   failed++;failures.push(file.name+": unsupported format or over 12 MB");continue;
+  }
+  try{
+   const body=new FormData();
+   body.set("collection",destinationCollection);
+   body.set("album",destinationAlbum);
+   body.set("file",file,file.name);
+   const response=await fetch("/api/private-photos",{method:"POST",credentials:"same-origin",body});
+   const data=await response.json();
+   if(!response.ok)throw Error(data.error||"Upload failed");
+   uploaded++;
+  }catch(err){
+   failed++;failures.push(file.name+": "+(err?.message||"Upload failed"));
+  }
+ }
+ // Never retry completed files automatically; a second batch should be a deliberate selection.
+ input.disabled=false;button.disabled=false;uploadForm.reset();
+ for(const message of failures){const line=document.createElement("p");line.textContent=message;failureBox.append(line)}
+ status.textContent=uploaded+" of "+files.length+" uploaded to "+albumName(destinationAlbum)+
+   (failed?" · "+failed+" failed. Review the filenames below.":" · Complete.");
+ if(destinationCollection===selected&&destinationAlbum===currentAlbum)await load();
 });
-
 
 let managedAlbum=null,shownKeys=[],selectedKeys=new Set();
 function fillDestinations(select,collectionOnly=false,excludeId=""){
