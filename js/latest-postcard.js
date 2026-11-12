@@ -27,6 +27,8 @@
     const published = entries.filter(Boolean).sort((a,b)=>b.number-a.number);
     if (!published.length) return;
     const latest = published[0];
+    const heroLatestLink = document.getElementById('home-latest-postcard-action');
+    if (heroLatestLink) heroLatestLink.href = latest.href;
     const photoLink = document.getElementById('latest-postcard-photo-link');
     const photo = document.getElementById('latest-postcard-photo');
     // Read the day page's actual hero so future postcards update automatically.

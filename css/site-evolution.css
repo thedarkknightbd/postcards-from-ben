@@ -78,3 +78,35 @@ body{background:var(--evo-paper);color:var(--evo-ink)}
 .evo-correspondence{margin:3rem auto;padding:0 1.25rem}
 }
 @media(prefers-reduced-motion:reduce){.evo-adventures-link>img{transition:none}}
+
+
+/* Carolina-blue editorial refresh — public-facing only; no access or Worker changes. */
+:root{--evo-ink:#0b2d55;--evo-paper:#f7f3e8;--evo-accent:#7bafd4;--pbf-navy:#0b2d55;--pbf-sky:#7bafd4;--pbf-cream:#f7f3e8;--pbf-charcoal:#2e2e2e}
+body{background:var(--pbf-cream);color:var(--pbf-charcoal)}
+.site-nav{background:var(--pbf-navy)!important;color:#fff}
+.site-nav a,.site-nav summary{color:#fff}
+.site-nav .site-trip-dropdown a{color:var(--pbf-navy)}
+.evolution-intro{background:var(--pbf-navy)}
+.evolution-intro .section-kicker{color:#c6e5f8}
+.evolution-intro h1 em{color:#a9d5f0}
+.evolution-intro-inner>p:not(.section-kicker){color:#e7f1f8}
+.evolution-intro-actions a:first-child{background:var(--pbf-sky);color:var(--pbf-navy);border-radius:12px}
+.evolution-intro-actions a:not(:first-child){border-color:var(--pbf-sky)}
+.evolution-link{background:var(--pbf-navy);border-radius:12px}
+.evolution-feature-image,.evo-adventures-link{border-radius:18px}
+.evo-adventures-link:before{background:linear-gradient(90deg,rgba(11,45,85,.83),rgba(11,45,85,.28) 62%,rgba(11,45,85,.05))}
+.evo-outline-link{border-color:#b9dcf3;border-radius:12px;background:rgba(11,45,85,.25)}
+.redesign-friends{background:#e5f0f7!important;border-radius:22px!important}
+.evo-coming-soon{border-color:var(--pbf-sky);color:var(--pbf-navy);border-radius:12px}
+.redesign-atlas img{border-radius:20px!important}
+.evolution-feature-copy h2,.redesign-atlas h2,.evo-correspondence-heading h2,.redesign-friends h2{color:var(--pbf-navy)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--pbf-sky);outline-offset:3px}
+@media(max-width:760px){.evo-adventures-link:before{background:linear-gradient(0deg,rgba(11,45,85,.86),rgba(11,45,85,.04) 95%)}}
+
+/* Compact desktop hero: keep the next section visible without overwhelming the viewport. */
+@media (min-width: 761px) {
+  .evolution-intro { min-height: 0; height: clamp(490px, 65svh, 620px); }
+  .evolution-intro-inner { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .evolution-intro h1 { font-size: clamp(2.6rem, 4vw, 4.5rem); line-height: 1.08; }
+  .evolution-intro-actions { margin-top: 1.35rem; }
+}
