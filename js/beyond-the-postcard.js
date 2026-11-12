@@ -94,6 +94,7 @@ const photoFields=[
  ["latitude","Latitude"],["longitude","Longitude"],["gps_altitude_m","Altitude (meters)"],
  ["timezone","Timezone"]
 ];
+const readonlyFields=[["file_size_bytes","File size (bytes)"],["mime_type","File type"],["uploaded_at","Uploaded at"],["pixel_width","Width (pixels)"],["pixel_height","Height (pixels)"]];
 function albumOptions(){
  const select=$("photoMoveDestination");select.replaceChildren();
  for(const [collection,label] of Object.entries(names)){
@@ -121,8 +122,8 @@ async function openPhoto(item){
  const data=await res.json(),metadata=data.metadata||{};
  $("detailTitle").textContent=metadata.title||"Photograph details";
  $("detailStatus").textContent="";
- for(const [key,label] of photoFields){
-  if(!metadata[key])continue;
+ for(const [key,label] of [...photoFields,...readonlyFields]){
+  if(metadata[key]===null||metadata[key]===undefined||metadata[key]==="")continue;
   const dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=label;dd.textContent=metadata[key];$("detailInfo").append(dt,dd);
  }
  const form=$("photoEditForm");form.replaceChildren();
