@@ -14,8 +14,8 @@ async function load(){
    title.textContent=user.display_name+" · "+user.email;
    sub.textContent="Status: "+user.state+(user.state==="approved"?" · Current access: "+user.permission:"");
    sub.className="muted";row.className="row";
-   for(const p of ["location","private"])permission.add(new Option(p==="location"?"Location — location and travel history":"Private — location and private galleries",p));
-   permission.value=user.permission==="private"?"private":"location";
+   for(const p of ["public","location","private"])permission.add(new Option(({public:"Public — standard approved account",location:"Location — eligible for location if sharing is enabled",private:"Private — eligible for private galleries"})[p],p));
+   permission.value=["public","location","private"].includes(user.permission)?user.permission:"public";
    const action=async(state)=>{try{await api("/api/access/admin-users",{id:user.id,permission:permission.value,state});await load();message((state==="approved"?"Access saved for ":"Access revoked for ")+user.display_name)}catch(e){message(e.message)}};
    const approve=document.createElement("button");
    approve.textContent=user.state==="pending"?"Approve access":user.state==="revoked"?"Restore access":"Update access";
