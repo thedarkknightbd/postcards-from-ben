@@ -23,7 +23,7 @@ export async function onRequestPost({request,env}){
  const collection=String(body?.collection||"");
  const title=String(body?.title||"").trim();
  const parentId=body?.parentId==null?"":String(body.parentId);
- if(!collections.has(collection)||title.length<2||title.length>90||/[^\p{L}\p{N}\s.,'()&–-]/u.test(title))
+ if(!collections.has(collection)||title.length<2||title.length>90||/[^\p{L}\p{N}\s.,'()&–—-]/u.test(title))
   return privateResponse({error:"Enter an album title (2–90 characters)"},400);
  if(parentId&&!idPattern.test(parentId))return privateResponse({error:"Invalid parent album"},400);
  try {
@@ -54,7 +54,7 @@ export async function onRequestPatch({request,env}){
   let next;
   if(operation==="rename"){
    const title=String(body.title||"").trim();
-   if(title.length<2||title.length>90||/[^\p{L}\p{N}\s.,'()&–-]/u.test(title))
+   if(title.length<2||title.length>90||/[^\p{L}\p{N}\s.,'()&–—-]/u.test(title))
     return privateResponse({error:"Enter a valid album name (2–90 characters)"},400);
    if(albums.some(a=>a.id!==id&&a.collection===current.collection&&a.parentId===current.parentId&&a.title.toLowerCase()===title.toLowerCase()))
     return privateResponse({error:"Another album here already has that name"},409);
