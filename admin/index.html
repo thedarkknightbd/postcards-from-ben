@@ -1,45 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="shortcut icon" href="/icons/favicon.ico">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-
-    <link rel="manifest" href="/icons/site.webmanifest">
-    
-    <meta name="theme-color" content="#17212b">
-
-    <meta name="robots"
-          content="noindex">
-
-    <title>Postcards from Ben — Editor</title>
-    <style>
-      .media-manager-link {
-        position: fixed; right: 16px; bottom: 16px; z-index: 999999;
-        padding: 11px 14px; border-radius: 999px; background: #17212b;
-        color: #fff; text-decoration: none;
-        font: 700 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        box-shadow: 0 8px 28px rgba(0,0,0,.28);
-        border: 1px solid rgba(255,255,255,.18);
-      }
-    </style>
-</head>
-
-<body>
-    <a class="media-manager-link" href="/admin/media.html">Media</a>
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/decap-cms@beta/dist/decap-cms.js">
-    </script>
-
-</body>
-
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b2d55">
+<title>Dashboard · Postcards from Ben</title>
+<style>
+:root{--navy:#0b2d55;--sky:#7bafd4;--cream:#f7f3e8;--ink:#23394e;--line:#d7e2e9}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.container{max-width:1100px;margin:0 auto;padding:24px 20px 80px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:4px 0 22px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px}.mark{height:44px;width:44px;display:grid;place-items:center;border-radius:13px;background:var(--navy);color:white;font:32px Georgia,serif}
+.brand strong{display:block;color:var(--navy);line-height:1.1}.brand small{display:block;color:#55748c}.owner{font-size:12px;border:1px solid #c6d5df;border-radius:30px;padding:5px 12px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.17em;color:#447eac;margin-top:34px}
+h1,h2{font-family:Georgia,serif;color:var(--navy);font-weight:400}
+h1{font-size:clamp(2.5rem,6vw,4rem);line-height:1.12;margin:9px 0 10px}h2{font-size:1.6rem;margin:0 0 9px}
+.intro{color:#597184;max-width:710px;margin:0 0 28px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tile{background:white;min-height:178px;border:1px solid var(--line);border-radius:16px;padding:23px;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,transform .15s}
+.tile:hover{border-color:#7bafd4;transform:translateY(-1px)}.tile h2{font-size:1.4rem;margin:0}
+.tile p{margin:0;color:#5c7180;font-size:.88rem}.tile .symbol{font-size:27px;line-height:1}
+.tile .foot{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:.02em;color:#497ca0}
+.tile.muted{background:#f1f4f6;border-style:dashed}.tile.muted .foot{color:#768894}
+.banner{margin-top:25px;padding:25px;border:1px solid var(--line);border-radius:16px;background:white}
+.banner p{color:#607585;margin:6px 0 0}.status{display:inline-block;padding:4px 9px;border-radius:999px;background:#edf1f4;color:#536978;font-size:.78rem;font-weight:700}
+.quick{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}.quick a{border:1px solid #bbcddd;background:#fff;border-radius:8px;color:var(--navy);padding:10px 15px;font-size:.88rem;font-weight:600}
+.footer{margin-top:45px;color:#677e8e;font-size:.83rem}
+@media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:490px){.tiles{grid-template-columns:1fr}.tile{min-height:150px}.container{padding:16px 16px 55px}}
+</style></head><body>
+<main class="container">
+<header class="top"><div class="brand"><span class="mark" aria-hidden="true">✦</span><span><strong>Postcards from Ben</strong><small>Content Management</small></span></div><span class="owner">Owner dashboard</span></header>
+<p class="eyebrow">YOUR CREATIVE HOME</p><h1>Welcome back</h1>
+<p class="intro">Everything you need to manage your stories, photographs, private galleries, and site access—organized in one place.</p>
+<section class="tiles" aria-label="Administration">
+<a class="tile" href="/admin/editor/"><span class="symbol" aria-hidden="true">✎</span><h2>Trips &amp; Journals</h2><p>Stories, daily entries, routes, and trip settings through your existing CMS.</p><span class="foot">Open content editor →</span></a>
+<a class="tile" href="/admin/media.html"><span class="symbol" aria-hidden="true">▧</span><h2>Photo Library</h2><p>Manage public travel photographs, media, and metadata.</p><span class="foot">Open media manager →</span></a>
+<a class="tile" href="/beyond-the-postcard/"><span class="symbol" aria-hidden="true">▣</span><h2>Private Galleries</h2><p>Organize Beyond the Postcard albums and edit photos privately.</p><span class="foot">Open private galleries →</span></a>
+<a class="tile muted" href="#location-status"><span class="symbol" aria-hidden="true">⌖</span><h2>Location Sharing</h2><p>Future secure location sharing and history controls. Sharing remains unavailable.</p><span class="foot">Not yet enabled</span></a>
+<a class="tile" href="/admin/access"><span class="symbol" aria-hidden="true">♙</span><h2>Access Management</h2><p>Approve members and manage Private or Location permissions.</p><span class="foot">Manage access →</span></a>
+<a class="tile" href="/admin/editor/"><span class="symbol" aria-hidden="true">⚙</span><h2>Site Settings</h2><p>Manage homepage settings and other supported configuration in Decap CMS.</p><span class="foot">Open site settings →</span></a>
+</section>
+<section id="location-status" class="banner"><span class="status">Location sharing · Not enabled</span><h2>Privacy first</h2><p>Location membership permissions do not activate location sharing. An authenticated, server-enforced owner switch must be implemented and tested before location access can be turned on here.</p></section>
+<div class="quick"><a href="/admin/photo-scan/">Scan photo metadata</a><a href="/admin/editor/">Open Decap CMS</a><a href="/">View website</a></div>
+<p class="footer">Owner-only administration · Your existing content editor and services remain in place.</p>
+</main></body></html>
