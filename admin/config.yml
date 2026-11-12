@@ -44,6 +44,34 @@ collections:
               - { label: "Public Preview Page Path (starts with /)", name: "url", widget: "string", required: false }
 
 
+  - name: "future_adventures"
+    label: "Where to Next?"
+    editor:
+      preview: false
+    files:
+      - label: "Destination Ideas"
+        name: "destination_ideas"
+        file: "data/where-to-next.json"
+        fields:
+          - { label: "Introductory Message", name: "intro", widget: "text" }
+          - label: "Travel Ideas"
+            name: "ideas"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.stage}}"
+            fields:
+              - { label: "Destination", name: "title", widget: "string" }
+              - label: "Status"
+                name: "stage"
+                widget: "select"
+                options:
+                  - { label: "Dreaming About", value: "dreaming" }
+                  - { label: "Taking Shape", value: "planning" }
+                  - { label: "Coming Up Next", value: "upcoming" }
+                default: "dreaming"
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image Site Path (optional)", name: "image", widget: "string", required: false }
+              - { label: "Details Page Path (optional)", name: "url", widget: "string", required: false }
+
   - name: "long_way_around"
     label: "The Long Way Around"
     label_singular: "Day"
