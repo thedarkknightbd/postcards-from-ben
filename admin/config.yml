@@ -11,6 +11,39 @@ public_folder: "/trips/the-long-way-around/images/uploads"
 
 collections:
 
+  - name: "homepage_settings"
+    label: "Homepage"
+    editor:
+      preview: false
+    files:
+      - label: "Adventure Status"
+        name: "adventure_status"
+        file: "data/home-adventure.json"
+        fields:
+          - label: "Homepage Status"
+            name: "status"
+            widget: "select"
+            options:
+              - { label: "Between Adventures", value: "between" }
+              - { label: "Currently Traveling", value: "traveling" }
+              - { label: "Planning Next Adventure", value: "upcoming" }
+            default: "between"
+          - label: "Current Adventure"
+            name: "currentAdventure"
+            widget: "object"
+            fields:
+              - { label: "Adventure Title", name: "title", widget: "string", required: false }
+              - { label: "Homepage Description", name: "description", widget: "text", required: false }
+              - { label: "Public Trip Page Path (starts with /)", name: "url", widget: "string", required: false }
+          - label: "Upcoming Adventure"
+            name: "upcomingAdventure"
+            widget: "object"
+            fields:
+              - { label: "Adventure Title", name: "title", widget: "string", required: false }
+              - { label: "Homepage Description", name: "description", widget: "text", required: false }
+              - { label: "Public Preview Page Path (starts with /)", name: "url", widget: "string", required: false }
+
+
   - name: "long_way_around"
     label: "The Long Way Around"
     label_singular: "Day"
