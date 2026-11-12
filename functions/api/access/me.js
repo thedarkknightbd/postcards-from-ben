@@ -11,7 +11,7 @@ export async function onRequestGet({ request, env }) {
   return response({
     authenticated: Boolean(user),
     role,
-    can_view_location: ["location", "private", "admin"].includes(role),
+    can_view_location: ["location", "admin"].includes(role),
     can_view_private: ["private", "admin"].includes(role),
     can_manage_site: role === "admin"
   });
