@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Access management · Postcards from Ben</title><style>body{font:16px system-ui;background:#f7f7f4;color:#202725;margin:0;padding:24px}main{max-width:900px;margin:auto}section{background:white;border:1px solid #ddd;border-radius:14px;padding:22px;margin:18px 0}input,select,button{font:inherit;padding:9px;border-radius:7px;border:1px solid #aaa}input[type=password]{width:min(100%,440px)}button{background:#183f37;color:white;cursor:pointer;border:0;margin:4px}button.secondary{background:#e5e9e6;color:#203b35}article{border-top:1px solid #ddd;padding:14px 0}article:first-child{border:0}.muted{color:#5c6a63;font-size:.9rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}label{display:block;margin:10px 0}#message{min-height:24px}</style></head><body><main><h1>Access management</h1><p class="muted">Owner dashboard · sign in at /access/ with your approved owner email.</p><section><p class="muted">Your verified owner session grants access. An admin token is optional for maintenance.</p><label for="token">Maintenance token (optional)</label><input id="token" type="password" autocomplete="off" placeholder="Only if needed"><button id="load">Load accounts</button><p class="muted">The maintenance token, if used, stays in this page and is not stored.</p><p id="message" role="status" aria-live="polite"></p></section><section><h2 id="accountHeading">Pending access requests</h2><label for="filter">Show accounts</label><select id="filter"><option value="pending">Pending requests</option><option value="approved">Approved members</option><option value="revoked">Revoked accounts</option><option value="all">All accounts</option></select><div id="users"></div></section><section><h2>Share My Location</h2><p class="muted">Control whether approved Location and Private members may see your existing location map.</p><label><input type="radio" name="shareLocation" id="shareYes"> Yes</label><label><input type="radio" name="shareLocation" id="shareNo" checked> No</label><p id="shareStatus" role="status" aria-live="polite">Location sharing is off.</p><button id="saveShare" type="button">Save location setting</button><p class="muted">Development setting only: existing location endpoints are not yet connected to this control. Do not rely on this setting to hide your location until the server-side protection is complete.</p></section></main><script>
+const $=id=>document.getElementById(id),auth=()=>($("token").value.trim()?{"authorization":"Bearer "+$("token").value.trim()}:{});
+async function api(path,body){const r=await fetch(path,{method:body?"POST":"GET",headers:{...auth(),...(body?{"content-type":"application/json"}:{})},body:body?JSON.stringify(body):undefined,cache:"no-store"});const d=await r.json();if(!r.ok)throw Error(d.error||"Request failed");return d;}
+function message(s){$("message").textContent=s}
+async function load(){
+ try{
+  message("Loading…");
+  const filter=$("filter").value;
+  $("accountHeading").textContent=({pending:"Pending access requests",approved:"Approved members",revoked:"Revoked accounts",all:"All accounts"})[filter];
+  const [accounts,privacy]=await Promise.all([api("/api/access/admin-users?state="+encodeURIComponent(filter)),api("/api/access/admin-privacy")]);
+  $("shareYes").checked=privacy.share_location===true;
+  $("shareNo").checked=!privacy.share_location;
+  $("shareStatus").textContent=privacy.share_location?"Sharing preference: Yes (server protection required before production cutover).":"Sharing preference: No (server protection required before production cutover).";
+  $("users").replaceChildren();
+  for(const user of accounts.users){
+   const item=document.createElement("article"),title=document.createElement("strong"),sub=document.createElement("p"),row=document.createElement("div"),permission=document.createElement("select");
+   title.textContent=user.display_name+" · "+user.email;
+   sub.textContent="Status: "+user.state+(user.state==="approved"?" · Current access: "+user.permission:"");
+   sub.className="muted";row.className="row";
+   for(const p of ["location","private"])permission.add(new Option(p==="location"?"Location — location and travel history":"Private — location and private galleries",p));
+   permission.value=user.permission==="private"?"private":"location";
+   const action=async(state)=>{try{await api("/api/access/admin-users",{id:user.id,permission:permission.value,state});await load();message((state==="approved"?"Access saved for ":"Access revoked for ")+user.display_name)}catch(e){message(e.message)}};
+   const approve=document.createElement("button");
+   approve.textContent=user.state==="pending"?"Approve access":user.state==="revoked"?"Restore access":"Update access";
+   approve.addEventListener("click",()=>action("approved"));
+   row.append(permission,approve);
+   if(user.state!=="revoked"){const decline=document.createElement("button");decline.className="secondary";decline.textContent=user.state==="pending"?"Decline":"Revoke access";decline.addEventListener("click",()=>{if(confirm((user.state==="pending"?"Decline request from ":"Revoke access for ")+user.display_name+"?"))action("revoked")});row.append(decline)}
+   item.append(title,sub,row);$("users").append(item);
+  }
+  if(!accounts.users.length)$("users").textContent=filter==="pending"?"No pending requests.":"No accounts found.";
+  message("Loaded");
+ }catch(e){message(e.message)}
+}
+$("load").onclick=load;$("filter").onchange=load;
+$("saveShare").onclick=async()=>{try{const result=await api("/api/access/admin-privacy",{share_location:$("shareYes").checked});$("shareStatus").textContent=result.share_location?"Sharing preference saved: Yes (server protection required before production cutover).":"Sharing preference saved: No (server protection required before production cutover).";message("Location preference saved")}catch(e){message(e.message)}};
+</script></body></html>
