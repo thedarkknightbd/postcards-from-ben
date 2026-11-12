@@ -13,7 +13,8 @@ export async function onRequest({request,env}){
  const origin=request.headers.get("origin");if(origin!==new URL(request.url).origin)return response({error:"Invalid origin"},403);
  let body;try{body=await request.json()}catch{return response({error:"Invalid request"},400)}
  const id=String(body?.id||""),permission=String(body?.permission||""),state=String(body?.state||"");
- if(!/^[0-9a-f-]{36}$/.test(id)||!["public","location","private"].includes(permission)||!["approved","revoked"].includes(state))return response({error:"Invalid update"},400);
+ // Public is an internal pending/legacy value, not a member access tier.
+ if(!/^[0-9a-f-]{36}$/.test(id)||!["approved","revoked"].includes(state)||!(state==="approved"?["private","location"].includes(permission):["public","private","location"].includes(permission)))return response({error:"Invalid update"},400);
  const target=await env.ACCESS_DB.prepare("SELECT email FROM access_users WHERE id=?").bind(id).first();
  if(target?.email?.toLowerCase()==="bjdominguez@me.com")return response({error:"Owner access cannot be changed here"},403);
  const result=await env.ACCESS_DB.prepare("UPDATE access_users SET permission=?,state=?,approved_at=CASE WHEN ?='approved' THEN COALESCE(approved_at,CURRENT_TIMESTAMP) ELSE approved_at END,revoked_at=CASE WHEN ?='revoked' THEN CURRENT_TIMESTAMP ELSE NULL END,updated_at=CURRENT_TIMESTAMP WHERE id=?").bind(permission,state,state,state,id).run();
