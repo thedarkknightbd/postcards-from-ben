@@ -136,7 +136,7 @@ async function openPhoto(item){
   }
   const save=document.createElement("button");save.type="submit";save.textContent="Save metadata";form.append(save);
   const keyParts=item.key.split("/");
-  if(names[keyParts[1]])$("photoMoveDestination").value=keyParts[1]+"|"+(keyParts.length===4?keyParts[2]:"");  if(match)$("photoMoveDestination").value=match[1]+"|"+(match[2]||"");
+  if(names[keyParts[1]])$("photoMoveDestination").value=keyParts[1]+"|"+(keyParts.length===4?keyParts[2]:"");
  }
  $("photoDetails").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -150,9 +150,8 @@ $("photoEditForm").addEventListener("submit",async event=>{
  const metadata=Object.fromEntries(new FormData(event.currentTarget).entries());
  $("detailStatus").textContent="Saving metadata…";
  try{const data=await changePhoto({operation:"edit",metadata});
-  $("detailStatus").textContent="Metadata saved privately.";
-  $("detailTitle").textContent=data.metadata.title||"Photograph details";
   await openPhoto({key:selectedPhoto});
+  $("detailStatus").textContent="Metadata saved privately.";
  }catch(e){$("detailStatus").textContent=e.message}
 });
 $("photoMoveButton").addEventListener("click",async()=>{
