@@ -1,31 +1,38 @@
 {
-  "intro": "The suitcase is unpacked, but the curiosity isn't. This is where I collect possibilities, explore routes, and share the plans that eventually turn into postcards.",
+  "intro": "The next journey isn't decided yet. These are the corners of the world I'm drawn to—some familiar dreams, others just beginning to take shape.",
   "ideas": [
     {
-      "title": "Japan",
+      "title": "Asia",
       "stage": "dreaming",
-      "description": "A journey through Japan is high on my list—its cities, mountain scenery, historic places, and a culture I would love to experience.",
-      "image": "",
-      "url": ""
-    },
-    {
-      "title": "Southeast Asia",
-      "stage": "dreaming",
-      "description": "Thailand, Vietnam, and perhaps other parts of Asia: new landscapes, fascinating cities, local food, and places I have yet to discover.",
+      "description": "Japan, the Philippines, Vietnam, Thailand, and beyond. From mountain landscapes to bustling cities and quiet coastlines, there's an entire part of the world I'd love to discover.",
       "image": "",
       "url": ""
     },
     {
       "title": "Northern Europe",
       "stage": "dreaming",
-      "description": "Sweden, Norway, and perhaps more of the Nordic region—especially the dramatic landscapes, fjords, and scenery farther north.",
+      "description": "Norway's fjords, Sweden's landscapes, and perhaps more of Scandinavia. I'm drawn to the open roads, rugged coastlines, and beauty of the far north.",
       "image": "",
       "url": ""
     },
     {
-      "title": "Costa Rica",
+      "title": "Central America",
       "stage": "dreaming",
-      "description": "A Central American adventure with lush rainforests, volcanoes, wildlife, and beautiful natural scenery.",
+      "description": "Costa Rica is calling, but I'd love to see more of Central America too—rainforests, volcanoes, wildlife, and a different kind of adventure.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "More of Europe",
+      "stage": "dreaming",
+      "description": "The Long Way Around only made me want to see more. Bulgaria, Montenegro, Serbia, and other countries still missing from my map are calling.",
+      "image": "",
+      "url": ""
+    },
+    {
+      "title": "South America",
+      "stage": "dreaming",
+      "description": "Argentina, Chile, and Peru are high on my list. The Andes, dramatic landscapes, and places so different from anything I've seen make this region hard to ignore.",
       "image": "",
       "url": ""
     }
