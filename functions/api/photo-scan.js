@@ -61,7 +61,7 @@ async function scanPublic(env,item,columns){
   await db.prepare("INSERT OR IGNORE INTO photos ("+cols.join(",")+") VALUES ("+cols.map(()=>"?").join(",")+")").bind(...params).run();
  }else if(available.length){
   // Fill empty fields only. Never replace values the owner has already saved.
-  const updates=available.map(field=>field+"=COALESCE("+field+",?)").join(",");
+  const updates=available.map(field=>field+"=CASE WHEN "+field+" IS NULL OR "+field+"=\'\' THEN ? ELSE "+field+" END").join(",");
   const params=available.map(field=>["latitude","longitude","gps_altitude_m","aperture","shutter_speed","iso","focal_length_mm","pixel_width","pixel_height"].includes(field)?Number(extracted[field]):String(extracted[field]));
   await db.prepare("UPDATE photos SET "+updates+" WHERE r2_key=?").bind(...params,key).run();
  }
