@@ -4942,3 +4942,91 @@ body.lightbox-open {
   .postcard-page .postcard-page-main {padding-top:24px}
   .postcard-page .postcard-heading h1 {font-size:clamp(2.15rem,8vw,2.85rem)}
 }
+
+
+/* One true photographic hero component for the adventures collection and
+   featured-trip landing page. Use distinct photographs, identical geometry. */
+:is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero {
+  box-sizing:border-box;
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  width:100%;
+  min-height:370px;
+  height:370px;
+  padding:36px clamp(24px,6vw,76px);
+  text-align:left;
+  background-color:#0b2d55;
+  background-size:cover;
+  background-repeat:no-repeat;
+  color:#fff;
+}
+.adventures-landing .pbf-unified-adventure-hero {
+  background-image:linear-gradient(90deg,rgba(9,28,49,.87),rgba(9,28,49,.33)),url("https://commons.wikimedia.org/wiki/Special:FilePath/Elephant_on_the_savannah_%2842359536110%29.jpg?width=1600");
+  background-position:center 52%;
+}
+.trip-page .pbf-unified-adventure-hero {background-position:center 47%}
+:is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero h1 {
+  font:400 clamp(2.5rem,4.2vw,3.6rem)/1.08 Georgia,'Times New Roman',serif;
+  letter-spacing:-.03em;
+  max-width:740px;
+  margin:8px 0 12px;
+  color:#fff;
+  text-align:left;
+  text-wrap:balance;
+}
+:is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero .section-kicker,
+.trip-page .pbf-unified-adventure-hero .trip-label {
+  color:#b9dcf3!important;
+  font-size:.73rem!important;
+  font-weight:700;
+  letter-spacing:.16em;
+  line-height:1.4;
+  margin:0 0 6px!important;
+  text-align:left;
+}
+:is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero>p:not(.section-kicker):not(.trip-label):not(.hero-photo-credit) {
+  color:#f1f6fa;
+  font-size:clamp(.92rem,1.2vw,1rem);
+  line-height:1.5;
+  text-align:left;
+  max-width:600px;
+  margin:6px 0;
+}
+.trip-page .pbf-unified-adventure-hero .back-link {
+  position:static;
+  margin:0 0 13px;
+  color:#e3eff7;
+  font-size:.83rem;
+}
+.trip-page .pbf-unified-adventure-hero .longway-hero-description {max-width:590px}
+.trip-page .pbf-unified-adventure-hero .longway-hero-button {
+  position:static;
+  font-size:.9rem;
+  padding:9px 15px;
+  margin-top:12px;
+  border-radius:9px;
+}
+.adventures-landing .pbf-unified-adventure-hero .hero-photo-credit {
+  bottom:9px;right:14px;max-width:420px;
+  text-align:right;
+  font-size:.58rem;
+}
+@media(max-width:700px){
+  :is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero {
+    min-height:325px;
+    height:auto;
+    padding:34px 22px;
+  }
+  :is(.adventures-landing,.trip-page) .pbf-unified-adventure-hero h1 {
+    font-size:clamp(2.15rem,8vw,3rem);
+  }
+  .adventures-landing .pbf-unified-adventure-hero {
+    background-position:60% center;
+  }
+  .trip-page .pbf-unified-adventure-hero .back-link {margin-bottom:10px}
+  .adventures-landing .pbf-unified-adventure-hero {padding-bottom:60px}
+}
