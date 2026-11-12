@@ -26,7 +26,7 @@ export function owner(user) {
 export const collections = new Set(["special-moments", "bethel-visits", "friends-along-the-way"]);
 export const privateKey = key =>
   typeof key === "string" &&
-  /^albums\/(special-moments|bethel-visits|friends-along-the-way)\/[0-9a-f-]{36}\.(jpg|jpeg|png|webp|avif)$/i.test(key);
+  /^albums\/(special-moments|bethel-visits|friends-along-the-way)\/(?:[0-9a-f-]{36}\/)?[0-9a-f-]{36}\.(jpg|jpeg|png|webp|avif)$/i.test(key);
 export const fileTypes = new Map([
   ["image/jpeg", "jpg"],
   ["image/png", "png"],
