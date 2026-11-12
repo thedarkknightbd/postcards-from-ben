@@ -134,8 +134,8 @@ async function openPhoto(item){
    form.append(labelElement,input);
   }
   const save=document.createElement("button");save.type="submit";save.textContent="Save metadata";form.append(save);
-  const match=item.key.match(/^albums\\/([^/]+)\\/(?:([0-9a-f-]{36})\\/)?[0-9a-f-]{36}\\.[^/]+$/i);
-  if(match)$("photoMoveDestination").value=match[1]+"|"+(match[2]||"");
+  const keyParts=item.key.split("/");
+  if(names[keyParts[1]])$("photoMoveDestination").value=keyParts[1]+"|"+(keyParts.length===4?keyParts[2]:"");  if(match)$("photoMoveDestination").value=match[1]+"|"+(match[2]||"");
  }
  $("photoDetails").scrollIntoView({behavior:"smooth",block:"start"});
 }
