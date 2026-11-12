@@ -1,0 +1,13 @@
+{
+  "status": "between",
+  "currentAdventure": {
+    "title": "",
+    "description": "",
+    "url": ""
+  },
+  "upcomingAdventure": {
+    "title": "",
+    "description": "",
+    "url": ""
+  }
+}
