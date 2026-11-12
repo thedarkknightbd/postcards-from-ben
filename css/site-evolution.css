@@ -102,3 +102,11 @@ body{background:var(--pbf-cream);color:var(--pbf-charcoal)}
 .evolution-feature-copy h2,.redesign-atlas h2,.evo-correspondence-heading h2,.redesign-friends h2{color:var(--pbf-navy)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--pbf-sky);outline-offset:3px}
 @media(max-width:760px){.evo-adventures-link:before{background:linear-gradient(0deg,rgba(11,45,85,.86),rgba(11,45,85,.04) 95%)}}
+
+/* Compact desktop hero: keep the next section visible without overwhelming the viewport. */
+@media (min-width: 761px) {
+  .evolution-intro { min-height: 0; height: clamp(490px, 65svh, 620px); }
+  .evolution-intro-inner { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .evolution-intro h1 { font-size: clamp(2.6rem, 4vw, 4.5rem); line-height: 1.08; }
+  .evolution-intro-actions { margin-top: 1.35rem; }
+}
