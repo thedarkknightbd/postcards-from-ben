@@ -66,6 +66,8 @@ export function extractJpegMetadata(buffer){
   const exif=typeof first[34665]==="number"?ifd(first[34665]):{};
   const gps=typeof first[34853]==="number"?ifd(first[34853]):{};
   const assign=(name,value)=>{if(value!==null&&value!==undefined&&value!=="")out[name]=String(value)};
+  if(!out.pixel_width&&typeof exif[40962]==="number")out.pixel_width=exif[40962];
+  if(!out.pixel_height&&typeof exif[40963]==="number")out.pixel_height=exif[40963];
   assign("camera_make",first[271]);assign("camera_model",first[272]);assign("software",first[305]);
   assign("lens_model",exif[42036]);assign("iso",exif[34855]);assign("aperture",exif[33437]);
   assign("shutter_speed",exif[33434]);assign("focal_length_mm",exif[37386]);
