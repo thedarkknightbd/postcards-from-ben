@@ -94,6 +94,28 @@ const photoFields=[
  ["latitude","Latitude"],["longitude","Longitude"],["gps_altitude_m","Altitude (meters)"],
  ["timezone","Timezone"]
 ];
+// ISO 3166-1 alpha-2 choices, displayed as country names in Safari's locale.
+const countryCodes="AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW".split(" ");
+function addCountrySelector(form, currentValue){
+ const selector=document.createElement("select");
+ selector.id="meta-country";selector.name="country";selector.setAttribute("aria-label","Country");
+ selector.add(new Option("Select country",""));
+ const display=typeof Intl.DisplayNames==="function"?new Intl.DisplayNames(["en"],{type:"region"}):null;
+ const countries=countryCodes.map(code=>({code,name:display?.of(code)||code}))
+   .sort((a,b)=>a.name.localeCompare(b.name,"en"));
+ for(const country of countries)selector.add(new Option(country.name,country.name));
+ const current=String(currentValue||"").trim();
+ if(current){
+  let option=[...selector.options].find(o=>o.value.toLocaleLowerCase("en")===current.toLocaleLowerCase("en")||o.text===current);
+  if(!option){
+   const fromCode=[...selector.options].find(o=>o.value===display?.of(current.toUpperCase()));
+   option=fromCode;
+  }
+  if(!option){option=new Option(current+" (saved value)",current);selector.add(option)}
+  selector.value=option.value;
+ }
+ form.append(selector);
+}
 const readonlyFields=[["file_size_bytes","File size (bytes)"],["mime_type","File type"],["uploaded_at","Uploaded at"],["pixel_width","Width (pixels)"],["pixel_height","Height (pixels)"]];
 function albumOptions(){
  const select=$("photoMoveDestination");select.replaceChildren();
@@ -130,9 +152,11 @@ async function openPhoto(item){
  if(owner){
   for(const [key,label] of photoFields){
    const labelElement=document.createElement("label");labelElement.textContent=label;labelElement.htmlFor="meta-"+key;
+   form.append(labelElement);
+   if(key==="country"){addCountrySelector(form,metadata.country);continue}
    const input=key==="caption"||key==="alt_text"?document.createElement("textarea"):document.createElement("input");
    input.id="meta-"+key;input.name=key;input.value=metadata[key]||"";
-   form.append(labelElement,input);
+   form.append(input);
   }
   const save=document.createElement("button");save.type="submit";save.textContent="Save metadata";form.append(save);
   const keyParts=item.key.split("/");
