@@ -47,7 +47,12 @@ export async function onRequest({request,env}){
  if(request.method==="GET"){
   const key=new URL(request.url).searchParams.get("key");
   if(!key||!(await safeKey(env,key)))return privateResponse({error:"Photo not found"},404);
-  return privateResponse({key,metadata:await readMetadata(env,key)});
+  const metadata=await readMetadata(env,key);
+  if(!owner(member)){
+   // Do not send exact location fields in the metadata API to private viewers.
+   for(const field of ["latitude","longitude","gps_altitude_m"])delete metadata[field];
+  }
+  return privateResponse({key,metadata});
  }
  if(request.method!=="POST")return privateResponse({error:"Method not allowed"},405);
  if(!owner(member))return privateResponse({error:"Not found"},404);
