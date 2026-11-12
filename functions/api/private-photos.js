@@ -1,4 +1,5 @@
 import {privateMember, privateResponse, owner, collections, fileTypes} from "../_lib/private-media.js";
+import {extractJpegMetadata} from "../_lib/jpeg-exif.js";
 
 const albumIdPattern=/^[0-9a-f-]{36}$/i;
 async function validateAlbum(env, collection, albumId){
@@ -53,6 +54,22 @@ export async function onRequestPost({request,env}){
    file.type==="image/avif"?String.fromCharCode(...head.slice(4,8))==="ftyp"&&["avif","avis"].includes(String.fromCharCode(...head.slice(8,12))):false;
  if(!valid)return privateResponse({error:"Image file does not match its type"},400);
  const key=prefixFor(collection,albumId)+crypto.randomUUID()+"."+ext;
- await env.PRIVATE_MEDIA.put(key,file.stream(),{httpMetadata:{contentType:file.type,cacheControl:"private, no-store"}});
- return privateResponse({ok:true,key},201);
+ const body=await file.arrayBuffer();
+ const source=file.type==="image/jpeg"?extractJpegMetadata(body):{};
+ const metadata={
+  ...source,original_filename:file.name.slice(0,260),
+  file_size_bytes:file.size,mime_type:file.type,
+  uploaded_at:new Date().toISOString()
+ };
+ // Save original image unchanged, including its embedded EXIF bytes.
+ await env.PRIVATE_MEDIA.put(key,body,{httpMetadata:{contentType:file.type,cacheControl:"private, no-store"}});
+ try {
+  await env.PRIVATE_MEDIA.put("internal/photo-details/"+key.split("/").pop().split(".")[0]+".json",
+   JSON.stringify(metadata),{httpMetadata:{contentType:"application/json",cacheControl:"private, no-store"}});
+ }catch(error){
+  // A photo must never be silently accepted if its metadata couldn't be stored.
+  await env.PRIVATE_MEDIA.delete(key);
+  return privateResponse({error:"Could not store photo metadata; upload was rolled back"},503);
+ }
+ return privateResponse({ok:true,key,metadata},201);
 }
