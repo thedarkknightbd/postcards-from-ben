@@ -1,25 +1,24 @@
 import {currentUser,isOwner,response} from "../_lib/access-auth.js";
-import {upstreamConfigured,sanitizeLocation} from "../_lib/location-security.js";
+import {upstreamConfigured,sanitizeLocation,locationTransport,requestLocationWorker} from "../_lib/location-security.js";
 
-const WORKER="https://postcards-live-location.bjdominguez.workers.dev/location";
 const noStore={"cache-control":"private, no-store"};
 function safeStatus(status){return [200,400,401,403,404,405,429,500,502,503,504].includes(status)?status:null}
 export async function onRequestGet({request,env}){
  let user;try{user=await currentUser(request,env)}catch{}
  if(!isOwner(user))return response({error:"Not found"},404);
  if(!upstreamConfigured(env))return response({configured:false,anonymous:"not_checked",authenticated:"not_checked",message:"The Pages read-token secret is missing."},200,noStore);
- const state={configured:true,anonymous:"unavailable",authenticated:"not_checked",anonymous_status:null,authenticated_status:null};
+ const state={configured:true,transport:locationTransport(env),anonymous:"unavailable",authenticated:"not_checked",anonymous_status:null,authenticated_status:null};
  try{
-  const r=await fetch(WORKER,{method:"GET",headers:{"accept":"application/json"},redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)});
+  const r=await requestLocationWorker(env,false);
   state.anonymous_status=safeStatus(r.status);
   state.anonymous=[401,403,404].includes(r.status)?"blocked":r.status===200?"EXPOSED":"unexpected";
  }catch{state.anonymous="connection_error"}
  if(state.anonymous!=="blocked"){
-  state.message=state.anonymous==="EXPOSED"?"Worker returned success without authentication. Do not enable sharing.":"Could not verify that unauthenticated requests are blocked.";
+  state.message=state.anonymous==="EXPOSED"?"Worker returned success without authentication. Do not enable sharing.":state.transport==="public_url"?"The public Worker URL could not be verified. Configure an internal LOCATION_WORKER service binding on your Pages project.":"Could not verify that unauthenticated requests are blocked through the internal service binding.";
   return response(state,200,noStore);
  }
  try{
-  const r=await fetch(WORKER,{method:"GET",headers:{"authorization":"Bearer "+env.LOCATION_READ_TOKEN,"accept":"application/json"},redirect:"error",cache:"no-store",signal:AbortSignal.timeout(6000)});
+  const r=await requestLocationWorker(env,true);
   state.authenticated_status=safeStatus(r.status);
   if(r.status===401||r.status===403){state.authenticated="rejected";state.message="Worker rejected the Pages read token. Verify that both services use the same LOCATION_READ_TOKEN value.";return response(state,200,noStore)}
   if(r.status===404){state.authenticated="not_found";state.message="Worker returned 404 with the token. Verify the /location route and whether a latest point exists.";return response(state,200,noStore)}
