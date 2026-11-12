@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Scan existing photographs · Postcards from Ben</title>
+<style>
+:root{--navy:#0b2d55;--sky:#7bafd4}
+body{font:16px/1.55 system-ui,-apple-system,sans-serif;background:#f7f3e8;color:#233647;margin:0;padding:20px}
+main{max-width:780px;margin:20px auto 80px}
+h1{font:400 clamp(2.1rem,5vw,3.2rem) Georgia,serif;color:var(--navy);margin:10px 0}
+h2{font:400 1.6rem Georgia,serif;color:var(--navy);margin:0 0 10px}
+.small{letter-spacing:.14em;color:#386e93;font-weight:700;font-size:.75rem}
+.card{background:white;border:1px solid #cfdae1;border-radius:16px;margin:22px 0;padding:26px}
+button{cursor:pointer;background:var(--navy);color:white;border:0;border-radius:9px;padding:12px 18px;font:600 1rem system-ui}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.secondary{background:#dbe9f2;color:var(--navy);margin-left:8px}
+dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+dt{font-size:.83rem;color:#526878}dd{font-weight:700;font-size:1.3rem;margin:0}
+p[role=status]{min-height:25px;color:#365b75}
+a{color:var(--navy)}a:focus-visible,button:focus-visible{outline:3px solid var(--sky)}
+@media(max-width:450px){dl{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:18px}button.secondary{margin-left:0;margin-top:9px}}
+</style></head><body><main>
+<p class="small">POSTCARDS FROM BEN · OWNER TOOLS</p><h1>Scan existing photographs</h1>
+<p>Read metadata from your existing public and private R2 photographs without re-uploading, moving, or replacing them. Existing captions and manually edited metadata are preserved.</p>
+<p><a href="/admin/access/">Access Management</a> · <a href="/beyond-the-postcard/">Beyond the Postcard</a></p>
+<div class="card"><h2>Scan the complete photo library</h2><p>Process the public travel photographs first, then Beyond the Postcard. You can also run them separately below.</p><button type="button" data-start-all>Scan both libraries</button><p data-all-status role="status">Ready.</p></div>
+<section class="card" data-library="public"><h2>Public travel photographs</h2><p>Reads the originals in your public R2 trip folders and fills empty fields in your existing photo database.</p>
+<button type="button" data-start="public">Scan public library</button><button class="secondary" type="button" data-stop="public" disabled>Stop</button>
+<p role="status" data-status="public">Not started.</p><dl data-counts="public"></dl></section>
+<section class="card" data-library="private"><h2>Beyond the Postcard</h2><p>Reads originals in the private R2 bucket and fills private photo metadata records. Album organization stays unchanged.</p>
+<button type="button" data-start="private">Scan private library</button><button class="secondary" type="button" data-stop="private" disabled>Stop</button>
+<p role="status" data-status="private">Not started.</p><dl data-counts="private"></dl></section>
+<p><strong>Important:</strong> The original file must still contain metadata. JPEG EXIF extraction is supported; other formats may yield only filename, size, and type. Existing photos are not edited. Keep this Safari tab open while scanning; scans run in short batches and can be stopped.</p>
+</main><script defer src="/js/photo-scan.js?v=20261112-1"></script></body></html>
