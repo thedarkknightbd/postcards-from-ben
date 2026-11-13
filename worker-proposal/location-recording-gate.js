@@ -1,16 +1,17 @@
 // Proposed Cloudflare Worker recording gate. Not active until integrated into
 // postcards-live-location's actual /owntracks handler and sharing-state storage.
-// Requires a dedicated KV binding LOCATION_CONTROL shared with the Pages project.
+// Requires a dedicated D1 binding LOCATION_CONTROL_DB shared with the Pages project.
 // Does not touch LIVE_LOCATION KV, LOCATION_HISTORY D1, or OwnTracks credentials.
-export const SWITCH_KEY="master-switch-v1";
+// D1 schema: location_control(id INTEGER PRIMARY KEY CHECK(id=1), enabled INTEGER NOT NULL, enabled_at TEXT)
+
 
 export async function shouldRecordLocation(env,pointTimestampSeconds){
- if(!env.LOCATION_CONTROL)return {record:false,reason:"control_unconfigured"};
+ if(!env.LOCATION_CONTROL_DB)return {record:false,reason:"control_unconfigured"};
  let state;
- try{state=await env.LOCATION_CONTROL.get(SWITCH_KEY,"json")}
+ try{state=await env.LOCATION_CONTROL_DB.prepare("SELECT enabled,enabled_at FROM location_control WHERE id=1").first()}
  catch{return {record:false,reason:"control_unavailable"}}
- if(state?.enabled!==true)return {record:false,reason:"recording_disabled"};
- const enabledAt=Date.parse(state.enabledAt||"");
+ if(state?.enabled!==1)return {record:false,reason:"recording_disabled"};
+ const enabledAt=Date.parse(state.enabled_at||"");
  // Prevent accepting buffered OwnTracks locations that were generated
  // while recording was disabled. If the timestamp is absent, fail closed.
  const recordedAt=Number(pointTimestampSeconds);
