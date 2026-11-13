@@ -9,7 +9,7 @@ export async function onRequest({request,env}){
  if(request.method==="GET"){
   const state=await locationSharingState(env);
   // Check the actual Worker gate, not merely the presence of a token.
-  const ready=owner?await recordingGateReady(env):false;
+  const ready=await recordingGateReady(env);
   return response({sharing:state.sharing,can_manage:owner,worker_ready:ready,available:state.available,recording_control_ready:ready,updated_at:state.enabled_at||null});
  }
  if(request.method!=="POST")return response({error:"Method not allowed"},405);
