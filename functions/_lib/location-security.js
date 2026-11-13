@@ -1,13 +1,10 @@
 // Private location security helpers. Never expose the upstream Worker URL or token to browsers.
 export const LOCATION_CONFIG_KEY="internal/location-sharing-v1.json";
 export async function locationSharingState(env){
- if(!env.PRIVATE_MEDIA)return {sharing:false,available:false};
- try{
-  const object=await env.PRIVATE_MEDIA.get(LOCATION_CONFIG_KEY);
-  if(!object)return {sharing:false,available:true};
-  const state=await object.json();
-  return {sharing:state?.sharing===true,available:true,updated_at:state?.updated_at||null};
- }catch{return {sharing:false,available:false}}
+ if(!env.LOCATION_CONTROL_DB)return {sharing:false,available:false,enabled_at:null};
+ try{const state=await env.LOCATION_CONTROL_DB.prepare("SELECT enabled,enabled_at FROM location_control WHERE id=1").first();
+ return {sharing:state?.enabled===1,available:!!state,enabled_at:state?.enabled_at||null}
+ }catch{return {sharing:false,available:false,enabled_at:null}}
 }
 const LOCATION_URL="https://postcards-live-location.bjdominguez.workers.dev/location";
 const SERVICE_REQUEST_URL="https://location-worker.internal/location";
@@ -15,9 +12,9 @@ export const locationTransport=env=>env.LOCATION_WORKER&&typeof env.LOCATION_WOR
 export function upstreamConfigured(env){
  return Boolean(env.LOCATION_READ_TOKEN);
 }
-export async function requestLocationWorker(env,authenticated=false){
+export async function requestLocationWorker(env,authenticated=false,path="/location"){
  const service=locationTransport(env)==="service_binding";
- const url=service?SERVICE_REQUEST_URL:LOCATION_URL;
+ const url=(service?SERVICE_REQUEST_URL:LOCATION_URL).replace(/\/location$/,path);
  const headers={"accept":"application/json"};
  if(authenticated)headers.authorization="Bearer "+env.LOCATION_READ_TOKEN;
  const request=new Request(url,{method:"GET",headers,redirect:"manual",signal:AbortSignal.timeout(6000)});
@@ -27,9 +24,19 @@ export async function requestLocationWorker(env,authenticated=false){
  return response;
 }
 export function workerVerified(env){
- // Availability only: activation performs a fresh unauthenticated-denial check
- // and a valid authenticated GET before persisting the ON state.
- return upstreamConfigured(env);
+ return upstreamConfigured(env)&&locationTransport(env)==="service_binding"&&Boolean(env.LOCATION_CONTROL_DB);
+}
+export async function recordingGateReady(env){
+ if(!workerVerified(env))return false;
+ try{
+  const anonymous=await requestLocationWorker(env,false,"/control-status");
+  if(![401,403,404].includes(anonymous.status))return false;
+  const authenticated=await requestLocationWorker(env,true,"/control-status");
+  if(!authenticated.ok||!String(authenticated.headers.get("content-type")||"").includes("application/json"))return false;
+  const body=await authenticated.text();if(body.length>2048)return false;
+  const data=JSON.parse(body);
+  return data.recording_gate===true&&data.control_store==="D1";
+ }catch{return false}
 }
 export function sanitizeLocation(data){
  if(!data||typeof data!=="object")return null;

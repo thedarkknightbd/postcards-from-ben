@@ -21,7 +21,22 @@ export async function onRequestGet({request,env}){
   const r=await requestLocationWorker(env,true);
   state.authenticated_status=safeStatus(r.status);
   if(r.status===401||r.status===403){state.authenticated="rejected";state.message="Worker rejected the Pages read token. Verify that both services use the same LOCATION_READ_TOKEN value.";return response(state,200,noStore)}
-  if(r.status===404){state.authenticated="not_found";state.message="Worker returned 404 with the token. Verify the /location route and whether a latest point exists.";return response(state,200,noStore)}
+  if(r.status===404){
+   try{
+    const gate=await requestLocationWorker(env,true,"/control-status");
+    if(gate.ok){
+     const data=await gate.json();
+     if(data.recording_gate===true&&data.control_store==="D1"){
+      state.authenticated="recording_gate_ready";
+      state.message="Master recording gate is working. No new position is available while sharing is OFF or before OwnTracks sends an update.";
+      return response(state,200,noStore);
+     }
+    }
+   }catch{}
+   state.authenticated="not_found";
+   state.message="Location endpoint returned 404. Worker may be waiting for an update, or the control endpoint is not deployed.";
+   return response(state,200,noStore)
+  }
   if(!r.ok){state.authenticated="upstream_error";state.message="Worker responded with an error status.";return response(state,200,noStore)}
   if(!String(r.headers.get("content-type")||"").toLowerCase().includes("application/json")){state.authenticated="unexpected_content";state.message="Worker response is not JSON.";return response(state,200,noStore)}
   const body=await r.text();
