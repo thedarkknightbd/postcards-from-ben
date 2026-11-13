@@ -1,40 +1,183 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Location Sharing · Postcards from Ben</title>
-<style>:root{--navy:#0b2d55;--sky:#7bafd4}*{box-sizing:border-box}body{font:16px/1.6 system-ui,-apple-system,sans-serif;background:#f7f3e8;color:#23394e;margin:0}main{max-width:760px;margin:auto;padding:30px 18px 80px}a{color:var(--navy)}.eyebrow{color:#407da6;letter-spacing:.15em;font-size:.75rem;font-weight:700}h1,h2{font-family:Georgia,serif;color:var(--navy);font-weight:400}h1{font-size:clamp(2.1rem,5vw,3.1rem)}.card{background:white;padding:25px;border:1px solid #d6e0e7;border-radius:16px;margin:18px 0}button{font:600 1rem system-ui;background:var(--navy);color:white;border:0;padding:12px 18px;border-radius:10px;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.warning{background:#f6f1e9;padding:13px;border-radius:9px}#message{min-height:25px}#control[hidden]{display:none}</style></head>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Private Location · Postcards from Ben</title>
+<style>:root{--navy:#0b2d55;--sky:#7bafd4}*{box-sizing:border-box}body{font:16px/1.6 system-ui,-apple-system,sans-serif;background:#f7f3e8;color:#23394e;margin:0}main{max-width:760px;margin:auto;padding:30px 18px 80px}a{color:var(--navy)}.eyebrow{color:#407da6;letter-spacing:.15em;font-size:.75rem;font-weight:700}h1,h2{font-family:Georgia,serif;color:var(--navy);font-weight:400}h1{font-size:clamp(2.1rem,5vw,3.1rem)}.card{background:white;padding:25px;border:1px solid #d6e0e7;border-radius:16px;margin:18px 0}button{font:600 1rem system-ui;background:var(--navy);color:white;border:0;padding:12px 18px;border-radius:10px;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.warning{background:#f6f1e9;padding:13px;border-radius:9px}#message{min-height:25px}#control[hidden]{display:none} [hidden]{display:none!important}.map-shell{position:relative;margin:12px 0;background:#e8eff1;border-radius:14px;overflow:hidden;border:1px solid #d6e0e7}#map{height:340px;width:100%}.map-placeholder{padding:48px 18px;text-align:center;color:#597087}.map-note{font-size:.78rem;color:#607589}.status-pill{display:inline-block;border-radius:100px;background:#e9f2f9;color:#164368;padding:4px 12px;font-size:.85rem;font-weight:650}.status-pill.recent{background:#e4f4eb;color:#17633d}.status-pill.old{background:#f7ebd9;color:#84530c}.details{margin-top:15px;padding:14px 16px;border:1px solid #d6e0e7;border-radius:12px;background:#fff}summary{font-weight:600;cursor:pointer;color:var(--navy)}.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.meta{color:#607589;font-size:.9rem}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--sky);outline-offset:3px}@media(max-width:600px){#map{height:290px}.card{padding:19px}}</style></head>
 <body><main><p class="eyebrow">POSTCARDS FROM BEN · LOCATION</p><a href="/admin/">← Admin dashboard</a><h1>Location recording &amp; sharing</h1><p>This page is reserved for approved Location members and the site owner. One master switch will control accepting new OwnTracks positions and showing them to approved Location members, once the recording-aware Worker and shared control database are configured.</p>
 <section class="card"><h2 id="state">Checking privacy settings…</h2><p id="availability">Reading the server’s location-sharing controls.</p>
 <div id="control" hidden><button id="on" disabled>Start recording &amp; sharing</button> <button id="off" disabled>Stop recording &amp; sharing</button></div><p id="message" role="status" aria-live="polite"></p></section>
-<section class="card" id="liveCard" hidden><h2>Latest shared location</h2><p id="latest">Checking location…</p><p id="latestTime"></p><button id="refresh" type="button">Refresh location</button></section>
-<section class="card" id="diagnosticPanel" hidden><h2>Connection diagnostics</h2><p>Check the protected Worker without displaying coordinates or secrets.</p><button type="button" id="diagnose">Test Worker connection</button><p id="diagnosticStatus" role="status" aria-live="polite">No test run.</p></section>
+<section class="card" id="liveCard" hidden><h2>Private location map</h2>
+<p><span class="status-pill" id="freshness">Checking location…</span></p>
+<p id="latestTime" class="meta"></p>
+<div class="map-shell"><div id="map" hidden aria-label="Map showing the last reported location"></div><div class="map-placeholder" id="mapPlaceholder">Waiting for a new OwnTracks position.</div></div>
+<p class="map-note">Map tiles are provided by OpenStreetMap. When this private map is displayed, the map provider receives tile requests for the viewed area; the website never sends your OwnTracks credentials.</p>
+<div class="actions"><button id="refresh" type="button">Refresh location</button><span id="refreshState" class="meta" role="status" aria-live="polite">Updates every 60 seconds while this page is open.</span></div>
+<p id="latest" class="meta" hidden></p></section>
+<details class="details" id="diagnosticPanel" hidden><summary>Advanced · Connection diagnostics</summary><p>Check the protected Worker without displaying coordinates or secrets.</p><button type="button" id="diagnose">Test Worker connection</button><p id="diagnosticStatus" role="status" aria-live="polite">No test run.</p></details>
 <section class="card"><h2>Recording protection</h2><p class="warning" id="recordingHelp">Recording control is not verified yet. Until setup is complete, continue using OwnTracks Manual mode when you do not want location updates saved.</p></section>
 <section class="card"><h2>How the master switch works</h2><p><strong>ON:</strong> Cloudflare accepts new OwnTracks positions and authorized Location members can view new positions. <strong>OFF:</strong> the updated Worker stops storing new positions and the website stops sharing them. Previously saved trip history remains intact.</p><p>OwnTracks may still collect positions on your iPhone in Move mode. The master switch controls Cloudflare recording, not iPhone location services. A position sent before the latest ON time is ignored.</p></section>
 </main><script>
 const $=id=>document.getElementById(id);
-async function check(){try{const r=await fetch("/api/location-sharing",{cache:"no-store",credentials:"same-origin"});if(!r.ok)throw Error("Location settings are unavailable");const state=await r.json();$("state").textContent=state.sharing?"Recording ON · Private sharing ON":state.recording_control_ready?"Recording OFF · Private sharing OFF":"Private sharing OFF · Recording control not verified";$("availability").textContent=state.recording_control_ready?"Recording-aware Worker connected; the master control is available.":"The recording-aware Worker or shared control database is not configured. Master control is unavailable."; $("recordingHelp").textContent=state.recording_control_ready?"The master switch is connected. OFF stops new Cloudflare recording and website sharing; trip history is preserved.":"Recording control is NOT verified. Keep OwnTracks in Manual mode if you do not want Cloudflare to record your location.";$("control").hidden=!state.can_manage;$("diagnosticPanel").hidden=!state.can_manage;$("on").disabled=!state.can_manage||!state.worker_ready||state.sharing;$("off").disabled=!state.can_manage||!state.sharing;$("liveCard").hidden=!state.sharing;if(state.sharing)await refreshLocation();}catch(e){$("state").textContent="Location unavailable";$("availability").textContent=e.message}}
-async function change(sharing){if(sharing&&!confirm("Enable Cloudflare location recording AND private sharing for approved Location members?"))return;const button=$(sharing?"on":"off");button.disabled=true;try{const r=await fetch("/api/location-sharing",{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify({sharing})});const d=await r.json();if(!r.ok)throw Error(d.error||"Could not change sharing");$("message").textContent=sharing?"Recording and private sharing enabled. Waiting for a new OwnTracks position.":"Recording and private sharing disabled. Previously stored trip history is preserved.";await check()}catch(e){$("message").textContent=e.message;await check()}}
+const REFRESH_MS=60000;
+const RECENT_MS=5*60000;
+let sharing=false,requestInFlight=false,activeRequest=null,lastPoint=null,lastTimestamp=null;
+let map=null,marker=null,mapLoader=null;
+let refreshTimer=null,statusTimer=null;
+
+function clearLocation(){
+ lastPoint=null;lastTimestamp=null;
+ $("latestTime").textContent="";
+ $("latest").textContent="";
+ $("freshness").textContent="Waiting for a new position";
+ $("freshness").className="status-pill";
+ $("map").hidden=true;
+ $("mapPlaceholder").hidden=false;
+ $("mapPlaceholder").textContent="Location is unavailable until OwnTracks sends a fresh position.";
+ if(map&&marker){map.removeLayer(marker);marker=null;}
+}
+function ageText(ms){
+ const delta=Math.max(0,Date.now()-ms);
+ if(delta<60000)return "less than a minute ago";
+ const minutes=Math.floor(delta/60000);
+ if(minutes<60)return minutes+" minute"+(minutes===1?"":"s")+" ago";
+ const hours=Math.floor(minutes/60);
+ if(hours<24)return hours+" hour"+(hours===1?"":"s")+" ago";
+ const days=Math.floor(hours/24);
+ return days+" day"+(days===1?"":"s")+" ago";
+}
+function showFreshness(){
+ if(!sharing||!lastPoint||!lastTimestamp)return;
+ const recent=Date.now()-lastTimestamp<=RECENT_MS&&Date.now()>=lastTimestamp-60000;
+ $("freshness").textContent=recent?"Recently updated":"Last known location";
+ $("freshness").className="status-pill "+(recent?"recent":"old");
+ $("latestTime").textContent="Recorded "+new Date(lastTimestamp).toLocaleString()+" · "+ageText(lastTimestamp);
+}
+async function loadMap(){
+ if(window.L)return window.L;
+ if(mapLoader)return mapLoader;
+ mapLoader=new Promise((resolve,reject)=>{
+  const css=document.createElement("link");
+  css.rel="stylesheet";css.href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css";
+  document.head.appendChild(css);
+  const script=document.createElement("script");
+  script.src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js";
+  script.onload=()=>window.L?resolve(window.L):reject(Error("Map library is unavailable"));
+  script.onerror=()=>reject(Error("Could not load the map library"));
+  document.head.appendChild(script);
+ }).catch(error=>{mapLoader=null;throw error});
+ return mapLoader;
+}
+async function drawMap(latitude,longitude){
+ const L=await loadMap();
+ // If sharing was disabled while tiles loaded, do not render any location.
+ if(!sharing||document.hidden)return;
+ $("map").hidden=false;$("mapPlaceholder").hidden=true;
+ if(!map){
+  map=L.map("map",{zoomControl:true,scrollWheelZoom:false}).setView([latitude,longitude],12);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+   maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+ }else map.setView([latitude,longitude],Math.max(map.getZoom(),12));
+ if(marker)marker.setLatLng([latitude,longitude]);
+ else marker=L.marker([latitude,longitude]).addTo(map);
+ map.invalidateSize();
+}
 async function refreshLocation(){
- const latest=$("latest");latest.textContent="Checking protected location…";$("latestTime").textContent="";
+ if(!sharing||requestInFlight||document.hidden)return;
+ requestInFlight=true;
+ const controller=new AbortController();activeRequest=controller;
+ $("refresh").disabled=true;$("refreshState").textContent="Checking for a new location…";
  try{
-  const r=await fetch("/api/location-live",{credentials:"same-origin",cache:"no-store"});
-  const d=await r.json();if(!r.ok)throw Error(d.error||"Location not available");
-  const l=d.location;
-  latest.textContent="Latitude "+Number(l.latitude).toFixed(5)+" · Longitude "+Number(l.longitude).toFixed(5);
-  if(l.timestamp){
-   const ms=Number(l.timestamp)*(Number(l.timestamp)<1e11?1000:1);
-   $("latestTime").textContent="Recorded "+new Date(ms).toLocaleString();
-  }else $("latestTime").textContent="Capture time unavailable";
- }catch(e){latest.textContent=e.message==="Live location unavailable"?"Waiting for a new OwnTracks position.":e.message}
+  const r=await fetch("/api/location-live",{credentials:"same-origin",cache:"no-store",signal:controller.signal});
+  if(r.status===403){stopViewing();$("refreshState").textContent="Location sharing is off.";await check();return;}
+  const d=await r.json();
+  if(!sharing)return;
+  if(!r.ok){
+   if(r.status===404){clearLocation();$("refreshState").textContent="Waiting for a new OwnTracks report.";return;}
+   throw Error(d.error||"Location unavailable");
+  }
+  const l=d.location,latitude=Number(l?.latitude),longitude=Number(l?.longitude);
+  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180)throw Error("Invalid location response");
+  const t=Number(l.timestamp),milliseconds=t>0?(t<1e11?t*1000:t):null;
+  lastPoint={latitude,longitude};
+  lastTimestamp=milliseconds&&Number.isFinite(milliseconds)?milliseconds:null;
+  $("latest").textContent="Latitude "+latitude.toFixed(5)+" · Longitude "+longitude.toFixed(5);
+  if(lastTimestamp)showFreshness();
+  else{$("freshness").textContent="Last known location";$("freshness").className="status-pill old";$("latestTime").textContent="Capture time unavailable";}
+  $("refreshState").textContent="Checked at "+new Date().toLocaleTimeString();
+  try{await drawMap(latitude,longitude)}catch(e){$("mapPlaceholder").textContent="Map unavailable. Your last known coordinates are available below.";$("mapPlaceholder").hidden=false;$("latest").hidden=false;}
+ }catch(e){if(e.name!=="AbortError"){$("refreshState").textContent="Could not refresh. "+e.message;if(!lastPoint){$("mapPlaceholder").textContent="Location is temporarily unavailable."; $("mapPlaceholder").hidden=false;}}}
+ finally{requestInFlight=false;activeRequest=null;$("refresh").disabled=false;}
+}
+function stopViewing(){
+ sharing=false;
+ if(activeRequest)activeRequest.abort();
+ $("liveCard").hidden=true;
+ clearLocation();
+ stopRefresh();
+ // Clear map and tiles when the control is switched OFF.
+ if(map){map.remove();map=null;marker=null;}
+}
+function stopRefresh(){
+ if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null;}
+ if(statusTimer){clearInterval(statusTimer);statusTimer=null;}
+}
+function startRefresh(){
+ stopRefresh();
+ refreshTimer=setInterval(async()=>{
+  if(document.hidden||!sharing)return;
+  // Recheck server-side master switch before the next location fetch.
+  await check({silent:true,loadLocation:false});
+  if(sharing)await refreshLocation();
+ },REFRESH_MS);
+ statusTimer=setInterval(showFreshness,30000);
+}
+async function check(options={}){
+ const silent=options.silent===true;
+ try{
+  const r=await fetch("/api/location-sharing",{cache:"no-store",credentials:"same-origin"});
+  if(!r.ok){if(r.status===403||r.status===404)stopViewing();throw Error("Location settings are unavailable");}
+  const state=await r.json();
+  const wasSharing=sharing;
+  sharing=state.sharing===true;
+  $("state").textContent=sharing?"Recording ON · Private sharing ON":state.recording_control_ready?"Recording OFF · Private sharing OFF":"Private sharing OFF · Recording control not verified";
+  $("availability").textContent=state.recording_control_ready?"Recording-aware Worker connected; the master control is available.":"The recording-aware Worker or shared control database is not configured. Master control is unavailable.";
+  $("recordingHelp").textContent=state.recording_control_ready?"The master switch is connected. OFF stops new Cloudflare recording and website sharing; trip history is preserved.":"Recording control is NOT verified. Keep OwnTracks in Manual mode if you do not want Cloudflare to record your location.";
+  $("control").hidden=!state.can_manage;
+  $("diagnosticPanel").hidden=!state.can_manage;
+  $("on").disabled=!state.can_manage||!state.worker_ready||sharing;
+  $("off").disabled=!state.can_manage||!sharing;
+  if(!sharing){stopViewing();return;}
+  $("liveCard").hidden=false;
+  if(!wasSharing)startRefresh();
+  if(options.loadLocation!==false)await refreshLocation();
+ }catch(e){stopViewing();if(!silent){$("state").textContent="Location unavailable";$("availability").textContent=e.message;}}
+}
+async function change(next){
+ if(next&&!confirm("Enable Cloudflare location recording AND private sharing for approved Location members?"))return;
+ const button=$(next?"on":"off");button.disabled=true;
+ try{
+  const r=await fetch("/api/location-sharing",{method:"POST",credentials:"same-origin",
+   headers:{"content-type":"application/json"},body:JSON.stringify({sharing:next})});
+  const d=await r.json();if(!r.ok)throw Error(d.error||"Could not change sharing");
+  // Immediately clear any displayed coordinates upon OFF.
+  if(!next)stopViewing();
+  $("message").textContent=next?"Recording and private sharing enabled. Waiting for a new OwnTracks position.":"Recording and private sharing disabled. Trip history is preserved.";
+  await check();
+ }catch(e){$("message").textContent=e.message;await check();}
 }
 async function diagnose(){
  const button=$("diagnose"),out=$("diagnosticStatus");button.disabled=true;out.textContent="Testing connection…";
  try{
   const r=await fetch("/api/location-diagnostics",{credentials:"same-origin",cache:"no-store"});
   const d=await r.json();if(!r.ok)throw Error(d.error||"Diagnostic failed");
-  out.textContent="Connection: "+(d.transport==="service_binding"?"internal Cloudflare service binding":d.transport==="public_url"?"public Worker URL":"not configured")+". Anonymous access: "+d.anonymous+(d.anonymous_status?" (HTTP "+d.anonymous_status+")":"")+
+  out.textContent="Connection: "+(d.transport==="service_binding"?"internal Cloudflare service binding":d.transport==="public_url"?"public Worker URL":"not configured")+
+   ". Anonymous access: "+d.anonymous+(d.anonymous_status?" (HTTP "+d.anonymous_status+")":"")+
    ". Authenticated access: "+d.authenticated+(d.authenticated_status?" (HTTP "+d.authenticated_status+")":"")+
    ". "+(d.message||"");
- }catch(e){out.textContent=e.message}finally{button.disabled=false}
+ }catch(e){out.textContent=e.message}finally{button.disabled=false;}
 }
 $("diagnose").onclick=diagnose;
-$("refresh").onclick=refreshLocation;
-$("on").onclick=()=>change(true);$("off").onclick=()=>change(false);check();
+$("refresh").onclick=async()=>{await check({loadLocation:false});if(sharing)await refreshLocation();};
+$("on").onclick=()=>change(true);
+$("off").onclick=()=>change(false);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)check();});
+check();
 </script></body></html>
