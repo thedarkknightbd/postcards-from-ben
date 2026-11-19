@@ -9,19 +9,17 @@ async function initTravelMap() {
     const status = document.getElementById("travel-map-status");
 
     try {
-        const [dataResponse, d3, topo, worldModule] = await Promise.all([
-            fetch("/data/travel-history.json", { cache: "no-store" }),
+        // Always load the country picker first. It must remain usable even if
+        // the externally hosted world-map libraries are unavailable.
+        const dataResponse = await fetch("/data/travel-history.json", { cache: "no-store" });
+        if (!dataResponse.ok) throw new Error("Could not load travel history.");
+        const data = await dataResponse.json();
+        renderCountryList(data, details);
+        const [d3, topo, worldModule] = await Promise.all([
             import("https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"),
             import("https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/+esm"),
             import("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json/+esm")
         ]);
-
-        if (!dataResponse.ok) {
-            throw new Error("Could not load travel history.");
-        }
-
-        const data = await dataResponse.json();
-        renderCountryList(data, details);
         const world = worldModule.default;
         const countries = topo.feature(
             world,
