@@ -1171,6 +1171,14 @@ try {
                     key: photo.key
                   }))
                 : [];
+        // Only published captions are public; the original photographs remain unchanged.
+        try {
+            const captionsResponse=await fetch("/api/public-photo-captions?prefix="+encodeURIComponent(photoPrefix));
+            if(captionsResponse.ok){
+                const captions=(await captionsResponse.json()).photos||{};
+                pagePhotos.forEach(photo=>Object.assign(photo,captions[photo.key]||{}));
+            }
+        }catch(error){console.warn("Photo captions unavailable",error)}
 
     } else {
 
@@ -1550,10 +1558,8 @@ function createLightbox() {
                     alt=""
                 >
 
-                <p
-                    id="lightbox-caption"
-                    class="lightbox-caption">
-                </p>
+                <p id="lightbox-caption" class="lightbox-caption"></p>
+                <p id="lightbox-description" class="lightbox-description" hidden></p>
 
                 <p
                     id="lightbox-counter"
@@ -1778,12 +1784,16 @@ function updateLightbox() {
     );
 
     image.alt =
-        photo.caption ||
+        photo.description || photo.alt_text || photo.caption ||
         `Travel photo ${lightboxIndex + 1}`;
 
 
-    caption.textContent =
-        photo.caption || "";
+    caption.textContent = photo.caption || "";
+    caption.hidden = !photo.caption;
+    const description=document.getElementById("lightbox-description");
+    const detail=String(photo.description||photo.alt_text||"").trim();
+    description.textContent=detail && detail!==photo.caption?detail:"";
+    description.hidden=!description.textContent;
 
 
     counter.textContent =
