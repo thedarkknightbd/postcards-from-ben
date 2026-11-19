@@ -392,6 +392,10 @@ async function loadDayPage() {
     document.getElementById("intro-title").textContent =
         data.introTitle || "";
 
+    // One narrative per day. The original `intro` key stays unchanged for compatibility.
+    const postcardKicker = document.querySelector("#intro-section .section-kicker");
+    if (postcardKicker) postcardKicker.textContent = "Today\u0027s Postcard";
+
     // Render editor blank lines as separate paragraphs.
     const existingIntro = document.getElementById("intro-text");
     const introContainer = document.createElement("div");
@@ -1281,41 +1285,10 @@ if (pagePhotos.length > 0) {
 }
 
 
-    /* =====================================
-       JOURNAL
-    ===================================== */
-
-    const journalSection =
-        document.getElementById("journal-section");
-
-    const journalCard =
-        document.getElementById("journal-card");
-
-    journalCard.innerHTML = "";
-
-    if (
-        data.journal &&
-        data.journal.trim() !== ""
-    ) {
-
-        journalSection.hidden = false;
-
-        data.journal
-            .split("\n")
-            .filter(text => text.trim() !== "")
-            .forEach(text => {
-
-                const paragraph =
-                    document.createElement("p");
-
-                paragraph.textContent = text;
-
-                journalCard.appendChild(paragraph);
-            });
-
-    } else {
-        journalSection.hidden = true;
-    }
+    // The separate Postcard from the Road block is retired. Historical
+    // `journal` content remains untouched in the JSON data for preservation.
+    const retiredJournalSection = document.getElementById("journal-section");
+    if (retiredJournalSection) retiredJournalSection.hidden = true;
 
 
     /* =====================================
