@@ -5066,3 +5066,57 @@ nav.site-nav .site-trip-menu{text-align:left}
   nav.site-nav {gap:12px;padding:12px 18px;flex-direction:column;align-items:flex-start}
   nav.site-nav .site-nav-links{margin:0;justify-content:flex-start;text-align:left;gap:10px 16px}
 }
+
+/* 2026 unified public site chrome.
+   This must live in styles.css (loaded by every public page), not solely in
+   site-evolution.css (previously loaded on the homepage only). */
+:root {
+  --pbf-brand-navy:#0b2d55;
+  --pbf-brand-sky:#7bafd4;
+  --pbf-brand-cream:#f7f3e8;
+}
+:is(body.past-postcard-page,body.trip-page,body.adventures-landing,body.about-page,body.day-page) {
+  background-color:var(--pbf-brand-cream);
+}
+nav.site-nav,
+.day-page nav.site-nav {
+  background:var(--pbf-brand-navy)!important;
+  color:#fff;
+  border-top:0;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+nav.site-nav .site-brand,
+nav.site-nav .site-brand span,
+.day-page nav.site-nav .site-brand,
+.day-page nav.site-nav .site-brand span,
+nav.site-nav .site-nav-links>a,
+nav.site-nav .site-trip-menu>summary,
+.day-page nav.site-nav .site-nav-links>a,
+.day-page nav.site-nav .site-trip-menu>summary {
+  color:#fff;
+}
+nav.site-nav .site-nav-links>a:hover,
+nav.site-nav .site-trip-menu>summary:hover,
+nav.site-nav .site-brand:hover {
+  color:#b9dcf3;
+}
+nav.site-nav .site-trip-dropdown {
+  background:#fff;
+  border:1px solid #d6e2eb;
+}
+nav.site-nav .site-trip-dropdown a,
+.day-page nav.site-nav .site-trip-dropdown a {
+  color:var(--pbf-brand-navy);
+}
+nav.site-nav .site-trip-dropdown a:hover {
+  background:#eaf2f8;
+  color:var(--pbf-brand-navy);
+}
+nav.site-nav a:focus-visible,
+nav.site-nav summary:focus-visible {
+  outline:3px solid var(--pbf-brand-sky);
+  outline-offset:3px;
+}
+.past-postcard-page .past-postcard-hero:not(.has-photo) {
+  background-color:var(--pbf-brand-navy);
+}
