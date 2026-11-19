@@ -79,7 +79,7 @@ let currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,
 const fields=["date","title","route","introTitle","intro","journal"];
 const api="/api/admin/journal";
 const source=day=>"/trips/the-long-way-around/data/day-"+pad(day)+".json";
-const publishedUrl=day=>"/trips/the-long-way-around/day-"+pad(day)+".html";
+const publishedUrl=day=>"/trips/the-long-way-around/days/day-"+pad(day)+".html";
 const escapeText=s=>String(s??"");
 function status(text,error=false){$("notice").textContent=text;$("notice").style.color=error?"#a43b35":"#27694e";}
 function dayLabel(day){return "Day "+pad(day)}
