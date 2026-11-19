@@ -17,7 +17,7 @@ aside .days{display:grid;gap:6px;max-height:70vh;overflow-y:auto;padding-right:4
 .day:hover,.day.active{border-color:var(--sky);background:#ebf4fa}.day strong{font-weight:650;font-size:.9rem}.day small{font-size:.74rem;color:#607889}
 .day .dot{height:8px;width:8px;border-radius:50%;background:#cbd6dd;flex-shrink:0}.day .dot.draft{background:#27866f}
 label{display:block;font-weight:620;font-size:.88rem;margin:15px 0 5px}
-input,textarea{font:inherit;color:var(--ink);width:100%;padding:11px 12px;border:1px solid #b8cad6;border-radius:10px;background:#fff}
+input,textarea,select{font:inherit;color:var(--ink);width:100%;padding:11px 12px;border:1px solid #b8cad6;border-radius:10px;background:#fff}
 textarea{min-height:110px;resize:vertical;line-height:1.55}textarea.story{min-height:330px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
 button,.action{border:0;border-radius:9px;background:var(--navy);color:#fff;padding:11px 15px;font:600 .91rem system-ui;cursor:pointer}
@@ -27,7 +27,7 @@ button:disabled{opacity:.5;cursor:not-allowed}.action{text-decoration:none;displ
 .status.draft{background:#e6f5ee;color:#216449}.alert{padding:13px 15px;border-radius:10px;background:#f6f1e8;color:#5a6170;margin:15px 0}
 #notice{min-height:25px;font-size:.9rem}.muted{color:var(--muted);font-size:.9rem}
 details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summary{cursor:pointer;font-weight:650;color:var(--navy)}
-#editor[hidden],#empty[hidden]{display:none} .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#editor[hidden],#overviewEditor[hidden],#empty[hidden]{display:none} .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 @media(max-width:800px){.layout{grid-template-columns:1fr}aside .days{max-height:250px;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){main{padding:16px 14px 55px}.two{grid-template-columns:1fr}.panel{padding:17px}aside .days{grid-template-columns:1fr}}
 </style></head>
@@ -35,11 +35,32 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 <header><div class="brand">✦ Postcards from Ben <span class="muted"> / Administration</span></div><a href="/admin/">← Dashboard</a></header>
 <p class="eyebrow">NATIVE CONTENT STUDIO · FIRST EDITION</p>
 <h1>Trips &amp; Journals</h1>
-<p class="intro">Write, revise, and privately save drafts for <strong>The Long Way Around</strong>. Your published pages stay unchanged until you deliberately publish through the existing CMS.</p>
+<p class="intro">Choose an adventure, then select a day or its trip overview. Write your postcard and save it privately without changing the published website.</p>
 <div class="layout">
-<aside class="panel"><h2>Adventure days</h2><p class="muted">24 published days · green dots indicate saved private drafts.</p><nav id="days" class="days" aria-label="Choose a day"></nav></aside>
+<aside class="panel"><h2>Choose an adventure</h2><label for="tripSelect">Trip</label><select id="tripSelect" aria-label="Select an adventure"></select>
+<p class="muted" id="tripSummary">Select a trip to see its postcards.</p><nav id="days" class="days" aria-label="Choose a day or postcard"></nav></aside>
 <section class="panel" aria-label="Journal editor">
-<div id="empty"><h2>Choose a day to begin</h2><p class="muted">Select a day from the list to load its published story and any existing private draft.</p></div>
+<div id="empty"><h2>Choose a postcard to begin</h2><p class="muted">Select a trip, then choose a day or the adventure overview.</p></div>
+<div id="overviewEditor" hidden>
+<div class="meta"><h2 id="overviewHeading" style="margin:0">Adventure Postcard</h2><span class="status" id="overviewStatus">Published version</span></div>
+<p class="muted" id="overviewSaved"></p><div class="alert"><strong>Private draft.</strong> Your published adventure stays unchanged until you publish separately through the legacy CMS.</div>
+<form id="overviewForm">
+<label for="tripTitle">Adventure title</label><input id="tripTitle" required maxlength="200">
+<label for="tripKicker">Route &amp; dates</label><input id="tripKicker" maxlength="1000">
+<label for="tripSubtitle">Subtitle</label><input id="tripSubtitle" maxlength="1000">
+<label for="tripSectionLabel">Section label</label><input id="tripSectionLabel" maxlength="1000">
+<label for="tripIntroTitle">Postcard heading</label><input id="tripIntroTitle" maxlength="1000">
+<label for="tripStory">Adventure Postcard</label><textarea id="tripStory" class="story" maxlength="25000"></textarea>
+<details><summary>Advanced · Photo section</summary>
+<label for="tripPhotoTitle">Photo heading</label><input id="tripPhotoTitle" maxlength="1000">
+<label for="tripPhotoPlaceholder">Photo placeholder</label><input id="tripPhotoPlaceholder" maxlength="1000">
+</details>
+<div class="toolbar"><button id="tripSave" type="submit">Save private draft</button>
+<button id="tripDiscard" class="danger" type="button">Discard draft</button>
+<button id="tripDownload" class="secondary" type="button">Download JSON</button>
+<a class="action secondary" id="tripPublished" target="_blank" rel="noopener noreferrer">View published adventure</a>
+<a class="action secondary" href="/admin/editor/">Legacy CMS · Publish</a></div>
+<p role="status" aria-live="polite" id="tripNotice"></p></form></div>
 <div id="editor" hidden>
 <div class="meta"><h2 id="dayHeading" style="margin:0">Day</h2><span class="status" id="draftStatus">Published version</span></div>
 <p class="muted" id="savedAt"></p>
@@ -75,7 +96,16 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 <script>
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
-let currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,busy=false;
+const TRIPS=[
+ {slug:"the-long-way-around",title:"The Long Way Around",mode:"days",count:24},
+ {slug:"winter-on-the-black-sea",title:"Winter on the Black Sea",mode:"overview"},
+ {slug:"autumn-in-hungary",title:"Autumn in Hungary",mode:"overview"},
+ {slug:"a-special-convention",title:"A Special Convention",mode:"overview"},
+ {slug:"under-the-mara-sky",title:"Under the Mara Sky",mode:"overview"},
+ {slug:"an-afternoon-with-giants",title:"An Afternoon with Giants",mode:"overview"}
+];
+let currentTrip=TRIPS[0],currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,busy=false;
+let overviewPublished=null,overviewWorking=null,overviewDraft=false;
 const fields=["date","title","route","introTitle","intro"];
 const api="/api/admin/journal";
 const source=day=>"/trips/the-long-way-around/data/day-"+pad(day)+".json";
@@ -85,6 +115,13 @@ function status(text,error=false){$("notice").textContent=text;$("notice").style
 function dayLabel(day){return "Day "+pad(day)}
 function drawList(){
  const days=$("days");days.replaceChildren();
+ if(currentTrip.mode==="overview"){
+  const item=document.createElement("button");item.type="button";item.className="day active";
+  const name=document.createElement("strong");name.textContent="Adventure Postcard";
+  item.appendChild(name);
+  item.addEventListener("click",()=>loadOverview());
+  days.appendChild(item);return;
+ }
  for(let d=1;d<=24;d++){
   const item=document.createElement("button");item.type="button";item.className="day"+(d===currentDay?" active":"");
   const name=document.createElement("strong");name.textContent=dayLabel(d);
@@ -181,15 +218,115 @@ function download(){
   status("JSON downloaded. This does not publish it.");
  }catch(e){status(e.message,true)}
 }
-async function start(){
+
+const OVERVIEW_FIELDS={tripTitle:"title",tripKicker:"kicker",tripSubtitle:"subtitle",tripSectionLabel:"sectionLabel",
+ tripIntroTitle:"introTitle",tripStory:"story",tripPhotoTitle:"photoTitle",tripPhotoPlaceholder:"photoPlaceholder"};
+const tripApi=()=>"/api/admin/trip-draft?trip="+encodeURIComponent(currentTrip.slug);
+function tripNotice(message,error=false){
+ $("tripNotice").textContent=message;$("tripNotice").style.color=error?"#a43b35":"#27694e";
+}
+function overviewValues(){
+ const result=structuredClone(overviewWorking);
+ for(const [input,field] of Object.entries(OVERVIEW_FIELDS))result[field]=$(input).value;
+ return result;
+}
+function fillOverview(entry){
+ overviewWorking=structuredClone(entry);
+ for(const [input,field] of Object.entries(OVERVIEW_FIELDS))$(input).value=String(entry[field]??"");
+ dirty=false;
+}
+async function loadOverview(){
+ if(busy||currentTrip.mode!=="overview")return;
+ if(dirty&&!confirm("Discard unsaved changes?"))return;
+ busy=true;tripNotice("Loading adventure…");
  try{
-  const result=await getJson(api);
-  draftDays=new Set(result.draft_days||[]);drawList();
-  const day=Number(new URL(location.href).searchParams.get("day"));
-  if(Number.isInteger(day)&&day>=1&&day<=24)await loadDay(day);
- }catch(e){status("Unable to open private journal drafts: "+e.message,true)}
+  const [pub,draft]=await Promise.all([
+   getJson("/trips/"+currentTrip.slug+"/postcard.json"),getJson(tripApi())
+  ]);
+  overviewPublished=pub;overviewDraft=Boolean(draft.draft);fillOverview(draft.draft?.entry||pub);
+  $("editor").hidden=true;$("empty").hidden=true;$("overviewEditor").hidden=false;
+  $("overviewHeading").textContent=currentTrip.title;
+  $("overviewStatus").textContent=overviewDraft?"Private draft":"Published version";
+  $("overviewStatus").className="status"+(overviewDraft?" draft":"");
+  $("overviewSaved").textContent=draft.draft?.saved_at?
+   "Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
+  $("tripDiscard").disabled=!overviewDraft;
+  $("tripPublished").href="/trips/"+currentTrip.slug+"/";
+  tripNotice("Ready to edit.");
+ }catch(e){tripNotice(e.message,true)}
+ finally{busy=false}
+}
+async function saveOverview(event){
+ event.preventDefault();if(busy||currentTrip.mode!=="overview")return;
+ busy=true;$("tripSave").disabled=true;tripNotice("Saving private draft…");
+ try{
+  const entry=overviewValues();if(!entry.title.trim())throw Error("Adventure title is required");
+  const r=await fetch(tripApi(),{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify({entry})});
+  const d=await r.json();if(!r.ok)throw Error(d.error||"Could not save draft");
+  overviewWorking=structuredClone(entry);dirty=false;overviewDraft=true;
+  $("overviewStatus").textContent="Private draft";$("overviewStatus").className="status draft";
+  $("overviewSaved").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
+  $("tripDiscard").disabled=false;tripNotice("Private draft saved. Published adventure unchanged.");
+ }catch(e){tripNotice(e.message,true)}
+ finally{busy=false;$("tripSave").disabled=false}
+}
+async function discardOverview(){
+ if(busy||!overviewDraft||!confirm("Discard this private adventure draft?"))return;
+ busy=true;
+ try{
+  const r=await fetch(tripApi(),{method:"DELETE",credentials:"same-origin"});
+  const d=await r.json();if(!r.ok)throw Error(d.error||"Could not discard draft");
+  overviewDraft=false;fillOverview(overviewPublished);
+  $("overviewStatus").textContent="Published version";$("overviewStatus").className="status";
+  $("overviewSaved").textContent="No private draft saved yet.";$("tripDiscard").disabled=true;
+  tripNotice("Draft discarded; published content unchanged.");
+ }catch(e){tripNotice(e.message,true)}finally{busy=false}
+}
+function downloadOverview(){
+ if(!overviewWorking)return;
+ const blob=new Blob([JSON.stringify(overviewValues(),null,2)+"\n"],{type:"application/json"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");
+ a.href=url;a.download=currentTrip.slug+"-postcard.json";a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
+async function chooseTrip(slug,skipWarning=false){
+ const trip=TRIPS.find(x=>x.slug===slug);
+ if(!trip||busy)return false;
+ if(!skipWarning&&dirty&&!confirm("Leave this postcard? Unsaved edits will be lost.")){
+  $("tripSelect").value=currentTrip.slug;return false;
+ }
+ busy=true;currentTrip=trip;currentDay=null;published=null;working=null;dirty=false;
+ $("editor").hidden=true;$("overviewEditor").hidden=true;$("empty").hidden=false;
+ $("tripSelect").value=trip.slug;
+ $("tripSummary").textContent=trip.mode==="days"?"24 daily postcards · green dots mark saved drafts":"One adventure-level postcard. Daily entries can be added in a future phase.";
+ $("days").replaceChildren();
+ try{
+  if(trip.mode==="days"){
+   const result=await getJson(api);draftDays=new Set(result.draft_days||[]);
+  }
+  drawList();
+ }catch(e){$("empty").querySelector("p").textContent=e.message}
+ finally{busy=false}
+ if(trip.mode==="overview")await loadOverview();
+ return true;
+}
+async function start(){
+ const select=$("tripSelect");
+ for(const trip of TRIPS){
+  const option=document.createElement("option");option.value=trip.slug;option.textContent=trip.title;
+  select.appendChild(option);
+ }
+ const params=new URL(location.href).searchParams;
+ const tripSlug=TRIPS.some(t=>t.slug===params.get("trip"))?params.get("trip"):TRIPS[0].slug;
+ const ok=await chooseTrip(tripSlug,true);
+ const day=Number(params.get("day"));
+ if(ok&&currentTrip.mode==="days"&&Number.isInteger(day)&&day>=1&&day<=24)await loadDay(day);
 }
 $("entryForm").addEventListener("submit",saveDraft);
+$("overviewForm").addEventListener("submit",saveOverview);
+$("overviewForm").addEventListener("input",()=>{dirty=true;tripNotice("Unsaved changes.");});
+$("tripSelect").addEventListener("change",event=>chooseTrip(event.target.value));
+$("tripDiscard").onclick=discardOverview;$("tripDownload").onclick=downloadOverview;
 $("entryForm").addEventListener("input",()=>{dirty=true;status("Unsaved changes.");});
 $("discard").onclick=discard;$("download").onclick=download;
 window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue="";}});
