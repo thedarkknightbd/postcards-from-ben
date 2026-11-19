@@ -276,7 +276,13 @@ async function loadPastPostcard() {
         if (!photos.length) {
             return;
         }
-
+        try{
+            const result=await fetch("/api/public-photo-captions?prefix="+encodeURIComponent("trips/"+slug+"/gallery/"));
+            if(result.ok){
+                const details=(await result.json()).photos||{};
+                photos.forEach(photo=>Object.assign(photo,details[photo.key]||{}));
+            }
+        }catch(error){console.warn("Photo captions unavailable",error)}
         gallery.innerHTML = "";
 
         photos.forEach(
@@ -411,6 +417,8 @@ function createPastLightbox() {
                     alt=""
                 >
 
+                <p id="lightbox-caption" class="lightbox-caption" hidden></p>
+                <p id="lightbox-description" class="lightbox-description" hidden></p>
                 <p
                     id="lightbox-counter"
                     class="lightbox-counter">
@@ -616,8 +624,14 @@ function updatePastLightbox() {
         90
     );
 
-    image.alt =
+    image.alt = photo.description || photo.alt_text || photo.caption ||
         `${document.title.split(" | ")[0]} photo ${pastLightboxIndex + 1}`;
+    const caption=document.getElementById("lightbox-caption");
+    caption.textContent=photo.caption||"";
+    caption.hidden=!caption.textContent;
+    const description=document.getElementById("lightbox-description");
+    description.textContent=photo.description && photo.description!==photo.caption?photo.description:"";
+    description.hidden=!description.textContent;
 
     counter.textContent =
         `${pastLightboxIndex + 1} / ${pastLightboxPhotos.length}`;
