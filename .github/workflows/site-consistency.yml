@@ -16,3 +16,9 @@ jobs:
           node-version: '22'
       - name: Check favicon and navigation consistency
         run: node scripts/check-site-consistency.mjs
+      - name: Check private gallery JavaScript syntax
+        run: |
+          node --check js/beyond-the-postcard.js
+          node --check functions/api/private-photos.js
+          node --check functions/api/private-photo-order.js
+          node --check functions/api/private-photo-manage.js
