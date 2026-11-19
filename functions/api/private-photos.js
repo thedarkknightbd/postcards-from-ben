@@ -31,6 +31,19 @@ export async function onRequestGet({request,env}){
   cursor=page.truncated?page.cursor:undefined;
  }while(cursor&&items.length<300);
  items.sort((a,b)=>new Date(b.uploaded)-new Date(a.uploaded));
+ // A stored order is only a preference: newly uploaded photos still appear.
+ const orderPath="internal/private-photo-order/"+collection+"/"+(albumId||"root")+".json";
+ try {
+  const stored=await env.PRIVATE_MEDIA.get(orderPath);
+  if(stored){
+   const keys=await stored.json();
+   if(Array.isArray(keys)){
+    const positions=new Map(keys.map((key,index)=>[key,index]));
+    items.sort((a,b)=>(positions.get(a.key)??Number.MAX_SAFE_INTEGER)-
+      (positions.get(b.key)??Number.MAX_SAFE_INTEGER));
+   }
+  }
+ }catch{ /* Preserve upload ordering when a saved order is unavailable. */ }
  return privateResponse({items,collection,albumId});
 }
 export async function onRequestPost({request,env}){
