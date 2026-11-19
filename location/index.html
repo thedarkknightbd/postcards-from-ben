@@ -5,7 +5,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=postcards-unified-20261118-v2">
 <link rel="manifest" href="/icons/site.webmanifest?v=postcards-unified-20261118-v2">
 </head>
-<body><main><p class="eyebrow">POSTCARDS FROM BEN · LOCATION</p><a href="/admin/">← Admin dashboard</a><h1>Location recording &amp; sharing</h1><p>This page is reserved for approved Location members and the site owner. One master switch will control accepting new OwnTracks positions and showing them to approved Location members, once the recording-aware Worker and shared control database are configured.</p>
+<body><main><p class="eyebrow">POSTCARDS FROM BEN · PRIVATE LOCATION</p><nav aria-label="Private location navigation"><a href="/">← Postcards from Ben</a> <a id="ownerDashboardLink" href="/admin/" hidden style="margin-left:16px">Owner dashboard</a></nav><h1>Private Location</h1><p>This page is for approved Location members and the site owner only. Location details appear only while the owner enables recording and private sharing. When sharing is off, no location is displayed.</p>
 <section class="card"><h2 id="state">Checking privacy settings…</h2><p id="availability">Reading the server’s location-sharing controls.</p>
 <div id="control" hidden><button id="on" disabled>Start recording &amp; sharing</button> <button id="off" disabled>Stop recording &amp; sharing</button></div><p id="message" role="status" aria-live="polite"></p></section>
 <section class="card" id="liveCard" hidden><h2>Private location map</h2>
@@ -20,6 +20,10 @@
 <section class="card"><h2>How the master switch works</h2><p><strong>ON:</strong> Cloudflare accepts new OwnTracks positions and authorized Location members can view new positions. <strong>OFF:</strong> the updated Worker stops storing new positions and the website stops sharing them. Previously saved trip history remains intact.</p><p>OwnTracks may still collect positions on your iPhone in Move mode. The master switch controls Cloudflare recording, not iPhone location services. A position sent before the latest ON time is ignored.</p></section>
 </main><script>
 const $=id=>document.getElementById(id);
+fetch("/api/access/me",{credentials:"same-origin",cache:"no-store"})
+ .then(response=>response.ok?response.json():null)
+ .then(account=>{$("ownerDashboardLink").hidden=!account?.can_manage_site})
+ .catch(()=>{});
 const REFRESH_MS=60000;
 const RECENT_MS=5*60000;
 let sharing=false,requestInFlight=false,activeRequest=null,lastPoint=null,lastTimestamp=null;
