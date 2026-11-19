@@ -1,3 +1,4 @@
+import {mediaAuthorized} from "../_lib/media-auth.js";
 const IMAGE_RE = /\.(avif|gif|heic|heif|jpe?g|png|webp)$/i;
 const VIDEO_RE = /\.(mp4|mov)$/i;
 const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
@@ -18,9 +19,8 @@ export async function onRequest(context) {
     return json({ error: "R2 binding POSTCARDS_MEDIA is not configured." }, 500);
   }
 
-  const auth = request.headers.get("Authorization") || "";
-  const expected = env.MEDIA_UPLOAD_TOKEN ? `Bearer ${env.MEDIA_UPLOAD_TOKEN}` : "";
-  const isAuthorized = Boolean(expected && auth === expected);
+  // Preserve public folder listing; all mutations require owner session or legacy token.
+  const isAuthorized = await mediaAuthorized(request,env,{write:request.method!=="GET"});
   const url = new URL(request.url);
   const action = url.searchParams.get("action") || "";
 
