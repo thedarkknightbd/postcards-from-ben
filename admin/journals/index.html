@@ -24,7 +24,7 @@ button,.action{border:0;border-radius:9px;background:var(--navy);color:#fff;padd
 button.secondary,.action.secondary{background:#e8f1f7;color:var(--navy)}button.danger{background:#f9e8e6;color:#7f302b}
 button:disabled{opacity:.5;cursor:not-allowed}.action{text-decoration:none;display:inline-block}
 .status{display:inline-flex;background:#edf1f5;border-radius:100px;color:#506b80;padding:5px 11px;font-size:.77rem;font-weight:700}
-.status.draft{background:#e6f5ee;color:#216449}.alert{padding:13px 15px;border-radius:10px;background:#f6f1e8;color:#5a6170;margin:15px 0}
+.status.draft{background:#e6f5ee;color:#216449}.preview-dialog{border:1px solid var(--line);border-radius:17px;padding:0;max-width:min(750px,92vw);width:100%;max-height:85vh;box-shadow:0 18px 70px #112f4566;color:var(--ink)}.preview-dialog::backdrop{background:#091f3699}.preview-inner{padding:27px 30px}.preview-inner h2{margin:4px 0 8px}.preview-inner .story-text{white-space:pre-wrap;line-height:1.8;overflow-wrap:anywhere}.preview-inner .preview-subtitle{color:var(--muted);margin:7px 0 18px}.preview-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:23px}.publish-note{font-size:.87rem;color:var(--muted);padding:5px 0}.alert{padding:13px 15px;border-radius:10px;background:#f6f1e8;color:#5a6170;margin:15px 0}
 #notice{min-height:25px;font-size:.9rem}.muted{color:var(--muted);font-size:.9rem}
 details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summary{cursor:pointer;font-weight:650;color:var(--navy)}
 #editor[hidden],#overviewEditor[hidden],#empty[hidden]{display:none} .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -43,7 +43,7 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 <div id="empty"><h2>Choose a postcard to begin</h2><p class="muted">Select a trip, then choose a day or the adventure overview.</p></div>
 <div id="overviewEditor" hidden>
 <div class="meta"><h2 id="overviewHeading" style="margin:0">Adventure Postcard</h2><span class="status" id="overviewStatus">Published version</span></div>
-<p class="muted" id="overviewSaved"></p><div class="alert"><strong>Private draft.</strong> Your published adventure stays unchanged until you publish separately through the legacy CMS.</div>
+<p class="muted" id="overviewSaved"></p><div class="alert"><strong>Private draft.</strong> Save a private draft, preview your story, then publish directly to GitHub when publishing is configured. The public site changes only after Cloudflare deploys the commit.</div>
 <form id="overviewForm">
 <label for="tripTitle">Adventure title</label><input id="tripTitle" required maxlength="200">
 <label for="tripKicker">Route &amp; dates</label><input id="tripKicker" maxlength="1000">
@@ -56,15 +56,15 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 <label for="tripPhotoPlaceholder">Photo placeholder</label><input id="tripPhotoPlaceholder" maxlength="1000">
 </details>
 <div class="toolbar"><button id="tripSave" type="submit">Save private draft</button>
-<button id="tripDiscard" class="danger" type="button">Discard draft</button>
+<button id="tripPreview" class="secondary" type="button">Preview</button><button id="tripPublish" type="button" disabled>Publish Postcard</button><button id="tripDiscard" class="danger" type="button">Discard draft</button>
 <button id="tripDownload" class="secondary" type="button">Download JSON</button>
 <a class="action secondary" id="tripPublished" target="_blank" rel="noopener noreferrer">View published adventure</a>
 <a class="action secondary" href="/admin/editor/">Legacy CMS · Publish</a></div>
-<p role="status" aria-live="polite" id="tripNotice"></p></form></div>
+<p id="tripPublishHelp" class="publish-note">Checking GitHub publishing setup…</p><p role="status" aria-live="polite" id="tripNotice"></p></form></div>
 <div id="editor" hidden>
 <div class="meta"><h2 id="dayHeading" style="margin:0">Day</h2><span class="status" id="draftStatus">Published version</span></div>
 <p class="muted" id="savedAt"></p>
-<div class="alert"><strong>Draft mode.</strong> Save Draft stores a private working copy. It does <strong>not</strong> update the published trip or push to GitHub. Decap CMS remains available for publishing.</div>
+<div class="alert"><strong>Draft mode.</strong> Save Draft stores a private working copy. Preview it, then publish to GitHub after confirmation. Decap CMS remains available as a fallback.</div>
 <form id="entryForm">
 <div class="two">
 <div><label for="date">Date</label><input id="date" required maxlength="100"></div>
@@ -82,17 +82,28 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 </details>
 <div class="toolbar">
 <button id="save" type="submit">Save private draft</button>
-<button id="discard" type="button" class="danger">Discard draft</button>
+<button id="preview" type="button" class="secondary">Preview</button><button id="publish" type="button" disabled>Publish Postcard</button><button id="discard" type="button" class="danger">Discard draft</button>
 <button id="download" type="button" class="secondary">Download JSON</button>
 <a class="action secondary" id="viewDay" target="_blank" rel="noopener noreferrer" href="#">View published day</a>
 <a class="action secondary" href="/admin/editor/">Existing CMS</a>
 </div>
-<p id="notice" role="status" aria-live="polite"></p>
+<p id="publishHelp" class="publish-note">Checking GitHub publishing setup…</p><p id="notice" role="status" aria-live="polite"></p>
 </form>
 </div>
 </section>
 </div>
 </main>
+<dialog class="preview-dialog" id="previewDialog" aria-labelledby="previewHeading">
+ <div class="preview-inner">
+ <p class="eyebrow">PRIVATE CONTENT PREVIEW · NOT PUBLISHED</p>
+ <h2 id="previewHeading">Today's Postcard</h2>
+ <p id="previewMeta" class="preview-subtitle"></p>
+ <h3 id="previewStoryHeading"></h3>
+ <div id="previewStory" class="story-text"></div>
+ <p class="muted">This is a content preview of your text. The public page may have different layout, photos and maps.</p>
+ <div class="preview-actions"><button id="closePreview" type="button" class="secondary">Close preview</button></div>
+ </div>
+</dialog>
 <script>
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
@@ -106,8 +117,11 @@ const TRIPS=[
 ];
 let currentTrip=TRIPS[0],currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,busy=false;
 let overviewPublished=null,overviewWorking=null,overviewDraft=false;
+let daySha=null,overviewSha=null,dayDraftBase=null,overviewDraftBase=null,dayDraftState=null,overviewDraftState=null,publishConfigured=false;
 const fields=["date","title","route","introTitle","intro"];
 const api="/api/admin/journal";
+const publisher="/api/admin/publish";
+const publishUrl=()=>publisher+"?trip="+encodeURIComponent(currentTrip.slug)+(currentTrip.mode==="days"?"&day="+pad(currentDay):"");
 const source=day=>"/trips/the-long-way-around/data/day-"+pad(day)+".json";
 const publishedUrl=day=>"/trips/the-long-way-around/days/day-"+pad(day)+".html";
 const escapeText=s=>String(s??"");
@@ -165,7 +179,13 @@ async function loadDay(day){
  if(dirty&&!confirm("Leave this day? Unsaved changes will be lost."))return;
  busy=true;status("Loading "+dayLabel(day)+"…");
  try{
-  const [pub,draft]=await Promise.all([getJson(source(day)),getJson(api+"?day="+pad(day))]);
+  const [source,draft]=await Promise.all([
+   getJson(publisher+"?trip=the-long-way-around&day="+pad(day)),
+   getJson(api+"?day="+pad(day))
+  ]);
+  const pub=source.source_entry;
+  daySha=source.source_sha;publishConfigured=source.configured;
+  dayDraftBase=draft.draft?.base_sha||null;dayDraftState=draft.draft?.status||null;
   if(!pub||pub.dayNumber!==day)throw Error("Published day file is invalid");
   currentDay=day;published=pub;fillForm(draft.draft?.entry||pub);
   $("editor").hidden=false;$("empty").hidden=true;
@@ -175,7 +195,7 @@ async function loadDay(day){
   $("savedAt").textContent=draft.draft?.saved_at?"Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
   $("viewDay").href=publishedUrl(day);
   $("discard").disabled=!draft.draft;
-  drawList();status("Ready to edit.");
+  drawList();refreshPublishUi();status("Ready to edit.");
  }catch(e){status(e.message,true)}
  finally{busy=false}
 }
@@ -187,9 +207,9 @@ async function saveDraft(event){
   if(!entry.title.trim()||!entry.date.trim())throw Error("Title and date are required");
   const r=await fetch(api+"?day="+pad(currentDay),{
    method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},
-   body:JSON.stringify({entry})
+   body:JSON.stringify({entry,base_sha:daySha})
   });const d=await r.json();if(!r.ok)throw Error(d.error||"Could not save draft");
-  working=structuredClone(entry);dirty=false;draftDays.add(pad(currentDay));drawList();
+  working=structuredClone(entry);dirty=false;dayDraftBase=d.base_sha||null;dayDraftState="draft";draftDays.add(pad(currentDay));drawList();refreshPublishUi();
   $("draftStatus").textContent="Private draft";$("draftStatus").className="status draft";
   $("savedAt").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
   $("discard").disabled=false;status("Private draft saved. Your published site has not changed.");
@@ -203,7 +223,7 @@ async function discard(){
  try{
   const r=await fetch(api+"?day="+pad(currentDay),{method:"DELETE",credentials:"same-origin"});
   const d=await r.json();if(!r.ok)throw Error(d.error||"Could not discard draft");
-  draftDays.delete(pad(currentDay));drawList();fillForm(published);
+  draftDays.delete(pad(currentDay));dayDraftBase=null;dayDraftState=null;drawList();fillForm(published);refreshPublishUi();
   $("draftStatus").textContent="Published version";$("draftStatus").className="status";
   $("savedAt").textContent="No private draft saved yet.";$("discard").disabled=true;
   status("Draft discarded. Published site unchanged.");
@@ -241,9 +261,11 @@ async function loadOverview(){
  busy=true;tripNotice("Loading adventure…");
  try{
   const [pub,draft]=await Promise.all([
-   getJson("/trips/"+currentTrip.slug+"/postcard.json"),getJson(tripApi())
+   getJson(publishUrl()),getJson(tripApi())
   ]);
-  overviewPublished=pub;overviewDraft=Boolean(draft.draft);fillOverview(draft.draft?.entry||pub);
+  overviewPublished=pub.source_entry;overviewSha=pub.source_sha;publishConfigured=pub.configured;
+  overviewDraftBase=draft.draft?.base_sha||null;overviewDraftState=draft.draft?.status||null;
+  overviewDraft=Boolean(draft.draft);fillOverview(draft.draft?.entry||pub.source_entry);
   $("editor").hidden=true;$("empty").hidden=true;$("overviewEditor").hidden=false;
   $("overviewHeading").textContent=currentTrip.title;
   $("overviewStatus").textContent=overviewDraft?"Private draft":"Published version";
@@ -252,7 +274,7 @@ async function loadOverview(){
    "Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
   $("tripDiscard").disabled=!overviewDraft;
   $("tripPublished").href="/trips/"+currentTrip.slug+"/";
-  tripNotice("Ready to edit.");
+  refreshPublishUi();tripNotice("Ready to edit.");
  }catch(e){tripNotice(e.message,true)}
  finally{busy=false}
 }
@@ -261,9 +283,9 @@ async function saveOverview(event){
  busy=true;$("tripSave").disabled=true;tripNotice("Saving private draft…");
  try{
   const entry=overviewValues();if(!entry.title.trim())throw Error("Adventure title is required");
-  const r=await fetch(tripApi(),{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify({entry})});
+  const r=await fetch(tripApi(),{method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},body:JSON.stringify({entry,base_sha:overviewSha})});
   const d=await r.json();if(!r.ok)throw Error(d.error||"Could not save draft");
-  overviewWorking=structuredClone(entry);dirty=false;overviewDraft=true;
+  overviewWorking=structuredClone(entry);dirty=false;overviewDraft=true;overviewDraftBase=d.base_sha||null;overviewDraftState="draft";refreshPublishUi();
   $("overviewStatus").textContent="Private draft";$("overviewStatus").className="status draft";
   $("overviewSaved").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
   $("tripDiscard").disabled=false;tripNotice("Private draft saved. Published adventure unchanged.");
@@ -276,7 +298,7 @@ async function discardOverview(){
  try{
   const r=await fetch(tripApi(),{method:"DELETE",credentials:"same-origin"});
   const d=await r.json();if(!r.ok)throw Error(d.error||"Could not discard draft");
-  overviewDraft=false;fillOverview(overviewPublished);
+  overviewDraft=false;overviewDraftBase=null;overviewDraftState=null;fillOverview(overviewPublished);refreshPublishUi();
   $("overviewStatus").textContent="Published version";$("overviewStatus").className="status";
   $("overviewSaved").textContent="No private draft saved yet.";$("tripDiscard").disabled=true;
   tripNotice("Draft discarded; published content unchanged.");
@@ -295,7 +317,7 @@ async function chooseTrip(slug,skipWarning=false){
  if(!skipWarning&&dirty&&!confirm("Leave this postcard? Unsaved edits will be lost.")){
   $("tripSelect").value=currentTrip.slug;return false;
  }
- busy=true;currentTrip=trip;currentDay=null;published=null;working=null;dirty=false;
+ busy=true;currentTrip=trip;currentDay=null;published=null;working=null;dirty=false;daySha=null;overviewSha=null;dayDraftBase=null;overviewDraftBase=null;
  $("editor").hidden=true;$("overviewEditor").hidden=true;$("empty").hidden=false;
  $("tripSelect").value=trip.slug;
  $("tripSummary").textContent=trip.mode==="days"?"24 daily postcards · green dots mark saved drafts":"One adventure-level postcard. Daily entries can be added in a future phase.";
@@ -322,12 +344,73 @@ async function start(){
  const day=Number(params.get("day"));
  if(ok&&currentTrip.mode==="days"&&Number.isInteger(day)&&day>=1&&day<=24)await loadDay(day);
 }
+
+function refreshPublishUi(){
+ const hasBaseline=currentTrip.mode==="days"?!!dayDraftBase:!!overviewDraftBase;
+ const hasDraft=currentTrip.mode==="days"?dayDraftState!==null:overviewDraft;
+ const sha=currentTrip.mode==="days"?daySha:overviewSha;
+ const draftBase=currentTrip.mode==="days"?dayDraftBase:overviewDraftBase;
+ const draftState=currentTrip.mode==="days"?dayDraftState:overviewDraftState;
+ const active=Boolean(publishConfigured&&sha&&hasDraft&&draftBase===sha&&draftState==="draft"&&!dirty&&!busy);
+ const button=$(currentTrip.mode==="days"?"publish":"tripPublish");
+ button.disabled=!active;
+ const help=$(currentTrip.mode==="days"?"publishHelp":"tripPublishHelp");
+ if(!publishConfigured)help.textContent="Publishing is not enabled yet. Configure the private Cloudflare GITHUB_PUBLISH_TOKEN secret; Preview and private drafts are available now.";
+ else if(!hasDraft)help.textContent="Save a private draft to enable publishing.";
+ else if(!draftBase)help.textContent="This older draft has no source baseline. Preserve/download it, then discard and recreate it before publishing.";
+ else if(draftBase!==sha)help.textContent="Published content changed since the draft began. Compare and recreate the draft before publishing.";
+ else if(draftState!=="draft")help.textContent="Already committed to GitHub. Cloudflare deployment may still be in progress. Edit and save a new draft to publish again.";
+ else help.textContent="Ready to publish. Preview first, then confirm the GitHub update.";
+}
+function previewContent(mode){
+ try{
+  const entry=mode==="days"?formValues():overviewValues();
+  $("previewHeading").textContent=entry.title||"Untitled Postcard";
+  $("previewMeta").textContent=mode==="days"?
+    ["Day "+pad(currentDay),entry.date,entry.route].filter(Boolean).join(" · "):
+    [currentTrip.title,entry.kicker,entry.subtitle].filter(Boolean).join(" · ");
+  $("previewStoryHeading").textContent=entry.introTitle||"Today's Postcard";
+  $("previewStory").textContent=mode==="days"?(entry.intro||"No postcard text yet."):(entry.story||"No postcard text yet.");
+  $("previewDialog").showModal();
+ }catch(error){mode==="days"?status(error.message,true):tripNotice(error.message,true)}
+}
+async function publishCurrent(mode){
+ if(busy||dirty){mode==="days"?status("Save your latest changes before publishing.",true):tripNotice("Save your latest changes before publishing.",true);return}
+ const selected=mode==="days"?"Day "+pad(currentDay):currentTrip.title;
+ const sha=mode==="days"?daySha:overviewSha;
+ const base=mode==="days"?dayDraftBase:overviewDraftBase;
+ if(!publishConfigured||!sha||base!==sha)return;
+ if(!confirm("Publish "+selected+" to your public website?\n\nThis creates a GitHub commit. Cloudflare will deploy the update afterward."))return;
+ const currentUrl=publishUrl();
+ busy=true;
+ const button=$(mode==="days"?"publish":"tripPublish");button.disabled=true;
+ const display=mode==="days"?status:tripNotice;display("Publishing saved draft to GitHub…");
+ try{
+  const r=await fetch(currentUrl,{method:"POST",credentials:"same-origin",
+   headers:{"content-type":"application/json"},
+   body:JSON.stringify({confirmation:"PUBLISH",source_sha:sha})});
+  const result=await r.json();
+  if(!r.ok)throw Error(result.error||"Publish failed");
+  if(mode==="days"){dayDraftState="published_pending_deploy";}else{overviewDraftState="published_pending_deploy";}
+  refreshPublishUi();
+  display("Published to GitHub! Cloudflare deployment may still be in progress. Commit: "+result.commit_sha.slice(0,8));
+  const link=document.createElement("a");link.href=result.commit_url;link.target="_blank";link.rel="noopener noreferrer";link.textContent=" View GitHub commit";
+  $(mode==="days"?"notice":"tripNotice").appendChild(link);
+ }catch(e){display(e.message,true)}
+ finally{busy=false;refreshPublishUi()}
+}
+$("preview").onclick=()=>previewContent("days");
+$("tripPreview").onclick=()=>previewContent("overview");
+$("publish").onclick=()=>publishCurrent("days");
+$("tripPublish").onclick=()=>publishCurrent("overview");
+$("closePreview").onclick=()=>$("previewDialog").close();
+
 $("entryForm").addEventListener("submit",saveDraft);
 $("overviewForm").addEventListener("submit",saveOverview);
-$("overviewForm").addEventListener("input",()=>{dirty=true;tripNotice("Unsaved changes.");});
+$("overviewForm").addEventListener("input",()=>{dirty=true;refreshPublishUi();tripNotice("Unsaved changes.");});
 $("tripSelect").addEventListener("change",event=>chooseTrip(event.target.value));
 $("tripDiscard").onclick=discardOverview;$("tripDownload").onclick=downloadOverview;
-$("entryForm").addEventListener("input",()=>{dirty=true;status("Unsaved changes.");});
+$("entryForm").addEventListener("input",()=>{dirty=true;refreshPublishUi();status("Unsaved changes.");});
 $("discard").onclick=discard;$("download").onclick=download;
 window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue="";}});
 start();
