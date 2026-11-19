@@ -324,9 +324,15 @@ async function renderAtlasPhotos(place,details){
             image.loading="lazy";
             image.decoding="async";
             image.addEventListener("error",()=>figure.remove(),{once:true});
+            const link=document.createElement("a");
+            link.href=photo.src;
+            link.target="_blank";
+            link.rel="noopener noreferrer";
+            link.setAttribute("aria-label","Open photograph from "+place.name+" at full size");
+            link.append(image);
             const caption=document.createElement("figcaption");
             caption.textContent=photo.caption||photo.destination||place.name;
-            figure.append(image,caption);grid.append(figure);
+            figure.append(link,caption);grid.append(figure);
         }
         section.append(grid);
     }catch{
