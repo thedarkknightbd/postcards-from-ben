@@ -110,7 +110,7 @@ collections:
         name: "introTitle"
         widget: "string"
 
-      - label: "Today's Story"
+      - label: "Today's Postcard"
         name: "intro"
         widget: "text"
 
@@ -170,10 +170,6 @@ collections:
             value_type: "float"
 
 
-      - label: "Postcard from the Road"
-        name: "journal"
-        widget: "text"
-        required: false
 
 
       - label: "Previous Day"
