@@ -22,3 +22,8 @@ jobs:
           node --check functions/api/private-photos.js
           node --check functions/api/private-photo-order.js
           node --check functions/api/private-photo-manage.js
+          node --check functions/api/public-photo-captions.js
+          node --check js/public-photo-viewer.js
+          node --check js/travel-map.js
+          node --check js/past-postcard.js
+          node --check js/day-page.js
