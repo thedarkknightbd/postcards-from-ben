@@ -1,4 +1,5 @@
 import {currentUser,isOwner,response} from "../../_lib/access-auth.js";
+import {readGithub,validSha} from "../../_lib/postcard-github.js";
 
 // Trip-level private drafts for the five existing non-daily adventures.
 // Existing public postcard.json files are never overwritten by this endpoint.
@@ -48,11 +49,23 @@ export async function onRequest({request,env}){
  if(Number(request.headers.get("content-length")||0)>50000)return response({error:"Draft too large"},413);
  let payload;try{payload=await request.json()}catch{return response({error:"Invalid JSON"},400)}
  if(!validate(payload?.entry))return response({error:"Invalid postcard content"},400);
- const draft={entry:payload.entry,status:"draft",saved_at:new Date().toISOString(),trip};
+ let previous=null;
+ try{const obj=await env.PRIVATE_MEDIA.get(key);previous=obj?await obj.json():null}
+ catch{return response({error:"Cannot check previous draft"},503)}
+ let baseSha=previous?.base_sha||null;
+ if(!previous){
+  if(!validSha(payload?.base_sha))return response({error:"Reload the adventure before creating a draft"},409);
+  try{
+   const source=await readGithub(env,"trips/"+trip+"/postcard.json");
+   if(source.sha!==payload.base_sha)return response({error:"Published file has changed. Reload the adventure before saving."},409);
+   baseSha=source.sha;
+  }catch(e){return response({error:e.detail||"Cannot verify published source"},e.status||503)}
+ }
+ const draft={entry:payload.entry,status:"draft",saved_at:new Date().toISOString(),trip,base_sha:baseSha};
  try{
   await env.PRIVATE_MEDIA.put(key,JSON.stringify(draft),{
    httpMetadata:{contentType:"application/json",cacheControl:"private, no-store"}
   });
-  return response({ok:true,saved_at:draft.saved_at});
+  return response({ok:true,saved_at:draft.saved_at,base_sha:baseSha,publishable:validSha(baseSha)});
  }catch{return response({error:"Could not save private postcard draft"},503)}
 }

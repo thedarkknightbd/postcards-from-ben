@@ -1,4 +1,5 @@
 import {currentUser,isOwner,response} from "../../_lib/access-auth.js";
+import {readGithub,validSha} from "../../_lib/postcard-github.js";
 
 // Drafts are private, stored in PRIVATE_MEDIA, and never written to public GitHub content.
 // Only existing days 1-24 of The Long Way Around are editable in this first phase.
@@ -60,11 +61,23 @@ export async function onRequest({request,env}){
  if(Number(request.headers.get("content-length")||0)>80000)return response({error:"Draft exceeds limit"},413);
  let payload;try{payload=await request.json()}catch{return response({error:"Invalid JSON"},400)}
  if(!validEntry(payload?.entry,day))return response({error:"Invalid day content"},400);
- const draft={entry:payload.entry,saved_at:new Date().toISOString(),status:"draft",day_number:Number(day)};
+ let previous=null;
+ try{const obj=await env.PRIVATE_MEDIA.get(key(day));previous=obj?await obj.json():null}
+ catch{return response({error:"Cannot check previous draft"},503)}
+ let baseSha=previous?.base_sha||null;
+ if(!previous){
+  if(!validSha(payload?.base_sha))return response({error:"Reload the editor before creating a draft"},409);
+  try{
+   const source=await readGithub(env,"trips/the-long-way-around/data/day-"+day+".json");
+   if(source.sha!==payload.base_sha)return response({error:"Published file has changed. Reload the postcard before saving."},409);
+   baseSha=source.sha;
+  }catch(e){return response({error:e.detail||"Cannot verify published source"},e.status||503)}
+ }
+ const draft={entry:payload.entry,saved_at:new Date().toISOString(),status:"draft",day_number:Number(day),base_sha:baseSha};
  try{
   await env.PRIVATE_MEDIA.put(key(day),JSON.stringify(draft),{
    httpMetadata:{contentType:"application/json",cacheControl:"private, no-store"}
   });
-  return response({ok:true,saved_at:draft.saved_at});
+  return response({ok:true,saved_at:draft.saved_at,base_sha:baseSha,publishable:validSha(baseSha)});
  }catch{return response({error:"Could not save draft"},503)}
 }
