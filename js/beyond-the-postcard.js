@@ -185,6 +185,34 @@ async function load(){
      controls.append(move);
     }
     fig.append(controls);
+    fig.draggable=arranging;
+    fig.addEventListener("dragstart",event=>{
+     if(!arranging||orderSaving){event.preventDefault();return}
+     dragPhotoKey=item.key;
+     event.dataTransfer.effectAllowed="move";
+     event.dataTransfer.setData("text/plain",item.key);
+    });
+    fig.addEventListener("dragover",event=>{
+     if(!arranging||!dragPhotoKey||dragPhotoKey===item.key)return;
+     event.preventDefault();event.dataTransfer.dropEffect="move";
+     fig.classList.add("drag-over");
+    });
+    fig.addEventListener("dragleave",()=>fig.classList.remove("drag-over"));
+    fig.addEventListener("drop",event=>{
+     event.preventDefault();fig.classList.remove("drag-over");
+     if(!arranging||!dragPhotoKey||dragPhotoKey===item.key)return;
+     const keys=shownKeys.slice();
+     const from=keys.indexOf(dragPhotoKey),to=keys.indexOf(item.key);
+     if(from<0||to<0)return;
+     const [moved]=keys.splice(from,1);
+     keys.splice(to,0,moved);
+     dragPhotoKey="";
+     savePhotoOrder(keys);
+    });
+    fig.addEventListener("dragend",()=>{
+     dragPhotoKey="";
+     document.querySelectorAll(".drag-over").forEach(el=>el.classList.remove("drag-over"));
+    });
    }
    if(owner){const label=document.createElement("label");label.className="photo-check";const check=document.createElement("input");
     check.type="checkbox";check.checked=selectedKeys.has(item.key);check.addEventListener("click",event=>event.stopPropagation());
@@ -280,13 +308,24 @@ $("uploadForm").addEventListener("submit",async e=>{
 });
 
 let managedAlbum=null,shownKeys=[],selectedKeys=new Set();
-let orderSaving=false;
+let orderSaving=false,arranging=false,dragPhotoKey="";
+$("reorderToggle").addEventListener("click",()=>{
+ arranging=!arranging;
+ $("reorderToggle").setAttribute("aria-pressed",String(arranging));
+ $("reorderToggle").textContent=arranging?"Done arranging":"Arrange photos";
+ document.body.classList.toggle("is-arranging",arranging);
+ document.querySelectorAll("#photos figure").forEach(figure=>figure.draggable=arranging);
+});
 async function reorderPhoto(key,step){
  if(!owner||orderSaving)return;
  const index=shownKeys.indexOf(key),destination=index+step;
  if(index<0||destination<0||destination>=shownKeys.length)return;
  const keys=shownKeys.slice();
  [keys[index],keys[destination]]=[keys[destination],keys[index]];
+ return savePhotoOrder(keys);
+}
+async function savePhotoOrder(keys){
+ if(!owner||orderSaving)return;
  orderSaving=true;
  $("bulkStatus").textContent="Saving photo order…";
  try{
@@ -505,6 +544,7 @@ $("photoDeleteButton").addEventListener("click",async()=>{
  try{
   const info=await fetch("/api/access/me",{credentials:"same-origin",cache:"no-store"}).then(r=>r.json());
   owner=Boolean(info.can_manage_site);
+  $("reorderToggle").hidden=!owner;
   $("lightboxEdit").hidden=!owner;
   $("lightboxMoveDestination").hidden=!owner;
   $("lightboxMove").hidden=!owner;
