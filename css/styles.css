@@ -5120,3 +5120,10 @@ nav.site-nav summary:focus-visible {
 .past-postcard-page .past-postcard-hero:not(.has-photo) {
   background-color:var(--pbf-brand-navy);
 }
+
+/* Consistent captions and descriptions in public photo viewers. */
+.photo-lightbox .lightbox-description{
+  max-width:760px;margin:6px auto 0;text-align:center;
+  color:#d7e7f4;font-size:.9rem;line-height:1.55;
+}
+.photo-lightbox .lightbox-description[hidden]{display:none}
