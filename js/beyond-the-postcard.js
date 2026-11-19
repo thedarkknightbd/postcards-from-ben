@@ -8,28 +8,112 @@ const bethelAlbums=[
   "Croatia Bethel","Netherlands Bethel","Germany — Selters Bethel"
 ];
 let lightboxReturnFocus=null;
-function openFullSize(){
-  const dialog=$("privateLightbox");
-  if(!selectedPhoto||!dialog||typeof dialog.showModal!=="function")return;
-  lightboxReturnFocus=document.activeElement;
-  $("lightboxImage").src="/api/private-image?key="+encodeURIComponent(selectedPhoto);
-  $("lightboxCaption").textContent=$("detailTitle").textContent==="Photograph details"?"Private travel photograph":$("detailTitle").textContent;
-  dialog.showModal();
+let activeLightboxKey="",lightboxRequest=0,lightboxStartX=null;
+const privateImageUrl=key=>"/api/private-image?key="+encodeURIComponent(key);
+function updateLightbox(key){
+ const index=shownKeys.indexOf(key);
+ if(index<0)return;
+ activeLightboxKey=key;
+ const request=++lightboxRequest;
+ $("lightboxImage").src=privateImageUrl(key);
+ $("lightboxImage").alt="Private photograph "+(index+1)+" of "+shownKeys.length;
+ $("lightboxOriginal").href=privateImageUrl(key);
+ $("lightboxCount").textContent=(index+1)+" of "+shownKeys.length;
+ $("lightboxPrev").disabled=index===0;
+ $("lightboxNext").disabled=index===shownKeys.length-1;
+ $("lightboxCaption").textContent="";
+ $("lightboxStatus").textContent="";
+ if(owner){
+  fillDestinations($("lightboxMoveDestination"));
+  const parts=key.split("/");
+  $("lightboxMoveDestination").value=parts[1]+"|"+(parts.length===4?parts[2]:"");
+ }
+ fetch("/api/private-photo-manage?key="+encodeURIComponent(key),{cache:"no-store",credentials:"same-origin"})
+  .then(response=>response.ok?response.json():null)
+  .then(data=>{
+   if(request!==lightboxRequest||!data)return;
+   const metadata=data.metadata||{};
+   $("lightboxCaption").textContent=metadata.title||metadata.caption||"";
+   $("lightboxImage").alt=metadata.alt_text||metadata.title||"Private travel photograph";
+  }).catch(()=>{});
 }
-$("enlargePhoto").addEventListener("click",openFullSize);
-$("detailImage").addEventListener("click",openFullSize);
-$("detailImage").style.cursor="zoom-in";
+function openLightbox(key){
+ if(!shownKeys.includes(key))return;
+ const dialog=$("privateLightbox");
+ if(!dialog.open){
+  lightboxReturnFocus=document.activeElement;
+  dialog.showModal();
+ }
+ updateLightbox(key);
+}
+function changeLightbox(delta){
+ const index=shownKeys.indexOf(activeLightboxKey);
+ const next=index+delta;
+ if(next>=0&&next<shownKeys.length)updateLightbox(shownKeys[next]);
+}
+$("lightboxPrev").addEventListener("click",()=>changeLightbox(-1));
+$("lightboxNext").addEventListener("click",()=>changeLightbox(1));
 $("closeLightbox").addEventListener("click",()=>$("privateLightbox").close());
 $("privateLightbox").addEventListener("click",event=>{
-  if(event.target===$("privateLightbox"))$("privateLightbox").close();
+ if(event.target===$("privateLightbox"))$("privateLightbox").close();
 });
+$("privateLightbox").addEventListener("keydown",event=>{
+ if(event.key==="ArrowLeft"){event.preventDefault();changeLightbox(-1)}
+ if(event.key==="ArrowRight"){event.preventDefault();changeLightbox(1)}
+});
+$("lightboxImage").addEventListener("touchstart",event=>{
+ lightboxStartX=event.touches.length===1?event.touches[0].clientX:null;
+},{passive:true});
+$("lightboxImage").addEventListener("touchend",event=>{
+ if(lightboxStartX==null||!event.changedTouches.length)return;
+ const distance=event.changedTouches[0].clientX-lightboxStartX;
+ lightboxStartX=null;
+ if(Math.abs(distance)>55)changeLightbox(distance>0?-1:1);
+},{passive:true});
 $("privateLightbox").addEventListener("close",()=>{
-  $("lightboxImage").removeAttribute("src");
-  lightboxReturnFocus?.focus?.();
+ lightboxRequest++;activeLightboxKey="";
+ $("lightboxImage").removeAttribute("src");
+ lightboxReturnFocus?.focus?.();
 });
+$("lightboxEdit").hidden=!owner;
+$("lightboxMove").hidden=!owner;
+$("lightboxMoveDestination").hidden=!owner;
+$("lightboxEdit").addEventListener("click",()=>{
+ if(!owner||!activeLightboxKey)return;
+ const key=activeLightboxKey;
+ $("privateLightbox").close();
+ openPhoto({key});
+});
+$("lightboxMove").addEventListener("click",async()=>{
+ if(!owner||!activeLightboxKey)return;
+ const key=activeLightboxKey;
+ const [collection,album]=$("lightboxMoveDestination").value.split("|");
+ if(!confirm("Move this photograph to the selected album?"))return;
+ const button=$("lightboxMove");
+ button.disabled=true;$("lightboxStatus").textContent="Moving photograph…";
+ try{
+  const res=await fetch("/api/private-photo-manage",{
+   method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},
+   body:JSON.stringify({key,operation:"move",collection,album})
+  });
+  const data=await res.json();
+  if(!res.ok)throw Error(data.error||"Could not move photograph");
+  $("privateLightbox").close();
+  await load();
+  $("bulkStatus").textContent="Photo moved to "+(albums.find(a=>a.id===album)?.title||names[collection])+".";
+ }catch(error){$("lightboxStatus").textContent=error.message}
+ finally{button.disabled=false}
+});
+$("enlargePhoto").addEventListener("click",()=>{
+ if(selectedPhoto)openLightbox(selectedPhoto);
+});
+$("detailImage").addEventListener("click",()=>{
+ if(selectedPhoto)openLightbox(selectedPhoto);
+});
+$("detailImage").style.cursor="zoom-in";
 $("closePhotoDetails").addEventListener("click",()=>{
-  selectedPhoto=null;$("photoDetails").hidden=true;
-  $("photos").scrollIntoView({behavior:"smooth",block:"nearest"});
+ selectedPhoto=null;$("photoDetails").hidden=true;
+ $("photos").scrollIntoView({behavior:"smooth",block:"nearest"});
 });
 function renderBreadcrumb(){
  const nav=$("albumTrail");nav.replaceChildren();
