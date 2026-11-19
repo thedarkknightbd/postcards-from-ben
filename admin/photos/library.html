@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Public Photo Library · Postcards from Ben</title>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#0b1420; color:#f5f7fa; }
+    main { max-width:820px; margin:auto; padding:24px 18px 64px; }
+    h1 { margin:0 0 6px; font-size:28px; }
+    p { color:#aeb8c4; line-height:1.45; }
+    .card { background:#111d2b; border:1px solid #263648; border-radius:18px; padding:16px; margin:16px 0; }
+    label { display:block; margin:12px 0 6px; font-weight:700; }
+    select,input,button { width:100%; border-radius:12px; border:1px solid #34475d; background:#0c1724; color:#fff; padding:12px; font-size:16px; }
+    button { background:#e9b85d; color:#1c1407; font-weight:800; border:0; cursor:pointer; }
+    button.secondary { background:#1b2a3c; color:#e9eef5; }
+    button.danger { background:#57242a; color:#fff; }
+    button:disabled { opacity:.45; cursor:default; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .token-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+    .status { min-height:24px; margin-top:10px; white-space:pre-wrap; font-size:13px; color:#c9d3dd; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px; }
+    .item { background:#0b1622; border:1px solid #263648; border-radius:14px; overflow:hidden; }
+    .item img,.item video { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#07101a; }
+    .item video { aspect-ratio:16/9; }
+    .item-meta { padding:9px; font-size:11px; color:#aeb8c4; word-break:break-all; }
+    .item-actions { display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:6px; padding:0 9px 9px; }
+    .item-actions button { padding:9px 6px; font-size:13px; }
+    .metadata-panel { margin:10px; padding:12px; border:1px solid #34475d; border-radius:12px; background:#142438; }
+    .metadata-panel label { font-size:13px; margin:10px 0 4px; }
+    .metadata-panel textarea { width:100%; min-height:65px; border-radius:10px; border:1px solid #34475d; background:#0c1724; color:white; padding:10px; font:inherit; }
+    .metadata-panel .row { grid-template-columns:1fr 1fr; }
+    .metadata-panel .status { min-height:0; }
+    .hint { margin:8px 0 0; font-size:12px; color:#91a0af; }
+    .hidden { display:none; }
+    .progress { width:100%; height:8px; margin-top:10px; overflow:hidden; border-radius:999px; background:#263648; }
+    .progress[hidden] { display:none; }
+    .progress > span { display:block; width:0; height:100%; background:#e9b85d; transition:width .15s linear; }
+    a { color:#e9b85d; }
+    @media(max-width:560px) {
+      .grid { grid-template-columns:1fr; }
+      .row,.token-actions { grid-template-columns:1fr; }
+    }
+    /* Native admin presentation — retain the battle-tested public R2 operations below. */
+    :root { color-scheme: light; --navy:#0b2d55; --sky:#7bafd4; --cream:#f7f3e8; --line:#d6e2eb; }
+    body { background:var(--cream); color:#243b50; font:16px/1.55 system-ui,-apple-system,sans-serif; }
+    main { max-width:1120px; padding:26px 20px 80px; }
+    h1 { color:var(--navy); font:400 clamp(2.3rem,5vw,3.5rem) Georgia,serif; margin:8px 0 14px; }
+    p { color:#607889; }
+    .card { background:#fff; border-color:var(--line); border-radius:17px; padding:22px; }
+    label { color:#243b50; }
+    select,input,button { border:1px solid #b5cbd8; background:white; color:#243b50; border-radius:10px; }
+    button { background:var(--navy); color:white; font-weight:650; border-color:var(--navy); }
+    button.secondary { background:#eaf2f8; color:var(--navy); border-color:transparent; }
+    button.danger { background:#f8e9e7; color:#873931; border-color:transparent; }
+    .status { color:#536b7a; }
+    .item { background:#f6f9fb; border-color:var(--line); }
+    .item img,.item video { background:#e5edf2; }
+    .item-meta { color:#597489; }
+    .metadata-panel { background:#f4f8fa; border-color:var(--line); }
+    .metadata-panel textarea { background:white; color:#243b50; border-color:#b5cbd8; }
+    .hint { color:#607889; }
+    .progress { background:#dde8ef; }
+    .progress > span { background:var(--sky); }
+    a { color:var(--navy); }
+    .admin-nav { display:flex;justify-content:space-between;gap:15px;align-items:center;padding:5px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px }
+    .admin-brand { color:var(--navy);font:600 1.1rem Georgia,serif; }
+    .admin-label { color:#497fa7;letter-spacing:.14em;font-size:.75rem;font-weight:750;margin:0 0 5px; }
+    input[type="checkbox"] { width:auto; }
+    @media(max-width:560px){main{padding:15px}.card{padding:16px}.admin-nav{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="admin-nav"><div class="admin-brand">✦ Postcards from Ben / Administration</div><nav><a href="/admin/photos/">← Photo Management</a> · <a href="/admin/">Dashboard</a></nav></header>
+  <p class="admin-label">PHOTO MANAGEMENT / PUBLIC LIBRARY</p>
+  <h1>Public Photo Library</h1>
+  <p>Manage your selected adventure and day here—upload, organize, bulk tag, and edit public photos. Your existing Cloudflare R2 media library remains unchanged.</p>
+
+  <section class="card">
+    <label for="token">Upload key</label>
+    <input id="token" type="password" autocomplete="current-password" placeholder="Enter your media upload key">
+    <div class="token-actions">
+      <button id="saveSession" class="secondary">Use this session</button>
+      <button id="saveDevice" class="secondary">Remember on this device</button>
+    </div>
+    <button id="forgetToken" class="secondary" style="margin-top:10px">Forget saved key</button>
+    <p class="hint">Only use “Remember on this device” on a device you trust.</p>
+  </section>
+
+  <section class="card">
+    <label for="trip">Adventure</label>
+    <select id="trip">
+      <option value="the-long-way-around">The Long Way Around</option>
+      <option value="winter-on-the-black-sea">Winter on the Black Sea</option>
+      <option value="autumn-in-hungary">Autumn in Hungary</option>
+      <option value="a-special-convention">A Special Convention</option>
+      <option value="under-the-mara-sky">Under the Mara Sky</option>
+      <option value="an-afternoon-with-giants">An Afternoon with Giants</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <label for="kind">Location</label>
+        <select id="kind"></select>
+      </div>
+
+      <div id="dayWrap">
+        <label for="day">Day</label>
+        <select id="day"></select>
+      </div>
+    </div>
+
+    <label id="filesLabel" for="files">Photos</label>
+    <input id="files" type="file" accept="image/*" multiple>
+
+    <div class="actions">
+      <button id="upload">Upload photos</button>
+      <button id="refresh" class="secondary">Refresh</button>
+    </div>
+
+    <div id="progress" class="progress" hidden><span></span></div>
+    <div id="status" class="status"></div>
+    <p id="folderHint" class="hint"></p>
+  </section>
+
+  <section class="card">
+    <strong id="folderLabel">Current folder</strong>
+    <p class="hint">Use ↑ and ↓ to control display order. Changes save immediately.</p>
+    <div class="actions"><button id="bulkSelectAll" type="button" class="secondary">Select all photos in this folder</button></div>
+    <div id="bulkTools" class="metadata-panel" hidden>
+      <strong>Bulk tag photos</strong>
+      <p class="hint">Only checked fields are changed. Existing captions, alt text, and coordinates are preserved.</p>
+      <div id="bulkCount">0 selected</div>
+      <div class="row"><label><input type="checkbox" id="bulkCountryOn"> Set country<select id="bulkCountry"></select></label>
+      <label><input type="checkbox" id="bulkDestOn"> Set destination<input id="bulkDest" placeholder="Optional destination"></label></div>
+      <div class="row"><label><input type="checkbox" id="bulkAdventureOn"> Set adventure<select id="bulkAdventure"></select></label>
+      <label><input type="checkbox" id="bulkDayOn"> Set day<input id="bulkDay" type="number" min="1" max="366" placeholder="Day number"></label></div>
+      <div class="actions"><button id="bulkApply" type="button">Apply to selected</button><button id="bulkClear" type="button" class="secondary">Clear selection</button></div>
+      <div id="bulkStatus" class="status" role="status"></div>
+    </div>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section class="card" id="librarySection">
+    <strong>Photo Library</strong>
+    <p class="hint">Search tagged photos across every adventure. Untagged photos that have never been saved to PHOTO_DB will not appear yet.</p>
+    <label for="libraryQuery">Search filename, caption, or destination</label>
+    <input id="libraryQuery" placeholder="e.g. Carezza">
+    <div class="row">
+      <label>Country<select id="libraryCountry"></select></label>
+      <label>Destination filter<select id="libraryStatus"><option value="">All photos</option><option value="untagged">No destination</option></select></label>
+      <label>Adventure<select id="libraryAdventure"><option value="">All adventures</option></select></label>
+      <label>Day<input id="libraryDay" type="number" min="1" max="366" placeholder="Any day"></label>
+    </div>
+    <div class="actions"><button id="librarySearch" type="button">Search photos</button><button id="libraryReset" type="button" class="secondary">Clear filters</button></div>
+    <div id="libraryStatusText" class="status" role="status"></div>
+    <div id="libraryResults" class="grid"></div>
+    <div class="actions"><button id="libraryPrevious" type="button" class="secondary" disabled>Previous</button><button id="libraryNext" type="button" class="secondary" disabled>Next</button></div>
+  </section>
+  <p><a href="/admin/photos/">← Back to Photo Management</a></p>
+</main>
+
+<script>
+const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
+const VIDEO_PART_BYTES = 25 * 1024 * 1024;
+
+const tripEl = document.getElementById("trip");
+const tokenEl = document.getElementById("token");
+const kindEl = document.getElementById("kind");
+const dayEl = document.getElementById("day");
+const dayWrap = document.getElementById("dayWrap");
+const filesEl = document.getElementById("files");
+const filesLabel = document.getElementById("filesLabel");
+const statusEl = document.getElementById("status");
+const gridEl = document.getElementById("grid");
+const folderLabel = document.getElementById("folderLabel");
+const folderHint = document.getElementById("folderHint");
+const uploadButton = document.getElementById("upload");
+const progressEl = document.getElementById("progress");
+const progressBar = progressEl.querySelector("span");
+let currentObjects = [];
+const selectedPhotos = new Set();
+const bulkTools = document.getElementById("bulkTools");
+const bulkCount = document.getElementById("bulkCount");
+const bulkStatus = document.getElementById("bulkStatus");
+countryOptions(document.getElementById("bulkCountry"));
+const bulkAdventure = document.getElementById("bulkAdventure");
+bulkAdventure.innerHTML = tripEl.innerHTML;
+bulkAdventure.value = tripEl.value;
+function updateBulkUi() { bulkTools.hidden = !selectedPhotos.size; bulkCount.textContent = selectedPhotos.size + " selected"; }
+document.getElementById("bulkSelectAll").addEventListener("click",()=>{for(const obj of currentObjects) if(!isVideoKind()) selectedPhotos.add(obj.key); render();});
+document.getElementById("bulkClear").addEventListener("click",()=>{selectedPhotos.clear();render();});
+document.getElementById("bulkApply").addEventListener("click",applyBulk);
+
+for (let i = 1; i <= 24; i++) {
+  const n = String(i).padStart(2, "0");
+  dayEl.insertAdjacentHTML("beforeend", `<option value="${n}">Day ${i}</option>`);
+}
+
+tokenEl.value =
+  localStorage.getItem("postcards-media-token") ||
+  sessionStorage.getItem("postcards-media-token") ||
+  "";
+
+document.getElementById("saveSession").addEventListener("click", () => {
+  const token = tokenEl.value.trim();
+  sessionStorage.setItem("postcards-media-token", token);
+  setStatus("Upload key saved for this browser session.");
+});
+
+document.getElementById("saveDevice").addEventListener("click", () => {
+  const token = tokenEl.value.trim();
+  localStorage.setItem("postcards-media-token", token);
+  sessionStorage.removeItem("postcards-media-token");
+  setStatus("Upload key remembered on this device.");
+});
+
+document.getElementById("forgetToken").addEventListener("click", () => {
+  localStorage.removeItem("postcards-media-token");
+  sessionStorage.removeItem("postcards-media-token");
+  tokenEl.value = "";
+  setStatus("Saved upload key removed from this device.");
+});
+
+tripEl.addEventListener("change", () => {
+  configureLocations();
+  refresh();
+});
+
+kindEl.addEventListener("change", () => {
+  updateKindUi();
+  refresh();
+});
+
+dayEl.addEventListener("change", refresh);
+document.getElementById("refresh").addEventListener("click", refresh);
+uploadButton.addEventListener("click", upload);
+
+function isCurrentTrip() {
+  return tripEl.value === "the-long-way-around";
+}
+
+function isVideoKind() {
+  return kindEl.value === "videos";
+}
+
+function configureLocations() {
+  kindEl.innerHTML = "";
+
+  if (isCurrentTrip()) {
+    kindEl.insertAdjacentHTML("beforeend", '<option value="days">Day photos</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="videos">Day videos</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Trip hero</option>');
+  } else {
+    kindEl.insertAdjacentHTML("beforeend", '<option value="gallery">Gallery</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="videos">Videos</option>');
+    kindEl.insertAdjacentHTML("beforeend", '<option value="hero">Hero</option>');
+  }
+
+  updateKindUi();
+}
+
+function updateKindUi() {
+  dayWrap.classList.toggle(
+    "hidden",
+    !(isCurrentTrip() && (kindEl.value === "days" || kindEl.value === "videos"))
+  );
+
+  if (isVideoKind()) {
+    filesLabel.textContent = "MP4 or MOV videos";
+    filesEl.accept = "video/mp4,video/quicktime,.mp4,.mov";
+    uploadButton.textContent = "Upload videos";
+  } else {
+    filesLabel.textContent = "Photos";
+    filesEl.accept = "image/*";
+    uploadButton.textContent = "Upload photos";
+  }
+
+  filesEl.value = "";
+}
+
+function prefix() {
+  const root = `trips/${tripEl.value}`;
+
+  if (isCurrentTrip() && kindEl.value === "days") {
+    return `${root}/days/day-${dayEl.value}/`;
+  }
+
+  if (isCurrentTrip() && kindEl.value === "videos") {
+    return `${root}/days/day-${dayEl.value}/videos/`;
+  }
+
+  return `${root}/${kindEl.value}/`;
+}
+
+function token() {
+  return (
+    tokenEl.value.trim() ||
+    localStorage.getItem("postcards-media-token") ||
+    sessionStorage.getItem("postcards-media-token") ||
+    ""
+  );
+}
+
+function authHeaders(extra = {}) {
+  return { ...extra, Authorization: `Bearer ${token()}` };
+}
+
+function setStatus(message) {
+  statusEl.textContent = message;
+}
+
+function setProgress(value) {
+  if (value === null) {
+    progressEl.hidden = true;
+    progressBar.style.width = "0%";
+    return;
+  }
+
+  progressEl.hidden = false;
+  progressBar.style.width = `${Math.max(0, Math.min(100, value))}%`;
+}
+
+function hint() {
+  if (isCurrentTrip() && kindEl.value === "days") {
+    return `Anything here appears automatically on Day ${Number(dayEl.value)}.`;
+  }
+
+  if (isCurrentTrip() && kindEl.value === "videos") {
+    return `MP4 or MOV videos here appear automatically on Day ${Number(dayEl.value)}. Maximum 500 MB per video.`;
+  }
+
+  if (kindEl.value === "hero") {
+    return "The first image below is used as this adventure's hero/cover image.";
+  }
+
+  if (kindEl.value === "videos") {
+    return "MP4 or MOV videos here appear automatically on this adventure page. Maximum 500 MB per video.";
+  }
+
+  return "Everything here appears automatically in this adventure's photo gallery.";
+}
+
+function formatBytes(bytes) {
+  if (!Number.isFinite(bytes)) return "";
+  const units = ["B", "KB", "MB", "GB"];
+  let value = bytes;
+  let unit = 0;
+
+  while (value >= 1024 && unit < units.length - 1) {
+    value /= 1024;
+    unit++;
+  }
+
+  return `${value >= 10 || unit === 0 ? value.toFixed(0) : value.toFixed(1)} ${units[unit]}`;
+}
+
+async function refresh() {
+  const p = prefix();
+  folderLabel.textContent = p;
+  folderHint.textContent = hint();
+  gridEl.innerHTML = "";
+  setStatus("Loading…");
+
+  try {
+    const res = await fetch(`/api/r2?prefix=${encodeURIComponent(p)}`, {
+      headers: authHeaders()
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not list folder.");
+
+    currentObjects = data.objects || [];
+    selectedPhotos.clear();
+    render();
+    const noun = isVideoKind() ? "video" : "photo";
+    setStatus(
+      currentObjects.length
+        ? `${currentObjects.length} ${noun}(s)`
+        : `No ${noun}s in this folder yet.`
+    );
+  } catch (err) {
+    setStatus(err.message);
+  }
+}
+
+function render() {
+  gridEl.innerHTML = "";
+  updateBulkUi();
+
+  currentObjects.forEach((obj, index) => {
+    const item = document.createElement("article");
+    item.className = "item";
+
+    if (isVideoKind()) {
+      const video = document.createElement("video");
+      video.src = obj.url;
+      video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      item.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.src = obj.url;
+      img.alt = "";
+      item.appendChild(img);
+    }
+
+    const meta = document.createElement("div");
+    meta.className = "item-meta";
+    meta.textContent = `${obj.key.split("/").pop()} · ${formatBytes(Number(obj.size))}`;
+
+    const actions = document.createElement("div");
+    actions.className = "item-actions";
+
+    const up = document.createElement("button");
+    up.className = "secondary";
+    up.textContent = "↑";
+    up.title = "Move earlier";
+    up.disabled = index === 0;
+    up.addEventListener("click", () => move(index, -1));
+
+    const down = document.createElement("button");
+    down.className = "secondary";
+    down.textContent = "↓";
+    down.title = "Move later";
+    down.disabled = index === currentObjects.length - 1;
+    down.addEventListener("click", () => move(index, 1));
+
+    const del = document.createElement("button");
+    del.className = "danger";
+    del.textContent = "Delete";
+    del.addEventListener("click", () => removeMedia(obj));
+
+    if (!isVideoKind()) {
+      const selectLabel = document.createElement("label");
+      selectLabel.style.cssText = "display:flex;align-items:center;gap:8px;padding:6px;font-size:14px";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox"; checkbox.style.width = "auto";
+      checkbox.checked = selectedPhotos.has(obj.key);
+      checkbox.addEventListener("change",()=>{if(checkbox.checked) selectedPhotos.add(obj.key); else selectedPhotos.delete(obj.key); updateBulkUi();});
+      selectLabel.append(checkbox,document.createTextNode(" Select for bulk tagging"));
+      item.appendChild(selectLabel);
+      const edit = document.createElement("button");
+      edit.className = "secondary";
+      edit.textContent = "Tag photo";
+      edit.style.gridColumn = "1 / -1";
+      edit.addEventListener("click", () => openMetadata(item, obj, edit));
+      actions.append(edit);
+    }
+    actions.append(up, down, del);
+    item.append(meta, actions);
+    gridEl.appendChild(item);
+  });
+}
+
+const tripStartDates = {"the-long-way-around":"2026-10-19"};
+let atlasPlaces = [];
+fetch("/data/travel-history.json").then(r => r.ok ? r.json() : null).then(data => {
+  atlasPlaces = Array.isArray(data?.places) ? data.places : [];
+}).catch(() => {});
+function dayDate(adventure, day) {
+  const start = tripStartDates[adventure];
+  if (!start || !day || !Number.isInteger(Number(day))) return "";
+  const d = new Date(start + "T12:00:00Z");
+  d.setUTCDate(d.getUTCDate() + Number(day) - 1);
+  return d.toISOString().slice(0,10);
+}
+function countryOptions(select) {
+  const names = new Intl.DisplayNames(["en"], {type:"region"});
+  const codes = new Set(["US","DE","IT","AT","CZ","SK","HU","SI","HR","SM","CH","MC","FR","LU","BE","NL","LI","GB","CA","GR","KE","ZA","TZ","AE"]);
+  for (let i=65;i<=90;i++) for (let j=65;j<=90;j++) {
+    const code=String.fromCharCode(i,j), name=names.of(code);
+    if (name && name!==code && !/^[A-Z]{2}$/.test(name)) codes.add(code);
+  }
+  const entries=[...codes].map(code=>({code,name:names.of(code)})).filter(x=>x.name && x.name!==x.code).sort((a,b)=>a.name.localeCompare(b.name));
+  select.add(new Option("Choose country (optional)",""));
+  for (const {code,name} of entries) select.add(new Option(name,code));
+}
+function destinationSuggestions(countryCode, datalist) {
+  datalist.replaceChildren();
+  const display = new Intl.DisplayNames(["en"],{type:"region"});
+  const name = countryCode ? display.of(countryCode) : "";
+  const matches = atlasPlaces.filter(p => p.name === name || (name === "Czechia" && p.name === "Czechia"));
+  const seen = new Set();
+  for (const p of matches) for (const dest of p.destinations || []) {
+    if (!seen.has(dest.name)) { datalist.appendChild(new Option(dest.name)); seen.add(dest.name); }
+  }
+}
+
+
+async function applyBulk() {
+  const chosen = [...selectedPhotos];
+  if (!chosen.length) return;
+  const checked = name => document.getElementById("bulk"+name+"On").checked;
+  const value = name => document.getElementById("bulk"+name).value.trim();
+  const fields = {};
+  for (const [name,field] of [["Country","country"],["Dest","destination"],["Adventure","adventure"],["Day","day"]]) {
+    if (checked(name)) fields[field] = value(name);
+  }
+  if (!Object.keys(fields).length) { bulkStatus.textContent = "Check at least one field to change."; return; }
+  if (checked("Country") && !fields.country) { bulkStatus.textContent = "Choose a country."; return; }
+  if (checked("Dest") && (!fields.destination || (!checked("Country") && chosen.length))) {
+    bulkStatus.textContent = "For destination updates, check both Country and Destination."; return;
+  }
+  if (checked("Day") && (!Number.isInteger(Number(fields.day)) || Number(fields.day)<1 || Number(fields.day)>366)) {
+    bulkStatus.textContent = "Enter a valid day (1–366)."; return;
+  }
+  if (checked("Adventure") && !fields.adventure) { bulkStatus.textContent = "Choose an adventure."; return; }
+  if (!confirm("Apply the checked fields to "+chosen.length+" selected photos? Existing individual details will be kept where possible.")) return;
+  const button = document.getElementById("bulkApply");
+  button.disabled = true;
+  let done=0, failures=[];
+  for (const key of chosen) {
+    try {
+      const read = await fetch("/api/photo-metadata?key="+encodeURIComponent(key),{headers:authHeaders()});
+      const loaded = await read.json();
+      if (!read.ok) throw Error(loaded.error || "Read failed");
+      const p = loaded.photo || {};
+      const dest = p.destinations?.[0] || {};
+      const adv = p.adventures?.[0] || {};
+      const payload = {
+        key, caption:p.caption||"",alt_text:p.alt_text||"",
+        country:dest.country_code||"",destination:dest.name||"",
+        adventure:adv.adventure_slug||key.split("/")[1],
+        day:adv.day_number ?? (key.match(/\/day-(\d{2})\//)?.[1] || ""),
+        taken_at:p.taken_at||"",latitude:p.latitude??"",longitude:p.longitude??"",
+        
+      };
+      Object.assign(payload,fields);
+      // Never silently reassign a destination to a different country.
+      if (checked("Country") && !checked("Dest") && payload.country !== dest.country_code) payload.destination = "";
+      const save = await fetch("/api/photo-metadata",{method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
+      const result = await save.json();
+      if (!save.ok) throw Error(result.error || "Save failed");
+      done++;
+      selectedPhotos.delete(key);
+    } catch(e) { failures.push(key.split("/").pop()+": "+e.message); }
+    bulkStatus.textContent = done+" of "+chosen.length+" saved"+(failures.length?" · "+failures.length+" failed":"");
+  }
+  button.disabled = false;
+  updateBulkUi();
+  if (failures.length) bulkStatus.textContent += ". Failed: "+failures.slice(0,3).join("; ");
+  else bulkStatus.textContent = "Saved "+done+" photos. Existing captions and individual metadata retained.";
+  render();
+}
+
+
+let libraryPage=1;
+function setupLibrary() {
+  countryOptions(document.getElementById("libraryCountry"));
+  const a=document.getElementById("libraryAdventure");
+  for(const o of tripEl.options)a.add(new Option(o.textContent,o.value));
+  document.getElementById("librarySearch").addEventListener("click",()=>searchLibrary(1));
+  document.getElementById("libraryQuery").addEventListener("keydown",e=>{if(e.key==="Enter")searchLibrary(1);});
+  document.getElementById("libraryReset").addEventListener("click",()=>{
+    for(const id of ["libraryQuery","libraryCountry","libraryStatus","libraryAdventure","libraryDay"])document.getElementById(id).value="";
+    searchLibrary(1);
+  });
+  document.getElementById("libraryPrevious").addEventListener("click",()=>searchLibrary(libraryPage-1));
+  document.getElementById("libraryNext").addEventListener("click",()=>searchLibrary(libraryPage+1));
+}
+async function searchLibrary(page=1) {
+  const message=document.getElementById("libraryStatusText"),results=document.getElementById("libraryResults");
+  const params=new URLSearchParams({page:String(page)});
+  for(const [id,key] of [["libraryQuery","q"],["libraryCountry","country"],["libraryStatus","status"],["libraryAdventure","adventure"],["libraryDay","day"]]){
+    const v=document.getElementById(id).value.trim();if(v)params.set(key,v);
+  }
+  message.textContent="Searching…";results.replaceChildren();
+  try {
+    const res=await fetch("/api/photo-library?"+params,{headers:authHeaders()});
+    const data=await res.json();
+    if(!res.ok)throw Error(data.error||"Search failed");
+    libraryPage=data.page;
+    message.textContent=data.total+" matching tagged photos · Page "+data.page;
+    for(const photo of data.items){
+      const card=document.createElement("article");card.className="item";
+      const img=document.createElement("img");
+      img.loading="lazy";img.alt=photo.caption||photo.original_filename||"Photo";
+      img.src="https://photos.postcardsfromben.com/"+photo.r2_key.split("/").map(encodeURIComponent).join("/");
+      card.appendChild(img);
+      const info=document.createElement("div");info.className="item-meta";
+      info.textContent=[photo.original_filename,photo.destination,photo.country,photo.adventure,photo.day?"Day "+photo.day:""].filter(Boolean).join(" · ");
+      card.appendChild(info);
+      const go=document.createElement("button");go.className="secondary";go.textContent="Open folder to edit";
+      go.style.margin="8px";go.style.width="calc(100% - 16px)";
+      go.addEventListener("click",()=>{
+        if(photo.adventure && [...tripEl.options].some(o=>o.value===photo.adventure))tripEl.value=photo.adventure;
+        else {message.textContent="This photo's adventure isn't in the Media Manager list.";return;}
+        configureLocations();
+        const match=photo.r2_key.match(/\/days\/day-(\d{2})\//);
+        if(match){kindEl.value="days";dayEl.value=match[1];}
+        else if(photo.r2_key.includes("/hero/"))kindEl.value="hero";
+        else kindEl.value="gallery";
+        updateKindUi();refresh();
+        document.getElementById("folderLabel").scrollIntoView({behavior:"smooth"});
+      });
+      card.appendChild(go);results.appendChild(card);
+    }
+    document.getElementById("libraryPrevious").disabled=data.page<=1;
+    document.getElementById("libraryNext").disabled=data.page*data.pageSize>=data.total;
+  }catch(e){message.textContent=e.message;}
+}
+setupLibrary();
+
+async function openMetadata(item, obj, button) {
+  const old = item.querySelector(".metadata-panel");
+  if (old) { old.remove(); button.textContent = "Tag photo"; return; }
+  button.textContent = "Close tags";
+  const panel = document.createElement("form");
+  panel.className = "metadata-panel";
+  const field = (label, name, value = "", type = "text") => {
+    const wrap = document.createElement("label");
+    wrap.textContent = label;
+    const input = document.createElement(type === "textarea" ? "textarea" : "input");
+    if (type !== "textarea") input.type = type;
+    input.name = name;
+    input.value = value == null ? "" : value;
+    wrap.appendChild(input);
+    return wrap;
+  };
+  const inferredDay = isCurrentTrip() && (kindEl.value === "days" || kindEl.value === "videos") ? Number(dayEl.value) : "";
+  const caption = field("Caption", "caption", "", "textarea");
+  const alt = field("Alt text (accessibility)", "alt_text", "", "textarea");
+  const country = document.createElement("label");
+  country.textContent = "Country";
+  const countrySelect = document.createElement("select");
+  countrySelect.name = "country";
+  countryOptions(countrySelect);
+  country.appendChild(countrySelect);
+  const destination = field("Destination (choose a suggestion or enter your own)", "destination");
+  const suggestions = document.createElement("datalist");
+  suggestions.id = "destinations-" + crypto.randomUUID();
+  destination.querySelector("input").setAttribute("list",suggestions.id);
+  destination.appendChild(suggestions);
+  countrySelect.addEventListener("change",()=>destinationSuggestions(countrySelect.value,suggestions));
+  const adventure = document.createElement("label");
+  adventure.textContent = "Adventure";
+  const adventureSelect = tripEl.cloneNode(true);
+  adventureSelect.removeAttribute("id");
+  adventureSelect.name = "adventure";
+  adventureSelect.value = tripEl.value;
+  adventure.appendChild(adventureSelect);
+  const day = field("Day number (leave blank for trip-wide photos)", "day", inferredDay, "number");
+  const save = document.createElement("button");
+  save.type = "submit"; save.textContent = "Save metadata";
+  const message = document.createElement("div");
+  message.className = "status";
+  panel.append(caption,alt,country,destination,adventure,day,save,message);
+  item.appendChild(panel);
+  const get = name => panel.elements.namedItem(name);
+  try {
+    const res = await fetch("/api/photo-metadata?key="+encodeURIComponent(obj.key), {headers:authHeaders()});
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not load metadata");
+    const p = data.photo;
+    if (p) {
+      if (p.destinations?.length) {
+        get("country").value = p.destinations[0].country_code;
+        destinationSuggestions(get("country").value,suggestions);
+        get("destination").value = p.destinations[0].name;
+      }
+      if (p.adventures?.length) {
+        get("adventure").value = p.adventures[0].adventure_slug;
+        get("day").value = p.adventures[0].day_number ?? "";
+      }
+    }
+  } catch (error) { message.textContent = error.message; }
+  panel.addEventListener("submit", async event => {
+    event.preventDefault();
+    save.disabled = true;
+    message.textContent = "Saving…";
+    try {
+      const payload = {key:obj.key};
+      for (const name of ["caption","alt_text","country","destination","adventure","day"]) payload[name] = get(name).value;
+      const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Save failed");
+      message.textContent = "Metadata saved to PHOTO_DB.";
+    } catch(error) { message.textContent = error.message; }
+    finally { save.disabled = false; }
+  });
+}
+
+async function move(index, delta) {
+  const target = index + delta;
+  if (target < 0 || target >= currentObjects.length) return;
+
+  [currentObjects[index], currentObjects[target]] =
+    [currentObjects[target], currentObjects[index]];
+
+  render();
+  setStatus("Saving order…");
+
+  try {
+    const res = await fetch("/api/r2", {
+      method: "PUT",
+      headers: authHeaders({ "content-type": "application/json" }),
+      body: JSON.stringify({
+        prefix: prefix(),
+        keys: currentObjects.map(obj => obj.key)
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Could not save order.");
+    setStatus("Order saved.");
+  } catch (err) {
+    setStatus(err.message);
+    await refresh();
+  }
+}
+
+async function removeMedia(obj) {
+  const noun = isVideoKind() ? "video" : "photo";
+  if (!confirm(`Delete this ${noun} from R2? This cannot be undone.`)) return;
+
+  setStatus("Deleting…");
+
+  try {
+    const res = await fetch(`/api/r2?key=${encodeURIComponent(obj.key)}`, {
+      method: "DELETE",
+      headers: authHeaders()
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `Could not delete ${noun}.`);
+
+    await refresh();
+    setStatus(`${noun[0].toUpperCase() + noun.slice(1)} deleted.`);
+  } catch (err) {
+    setStatus(err.message);
+  }
+}
+
+async function upload() {
+  const files = [...filesEl.files];
+
+  if (!files.length) {
+    return setStatus(
+      isVideoKind()
+        ? "Choose one or more MP4 or MOV videos first."
+        : "Choose one or more photos first."
+    );
+  }
+
+  if (isVideoKind()) {
+    const invalid = files.find(
+      file => {
+        const lower = file.name.toLowerCase();
+        return (
+          (!lower.endsWith(".mp4") && !lower.endsWith(".mov")) ||
+          file.size > MAX_VIDEO_BYTES
+        );
+      }
+    );
+
+    if (invalid) {
+      return setStatus(
+        invalid.size > MAX_VIDEO_BYTES
+          ? `${invalid.name} is larger than 500 MB.`
+          : `${invalid.name} is not an MP4 or MOV video.`
+      );
+    }
+  }
+
+  uploadButton.disabled = true;
+  setProgress(0);
+
+  try {
+    let completed = 0;
+
+    for (const file of files) {
+      if (isVideoKind()) {
+        await uploadVideo(file, completed, files.length);
+      } else {
+        await uploadPhoto(file, completed, files.length);
+      }
+
+      completed++;
+    }
+
+    filesEl.value = "";
+    await refresh();
+    setProgress(null);
+    setStatus(
+      `Uploaded ${completed} ${isVideoKind() ? "video" : "photo"}(s).`
+    );
+  } catch (err) {
+    setProgress(null);
+    setStatus(err.message);
+  } finally {
+    uploadButton.disabled = false;
+  }
+}
+
+async function uploadPhoto(file, completed, total) {
+  setStatus(`Uploading ${completed + 1} of ${total}: ${file.name}`);
+
+  const form = new FormData();
+  form.append("prefix", prefix());
+  form.append("file", file);
+
+  const res = await fetch("/api/r2", {
+    method: "POST",
+    headers: authHeaders(),
+    body: form
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `Upload failed for ${file.name}`);
+
+  setProgress(((completed + 1) / total) * 100);
+}
+
+async function uploadVideo(file, completedFiles, totalFiles) {
+  setStatus(
+    `Preparing video ${completedFiles + 1} of ${totalFiles}: ${file.name} (${formatBytes(file.size)})`
+  );
+
+  const startRes = await fetch("/api/r2?action=video-start", {
+    method: "POST",
+    headers: authHeaders({ "content-type": "application/json" }),
+    body: JSON.stringify({
+      prefix: prefix(),
+      name: file.name,
+      size: file.size,
+      type: file.type || ""
+    })
+  });
+
+  const start = await startRes.json();
+  if (!startRes.ok) {
+    throw new Error(start.error || `Could not start upload for ${file.name}`);
+  }
+
+  const parts = [];
+  const partCount = Math.ceil(file.size / VIDEO_PART_BYTES);
+
+  try {
+    for (let index = 0; index < partCount; index++) {
+      const partNumber = index + 1;
+      const begin = index * VIDEO_PART_BYTES;
+      const end = Math.min(file.size, begin + VIDEO_PART_BYTES);
+      const blob = file.slice(begin, end);
+
+      setStatus(
+        `Uploading ${file.name}: part ${partNumber} of ${partCount} · ${Math.round((begin / file.size) * 100)}%`
+      );
+
+      const partRes = await fetch(
+        `/api/r2?action=video-part&key=${encodeURIComponent(start.key)}&uploadId=${encodeURIComponent(start.uploadId)}&partNumber=${partNumber}`,
+        {
+          method: "PUT",
+          headers: authHeaders({ "content-type": "application/octet-stream" }),
+          body: blob
+        }
+      );
+
+      const part = await partRes.json();
+      if (!partRes.ok) {
+        throw new Error(part.error || `Video part ${partNumber} failed.`);
+      }
+
+      parts.push({
+        partNumber: Number(part.partNumber),
+        etag: part.etag
+      });
+
+      const fileFraction = end / file.size;
+      const overall = ((completedFiles + fileFraction) / totalFiles) * 100;
+      setProgress(overall);
+    }
+
+    setStatus(`Finalizing ${file.name}…`);
+
+    const completeRes = await fetch("/api/r2?action=video-complete", {
+      method: "POST",
+      headers: authHeaders({ "content-type": "application/json" }),
+      body: JSON.stringify({
+        key: start.key,
+        uploadId: start.uploadId,
+        parts
+      })
+    });
+
+    const complete = await completeRes.json();
+    if (!completeRes.ok) {
+      throw new Error(complete.error || `Could not finish ${file.name}`);
+    }
+  } catch (error) {
+    try {
+      await fetch(
+        `/api/r2?action=video-abort&key=${encodeURIComponent(start.key)}&uploadId=${encodeURIComponent(start.uploadId)}`,
+        {
+          method: "DELETE",
+          headers: authHeaders()
+        }
+      );
+    } catch {}
+
+    throw error;
+  }
+}
+
+// Owner photo hub can deep-link to an approved adventure, folder and day.
+// This only sets form filters. Existing upload-key authorization is unchanged.
+const incoming=new URLSearchParams(location.search);
+const requestedTrip=incoming.get("trip");
+if(requestedTrip&&[...tripEl.options].some(option=>option.value===requestedTrip))
+ tripEl.value=requestedTrip;
+configureLocations();
+const requestedKind=incoming.get("kind");
+if(requestedKind&&[...kindEl.options].some(option=>option.value===requestedKind)){
+ kindEl.value=requestedKind;updateKindUi();
+}
+const requestedDay=incoming.get("day");
+if(requestedDay&&[...dayEl.options].some(option=>option.value===requestedDay))
+ dayEl.value=requestedDay;
+refresh();
+</script>
+</body>
+</html>

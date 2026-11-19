@@ -29,8 +29,8 @@ label{display:block;font-size:.88rem;font-weight:650;margin:13px 0 6px}select{wi
 </select>
 <label for="kind">Photo collection</label><select id="kind"></select>
 <div id="dayWrap"><label for="day">Adventure day</label><select id="day"></select></div>
-<a id="openMedia" class="button" href="/admin/media.html">Open selected photo folder</a>
-<p class="muted">The existing media manager uses its own upload key for writing. This page does not expose or replace that credential.</p>
+<a id="openMedia" class="button" href="/admin/photos/library.html">Open selected photo folder</a>
+<p class="muted">The public photo editor opens within your new admin section. Its existing upload key is still required for photo changes.</p>
 </section>
 <section class="panel"><h2>Beyond the Postcard</h2>
 <p class="muted">Your private galleries have their own permissions, nested albums, photo editor and bulk upload controls.</p>
@@ -39,7 +39,7 @@ label{display:block;font-size:.88rem;font-weight:650;margin:13px 0 6px}select{wi
 </section>
 </div>
 <div class="panel"><h2>Library maintenance</h2><p class="muted">Scan existing image metadata, or search photos already tagged in your public library.</p>
-<a class="button secondary" href="/admin/photo-scan/">Scan photo metadata</a> <a class="button secondary" href="/admin/media.html#library">Search public photo library</a>
+<a class="button secondary" href="/admin/photo-scan/">Scan photo metadata</a> <a class="button secondary" href="/admin/photos/library.html#library">Search public photo library</a>
 </div>
 </main><script>
 const $=id=>document.getElementById(id);
@@ -58,7 +58,7 @@ function refresh(){
  $("dayWrap").hidden=!(current&&["days","videos"].includes($("kind").value));
  const params=new URLSearchParams({trip:$("trip").value,kind:$("kind").value});
  if(current&&["days","videos"].includes($("kind").value))params.set("day",$("day").value);
- $("openMedia").href="/admin/media.html?"+params.toString();
+ $("openMedia").href="/admin/photos/library.html?"+params.toString();
 }
 $("trip").onchange=update;$("kind").onchange=refresh;$("day").onchange=refresh;
 update();
