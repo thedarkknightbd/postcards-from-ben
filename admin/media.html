@@ -879,7 +879,20 @@ async function uploadVideo(file, completedFiles, totalFiles) {
   }
 }
 
+// Owner photo hub can deep-link to an approved adventure, folder and day.
+// This only sets form filters. Existing upload-key authorization is unchanged.
+const incoming=new URLSearchParams(location.search);
+const requestedTrip=incoming.get("trip");
+if(requestedTrip&&[...tripEl.options].some(option=>option.value===requestedTrip))
+ tripEl.value=requestedTrip;
 configureLocations();
+const requestedKind=incoming.get("kind");
+if(requestedKind&&[...kindEl.options].some(option=>option.value===requestedKind)){
+ kindEl.value=requestedKind;updateKindUi();
+}
+const requestedDay=incoming.get("day");
+if(requestedDay&&[...dayEl.options].some(option=>option.value===requestedDay))
+ dayEl.value=requestedDay;
 refresh();
 </script>
 </body>
