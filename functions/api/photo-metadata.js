@@ -1,4 +1,5 @@
-// Private photo metadata API. All operations require the existing media upload key.
+import {mediaAuthorized} from "../_lib/media-auth.js";
+// Private photo metadata API. Accepts owner session or legacy media key.
 // Uses PHOTO_DB exclusively; never touches LOCATION_DB.
 const reply = (body, status = 200) => new Response(JSON.stringify(body), {
   status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", "x-content-type-options": "nosniff" }
@@ -20,8 +21,7 @@ async function detail(db, key) {
 }
 export async function onRequest({request, env}) {
   if (!env.PHOTO_DB) return reply({error:"PHOTO_DB binding is not configured for this deployment."},503);
-  const expected = env.MEDIA_UPLOAD_TOKEN;
-  if (!expected || request.headers.get("Authorization") !== `Bearer ${expected}`) return reply({error:"Unauthorized"},401);
+  if (!(await mediaAuthorized(request,env,{write:request.method!=="GET"}))) return reply({error:"Unauthorized"},401);
   const url = new URL(request.url);
   const key = clean(url.searchParams.get("key"), 700);
   if (request.method === "GET") {
