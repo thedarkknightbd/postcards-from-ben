@@ -621,6 +621,8 @@ async function openMetadata(item, obj, button) {
     if (!res.ok) throw new Error(data.error || "Could not load metadata");
     const p = data.photo;
     if (p) {
+      get("caption").value = p.caption || "";
+      get("alt_text").value = p.alt_text || "";
       if (p.destinations?.length) {
         get("country").value = p.destinations[0].country_code;
         destinationSuggestions(get("country").value,suggestions);
@@ -636,14 +638,30 @@ async function openMetadata(item, obj, button) {
     event.preventDefault();
     save.disabled = true;
     message.textContent = "Saving…";
+    message.style.color = "";
     try {
       const payload = {key:obj.key};
       for (const name of ["caption","alt_text","country","destination","adventure","day"]) payload[name] = get(name).value;
       const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Save failed");
-      message.textContent = "Metadata saved to PHOTO_DB.";
-    } catch(error) { message.textContent = error.message; }
+      if (!res.ok || !data.ok) throw new Error(data.error || "Save failed");
+      const verify = await fetch("/api/photo-metadata?key="+encodeURIComponent(obj.key),{headers:authHeaders(),cache:"no-store"});
+      const checked = await verify.json();
+      if (!verify.ok || !checked.photo) throw new Error("Save accepted, but read-back verification failed.");
+      const saved = checked.photo;
+      const savedDest = saved.destinations?.[0] || {};
+      const savedAdv = saved.adventures?.[0] || {};
+      const requestedDay = payload.day === "" ? (isCurrentTrip() && ["days","videos"].includes(kindEl.value) ? String(Number(dayEl.value)) : "") : String(Number(payload.day));
+      const matches = String(saved.caption||"")===payload.caption.trim() &&
+        String(saved.alt_text||"")===payload.alt_text.trim() &&
+        String(savedDest.country_code||"")===(payload.destination.trim()?payload.country.trim().toUpperCase():"") &&
+        String(savedDest.name||"")===payload.destination.trim() &&
+        String(savedAdv.adventure_slug||"")===payload.adventure.trim() &&
+        String(savedAdv.day_number??"")===requestedDay;
+      if (!matches) throw new Error("Save accepted, but values differ on read-back. Refresh and review.");
+      message.style.color="#237045";
+      message.textContent = "✓ Saved and verified in PHOTO_DB.";
+    } catch(error) { message.textContent = error.message; message.style.color="#943e34"; }
     finally { save.disabled = false; }
   });
 }
