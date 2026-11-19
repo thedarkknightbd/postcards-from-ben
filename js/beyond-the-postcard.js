@@ -35,8 +35,8 @@ function updateLightbox(key){
   .then(data=>{
    if(request!==lightboxRequest||!data)return;
    const metadata=data.metadata||{};
-   $("lightboxCaption").textContent=metadata.title||metadata.caption||"";
-   const description=String(metadata.caption&&metadata.title?metadata.caption:metadata.alt_text||"").trim();
+   $("lightboxCaption").textContent=metadata.caption||metadata.title||"";
+   const description=String(metadata.alt_text||"").trim();
    $("lightboxDescription").textContent=description&&description!==$("lightboxCaption").textContent?description:"";
    $("lightboxDescription").hidden=!$("lightboxDescription").textContent;
    $("lightboxImage").alt=metadata.alt_text||metadata.title||"Private travel photograph";
