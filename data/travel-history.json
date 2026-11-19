@@ -7,7 +7,8 @@
       ],
       "small": true,
       "lat": 17.0747,
-      "lng": -61.8175
+      "lng": -61.8175,
+      "countryCode": "AG"
     },
     {
       "name": "Aruba",
@@ -16,7 +17,8 @@
       ],
       "small": true,
       "lat": 12.5211,
-      "lng": -69.9683
+      "lng": -69.9683,
+      "countryCode": "AW"
     },
     {
       "name": "Austria",
@@ -25,7 +27,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "AT"
     },
     {
       "name": "Bahamas",
@@ -35,7 +38,8 @@
       ],
       "small": true,
       "lat": 25.0343,
-      "lng": -77.3963
+      "lng": -77.3963,
+      "countryCode": "BS"
     },
     {
       "name": "Barbados",
@@ -44,7 +48,8 @@
       ],
       "small": true,
       "lat": 13.1939,
-      "lng": -59.5432
+      "lng": -59.5432,
+      "countryCode": "BB"
     },
     {
       "name": "Belgium",
@@ -53,7 +58,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "BE"
     },
     {
       "name": "Bermuda",
@@ -62,19 +68,22 @@
       ],
       "small": true,
       "lat": 32.3078,
-      "lng": -64.7505
+      "lng": -64.7505,
+      "countryCode": "BM"
     },
     {
       "name": "Bosnia & Herzegovina",
       "mapNames": [
         "Bosnia and Herzegovina"
-      ]
+      ],
+      "countryCode": "BA"
     },
     {
       "name": "Brazil",
       "mapNames": [
         "Brazil"
-      ]
+      ],
+      "countryCode": "BR"
     },
     {
       "name": "British Virgin Islands",
@@ -83,13 +92,15 @@
       ],
       "small": true,
       "lat": 18.4207,
-      "lng": -64.64
+      "lng": -64.64,
+      "countryCode": "VG"
     },
     {
       "name": "Canada",
       "mapNames": [
         "Canada"
-      ]
+      ],
+      "countryCode": "CA"
     },
     {
       "name": "Caribbean Netherlands",
@@ -98,13 +109,15 @@
       ],
       "small": true,
       "lat": 12.2019,
-      "lng": -68.2624
+      "lng": -68.2624,
+      "countryCode": "BQ"
     },
     {
       "name": "Colombia",
       "mapNames": [
         "Colombia"
-      ]
+      ],
+      "countryCode": "CO"
     },
     {
       "name": "Croatia",
@@ -113,7 +126,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "HR"
     },
     {
       "name": "Czechia",
@@ -123,7 +137,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "CZ"
     },
     {
       "name": "France",
@@ -132,7 +147,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "FR"
     },
     {
       "name": "Germany",
@@ -141,7 +157,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "DE"
     },
     {
       "name": "Greece",
@@ -150,7 +167,8 @@
       ],
       "trips": [
         "special-convention"
-      ]
+      ],
+      "countryCode": "GR"
     },
     {
       "name": "Hungary",
@@ -160,19 +178,22 @@
       "trips": [
         "autumn-hungary",
         "long-way-around"
-      ]
+      ],
+      "countryCode": "HU"
     },
     {
       "name": "India",
       "mapNames": [
         "India"
-      ]
+      ],
+      "countryCode": "IN"
     },
     {
       "name": "Ireland",
       "mapNames": [
         "Ireland"
-      ]
+      ],
+      "countryCode": "IE"
     },
     {
       "name": "Italy",
@@ -181,7 +202,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "IT"
     },
     {
       "name": "Kenya",
@@ -191,7 +213,8 @@
       "trips": [
         "under-mara-sky",
         "afternoon-with-giants"
-      ]
+      ],
+      "countryCode": "KE"
     },
     {
       "name": "Liechtenstein",
@@ -203,7 +226,8 @@
       "lng": 9.5209,
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "LI"
     },
     {
       "name": "Luxembourg",
@@ -212,13 +236,15 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "LU"
     },
     {
       "name": "Mexico",
       "mapNames": [
         "Mexico"
-      ]
+      ],
+      "countryCode": "MX"
     },
     {
       "name": "Monaco",
@@ -230,7 +256,8 @@
       "lng": 7.4246,
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "MC"
     },
     {
       "name": "Netherlands",
@@ -239,7 +266,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "NL"
     },
     {
       "name": "Puerto Rico",
@@ -248,7 +276,8 @@
       ],
       "small": true,
       "lat": 18.2208,
-      "lng": -66.5901
+      "lng": -66.5901,
+      "countryCode": "PR"
     },
     {
       "name": "Romania",
@@ -257,7 +286,8 @@
       ],
       "trips": [
         "special-convention"
-      ]
+      ],
+      "countryCode": "RO"
     },
     {
       "name": "San Marino",
@@ -269,7 +299,8 @@
       "lng": 12.4578,
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "SM"
     },
     {
       "name": "Sint Maarten",
@@ -278,7 +309,8 @@
       ],
       "small": true,
       "lat": 18.0425,
-      "lng": -63.0548
+      "lng": -63.0548,
+      "countryCode": "SX"
     },
     {
       "name": "Slovakia",
@@ -287,7 +319,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "SK"
     },
     {
       "name": "Slovenia",
@@ -296,7 +329,8 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "SI"
     },
     {
       "name": "St Lucia",
@@ -306,7 +340,8 @@
       ],
       "small": true,
       "lat": 13.9094,
-      "lng": -60.9789
+      "lng": -60.9789,
+      "countryCode": "LC"
     },
     {
       "name": "St Martin",
@@ -315,7 +350,8 @@
       ],
       "small": true,
       "lat": 18.0826,
-      "lng": -63.0523
+      "lng": -63.0523,
+      "countryCode": "MF"
     },
     {
       "name": "Switzerland",
@@ -324,19 +360,22 @@
       ],
       "trips": [
         "long-way-around"
-      ]
+      ],
+      "countryCode": "CH"
     },
     {
       "name": "UAE",
       "mapNames": [
         "United Arab Emirates"
-      ]
+      ],
+      "countryCode": "AE"
     },
     {
       "name": "UK",
       "mapNames": [
         "United Kingdom"
-      ]
+      ],
+      "countryCode": "GB"
     },
     {
       "name": "Ukraine",
@@ -345,7 +384,8 @@
       ],
       "trips": [
         "winter-black-sea"
-      ]
+      ],
+      "countryCode": "UA"
     },
     {
       "name": "US Virgin Islands",
@@ -355,14 +395,16 @@
       ],
       "small": true,
       "lat": 18.3358,
-      "lng": -64.8963
+      "lng": -64.8963,
+      "countryCode": "VI"
     },
     {
       "name": "USA",
       "mapNames": [
         "United States of America",
         "United States"
-      ]
+      ],
+      "countryCode": "US"
     },
     {
       "name": "Vatican City",
@@ -371,7 +413,8 @@
       ],
       "small": true,
       "lat": 41.9029,
-      "lng": 12.4534
+      "lng": 12.4534,
+      "countryCode": "VA"
     }
   ],
   "trips": {
