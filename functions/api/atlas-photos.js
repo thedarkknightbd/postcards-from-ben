@@ -62,6 +62,7 @@ export async function onRequestGet({request,env}){
           src:publicUrl(env,p.r2_key),
           caption:String(p.caption||"").slice(0,300),
           alt:String(p.alt_text||p.caption||p.destination||"Travel photograph").slice(0,300),
+          description:String(p.alt_text||"").slice(0,500),
           destination:String(p.destination||"").slice(0,120)
         });
         if(photos.length>=24)break;
