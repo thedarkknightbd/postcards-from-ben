@@ -613,11 +613,18 @@ async function openMetadata(item, obj, button) {
   adventureSelect.value = tripEl.value;
   adventure.appendChild(adventureSelect);
   const day = field("Day number (leave blank for trip-wide photos)", "day", inferredDay, "number");
+  const taken = field("Photo taken at (EXIF date/time; leave blank if unknown)", "taken_at");
+  const latitude = field("GPS latitude (optional, -90 to 90)", "latitude", "", "number");
+  const longitude = field("GPS longitude (optional, -180 to 180)", "longitude", "", "number");
+  for (const [control, min, max] of [[latitude,-90,90],[longitude,-180,180]]) {
+    const input = control.querySelector("input");
+    input.min=String(min); input.max=String(max); input.step="any";
+  }
   const save = document.createElement("button");
   save.type = "submit"; save.textContent = "Save metadata";
   const message = document.createElement("div");
   message.className = "status";
-  panel.append(caption,alt,country,destination,adventure,day,save,message);
+  panel.append(caption,alt,country,destination,adventure,day,taken,latitude,longitude,save,message);
   item.appendChild(panel);
   const get = name => panel.elements.namedItem(name);
   try {
@@ -628,6 +635,9 @@ async function openMetadata(item, obj, button) {
     if (p) {
       get("caption").value = p.caption || "";
       get("alt_text").value = p.alt_text || "";
+      get("taken_at").value = p.taken_at || "";
+      get("latitude").value = p.latitude ?? "";
+      get("longitude").value = p.longitude ?? "";
       if (p.destinations?.length) {
         get("country").value = p.destinations[0].country_code;
         destinationSuggestions(get("country").value,suggestions);
@@ -646,7 +656,7 @@ async function openMetadata(item, obj, button) {
     message.style.color = "";
     try {
       const payload = {key:obj.key};
-      for (const name of ["caption","alt_text","country","destination","adventure","day"]) payload[name] = get(name).value;
+      for (const name of ["caption","alt_text","country","destination","adventure","day","taken_at","latitude","longitude"]) payload[name] = get(name).value;
       const res = await fetch("/api/photo-metadata", {method:"PUT",headers:authHeaders({"content-type":"application/json"}),body:JSON.stringify(payload)});
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || "Save failed");
@@ -662,7 +672,10 @@ async function openMetadata(item, obj, button) {
         String(savedDest.country_code||"")===(payload.destination.trim()?payload.country.trim().toUpperCase():"") &&
         String(savedDest.name||"")===payload.destination.trim() &&
         String(savedAdv.adventure_slug||"")===payload.adventure.trim() &&
-        String(savedAdv.day_number??"")===requestedDay;
+        String(savedAdv.day_number??"")===requestedDay &&
+        String(saved.taken_at||"")===payload.taken_at.trim() &&
+        (saved.latitude==null?"":String(Number(saved.latitude)))===(payload.latitude.trim()===""?"":String(Number(payload.latitude))) &&
+        (saved.longitude==null?"":String(Number(saved.longitude)))===(payload.longitude.trim()===""?"":String(Number(payload.longitude)));
       if (!matches) throw new Error("Save accepted, but values differ on read-back. Refresh and review.");
       message.style.color="#237045";
       message.textContent = "✓ Saved and verified in PHOTO_DB.";
