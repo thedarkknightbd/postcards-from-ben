@@ -170,7 +170,22 @@ async function load(){
    img.src="/api/private-image?key="+encodeURIComponent(item.key);
    img.loading="lazy";img.alt="Private travel photograph";img.referrerPolicy="no-referrer";
    cap.textContent=item.uploaded?new Date(item.uploaded).toLocaleDateString():"Private photograph";
-   fig.append(img,cap);fig.tabIndex=0;fig.setAttribute("role","button");fig.setAttribute("aria-label","View photo details");fig.addEventListener("click",()=>openPhoto(item));fig.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openPhoto(item)}});
+   fig.append(img,cap);fig.tabIndex=0;fig.setAttribute("role","button");fig.setAttribute("aria-label","View photograph");
+   fig.addEventListener("click",()=>openLightbox(item.key));
+   fig.addEventListener("keydown",event=>{if(event.target!==fig)return;if(event.key==="Enter"||event.key===" "){event.preventDefault();openLightbox(item.key)}});
+   if(owner){
+    const controls=document.createElement("div");controls.className="photo-order-actions";
+    const index=shownKeys.indexOf(item.key);
+    for(const [label,step] of [["← Earlier",-1],["Later →",1]]){
+     const move=document.createElement("button");
+     move.type="button";move.textContent=label;
+     move.disabled=index+step<0||index+step>=shownKeys.length;
+     move.setAttribute("aria-label",label+" in album");
+     move.addEventListener("click",event=>{event.stopPropagation();reorderPhoto(item.key,step)});
+     controls.append(move);
+    }
+    fig.append(controls);
+   }
    if(owner){const label=document.createElement("label");label.className="photo-check";const check=document.createElement("input");
     check.type="checkbox";check.checked=selectedKeys.has(item.key);check.addEventListener("click",event=>event.stopPropagation());
     check.onchange=()=>{check.checked?selectedKeys.add(item.key):selectedKeys.delete(item.key);refreshBulkUI()};
@@ -265,6 +280,27 @@ $("uploadForm").addEventListener("submit",async e=>{
 });
 
 let managedAlbum=null,shownKeys=[],selectedKeys=new Set();
+let orderSaving=false;
+async function reorderPhoto(key,step){
+ if(!owner||orderSaving)return;
+ const index=shownKeys.indexOf(key),destination=index+step;
+ if(index<0||destination<0||destination>=shownKeys.length)return;
+ const keys=shownKeys.slice();
+ [keys[index],keys[destination]]=[keys[destination],keys[index]];
+ orderSaving=true;
+ $("bulkStatus").textContent="Saving photo order…";
+ try{
+  const response=await fetch("/api/private-photo-order",{
+   method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},
+   body:JSON.stringify({collection:selected,album:currentAlbum,keys})
+  });
+  const data=await response.json();
+  if(!response.ok)throw Error(data.error||"Could not save order");
+  await load();
+  $("bulkStatus").textContent="Photo order saved.";
+ }catch(error){$("bulkStatus").textContent=error.message+" Reload the album before trying again.";}
+ finally{orderSaving=false}
+}
 function fillDestinations(select,collectionOnly=false,excludeId=""){
  select.replaceChildren();
  for(const [collection,label] of Object.entries(names)){
@@ -413,7 +449,8 @@ async function openPhoto(item){
  const data=await res.json(),metadata=data.metadata||{};
  $("detailTitle").textContent=metadata.title||"Photograph details";
  $("detailStatus").textContent="";
- for(const [key,label] of [...photoFields,...readonlyFields]){
+ // Keep technical EXIF fields in the owner's editor, not in the gallery view.
+ for(const [key,label] of [["title","Title"],["caption","Caption"],["country","Country"],["location","Location"],["visit","Visit"],["exhibit","Exhibit"],["taken_at","Date taken"]]){
   if(metadata[key]===null||metadata[key]===undefined||metadata[key]==="")continue;
   const dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=label;dd.textContent=metadata[key];$("detailInfo").append(dt,dd);
  }
@@ -468,6 +505,9 @@ $("photoDeleteButton").addEventListener("click",async()=>{
  try{
   const info=await fetch("/api/access/me",{credentials:"same-origin",cache:"no-store"}).then(r=>r.json());
   owner=Boolean(info.can_manage_site);
+  $("lightboxEdit").hidden=!owner;
+  $("lightboxMoveDestination").hidden=!owner;
+  $("lightboxMove").hidden=!owner;
   if(owner){$("ownerPanel").hidden=false;$("bethelQuickSetup").hidden=false;}
   await loadAlbums();fillDestinations($("bulkDestination"));await load();
  }catch{ $("photos").textContent="This collection is temporarily unavailable." }
