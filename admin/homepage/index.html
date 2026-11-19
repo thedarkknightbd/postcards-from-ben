@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b2d55">
+<title>Homepage Management · Postcards from Ben</title>
+<style>
+:root{--navy:#0b2d55;--sky:#7bafd4;--cream:#f7f3e8;--ink:#243b50;--line:#d6e2eb;--muted:#607889}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.55 system-ui,-apple-system,sans-serif}
+main{max-width:1130px;margin:auto;padding:25px 20px 80px}header{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px}
+a{color:var(--navy)}h1,h2,h3{font:400 1.6rem Georgia,serif;color:var(--navy)}h1{font-size:clamp(2.4rem,5vw,3.6rem);margin:8px 0 12px}.brand{font:600 1.1rem Georgia,serif;color:var(--navy)}
+.eyebrow{color:#4383b1;font-size:.74rem;letter-spacing:.15em;font-weight:750;margin-top:30px}
+.muted{color:var(--muted);font-size:.9rem}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:24px;margin-top:18px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 12px}button{font:600 .91rem system-ui;border:none;border-radius:9px;padding:11px 16px;cursor:pointer;background:var(--navy);color:white}button.secondary,.tab{background:#e9f2f8;color:var(--navy)}button.danger{background:#f8e9e7;color:#873931}button.active{background:var(--navy);color:white}button:disabled{opacity:.48;cursor:not-allowed}
+input,textarea,select{width:100%;background:white;border:1px solid #b5cbd8;border-radius:10px;padding:11px 12px;color:var(--ink);font:inherit}
+textarea{min-height:105px;resize:vertical}label{display:block;font-size:.85rem;font-weight:650;margin:13px 0 5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:13px;background:#fbfdfe}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.card-head h3{margin:0;font-size:1.2rem}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin:23px 0 8px;align-items:center}
+.status{display:inline-block;padding:4px 11px;font-size:.8rem;font-weight:700;border-radius:25px;background:#e5f3e9;color:#1b6844}
+.note{margin:15px 0;border-radius:10px;background:#f4efe5;padding:12px 15px;color:#5b6170}
+#notice{min-height:24px;font-size:.9rem}.rows{display:grid;gap:12px}
+dialog{width:min(720px,94vw);max-height:85vh;border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 20px 65px #102b4066}dialog::backdrop{background:#071c3199}
+.preview-content{white-space:pre-wrap;line-height:1.75;margin-bottom:18px}.hide[hidden],[hidden]{display:none!important}
+@media(max-width:670px){.grid{grid-template-columns:1fr}main{padding:15px}.panel{padding:18px}}
+</style></head>
+<body><main>
+<header><div class="brand">✦ Postcards from Ben / Administration</div><a href="/admin/">← Dashboard</a></header>
+<p class="eyebrow">NATIVE CONTENT STUDIO</p><h1>Homepage Management</h1>
+<p class="muted">Manage your adventure status and future destinations. Save a private draft, preview its contents, and publish it to GitHub when ready. The public homepage design stays unchanged.</p>
+<nav class="tabs" aria-label="Homepage sections">
+<button class="tab active" type="button" data-section="adventure-status">Adventure Status</button>
+<button class="tab" type="button" data-section="where-to-next">Where to Next?</button>
+</nav>
+<section class="panel">
+<div class="card-head"><h2 id="sectionHeading">Adventure Status</h2><span class="status" id="state">Loading…</span></div>
+<div class="note" id="description">Private drafts do not change your public homepage.</div>
+<div id="statusFields" hidden>
+<label for="siteStatus">Homepage status</label><select id="siteStatus">
+<option value="between">Between Adventures</option><option value="traveling">Currently Traveling</option><option value="upcoming">Planning Next Adventure</option>
+</select>
+<div class="grid">
+<div class="box"><h3>Current Adventure</h3>
+<label for="currentTitle">Title</label><input id="currentTitle" maxlength="200">
+<label for="currentDescription">Description</label><textarea id="currentDescription" maxlength="2500"></textarea>
+<label for="currentUrl">Page path</label><input id="currentUrl" placeholder="/trips/..." maxlength="500"></div>
+<div class="box"><h3>Upcoming Adventure</h3>
+<label for="upcomingTitle">Title</label><input id="upcomingTitle" maxlength="200">
+<label for="upcomingDescription">Description</label><textarea id="upcomingDescription" maxlength="2500"></textarea>
+<label for="upcomingUrl">Page path</label><input id="upcomingUrl" placeholder="/trips/..." maxlength="500"></div>
+</div></div>
+<div id="futureFields" hidden>
+<label for="futureIntro">Introduction to Where to Next?</label><textarea id="futureIntro" maxlength="4000"></textarea>
+<div class="card-head"><h3>Destinations</h3><button type="button" id="addIdea" class="secondary">+ Add destination</button></div>
+<div class="rows" id="ideaList"></div></div>
+<div class="actions">
+<button id="save" type="button">Save Private Draft</button>
+<button id="preview" type="button" class="secondary">Preview</button>
+<button id="publish" type="button" disabled>Publish Homepage</button>
+<button id="discard" type="button" class="danger" disabled>Discard Draft</button>
+<a href="/" target="_blank" rel="noopener noreferrer">View public homepage</a>
+</div>
+<p class="muted" id="publishHelp">Checking publishing readiness…</p>
+<p id="notice" role="status" aria-live="polite"></p>
+</section></main>
+<dialog id="previewDialog" aria-labelledby="previewHeading">
+<p class="eyebrow">PRIVATE CONTENT PREVIEW · NOT PUBLISHED</p>
+<h2 id="previewHeading">Homepage</h2><div id="previewBody" class="preview-content"></div>
+<p class="muted">Content preview only. The actual homepage will retain its current images and layout.</p>
+<button id="closePreview" class="secondary" type="button">Close preview</button>
+</dialog>
+<script>
+const $=id=>document.getElementById(id);
+let section="adventure-status",source=null,draft=null,working=null,dirty=false,previewed=false,busy=false,configured=false;
+const base="/api/admin/homepage?section=";
+const esc=s=>String(s??"");
+const status=(message,bad=false)=>{$("notice").textContent=message;$("notice").style.color=bad?"#963d38":"#25724a"};
+const url=()=>base+encodeURIComponent(section);
+const clone=x=>structuredClone(x);
+async function json(url,options={}){
+ const r=await fetch(url,{credentials:"same-origin",cache:"no-store",...options});
+ const d=await r.json();if(!r.ok)throw Error(d.error||"Request failed");return d;
+}
+function ideaTemplate(item,index){
+ const box=document.createElement("div");box.className="box idea";
+ box.innerHTML='<div class="card-head"><h3></h3><div><button class="secondary" type="button" data-move="-1" title="Move up">↑</button> <button class="secondary" type="button" data-move="1" title="Move down">↓</button> <button class="danger" type="button" data-remove>Remove</button></div></div><div class="grid"><div><label>Destination</label><input data-key="title" maxlength="160"></div><div><label>Stage</label><select data-key="stage"><option value="dreaming">Dreaming About</option><option value="planning">Taking Shape</option><option value="upcoming">Coming Up Next</option></select></div></div><label>Description</label><textarea data-key="description" maxlength="3000"></textarea><div class="grid"><div><label>Image path (optional)</label><input data-key="image" maxlength="500" placeholder="/photos/..."></div><div><label>Details path (optional)</label><input data-key="url" maxlength="500" placeholder="/trips/..."></div></div>';
+ box.querySelector("h3").textContent="Destination "+(index+1);
+ for(const key of ["title","stage","description","image","url"])box.querySelector('[data-key="'+key+'"]').value=esc(item[key]??(key==="stage"?"dreaming":""));
+ box.querySelector("[data-remove]").onclick=()=>{if(!confirm("Remove this destination from the draft?"))return;box.remove();renumber();changed()};
+ box.querySelectorAll("[data-move]").forEach(btn=>btn.onclick=()=>{
+  const siblings=[...$("ideaList").children],i=siblings.indexOf(box),j=i+Number(btn.dataset.move);
+  if(j<0||j>=siblings.length)return;
+  if(j>i)$("ideaList").insertBefore(siblings[j],box);else $("ideaList").insertBefore(box,siblings[j]);
+  renumber();changed();
+ });
+ return box;
+}
+function renumber(){[...$("ideaList").children].forEach((x,i)=>x.querySelector("h3").textContent="Destination "+(i+1))}
+function readValues(){
+ const out=clone(working);
+ if(section==="adventure-status"){
+  out.status=$("siteStatus").value;
+  for(const name of ["current","upcoming"]){
+   const k=name+"Adventure";out[k]={...out[k],
+    title:$(name+"Title").value,description:$(name+"Description").value,url:$(name+"Url").value};
+  }
+ }else{
+  out.intro=$("futureIntro").value;
+  out.ideas=[...$("ideaList").children].map(box=>{
+   const x={};for(const key of ["title","stage","description","image","url"])x[key]=box.querySelector('[data-key="'+key+'"]').value;
+   return x;
+  });
+ }
+ return out;
+}
+function fill(entry){
+ working=clone(entry);
+ if(section==="adventure-status"){
+  $("statusFields").hidden=false;$("futureFields").hidden=true;
+  $("siteStatus").value=entry.status;
+  for(const name of ["current","upcoming"]){
+   const x=entry[name+"Adventure"]||{};
+   for(const key of ["Title","Description","Url"])$(name+key).value=esc(x[key.toLowerCase()]||"");
+  }
+ }else{
+  $("statusFields").hidden=true;$("futureFields").hidden=false;
+  $("futureIntro").value=esc(entry.intro);$("ideaList").replaceChildren();
+  for(const item of entry.ideas||[])$("ideaList").appendChild(ideaTemplate(item,$("ideaList").children.length));
+ }
+ dirty=false;previewed=false;readiness();
+}
+function changed(){dirty=true;previewed=false;readiness();status("Unsaved changes.")}
+function readiness(){
+ const hasDraft=draft?.status==="draft",baseline=!!draft?.base_sha,match=source?.sha&&draft?.base_sha===source.sha;
+ const ready=!!(configured&&!dirty&&!busy&&previewed&&hasDraft&&baseline&&match);
+ $("publish").disabled=!ready;$("save").disabled=!working||busy;$("preview").disabled=!working;
+ $("discard").disabled=!draft||busy;
+ $("state").textContent=draft?.status==="draft"?"Private draft":draft?.status==="published_pending_deploy"?"Committed · Deploy pending":"Published version";
+ if(!source)$("publishHelp").textContent="GitHub source check unavailable. Existing private drafts can be viewed, but new drafts and publishing require GitHub.";
+ else if(!configured)$("publishHelp").textContent="GitHub publishing secret is not configured for this deployment.";
+ else if(draft&&!baseline)$("publishHelp").textContent="Legacy draft has no source baseline. Download its contents before recreating it.";
+ else if(draft&&baseline&&!match)$("publishHelp").textContent="Source content changed. Resolve the conflict before publishing.";
+ else if(!hasDraft)$("publishHelp").textContent="Save a private draft before publishing.";
+ else if(dirty)$("publishHelp").textContent="Save your latest edits before previewing and publishing.";
+ else if(!previewed)$("publishHelp").textContent="Open Preview to review your saved draft before publishing.";
+ else $("publishHelp").textContent="Ready to publish. Confirm to commit the homepage update to GitHub.";
+}
+async function load(name){
+ if(dirty&&!confirm("Leave this section and lose unsaved changes?"))return false;
+ section=name;source=null;draft=null;working=null;busy=true;dirty=false;previewed=false;
+ document.querySelectorAll("[data-section]").forEach(b=>b.classList.toggle("active",b.dataset.section===name));
+ $("sectionHeading").textContent=name==="adventure-status"?"Adventure Status":"Where to Next?";
+ $("statusFields").hidden=true;$("futureFields").hidden=true;
+ status("Loading homepage content…");readiness();
+ try{
+  const result=await json(url());source=result.source;draft=result.draft;configured=result.configured;
+  let entry=draft?.entry||source?.entry;
+  if(!entry){
+   // Static public content is a read-only fallback if GitHub API is unavailable.
+   entry=await json(name==="adventure-status"?"/data/home-adventure.json":"/data/where-to-next.json");
+  }
+  fill(entry);
+  status(result.source_error?"Content loaded; GitHub publishing check unavailable: "+result.source_error:"Ready to edit.",!!result.source_error);
+ }catch(e){status("Could not load homepage settings: "+e.message,true)}
+ finally{busy=false;readiness()}
+ return true;
+}
+async function save(){
+ if(busy||!working)return;
+ busy=true;readiness();status("Saving private draft…");
+ try{
+  const entry=readValues(),d=await json(url(),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({action:"save",entry,base_sha:source?.sha})});
+  draft={entry,base_sha:d.base_sha,status:"draft",saved_at:d.saved_at};fill(entry);
+  status("Private draft saved. Your public homepage has not changed.");
+ }catch(e){status(e.message,true)}finally{busy=false;readiness()}
+}
+function preview(){
+ try{
+  const entry=readValues();
+  $("previewHeading").textContent=section==="adventure-status"?"Adventure Status":"Where to Next?";
+  if(section==="adventure-status"){
+   $("previewBody").textContent="Homepage status: "+entry.status+"\\n\\nCurrent Adventure\\n"+entry.currentAdventure.title+"\\n"+entry.currentAdventure.description+"\\n"+entry.currentAdventure.url+"\\n\\nUpcoming Adventure\\n"+entry.upcomingAdventure.title+"\\n"+entry.upcomingAdventure.description+"\\n"+entry.upcomingAdventure.url;
+  }else $("previewBody").textContent=entry.intro+"\\n\\n"+entry.ideas.map((x,i)=>(i+1)+". "+x.title+" ("+x.stage+")\\n"+x.description+"\\n"+x.image+" "+x.url).join("\\n\\n");
+  $("previewDialog").showModal();previewed=true;readiness();
+ }catch(e){status(e.message,true)}
+}
+async function publish(){
+ if($("publish").disabled)return;
+ if(!confirm("Publish these homepage changes to GitHub? Cloudflare will deploy them afterward."))return;
+ busy=true;readiness();status("Publishing to GitHub…");
+ try{
+  const d=await json(url(),{method:"POST",headers:{"content-type":"application/json"},
+   body:JSON.stringify({action:"publish",confirmation:"PUBLISH",source_sha:source.sha})});
+  draft.status="published_pending_deploy";dirty=false;previewed=false;
+  status("Committed to GitHub. Cloudflare deployment may still be in progress. Commit "+d.commit_sha.slice(0,8));
+  const a=document.createElement("a");a.href=d.commit_url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=" View GitHub commit";$("notice").appendChild(a);
+ }catch(e){status(e.message,true)}finally{busy=false;readiness()}
+}
+async function discard(){
+ if(!draft||!confirm("Discard this private homepage draft?"))return;
+ busy=true;readiness();
+ try{
+  await json(url(),{method:"DELETE"});draft=null;
+  const entry=source?.entry||await json(section==="adventure-status"?"/data/home-adventure.json":"/data/where-to-next.json");
+  fill(entry);status("Draft discarded; published settings unchanged.");
+ }catch(e){status(e.message,true)}finally{busy=false;readiness()}
+}
+document.querySelectorAll("[data-section]").forEach(b=>b.onclick=async()=>{await load(b.dataset.section)});
+$("statusFields").addEventListener("input",changed);
+$("statusFields").addEventListener("change",changed);
+$("futureFields").addEventListener("input",changed);
+$("futureFields").addEventListener("change",changed);
+$("addIdea").onclick=()=>{if($("ideaList").children.length>=15){status("Maximum 15 destinations.",true);return}
+ $("ideaList").appendChild(ideaTemplate({title:"",stage:"dreaming",description:"",image:"",url:""},$("ideaList").children.length));changed()};
+$("save").onclick=save;$("preview").onclick=preview;$("publish").onclick=publish;$("discard").onclick=discard;
+$("closePreview").onclick=()=>$("previewDialog").close();
+window.addEventListener("beforeunload",event=>{if(dirty){event.preventDefault();event.returnValue=""}});
+load("adventure-status");
+</script></body></html>
