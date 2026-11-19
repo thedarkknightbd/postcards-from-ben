@@ -4,8 +4,8 @@ const $=id=>document.getElementById(id);
 const parentOf=id=>albums.find(a=>a.id===id&&a.collection===selected);
 function albumName(id){return parentOf(id)?.title||names[selected]}
 const bethelAlbums=[
-  "Slovakia — Bratislava","Hungary — Budapest","Slovenia — Kamnik",
-  "Croatia — Zagreb","Netherlands — Emmen","Germany — Selters"
+  "Slovakia Bethel","Hungary Bethel","Slovenia Bethel",
+  "Croatia Bethel","Netherlands Bethel","Germany — Selters Bethel"
 ];
 let lightboxReturnFocus=null;
 function openFullSize(){
