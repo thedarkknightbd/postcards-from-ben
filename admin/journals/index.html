@@ -179,12 +179,15 @@ async function loadDay(day){
  if(dirty&&!confirm("Leave this day? Unsaved changes will be lost."))return;
  busy=true;status("Loading "+dayLabel(day)+"…");
  try{
-  const [source,draft]=await Promise.all([
-   getJson(publisher+"?trip=the-long-way-around&day="+pad(day)),
-   getJson(api+"?day="+pad(day))
+  const [pub,draft]=await Promise.all([
+   getJson(source(day)),getJson(api+"?day="+pad(day))
   ]);
-  const pub=source.source_entry;
-  daySha=source.source_sha;publishConfigured=source.configured;
+  // Reading the editor must not depend on GitHub API availability.
+  // GitHub metadata is needed only for safely saving and publishing a draft.
+  let publishInfo=null,publishIssue="";
+  try{publishInfo=await getJson(publisher+"?trip=the-long-way-around&day="+pad(day));}
+  catch(error){publishIssue=error.message;}
+  daySha=publishInfo?.source_sha||null;publishConfigured=Boolean(publishInfo?.configured);
   dayDraftBase=draft.draft?.base_sha||null;dayDraftState=draft.draft?.status||null;previewed=false;
   if(!pub||pub.dayNumber!==day)throw Error("Published day file is invalid");
   currentDay=day;published=pub;fillForm(draft.draft?.entry||pub);
@@ -195,8 +198,8 @@ async function loadDay(day){
   $("savedAt").textContent=draft.draft?.saved_at?"Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
   $("viewDay").href=publishedUrl(day);
   $("discard").disabled=!draft.draft;
-  drawList();refreshPublishUi();status("Ready to edit.");
- }catch(e){status(e.message,true)}
+  drawList();refreshPublishUi();status(publishIssue?"Postcard loaded. GitHub publishing check unavailable: "+publishIssue:"Ready to edit.",Boolean(publishIssue));
+ }catch(e){$("editor").hidden=true;$("overviewEditor").hidden=true;$("empty").hidden=false;$("empty").querySelector("p").textContent="Unable to load this postcard: "+e.message;status(e.message,true)}
  finally{busy=false}
 }
 async function saveDraft(event){
@@ -261,11 +264,15 @@ async function loadOverview(){
  busy=true;tripNotice("Loading adventure…");
  try{
   const [pub,draft]=await Promise.all([
-   getJson(publishUrl()),getJson(tripApi())
+   getJson("/trips/"+currentTrip.slug+"/postcard.json"),getJson(tripApi())
   ]);
-  overviewPublished=pub.source_entry;overviewSha=pub.source_sha;publishConfigured=pub.configured;
+  // The public trip JSON is the reading source; GitHub metadata is optional for opening the editor.
+  let publishInfo=null,publishIssue="";
+  try{publishInfo=await getJson(publishUrl());}
+  catch(error){publishIssue=error.message;}
+  overviewPublished=pub;overviewSha=publishInfo?.source_sha||null;publishConfigured=Boolean(publishInfo?.configured);
   overviewDraftBase=draft.draft?.base_sha||null;overviewDraftState=draft.draft?.status||null;previewed=false;
-  overviewDraft=Boolean(draft.draft);fillOverview(draft.draft?.entry||pub.source_entry);
+  overviewDraft=Boolean(draft.draft);fillOverview(draft.draft?.entry||pub);
   $("editor").hidden=true;$("empty").hidden=true;$("overviewEditor").hidden=false;
   $("overviewHeading").textContent=currentTrip.title;
   $("overviewStatus").textContent=overviewDraft?"Private draft":"Published version";
@@ -274,8 +281,8 @@ async function loadOverview(){
    "Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
   $("tripDiscard").disabled=!overviewDraft;
   $("tripPublished").href="/trips/"+currentTrip.slug+"/";
-  refreshPublishUi();tripNotice("Ready to edit.");
- }catch(e){tripNotice(e.message,true)}
+  refreshPublishUi();tripNotice(publishIssue?"Postcard loaded. GitHub publishing check unavailable: "+publishIssue:"Ready to edit.",Boolean(publishIssue));
+ }catch(e){$("editor").hidden=true;$("overviewEditor").hidden=true;$("empty").hidden=false;$("empty").querySelector("p").textContent="Unable to load this adventure: "+e.message;tripNotice(e.message,true)}
  finally{busy=false}
 }
 async function saveOverview(event){
@@ -355,7 +362,8 @@ function refreshPublishUi(){
  const button=$(currentTrip.mode==="days"?"publish":"tripPublish");
  button.disabled=!active;
  const help=$(currentTrip.mode==="days"?"publishHelp":"tripPublishHelp");
- if(!publishConfigured)help.textContent="Publishing is not enabled yet. Configure the private Cloudflare GITHUB_PUBLISH_TOKEN secret; Preview and private drafts are available now.";
+ if(!sha)help.textContent="Postcard editing is available, but the GitHub source check failed. Publishing and new draft creation require GitHub to be reachable. No existing content was changed.";
+ else if(!publishConfigured)help.textContent="Publishing is not enabled yet. Configure the private Cloudflare GITHUB_PUBLISH_TOKEN secret; Preview and private drafts are available now.";
  else if(!hasDraft)help.textContent="Save a private draft to enable publishing.";
  else if(!draftBase)help.textContent="This older draft has no source baseline. Preserve/download it, then discard and recreate it before publishing.";
  else if(draftBase!==sha)help.textContent="Published content changed since the draft began. Compare and recreate the draft before publishing.";
