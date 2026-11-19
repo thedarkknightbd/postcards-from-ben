@@ -81,15 +81,9 @@
   <h1>Public Photo Library</h1>
   <p>Manage your selected adventure and day here—upload, organize, bulk tag, and edit public photos. Your existing Cloudflare R2 media library remains unchanged.</p>
 
-  <section class="card">
-    <label for="token">Upload key</label>
-    <input id="token" type="password" autocomplete="current-password" placeholder="Enter your media upload key">
-    <div class="token-actions">
-      <button id="saveSession" class="secondary">Use this session</button>
-      <button id="saveDevice" class="secondary">Remember on this device</button>
-    </div>
-    <button id="forgetToken" class="secondary" style="margin-top:10px">Forget saved key</button>
-    <p class="hint">Only use “Remember on this device” on a device you trust.</p>
+  <section class="card" aria-label="Sign-in status">
+    <strong>Signed in as site owner</strong>
+    <p class="hint">Public photo uploads, sorting and metadata changes now use your existing secure Owner session. No separate upload key is required.</p>
   </section>
 
   <section class="card">
@@ -170,7 +164,6 @@ const MAX_VIDEO_BYTES = 500 * 1024 * 1024;
 const VIDEO_PART_BYTES = 25 * 1024 * 1024;
 
 const tripEl = document.getElementById("trip");
-const tokenEl = document.getElementById("token");
 const kindEl = document.getElementById("kind");
 const dayEl = document.getElementById("day");
 const dayWrap = document.getElementById("dayWrap");
@@ -201,31 +194,6 @@ for (let i = 1; i <= 24; i++) {
   const n = String(i).padStart(2, "0");
   dayEl.insertAdjacentHTML("beforeend", `<option value="${n}">Day ${i}</option>`);
 }
-
-tokenEl.value =
-  localStorage.getItem("postcards-media-token") ||
-  sessionStorage.getItem("postcards-media-token") ||
-  "";
-
-document.getElementById("saveSession").addEventListener("click", () => {
-  const token = tokenEl.value.trim();
-  sessionStorage.setItem("postcards-media-token", token);
-  setStatus("Upload key saved for this browser session.");
-});
-
-document.getElementById("saveDevice").addEventListener("click", () => {
-  const token = tokenEl.value.trim();
-  localStorage.setItem("postcards-media-token", token);
-  sessionStorage.removeItem("postcards-media-token");
-  setStatus("Upload key remembered on this device.");
-});
-
-document.getElementById("forgetToken").addEventListener("click", () => {
-  localStorage.removeItem("postcards-media-token");
-  sessionStorage.removeItem("postcards-media-token");
-  tokenEl.value = "";
-  setStatus("Saved upload key removed from this device.");
-});
 
 tripEl.addEventListener("change", () => {
   configureLocations();
@@ -298,17 +266,10 @@ function prefix() {
   return `${root}/${kindEl.value}/`;
 }
 
-function token() {
-  return (
-    tokenEl.value.trim() ||
-    localStorage.getItem("postcards-media-token") ||
-    sessionStorage.getItem("postcards-media-token") ||
-    ""
-  );
-}
-
 function authHeaders(extra = {}) {
-  return { ...extra, Authorization: `Bearer ${token()}` };
+  // Owner session cookie is attached automatically for same-origin requests.
+  // Never send the deprecated media upload key from this page.
+  return extra;
 }
 
 function setStatus(message) {

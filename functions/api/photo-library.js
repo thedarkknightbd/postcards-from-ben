@@ -1,8 +1,9 @@
+import {mediaAuthorized} from "../_lib/media-auth.js";
 // Private searchable photo metadata index. Read-only; R2 objects remain unchanged.
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{"content-type":"application/json","cache-control":"no-store"}});
 export async function onRequestGet({request,env}) {
   if (!env.PHOTO_DB) return json({error:"PHOTO_DB is not configured"},503);
-  if (!env.MEDIA_UPLOAD_TOKEN || request.headers.get("Authorization")!==`Bearer ${env.MEDIA_UPLOAD_TOKEN}`) return json({error:"Unauthorized"},401);
+  if (!(await mediaAuthorized(request,env))) return json({error:"Unauthorized"},401);
   const q=new URL(request.url).searchParams;
   const search=(q.get("q")||"").trim().slice(0,100);
   const country=(q.get("country")||"").trim().toUpperCase().slice(0,2);
