@@ -27,3 +27,5 @@ jobs:
           node --check js/travel-map.js
           node --check js/past-postcard.js
           node --check js/day-page.js
+      - name: Verify location membership and sharing access gates
+        run: node --experimental-default-type=module --test tests/location-access.test.mjs
