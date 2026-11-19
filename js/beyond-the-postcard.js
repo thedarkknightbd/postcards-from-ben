@@ -164,6 +164,8 @@ async function load(){
   if(!res.ok)throw Error("This gallery is unavailable");
   const data=await res.json();
   shownKeys=data.items.map(item=>item.key);refreshBulkUI();
+  $("reversePhotoOrder").disabled=!owner||shownKeys.length<2||orderSaving;
+  $("reorderToggle").disabled=!owner||shownKeys.length<2||orderSaving;
   $("count").textContent=data.items.length+" photographs";
   if(!data.items.length){
     const p=document.createElement("p");p.className="gallery-empty";
@@ -325,6 +327,16 @@ $("uploadForm").addEventListener("submit",async e=>{
 
 let managedAlbum=null,shownKeys=[],selectedKeys=new Set();
 let orderSaving=false,arranging=false,dragPhotoKey="";
+function showOrderStatus(message){
+ const el=$("photoOrderStatus");
+ el.hidden=false;
+ el.textContent=message;
+}
+$("reversePhotoOrder").addEventListener("click",async()=>{
+ if(!owner||orderSaving||shownKeys.length<2)return;
+ if(!confirm("Reverse the display sequence of all "+shownKeys.length+" photos in this album? Your photos and albums will not be moved or deleted."))return;
+ await savePhotoOrder([...shownKeys].reverse());
+});
 $("reorderToggle").addEventListener("click",()=>{
  arranging=!arranging;
  $("reorderToggle").setAttribute("aria-pressed",String(arranging));
@@ -343,18 +355,29 @@ async function reorderPhoto(key,step){
 async function savePhotoOrder(keys){
  if(!owner||orderSaving)return;
  orderSaving=true;
- $("bulkStatus").textContent="Saving photo order…";
+ $("reversePhotoOrder").disabled=true;
+ $("reorderToggle").disabled=true;
+ showOrderStatus("Saving photo sequence…");
+ const collection=selected,album=currentAlbum;
  try{
   const response=await fetch("/api/private-photo-order",{
    method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},
-   body:JSON.stringify({collection:selected,album:currentAlbum,keys})
+   body:JSON.stringify({collection,album,keys})
   });
   const data=await response.json();
   if(!response.ok)throw Error(data.error||"Could not save order");
-  await load();
-  $("bulkStatus").textContent="Photo order saved.";
- }catch(error){$("bulkStatus").textContent=error.message+" Reload the album before trying again.";}
- finally{orderSaving=false}
+  if(collection===selected&&album===currentAlbum){
+   await load();
+   if(shownKeys.join("\\u0000")!==keys.join("\\u0000"))throw Error("Saved, but the displayed sequence did not match. Refresh the album.");
+  }
+  showOrderStatus("Photo sequence saved. The new order will remain after refreshing.");
+ }catch(error){
+  showOrderStatus("Could not verify the new sequence: "+error.message);
+ }finally{
+  orderSaving=false;
+  $("reversePhotoOrder").disabled=false;
+  $("reorderToggle").disabled=false;
+ }
 }
 function fillDestinations(select,collectionOnly=false,excludeId=""){
  select.replaceChildren();
@@ -561,6 +584,7 @@ $("photoDeleteButton").addEventListener("click",async()=>{
   const info=await fetch("/api/access/me",{credentials:"same-origin",cache:"no-store"}).then(r=>r.json());
   owner=Boolean(info.can_manage_site);
   $("reorderToggle").hidden=!owner;
+  $("reversePhotoOrder").hidden=!owner;
   $("lightboxEdit").hidden=!owner;
   $("lightboxMoveDestination").hidden=!owner;
   $("lightboxMove").hidden=!owner;
