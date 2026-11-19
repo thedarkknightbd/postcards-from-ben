@@ -316,7 +316,7 @@ async function renderAtlasPhotos(place,details){
         }
         const grid=document.createElement("div");
         grid.className="atlas-photo-grid";
-        for(const photo of result.photos){
+        result.photos.forEach((photo,index)=>{
             const figure=document.createElement("figure");
             const image=document.createElement("img");
             image.src=photo.src;
@@ -326,14 +326,17 @@ async function renderAtlasPhotos(place,details){
             image.addEventListener("error",()=>figure.remove(),{once:true});
             const link=document.createElement("a");
             link.href=photo.src;
-            link.target="_blank";
-            link.rel="noopener noreferrer";
-            link.setAttribute("aria-label","Open photograph from "+place.name+" at full size");
+            link.setAttribute("aria-label","View photograph from "+place.name);
+            link.addEventListener("click",event=>{
+                if(!window.PostcardsPhotoViewer)return;
+                event.preventDefault();
+                window.PostcardsPhotoViewer.open(result.photos,index);
+            });
             link.append(image);
             const caption=document.createElement("figcaption");
             caption.textContent=photo.caption||photo.destination||place.name;
             figure.append(link,caption);grid.append(figure);
-        }
+        });
         section.append(grid);
     }catch{
         if(id!==atlasPhotoRequest||!section.isConnected)return;
