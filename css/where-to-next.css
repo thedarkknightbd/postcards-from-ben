@@ -59,6 +59,7 @@
 /* Editorial refinement — wider page hero, balanced typography and closer
    transition into the introduction. Does not change destination cards. */
 .next-page {
+  width:min(1380px,100%);
   max-width:1380px;
   padding-inline:clamp(16px,2.6vw,36px);
 }
