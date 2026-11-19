@@ -22,6 +22,8 @@ function updateLightbox(key){
  $("lightboxPrev").disabled=index===0;
  $("lightboxNext").disabled=index===shownKeys.length-1;
  $("lightboxCaption").textContent="";
+ $("lightboxDescription").textContent="";
+ $("lightboxDescription").hidden=true;
  $("lightboxStatus").textContent="";
  if(owner){
   fillDestinations($("lightboxMoveDestination"));
@@ -34,6 +36,9 @@ function updateLightbox(key){
    if(request!==lightboxRequest||!data)return;
    const metadata=data.metadata||{};
    $("lightboxCaption").textContent=metadata.title||metadata.caption||"";
+   const description=String(metadata.caption&&metadata.title?metadata.caption:metadata.alt_text||"").trim();
+   $("lightboxDescription").textContent=description&&description!==$("lightboxCaption").textContent?description:"";
+   $("lightboxDescription").hidden=!$("lightboxDescription").textContent;
    $("lightboxImage").alt=metadata.alt_text||metadata.title||"Private travel photograph";
   }).catch(()=>{});
 }
@@ -213,6 +218,17 @@ async function load(){
      dragPhotoKey="";
      document.querySelectorAll(".drag-over").forEach(el=>el.classList.remove("drag-over"));
     });
+   }
+   if(owner){
+    const quick=document.createElement("button");quick.type="button";
+    quick.textContent="Move to album";
+    quick.className="private-photo-quick-move";
+    quick.addEventListener("click",event=>{
+      event.stopPropagation();
+      openLightbox(item.key);
+      $("lightboxMoveDestination").focus();
+    });
+    fig.append(quick);
    }
    if(owner){const label=document.createElement("label");label.className="photo-check";const check=document.createElement("input");
     check.type="checkbox";check.checked=selectedKeys.has(item.key);check.addEventListener("click",event=>event.stopPropagation());
