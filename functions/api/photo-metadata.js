@@ -49,11 +49,14 @@ export async function onRequest({request, env}) {
   if (!/^[a-z0-9-]+$/.test(adventure) || (day != null && (!Number.isInteger(day) || day < 1 || day > 366))) return reply({error:"Invalid adventure or day"},400);
   const journalUrl = day != null ? `/trips/${adventure}/days/day-${String(day).padStart(2,"0")}.html` : `/trips/${adventure}/`;
   const caption = clean(body.caption,1000), alt = clean(body.alt_text,500);
-  // Preserve EXIF-derived values when the simplified editor does not send them.
-  const existing = await env.PHOTO_DB.prepare("SELECT taken_at,latitude,longitude,gps_altitude_m,camera_make,camera_model FROM photos WHERE r2_key=?").bind(r2Key).first();
-  const taken = existing?.taken_at ?? (clean(body.taken_at,40) || null);
-  const savedLat = existing?.latitude ?? coords[0];
-  const savedLon = existing?.longitude ?? coords[1];
+  // Keep EXIF values when the editor omits a field, but honor explicit corrections.
+  // The previous nullish-coalescing precedence prevented users from updating existing
+  // dates and coordinates, even when the API reported a successful save.
+  const existing = await env.PHOTO_DB.prepare("SELECT taken_at,latitude,longitude FROM photos WHERE r2_key=?").bind(r2Key).first();
+  const supplied = field => Object.prototype.hasOwnProperty.call(body, field);
+  const taken = supplied("taken_at") ? (clean(body.taken_at,40) || null) : (existing?.taken_at ?? null);
+  const savedLat = supplied("latitude") ? coords[0] : (existing?.latitude ?? null);
+  const savedLon = supplied("longitude") ? coords[1] : (existing?.longitude ?? null);
   const id = crypto.randomUUID();
   const db = env.PHOTO_DB;
   try {
