@@ -18,7 +18,7 @@ aside .days{display:grid;gap:6px;max-height:70vh;overflow-y:auto;padding-right:4
 .day .dot{height:8px;width:8px;border-radius:50%;background:#cbd6dd;flex-shrink:0}.day .dot.draft{background:#27866f}
 label{display:block;font-weight:620;font-size:.88rem;margin:15px 0 5px}
 input,textarea{font:inherit;color:var(--ink);width:100%;padding:11px 12px;border:1px solid #b8cad6;border-radius:10px;background:#fff}
-textarea{min-height:110px;resize:vertical;line-height:1.55}textarea.story{min-height:330px}textarea.journal{min-height:165px}
+textarea{min-height:110px;resize:vertical;line-height:1.55}textarea.story{min-height:330px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
 button,.action{border:0;border-radius:9px;background:var(--navy);color:#fff;padding:11px 15px;font:600 .91rem system-ui;cursor:pointer}
 button.secondary,.action.secondary{background:#e8f1f7;color:var(--navy)}button.danger{background:#f9e8e6;color:#7f302b}
@@ -52,10 +52,10 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 <label for="title">Page title</label><input id="title" required maxlength="200">
 <label for="route">Route</label><input id="route" maxlength="500">
 <label for="introTitle">Introduction heading</label><input id="introTitle" maxlength="200">
-<label for="intro">Today's story</label><textarea id="intro" class="story" maxlength="25000"></textarea>
-<label for="journal">Postcard from the Road</label><textarea id="journal" class="journal" maxlength="25000"></textarea>
+<label for="intro">Today's Postcard</label><textarea id="intro" class="story" maxlength="25000"></textarea>
+
 <details><summary>Advanced · Quick facts, stops and remaining metadata</summary>
-<p class="muted">These fields use JSON for this first version. Existing photos, videos, previous/next links and other fields are preserved in your draft.</p>
+<p class="muted">These fields use JSON for this first version. Existing photos, videos, any older reflection text, previous/next links, and other fields are preserved in your draft.</p>
 <label for="facts">Quick facts (JSON list)</label><textarea id="facts" spellcheck="false"></textarea>
 <label for="stops">Stops (JSON list)</label><textarea id="stops" spellcheck="false"></textarea>
 </details>
@@ -76,7 +76,7 @@ details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summar
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
 let currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,busy=false;
-const fields=["date","title","route","introTitle","intro","journal"];
+const fields=["date","title","route","introTitle","intro"];
 const api="/api/admin/journal";
 const source=day=>"/trips/the-long-way-around/data/day-"+pad(day)+".json";
 const publishedUrl=day=>"/trips/the-long-way-around/days/day-"+pad(day)+".html";
