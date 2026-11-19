@@ -214,7 +214,7 @@ async function saveDraft(event){
   $("savedAt").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
   $("discard").disabled=false;status("Private draft saved. Your published site has not changed.");
  }catch(e){status(e.message,true)}
- finally{busy=false;$("save").disabled=false}
+ finally{busy=false;$("save").disabled=false;refreshPublishUi()}
 }
 async function discard(){
  if(busy||!currentDay)return;
@@ -290,7 +290,7 @@ async function saveOverview(event){
   $("overviewSaved").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
   $("tripDiscard").disabled=false;tripNotice("Private draft saved. Published adventure unchanged.");
  }catch(e){tripNotice(e.message,true)}
- finally{busy=false;$("tripSave").disabled=false}
+ finally{busy=false;$("tripSave").disabled=false;refreshPublishUi()}
 }
 async function discardOverview(){
  if(busy||!overviewDraft||!confirm("Discard this private adventure draft?"))return;
@@ -346,7 +346,7 @@ async function start(){
 }
 
 function refreshPublishUi(){
- const hasBaseline=currentTrip.mode==="days"?!!dayDraftBase:!!overviewDraftBase;
+ 
  const hasDraft=currentTrip.mode==="days"?dayDraftState!==null:overviewDraft;
  const sha=currentTrip.mode==="days"?daySha:overviewSha;
  const draftBase=currentTrip.mode==="days"?dayDraftBase:overviewDraftBase;
