@@ -54,3 +54,72 @@
 .next-hero .next-text-link:hover {background:#a9d5f0;transform:translateY(-1px)}
 .next-hero .next-text-link:focus-visible {outline:3px solid white;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.next-hero .next-text-link{transition:none}.next-hero .next-text-link:hover{transform:none}}
+
+
+/* Editorial refinement — wider page hero, balanced typography and closer
+   transition into the introduction. Does not change destination cards. */
+.next-page {
+  width:min(1380px,100%);
+  max-width:1380px;
+  padding-inline:clamp(16px,2.6vw,36px);
+}
+.next-hero {
+  grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);
+  min-height:clamp(440px,39vw,570px);
+  border-radius:0 0 16px 16px;
+}
+.next-hero-copy {
+  min-width:0;
+  padding:clamp(30px,4.4vw,70px);
+  text-align:center;
+  align-items:center;
+}
+.next-hero h1 {
+  font-size:clamp(3.4rem,5.15vw,5rem);
+  line-height:1.04;
+  letter-spacing:-.035em;
+  margin:13px 0 19px;
+  text-wrap:balance;
+}
+.next-hero-copy>p:not(.next-eyebrow){
+  max-width:440px;
+  margin-inline:auto;
+  font-size:clamp(1rem,1.28vw,1.15rem);
+  line-height:1.65;
+}
+.next-hero img {
+  display:block;
+  width:100%;
+  height:100%;
+  max-height:none;
+  min-height:0;
+  object-fit:cover;
+  object-position:center 52%;
+}
+.next-intro {
+  margin-top:clamp(34px,3.5vw,52px);
+  margin-bottom:clamp(42px,4vw,58px);
+}
+/* At navigation scale, keep the wordmark prominent rather than letting
+   the existing photographic postage stamp compete with it. */
+body:has(.next-page) .site-brand {gap:11px}
+body:has(.next-page) .site-brand-icon {
+  width:28px;
+  height:30px;
+  object-fit:contain;
+  border-radius:3px;
+}
+@media(max-width:800px){
+  .next-hero {min-height:400px;grid-template-columns:1.03fr .97fr}
+  .next-hero-copy {padding:clamp(24px,3.8vw,38px)}
+  .next-hero h1 {font-size:clamp(2.7rem,5.5vw,3.6rem)}
+}
+@media(max-width:600px){
+  .next-page {padding-inline:16px}
+  .next-hero {min-height:0;display:flex;flex-direction:column-reverse}
+  .next-hero img {height:240px;max-height:240px}
+  .next-hero-copy {padding:34px 22px 38px}
+  .next-hero h1 {font-size:clamp(2.8rem,10vw,3.7rem);margin:10px 0 14px}
+  .next-hero-copy>p:not(.next-eyebrow){font-size:1rem}
+  .next-intro {margin:34px auto 46px}
+}
