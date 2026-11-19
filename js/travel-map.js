@@ -21,6 +21,7 @@ async function initTravelMap() {
         }
 
         const data = await dataResponse.json();
+        renderCountryList(data, details);
         const world = worldModule.default;
         const countries = topo.feature(
             world,
@@ -265,6 +266,77 @@ function findPlace(feature, visitedNameMap) {
 }
 
 
+// Country buttons are a keyboard- and touch-friendly alternative to SVG shapes.
+function renderCountryList(data,details){
+    const list=document.getElementById("atlas-country-list");
+    if(!list)return;
+    list.replaceChildren();
+    for(const place of [...data.places].sort((a,b)=>a.name.localeCompare(b.name))){
+        const button=document.createElement("button");
+        button.type="button";
+        button.textContent=place.name;
+        button.dataset.country=place.countryCode||"";
+        button.setAttribute("aria-pressed","false");
+        button.addEventListener("click",()=>{
+            selectPlace(place,data,details);
+            details?.scrollIntoView({behavior:"smooth",block:"nearest"});
+        });
+        list.append(button);
+    }
+}
+
+let atlasPhotoRequest=0;
+async function renderAtlasPhotos(place,details){
+    if(!document.getElementById("atlas-country-list")||!place.countryCode)return;
+    const id=++atlasPhotoRequest;
+    const section=document.createElement("section");
+    section.className="atlas-photo-section";
+    section.setAttribute("aria-label","Photographs from "+place.name);
+    const heading=document.createElement("h4");
+    heading.textContent="Photographs from "+place.name;
+    const message=document.createElement("p");
+    message.className="atlas-help";
+    message.textContent="Looking for published photographs…";
+    section.append(heading,message);
+    details.append(section);
+    try{
+        const res=await fetch("/api/atlas-photos?country="+encodeURIComponent(place.countryCode),{cache:"no-store"});
+        if(!res.ok)throw Error("Unavailable");
+        const result=await res.json();
+        if(id!==atlasPhotoRequest||!section.isConnected)return;
+        message.remove();
+        if(!result.available){
+            const p=document.createElement("p");
+            p.className="atlas-help";p.textContent="The photo collection is temporarily unavailable.";
+            section.append(p);return;
+        }
+        if(!result.photos?.length){
+            const p=document.createElement("p");
+            p.className="atlas-help";
+            p.textContent="No published photographs have been tagged to this country yet.";
+            section.append(p);return;
+        }
+        const grid=document.createElement("div");
+        grid.className="atlas-photo-grid";
+        for(const photo of result.photos){
+            const figure=document.createElement("figure");
+            const image=document.createElement("img");
+            image.src=photo.src;
+            image.alt=photo.alt||"Travel photograph";
+            image.loading="lazy";
+            image.decoding="async";
+            image.addEventListener("error",()=>figure.remove(),{once:true});
+            const caption=document.createElement("figcaption");
+            caption.textContent=photo.caption||photo.destination||place.name;
+            figure.append(image,caption);grid.append(figure);
+        }
+        section.append(grid);
+    }catch{
+        if(id!==atlasPhotoRequest||!section.isConnected)return;
+        message.textContent="Country photographs could not be loaded right now.";
+    }
+}
+
 function selectPlace(place, data, details) {
     if (!place || !details) {
         return;
@@ -315,6 +387,10 @@ function selectPlace(place, data, details) {
     `;
 
     details.hidden = false;
+    document.querySelectorAll("#atlas-country-list button").forEach(button=>{
+        button.setAttribute("aria-pressed",String(button.dataset.country===place.countryCode));
+    });
+    renderAtlasPhotos(place,details);
 }
 
 
