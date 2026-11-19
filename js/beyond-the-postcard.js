@@ -3,6 +3,34 @@ let selected="special-moments",currentAlbum="",albums=[],owner=false;
 const $=id=>document.getElementById(id);
 const parentOf=id=>albums.find(a=>a.id===id&&a.collection===selected);
 function albumName(id){return parentOf(id)?.title||names[selected]}
+const bethelAlbums=[
+  "Slovakia — Bratislava","Hungary — Budapest","Slovenia — Kamnik",
+  "Croatia — Zagreb","Netherlands — Emmen","Germany — Selters"
+];
+let lightboxReturnFocus=null;
+function openFullSize(){
+  const dialog=$("privateLightbox");
+  if(!selectedPhoto||!dialog||typeof dialog.showModal!=="function")return;
+  lightboxReturnFocus=document.activeElement;
+  $("lightboxImage").src="/api/private-image?key="+encodeURIComponent(selectedPhoto);
+  $("lightboxCaption").textContent=$("detailTitle").textContent==="Photograph details"?"Private travel photograph":$("detailTitle").textContent;
+  dialog.showModal();
+}
+$("enlargePhoto").addEventListener("click",openFullSize);
+$("detailImage").addEventListener("click",openFullSize);
+$("detailImage").style.cursor="zoom-in";
+$("closeLightbox").addEventListener("click",()=>$("privateLightbox").close());
+$("privateLightbox").addEventListener("click",event=>{
+  if(event.target===$("privateLightbox"))$("privateLightbox").close();
+});
+$("privateLightbox").addEventListener("close",()=>{
+  $("lightboxImage").removeAttribute("src");
+  lightboxReturnFocus?.focus?.();
+});
+$("closePhotoDetails").addEventListener("click",()=>{
+  selectedPhoto=null;$("photoDetails").hidden=true;
+  $("photos").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
 function renderBreadcrumb(){
  const nav=$("albumTrail");nav.replaceChildren();
  const ids=[];let id=currentAlbum;let depth=0;
@@ -72,6 +100,37 @@ document.querySelectorAll("[data-collection]").forEach(button=>button.addEventLi
  document.querySelectorAll("[data-collection]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
  $("collection").value=selected;load();
 }));
+// Owner-initiated, idempotent setup for the six 2026 Bethel visit galleries.
+$("createBethelAlbums").addEventListener("click",async()=>{
+ if(!owner)return;
+ const button=$("createBethelAlbums"),status=$("bethelSetupStatus");
+ button.disabled=true;
+ status.textContent="Checking existing folders…";
+ const existing=new Set(albums.filter(a=>a.collection==="bethel-visits"&&!a.parentId).map(a=>a.title.toLocaleLowerCase("en")));
+ let created=0;const failures=[];
+ try{
+  for(const title of bethelAlbums){
+   if(existing.has(title.toLocaleLowerCase("en")))continue;
+   status.textContent="Creating Bethel folders: "+(created+1)+"…";
+   try{
+    const response=await fetch("/api/private-albums",{
+     method:"POST",credentials:"same-origin",
+     headers:{"content-type":"application/json"},
+     body:JSON.stringify({collection:"bethel-visits",parentId:"",title})
+    });
+    const data=await response.json();
+    if(!response.ok)throw Error(data.error||"Could not create folder");
+    created++;existing.add(title.toLocaleLowerCase("en"));
+   }catch(error){failures.push(title+": "+error.message)}
+  }
+  await loadAlbums();
+  fillDestinations($("bulkDestination"));
+  if(selected==="bethel-visits")await load();
+  status.textContent=created+" new Bethel albums created."+
+   (failures.length?" Problems: "+failures.join("; "):" All six planned folders are now accounted for.");
+ }catch(error){status.textContent="Album setup could not finish: "+error.message}
+ finally{button.disabled=false}
+});
 $("albumForm").addEventListener("submit",async e=>{
  e.preventDefault();if(!owner)return;
  const button=$("createAlbumButton"),msg=$("albumStatus");button.disabled=true;msg.textContent="Creating album…";
@@ -325,7 +384,7 @@ $("photoDeleteButton").addEventListener("click",async()=>{
  try{
   const info=await fetch("/api/access/me",{credentials:"same-origin",cache:"no-store"}).then(r=>r.json());
   owner=Boolean(info.can_manage_site);
-  if(owner)$("ownerPanel").hidden=false;
+  if(owner){$("ownerPanel").hidden=false;$("bethelQuickSetup").hidden=false;}
   await loadAlbums();fillDestinations($("bulkDestination"));await load();
  }catch{ $("photos").textContent="This collection is temporarily unavailable." }
 })();
