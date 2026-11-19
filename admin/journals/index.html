@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b2d55">
+<title>Trips & Journals · Postcards from Ben</title>
+<style>
+:root{--navy:#0b2d55;--sky:#7bafd4;--cream:#f7f3e8;--ink:#23394e;--line:#d6e2eb;--muted:#607889}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);font:16px/1.5 system-ui,-apple-system,sans-serif;color:var(--ink)}
+a{color:var(--navy)}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+main{max-width:1220px;margin:auto;padding:25px 20px 85px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px}
+.brand{font:600 1rem Georgia,serif;color:var(--navy)}.eyebrow{letter-spacing:.14em;color:#4284b0;font-size:.76rem;font-weight:700;margin-top:28px}
+h1,h2,h3{font-family:Georgia,serif;color:var(--navy);font-weight:400}h1{font-size:clamp(2.2rem,5vw,3.5rem);margin:6px 0 12px}h2{font-size:1.55rem;margin:0 0 10px}h3{font-size:1.18rem}
+.intro{max-width:760px;color:var(--muted)}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;margin-top:25px}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;min-width:0}
+aside .days{display:grid;gap:6px;max-height:70vh;overflow-y:auto;padding-right:4px}
+.day{display:flex;justify-content:space-between;align-items:center;width:100%;background:#f8fafb;color:var(--navy);padding:10px 12px;border:1px solid transparent;border-radius:9px;text-align:left;cursor:pointer;font:inherit}
+.day:hover,.day.active{border-color:var(--sky);background:#ebf4fa}.day strong{font-weight:650;font-size:.9rem}.day small{font-size:.74rem;color:#607889}
+.day .dot{height:8px;width:8px;border-radius:50%;background:#cbd6dd;flex-shrink:0}.day .dot.draft{background:#27866f}
+label{display:block;font-weight:620;font-size:.88rem;margin:15px 0 5px}
+input,textarea{font:inherit;color:var(--ink);width:100%;padding:11px 12px;border:1px solid #b8cad6;border-radius:10px;background:#fff}
+textarea{min-height:110px;resize:vertical;line-height:1.55}textarea.story{min-height:330px}textarea.journal{min-height:165px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+button,.action{border:0;border-radius:9px;background:var(--navy);color:#fff;padding:11px 15px;font:600 .91rem system-ui;cursor:pointer}
+button.secondary,.action.secondary{background:#e8f1f7;color:var(--navy)}button.danger{background:#f9e8e6;color:#7f302b}
+button:disabled{opacity:.5;cursor:not-allowed}.action{text-decoration:none;display:inline-block}
+.status{display:inline-flex;background:#edf1f5;border-radius:100px;color:#506b80;padding:5px 11px;font-size:.77rem;font-weight:700}
+.status.draft{background:#e6f5ee;color:#216449}.alert{padding:13px 15px;border-radius:10px;background:#f6f1e8;color:#5a6170;margin:15px 0}
+#notice{min-height:25px;font-size:.9rem}.muted{color:var(--muted);font-size:.9rem}
+details{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}summary{cursor:pointer;font-weight:650;color:var(--navy)}
+#editor[hidden],#empty[hidden]{display:none} .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media(max-width:800px){.layout{grid-template-columns:1fr}aside .days{max-height:250px;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){main{padding:16px 14px 55px}.two{grid-template-columns:1fr}.panel{padding:17px}aside .days{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<header><div class="brand">✦ Postcards from Ben <span class="muted"> / Administration</span></div><a href="/admin/">← Dashboard</a></header>
+<p class="eyebrow">NATIVE CONTENT STUDIO · FIRST EDITION</p>
+<h1>Trips &amp; Journals</h1>
+<p class="intro">Write, revise, and privately save drafts for <strong>The Long Way Around</strong>. Your published pages stay unchanged until you deliberately publish through the existing CMS.</p>
+<div class="layout">
+<aside class="panel"><h2>Adventure days</h2><p class="muted">24 published days · green dots indicate saved private drafts.</p><nav id="days" class="days" aria-label="Choose a day"></nav></aside>
+<section class="panel" aria-label="Journal editor">
+<div id="empty"><h2>Choose a day to begin</h2><p class="muted">Select a day from the list to load its published story and any existing private draft.</p></div>
+<div id="editor" hidden>
+<div class="meta"><h2 id="dayHeading" style="margin:0">Day</h2><span class="status" id="draftStatus">Published version</span></div>
+<p class="muted" id="savedAt"></p>
+<div class="alert"><strong>Draft mode.</strong> Save Draft stores a private working copy. It does <strong>not</strong> update the published trip or push to GitHub. Decap CMS remains available for publishing.</div>
+<form id="entryForm">
+<div class="two">
+<div><label for="date">Date</label><input id="date" required maxlength="100"></div>
+<div><label for="km">Kilometers driven (optional)</label><input id="km" inputmode="numeric" type="number" min="0" step="1"></div>
+</div>
+<label for="title">Page title</label><input id="title" required maxlength="200">
+<label for="route">Route</label><input id="route" maxlength="500">
+<label for="introTitle">Introduction heading</label><input id="introTitle" maxlength="200">
+<label for="intro">Today's story</label><textarea id="intro" class="story" maxlength="25000"></textarea>
+<label for="journal">Postcard from the Road</label><textarea id="journal" class="journal" maxlength="25000"></textarea>
+<details><summary>Advanced · Quick facts, stops and remaining metadata</summary>
+<p class="muted">These fields use JSON for this first version. Existing photos, videos, previous/next links and other fields are preserved in your draft.</p>
+<label for="facts">Quick facts (JSON list)</label><textarea id="facts" spellcheck="false"></textarea>
+<label for="stops">Stops (JSON list)</label><textarea id="stops" spellcheck="false"></textarea>
+</details>
+<div class="toolbar">
+<button id="save" type="submit">Save private draft</button>
+<button id="discard" type="button" class="danger">Discard draft</button>
+<button id="download" type="button" class="secondary">Download JSON</button>
+<a class="action secondary" id="viewDay" target="_blank" rel="noopener noreferrer" href="#">View published day</a>
+<a class="action secondary" href="/admin/editor/">Existing CMS</a>
+</div>
+<p id="notice" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+let currentDay=null,published=null,working=null,draftDays=new Set(),dirty=false,busy=false;
+const fields=["date","title","route","introTitle","intro","journal"];
+const api="/api/admin/journal";
+const source=day=>"/trips/the-long-way-around/data/day-"+pad(day)+".json";
+const publishedUrl=day=>"/trips/the-long-way-around/days/day-"+pad(day)+".html";
+const escapeText=s=>String(s??"");
+function status(text,error=false){$("notice").textContent=text;$("notice").style.color=error?"#a43b35":"#27694e";}
+function dayLabel(day){return "Day "+pad(day)}
+function drawList(){
+ const days=$("days");days.replaceChildren();
+ for(let d=1;d<=24;d++){
+  const item=document.createElement("button");item.type="button";item.className="day"+(d===currentDay?" active":"");
+  const name=document.createElement("strong");name.textContent=dayLabel(d);
+  const marker=document.createElement("span");marker.className="dot"+(draftDays.has(pad(d))?" draft":"");
+  item.append(name,marker);item.title=draftDays.has(pad(d))?"Saved private draft":"Published only";
+  item.addEventListener("click",()=>loadDay(d));days.appendChild(item);
+ }
+}
+async function getJson(url){
+ const r=await fetch(url,{cache:"no-store",credentials:"same-origin"});
+ const data=await r.json();if(!r.ok)throw Error(data.error||"Unable to load content");return data;
+}
+function formValues(){
+ if(!working)throw Error("Select a day");
+ const next=structuredClone(working);
+ for(const field of fields)next[field]=$(field).value;
+ const km=$("km").value.trim();
+ if(km==="")delete next.kilometersDriven;
+ else{
+  const n=Number(km);
+  if(!Number.isSafeInteger(n)||n<0)throw Error("Kilometers must be a nonnegative whole number");
+  next.kilometersDriven=n;
+ }
+ for(const field of ["facts","stops"]){
+  let value;try{value=JSON.parse($(field).value)}catch{throw Error("Invalid JSON in "+field)};
+  if(!Array.isArray(value))throw Error(field+" must be a JSON list");
+  next[field]=value;
+ }
+ return next;
+}
+function fillForm(entry){
+ working=structuredClone(entry);
+ for(const field of fields)$(field).value=escapeText(entry[field]);
+ $("km").value=Number.isSafeInteger(entry.kilometersDriven)?String(entry.kilometersDriven):"";
+ $("facts").value=JSON.stringify(entry.facts??[],null,2);
+ $("stops").value=JSON.stringify(entry.stops??[],null,2);
+ dirty=false;
+}
+async function loadDay(day){
+ if(busy||day===currentDay)return;
+ if(dirty&&!confirm("Leave this day? Unsaved changes will be lost."))return;
+ busy=true;status("Loading "+dayLabel(day)+"…");
+ try{
+  const [pub,draft]=await Promise.all([getJson(source(day)),getJson(api+"?day="+pad(day))]);
+  if(!pub||pub.dayNumber!==day)throw Error("Published day file is invalid");
+  currentDay=day;published=pub;fillForm(draft.draft?.entry||pub);
+  $("editor").hidden=false;$("empty").hidden=true;
+  $("dayHeading").textContent=dayLabel(day)+" · "+(pub.title||"Untitled");
+  $("draftStatus").textContent=draft.draft?"Private draft":"Published version";
+  $("draftStatus").className="status"+(draft.draft?" draft":"");
+  $("savedAt").textContent=draft.draft?.saved_at?"Draft saved "+new Date(draft.draft.saved_at).toLocaleString():"No private draft saved yet.";
+  $("viewDay").href=publishedUrl(day);
+  $("discard").disabled=!draft.draft;
+  drawList();status("Ready to edit.");
+ }catch(e){status(e.message,true)}
+ finally{busy=false}
+}
+async function saveDraft(event){
+ event.preventDefault();if(busy||!currentDay)return;
+ busy=true;$("save").disabled=true;status("Saving private draft…");
+ try{
+  const entry=formValues();
+  if(!entry.title.trim()||!entry.date.trim())throw Error("Title and date are required");
+  const r=await fetch(api+"?day="+pad(currentDay),{
+   method:"POST",credentials:"same-origin",headers:{"content-type":"application/json"},
+   body:JSON.stringify({entry})
+  });const d=await r.json();if(!r.ok)throw Error(d.error||"Could not save draft");
+  working=structuredClone(entry);dirty=false;draftDays.add(pad(currentDay));drawList();
+  $("draftStatus").textContent="Private draft";$("draftStatus").className="status draft";
+  $("savedAt").textContent="Draft saved "+new Date(d.saved_at).toLocaleString();
+  $("discard").disabled=false;status("Private draft saved. Your published site has not changed.");
+ }catch(e){status(e.message,true)}
+ finally{busy=false;$("save").disabled=false}
+}
+async function discard(){
+ if(busy||!currentDay)return;
+ if(!confirm("Permanently discard this private draft and return to the published version?"))return;
+ busy=true;
+ try{
+  const r=await fetch(api+"?day="+pad(currentDay),{method:"DELETE",credentials:"same-origin"});
+  const d=await r.json();if(!r.ok)throw Error(d.error||"Could not discard draft");
+  draftDays.delete(pad(currentDay));drawList();fillForm(published);
+  $("draftStatus").textContent="Published version";$("draftStatus").className="status";
+  $("savedAt").textContent="No private draft saved yet.";$("discard").disabled=true;
+  status("Draft discarded. Published site unchanged.");
+ }catch(e){status(e.message,true)}finally{busy=false}
+}
+function download(){
+ try{
+  const entry=formValues();const blob=new Blob([JSON.stringify(entry,null,2)+"\n"],{type:"application/json"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");
+  a.href=url;a.download="day-"+pad(currentDay)+".json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+  status("JSON downloaded. This does not publish it.");
+ }catch(e){status(e.message,true)}
+}
+async function start(){
+ try{
+  const result=await getJson(api);
+  draftDays=new Set(result.draft_days||[]);drawList();
+  const day=Number(new URL(location.href).searchParams.get("day"));
+  if(Number.isInteger(day)&&day>=1&&day<=24)await loadDay(day);
+ }catch(e){status("Unable to open private journal drafts: "+e.message,true)}
+}
+$("entryForm").addEventListener("submit",saveDraft);
+$("entryForm").addEventListener("input",()=>{dirty=true;status("Unsaved changes.");});
+$("discard").onclick=discard;$("download").onclick=download;
+window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue="";}});
+start();
+</script></body></html>

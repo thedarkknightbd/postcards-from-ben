@@ -5,7 +5,8 @@ export async function onRequest(context){
  const path=new URL(request.url).pathname;
  // The unified dashboard uses the approved site owner session.
  // Existing Decap CMS and specialized admin endpoints continue to run independently.
- if(path!=="/admin/"&&path!=="/admin"&&path!=="/admin/index.html")return context.next();
+ const ownerPage=path==="/admin/"||path==="/admin"||path==="/admin/index.html"||path==="/admin/journals"||path==="/admin/journals/"||path==="/admin/journals/index.html";
+ if(!ownerPage)return context.next();
  let authorized=false;
  try{authorized=isOwner(await currentUser(request,env))}catch{}
  if(!authorized)return new Response("Not found",{
